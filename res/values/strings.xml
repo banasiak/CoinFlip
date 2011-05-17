@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ *========================================================================
+ * strings.xml
+ * May 11, 2011 12:15:47 AM | variable
+ * Copyright (c) 2011 Richard Banasiak
+ *========================================================================
+ * This file is part of CoinFlip.
+ * 
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+    <string name="header_tv">Welcome to Coin Flip!</string>
+    <string name="app_name">Coin Flip</string>
+    <string name="flip_coin_button">Tap/Shake to Flip Coin</string>
+    <string name="reset_coin_button">Reset Coin</string>
+    <string name="flip_result">Flip Result</string>
+    <string name="heads">HEADS</string>
+    <string name="tails">TAILS</string>
+    <string name="about_menu_title">About</string>
+    <string name="about_activity_title">About Coin Flip</string>
+    <string name="about_text">version 1.0
+        \n\nA convenient way to flip a coin, even if you don\'t have one. Simply press the button or shake and view the result.  Press button to reset.
+        \n\nVerify the flip algorithm is truly pseudo-random by running the Self Test and flipping the coin 10,000 times.
+        \n\n\nQuarter-dollar coin images from the United States Mint. - www.usmint.gov
+        \n\n\n© Copyright 2011 - Richard Banasiak
+    </string>
+    <string name="selftest_menu_title">Self Test</string>
+    <string name="selftest_activity_title">Coin Flip Self Test Results</string>
+    <string name="exit">Exit</string> 
+</resources>

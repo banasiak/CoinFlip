@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ *========================================================================
+ * main.xml
+ * May 11, 2011 12:25:23 AM | variable
+ * Copyright (c) 2011 Richard Banasiak
+ *========================================================================
+ * This file is part of CoinFlip.
+ * 
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<TableLayout
+android:id="@+id/tableLayout"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+<TextView
+android:id="@+id/header_text_view"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="20dp"
+android:layout_marginBottom="20dp"
+android:text="@string/header_tv"
+android:textSize="22sp"
+android:textStyle="bold"
+android:gravity="center"
+>
+</TextView>
+<ImageView
+android:id="@+id/coin_image_view"
+android:maxWidth="320dp"
+android:maxHeight="320dp"
+android:src="@drawable/unknown"
+>
+</ImageView>
+<TextView
+android:id="@+id/result_text_view"
+android:text=""
+android:textSize="48sp"
+android:textStyle="bold"
+android:gravity="center"
+>
+</TextView>
+<Button
+android:id="@+id/flip_coin_button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:padding="20px"
+android:layout_marginLeft="40dp"
+android:layout_marginRight="40dp"
+android:layout_marginTop="20dp"
+android:layout_marginBottom="20dp"
+android:text="@string/flip_coin_button"
+android:textStyle="bold"
+android:gravity="center"
+android:layout_gravity="center_horizontal"
+android:hapticFeedbackEnabled="true">
+</Button>
+</TableLayout>
+
