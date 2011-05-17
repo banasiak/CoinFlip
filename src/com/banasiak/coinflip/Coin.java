@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Coin.java
- * May 11, 2011 7:43:52 PM | variable
+ * May 16, 2011 11:06:31 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -27,17 +27,18 @@ import java.util.Random;
 import android.app.Activity;
 import android.util.Log;
 
-public class Coin extends Activity
+public class Coin
+    extends Activity
 {
     // Debugging tag.
     private static final String TAG = "Coin";
     
     Random generator = new Random();
-    
+
     public boolean flip()
     {
-        Log.d(TAG, "flip()");       
+        Log.d(TAG, "flip()");
         return generator.nextBoolean();
     }
-    
+
 }

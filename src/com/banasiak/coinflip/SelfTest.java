@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * SelfTest.java
- * May 11, 2011 7:31:08 PM | variable
+ * May 16, 2011 11:14:07 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -29,22 +29,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class SelfTest extends Activity
+public class SelfTest
+    extends Activity
 {
-    // Debugging tag.
+
     private static final String TAG = "SelfTest";
-    
-    Coin theCoin = new Coin();
-    
+    private static final int NUMBER_OF_FLIPS = 10000;
+    private Coin theCoin = new Coin();
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         Log.d(TAG, "onCreate()");
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selftest);
         selfTest();
     }
-    
+
     private void selfTest()
     {
         Log.i(TAG, "selfTest()");
@@ -56,38 +58,45 @@ public class SelfTest extends Activity
         final TextView totalValue = (TextView) findViewById(R.id.total_value_tv);
         final TextView totalRatio = (TextView) findViewById(R.id.total_ratio_tv);
         final TextView elapsedTime = (TextView) findViewById(R.id.elapsed_time_tv);
-               
+
         int heads = 0;
         int tails = 0;
-        int total = 0;       
+        int total = 0;
 
         NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(1);
-        
+
         long startTimeStamp = System.currentTimeMillis();
-        for(total=0; total<10000; total++)
+        for (total = 0; total < NUMBER_OF_FLIPS; total++)
         {
-            if( theCoin.flip() )
+            if (theCoin.flip())
                 heads++;
             else
                 tails++;
         }
         long endTimeStamp = System.currentTimeMillis();
-        
+
         Log.d(TAG, "heads: " + heads);
         Log.d(TAG, "tails: " + tails);
         Log.d(TAG, "total: " + total);
         Log.d(TAG, "time: " + Long.toString(endTimeStamp - startTimeStamp));
-        
+
         headsValue.setText(Integer.toString(heads));
-        headsRatio.setText("(" + percentFormat.format((double) heads / (double) total) + ")");
+        headsRatio.setText("(" +
+                           percentFormat
+                                   .format((double) heads / (double) total) +
+                           ")");
         tailsValue.setText(Integer.toString(tails));
-        tailsRatio.setText("(" + percentFormat.format((double) tails / (double) total) + ")");
+        tailsRatio.setText("(" +
+                           percentFormat.format((double) tails / (double) total) +
+                           ")");
         totalValue.setText(Integer.toString(total));
-        totalRatio.setText("(" + percentFormat.format((double) total / (double) total) + ")");
-        
+        totalRatio.setText("(" +
+                           percentFormat.format((double) total / (double) total) +
+                           ")");
+
         elapsedTime.setText(Long.toString(endTimeStamp - startTimeStamp));
-        
+
     }
-    
+
 }

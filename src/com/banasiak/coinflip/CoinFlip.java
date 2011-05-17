@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlip.java
- * May 10, 2011 8:48:54 PM | variable
+ * May 16, 2011 11:07:27 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -32,27 +32,24 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
-import android.view.HapticFeedbackConstants;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CoinFlip
     extends Activity
 {
     private static final String TAG = "CoinFlip";
-    
+
     private Coin theCoin = new Coin();
     private ShakeListener shaker;
     private int buttonState = 0;
     private int flipCounter = 0;
-    
+
     /**
      * Called when the user presses the menu button.
      */
@@ -65,7 +62,7 @@ public class CoinFlip
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-    
+
     /**
      * Called when the user selects an item from the options menu.
      */
@@ -88,19 +85,22 @@ public class CoinFlip
                 return true;
         }
         return false;
-    }    
-    
+    }
+
     @Override
     public void onResume()
     {
-      shaker.resume();
-      super.onResume();
+        Log.d(TAG, "onResume()");
+        shaker.resume();
+        super.onResume();
     }
+
     @Override
     public void onPause()
     {
-      shaker.pause();
-      super.onPause();
+        Log.d(TAG, "onPause()");
+        shaker.pause();
+        super.onPause();
     }
 
     /** Called when the activity is first created. */
@@ -108,105 +108,91 @@ public class CoinFlip
     public void onCreate(Bundle savedInstanceState)
     {
         Log.d(TAG, "onCreate()");
-        /*
-         * The onCreate() method will be called by the Android system when your
-         * Activity starts - it is where you should perform all initialization
-         * and UI setup. An activity is not required to have a user interface,
-         * but usually will.
-         */
+
         super.onCreate(savedInstanceState);
-        // TextView tv = new TextView(this);
-        // tv.setText("Hello, Android!");
-        // setContentView(tv);
         setContentView(R.layout.main);
-        
-        final Vibrator viberator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
         shaker = new ShakeListener(this);
         shaker.setOnShakeListener(new ShakeListener.OnShakeListener()
         {
-           public void onShake()
-           {
-               if(buttonState == 0)
-               {
-                   viberator.vibrate(100);
-                   flipCounter++;
-                   renderResult( theCoin.flip() );
-               }
-           }
+            public void onShake()
+            {
+                flipOrResetCoin();
+            }
         });
 
-        final Button flipCoinButton = (Button) findViewById(R.id.flip_coin_button);
-        flipCoinButton.setOnClickListener(new OnClickListener()
+        final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
+        coinImage.setOnClickListener(new OnClickListener()
         {
             public void onClick(View v)
             {
-                // Perform action on clicks          
-                if(buttonState == 0)
-                {
-                    viberator.vibrate(100);
-                    flipCounter++;
-                    renderResult( theCoin.flip() );
-                }
-                else
-                {
-                    flipCoinButton.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);  
-                    resetCoin();
-                }
+                flipOrResetCoin();
             }
         });
     }
-    
-    private void resetCoin()
+
+    private void flipOrResetCoin()
     {
-        final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
-        final TextView resultText = (TextView) findViewById(R.id.result_text_view);
-        final Button flipCoinButton = (Button) findViewById(R.id.flip_coin_button);
+        Log.d(TAG, "flipOrResetCoin()");
         
-        coinImage.setImageDrawable(getResources()
-                                   .getDrawable(R.drawable.unknown));
-        resultText.setText("");
-        flipCoinButton.setText(R.string.flip_coin_button);
-        buttonState = 0;
-                           
-    }
-    
-    private void renderResult(boolean result)
-    {
-        Log.d(TAG, "renderResult()");
-        final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
-        final TextView resultText = (TextView) findViewById(R.id.result_text_view);
-        final Button flipCoinButton = (Button) findViewById(R.id.flip_coin_button);
-        
-        if (result == true)
+        if (buttonState == 0)
         {
-            
-            coinImage.setImageDrawable(getResources()
-                    .getDrawable(R.drawable.heads));
-            resultText.setText(R.string.heads);
-            resultText.setTextColor(Color.parseColor("green"));
-//            Toast.makeText(CoinFlip.this,
-//                           getString(R.string.flip_result) +
-//                                   " " +
-//                                   Integer.toString(flipCounter) +
-//                                   ": " +
-//                                   getString(R.string.heads),
-//                           Toast.LENGTH_SHORT).show();
+            flipCoin();
+            shaker.pause();
+            buttonState = 1;
         }
         else
         {
-            coinImage.setImageDrawable(getResources()
-                    .getDrawable(R.drawable.tails));
+            resetCoin();
+            shaker.resume();
+            buttonState = 0;
+        }
+    }
+
+    private void flipCoin()
+    {
+        Log.d(TAG, "flipCoin()");
+        
+        final Vibrator viberator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        viberator.vibrate(100);
+        flipCounter++;
+        renderResult(theCoin.flip());
+    }
+
+    private void resetCoin()
+    {
+        Log.d(TAG, "resetCoin()");
+        
+        final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
+        final TextView resultText = (TextView) findViewById(R.id.result_text_view);
+        final TextView instructionsText = (TextView) findViewById(R.id.instructions_text_view);
+
+        coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
+        resultText.setText("");
+        instructionsText.setText(R.string.flip_coin_tv);
+    }
+
+    private void renderResult(boolean result)
+    {
+        Log.d(TAG, "renderResult()");
+        
+        final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
+        final TextView resultText = (TextView) findViewById(R.id.result_text_view);
+        final TextView instructionsText = (TextView) findViewById(R.id.instructions_text_view);
+
+        if (result == true)
+        {
+            coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads));
+            resultText.setText(R.string.heads);
+            resultText.setTextColor(Color.parseColor("green"));
+        }
+        else
+        {
+            coinImage.setImageDrawable(getResources().getDrawable(R.drawable.tails));
             resultText.setText(R.string.tails);
             resultText.setTextColor(Color.parseColor("red"));
-//            Toast.makeText(CoinFlip.this,
-//                           getString(R.string.flip_result) +
-//                                   " " +
-//                                   Integer.toString(flipCounter) +
-//                                   ": " +
-//                                   getString(R.string.tails),
-//                           Toast.LENGTH_SHORT).show();
         }
-        flipCoinButton.setText(R.string.reset_coin_button);
-        buttonState = 1;
+        instructionsText.setText(R.string.reset_coin_tv);
     }
 }

@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * main.xml
- * May 11, 2011 12:25:23 AM | variable
+ * May 16, 2011 10:46:49 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,54 +20,45 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<TableLayout
-android:id="@+id/tableLayout"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-android:orientation="vertical"
-xmlns:android="http://schemas.android.com/apk/res/android"
->
-<TextView
-android:id="@+id/header_text_view"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_marginTop="20dp"
-android:layout_marginBottom="20dp"
-android:text="@string/header_tv"
-android:textSize="22sp"
-android:textStyle="bold"
-android:gravity="center"
->
-</TextView>
-<ImageView
-android:id="@+id/coin_image_view"
-android:maxWidth="320dp"
-android:maxHeight="320dp"
-android:src="@drawable/unknown"
->
-</ImageView>
-<TextView
-android:id="@+id/result_text_view"
-android:text=""
-android:textSize="48sp"
-android:textStyle="bold"
-android:gravity="center"
->
-</TextView>
-<Button
-android:id="@+id/flip_coin_button"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:padding="20px"
-android:layout_marginLeft="40dp"
-android:layout_marginRight="40dp"
-android:layout_marginTop="20dp"
-android:layout_marginBottom="20dp"
-android:text="@string/flip_coin_button"
-android:textStyle="bold"
-android:gravity="center"
-android:layout_gravity="center_horizontal"
-android:hapticFeedbackEnabled="true">
-</Button>
+<TableLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tableLayout" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:orientation="vertical">
+    <!-- 
+    <TextView 
+        android:id="@+id/header_text_view" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" 
+        android:text="@string/header_tv"
+        android:textSize="24sp" 
+        android:textStyle="bold" 
+        android:gravity="center"
+        android:visibility="invisible">
+    </TextView>
+    -->
+    <ImageView 
+        android:id="@+id/coin_image_view" 
+        android:maxWidth="400dp"
+        android:maxHeight="400dp" 
+        android:layout_marginTop="30dp"
+        android:src="@drawable/unknown">
+    </ImageView>
+    <TextView 
+        android:id="@+id/result_text_view" 
+        android:text=""
+        android:textSize="64sp" 
+        android:textStyle="bold" 
+        android:gravity="center">
+    </TextView>
+    <TextView 
+        android:id="@+id/instructions_text_view" 
+        android:text="@string/flip_coin_tv"
+        android:textSize="18sp" 
+        android:textStyle="bold" 
+        android:gravity="center"
+        android:padding="20dp" />
 </TableLayout>
-

@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * selftest.xml
- * May 11, 2011 7:20:32 PM | variable
+ * May 16, 2011 10:49:19 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,132 +20,119 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<ScrollView
-   xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="fill_parent"
-   android:layout_height="fill_parent"
-   android:padding="10dp" >
-        <TableLayout 
-            android:gravity="center_vertical"
-            android:layout_gravity="center_vertical"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent" >
-            <TableRow>          
-                <TextView
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="Heads:"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                />
-                <TextView
-                    android:id="@+id/heads_value_tv"
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="0"
-                    android:textSize="18dp"
-                /> 
-                <TextView
-                    android:id="@+id/heads_ratio_tv"                
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="0dp" 
-                    android:text="(0%)"
-                    android:textSize="18dp"
-                />
-            </TableRow>
-            <TableRow>          
-                <TextView
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="Tails:"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                />
-                <TextView
-                    android:id="@+id/tails_value_tv"                
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="0"
-                    android:textSize="18dp"
-                /> 
-                <TextView
-                    android:id="@+id/tails_ratio_tv"                
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="0dp" 
-                    android:text="(0%)"
-                    android:textSize="18dp"
-                />
-            </TableRow>            
-            <TableRow
-                android:paddingBottom="10dp">          
-                <TextView
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="Total:"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                />
-                <TextView
-                    android:id="@+id/total_value_tv"                
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="0"
-                    android:textSize="18dp"
-                /> 
-                <TextView
-                    android:id="@+id/total_ratio_tv"                
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="0dp"
-                    android:text="(0%)"
-                    android:textSize="18dp"
-                />
-            </TableRow>
-            <TableRow
-                android:paddingBottom="10dp">          
-                <TextView
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="Time:"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                />
-                <TextView
-                    android:id="@+id/elapsed_time_tv"                
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="0"
-                    android:textSize="18dp"
-                /> 
-                <TextView            
-                    android:gravity="left"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="0dp" 
-                    android:paddingRight="10dp" 
-                    android:text="ms"
-                    android:textSize="18dp"
-                 />                 
-            </TableRow>  
-        </TableLayout>
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:padding="10dp">
+    <TableLayout 
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical" 
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+        <TableRow>
+            <TextView 
+                android:gravity="left"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="Heads:" 
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView 
+                android:id="@+id/heads_value_tv"
+                android:gravity="left" 
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="0" 
+                android:textSize="18dp" />
+            <TextView 
+                android:id="@+id/heads_ratio_tv"
+                android:gravity="left" 
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="0dp"
+                android:text="(0%)" 
+                android:textSize="18dp" />
+        </TableRow>
+        <TableRow>
+            <TextView 
+                android:gravity="left"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="Tails:" 
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView 
+                android:id="@+id/tails_value_tv"
+                android:gravity="left" 
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="0" 
+                android:textSize="18dp" />
+            <TextView 
+                android:id="@+id/tails_ratio_tv"
+                android:gravity="left" 
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="0dp"
+                android:text="(0%)" 
+                android:textSize="18dp" />
+        </TableRow>
+        <TableRow 
+            android:paddingBottom="10dp">
+            <TextView 
+                android:gravity="left"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="Total:" 
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView 
+                android:id="@+id/total_value_tv"
+                android:gravity="left" 
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="0" 
+                android:textSize="18dp" />
+            <TextView 
+                android:id="@+id/total_ratio_tv"
+                android:gravity="left" 
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="0dp"
+                android:text="(0%)" 
+                android:textSize="18dp" />
+        </TableRow>
+        <TableRow 
+                android:paddingBottom="10dp">
+            <TextView 
+                android:gravity="left"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="Time:" 
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView 
+                android:id="@+id/elapsed_time_tv"
+                android:gravity="left" 
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="0" 
+                android:textSize="18dp" />
+            <TextView android:gravity="left"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="0dp" 
+                android:paddingRight="10dp"
+                android:text="ms" 
+                android:textSize="18dp" />
+        </TableRow>
+    </TableLayout>
 </ScrollView>

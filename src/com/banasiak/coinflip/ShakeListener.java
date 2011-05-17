@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * ShakeListener.java
- * May 12, 2011 10:39:36 PM | variable
+ * May 16, 2011 11:19:06 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -34,19 +34,19 @@ public class ShakeListener
             SensorEventListener
 {
     private static final int FORCE_THRESHOLD = 300;
-    private static final int TIME_THRESHOLD  = 100;
-    private static final int SHAKE_TIMEOUT   = 500;
-    private static final int SHAKE_DURATION  = 1000;
-    private static final int SHAKE_COUNT     = 3;
+    private static final int TIME_THRESHOLD = 100;
+    private static final int SHAKE_TIMEOUT = 500;
+    private static final int SHAKE_DURATION = 1000;
+    private static final int SHAKE_COUNT = 3;
 
-    private SensorManager    mSensorMgr;
-    private float            mLastX          = -1.0f, mLastY = -1.0f, mLastZ = -1.0f;
-    private long             mLastTime;
-    private OnShakeListener  mShakeListener;
-    private Context          mContext;
-    private int              mShakeCount     = 0;
-    private long             mLastShake;
-    private long             mLastForce;
+    private SensorManager mSensorMgr;
+    private float mLastX = -1.0f, mLastY = -1.0f, mLastZ = -1.0f;
+    private long  mLastTime;
+    private OnShakeListener mShakeListener;
+    private Context mContext;
+    private int mShakeCount = 0;
+    private long mLastShake;
+    private long mLastForce;
 
     public interface OnShakeListener
     {
@@ -69,17 +69,21 @@ public class ShakeListener
         mSensorMgr = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         if (mSensorMgr == null)
         {
-            throw new UnsupportedOperationException("Sensors not supported");
+            throw new UnsupportedOperationException("Sensors not supported!");
         }
         boolean supported = false;
         try
         {
-            supported = mSensorMgr.registerListener(this, mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME);
+            supported = mSensorMgr
+                    .registerListener(this,
+                                      mSensorMgr
+                                              .getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                                      SensorManager.SENSOR_DELAY_GAME);
         }
         catch (Exception e)
         {
             Toast.makeText(mContext,
-                           "Shaking not supported",
+                           "Shaking not supported!",
                            Toast.LENGTH_LONG).show();
         }
 
@@ -104,6 +108,7 @@ public class ShakeListener
     {
         if (event.sensor.getType() != Sensor.TYPE_ACCELEROMETER)
             return;
+        
         long now = System.currentTimeMillis();
 
         if ((now - mLastForce) > SHAKE_TIMEOUT)
@@ -124,7 +129,8 @@ public class ShakeListener
                           10000;
             if (speed > FORCE_THRESHOLD)
             {
-                if ((++mShakeCount >= SHAKE_COUNT) && (now - mLastShake > SHAKE_DURATION))
+                if ((++mShakeCount >= SHAKE_COUNT) &&
+                    (now - mLastShake > SHAKE_DURATION))
                 {
                     mLastShake = now;
                     mShakeCount = 0;

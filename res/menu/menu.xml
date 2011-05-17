@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * menu.xml
- * May 10, 2011 11:06:34 PM | variable
+ * May 16, 2011 11:02:35 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,20 +20,18 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-   <item 
-       android:id="@+id/about_menu"
-       android:title="@string/about_menu_title" 
-       android:icon="@android:drawable/ic_menu_info_details" 
-    />
-    <item
-       android:id="@+id/selftest_menu"
-       android:title="@string/selftest_menu_title"
-       android:icon="@android:drawable/ic_menu_view"
-    />
-    <item
-       android:id="@+id/exit"
-       android:title="@string/exit"
-       android:icon="@android:drawable/ic_menu_close_clear_cancel"
-    />
+<menu 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item 
+        android:id="@+id/about_menu" 
+        android:title="@string/about_menu_title"
+        android:icon="@android:drawable/ic_menu_info_details" />
+    <item 
+        android:id="@+id/selftest_menu" 
+        android:title="@string/selftest_menu_title"
+        android:icon="@android:drawable/ic_menu_view" />
+    <item 
+        android:id="@+id/exit" 
+        android:title="@string/exit"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel" />
 </menu>

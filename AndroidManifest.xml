@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * May 11, 2011 12:15:47 AM | variable
+ * May 16, 2011 11:23:31 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,40 +20,47 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.banasiak.coinflip"
-      android:versionCode="1"
-      android:versionName="1.0">
-      
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".CoinFlip"
-                  android:screenOrientation="portrait">
-                  android:label="@string/app_name">
+<manifest 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.banasiak.coinflip" 
+    android:versionCode="2" 
+    android:versionName="1.1">
+
+    <application 
+        android:icon="@drawable/icon" 
+        android:label="@string/app_name">
+        <activity 
+            android:name=".CoinFlip" 
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" 
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action 
+                    android:name="android.intent.action.MAIN" />
+                <category 
+                    android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SelfTest"
+        <activity 
+            android:name=".SelfTest" 
             android:label="@string/selftest_activity_title"
             android:theme="@android:style/Theme.Dialog">
-        </activity>        
-        <activity
-            android:name=".About"
+        </activity>
+        <activity 
+            android:name=".About" 
             android:label="@string/about_activity_title"
             android:theme="@android:style/Theme.Dialog">
         </activity>
     </application>
-    
+
     <uses-sdk android:minSdkVersion="4" />
-    
+
     <uses-permission android:name="android.permission.VIBRATE" />
-    
+
     <supports-screens 
-        android:anyDensity="true" 
+        android:anyDensity="true"
+        android:smallScreens="false"
         android:normalScreens="true" 
-        android:smallScreens="false" 
         android:largeScreens="true">
     </supports-screens>
 

@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * About.java
- * May 10, 2011 10:53:09 PM | variable
+ * May 16, 2011 11:05:47 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -26,15 +26,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class About extends Activity
+public class About
+    extends Activity
 {
     // Debugging tag.
     private static final String TAG = "About";
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        Log.d(TAG, "onCreate()");
+        Log.d(TAG,
+              "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
     }
