@@ -23,8 +23,7 @@
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip" 
-    android:versionCode="2" 
-    android:versionName="1.1">
+    android:versionCode="3" android:versionName="1.2">
 
     <application 
         android:icon="@drawable/icon" 
@@ -53,15 +52,17 @@
         </activity>
     </application>
 
-    <uses-sdk android:minSdkVersion="4" />
+    <uses-sdk android:minSdkVersion="3" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
+<!-- 
     <supports-screens 
         android:anyDensity="true"
         android:smallScreens="false"
         android:normalScreens="true" 
         android:largeScreens="true">
     </supports-screens>
+-->
 
 </manifest> 

@@ -42,18 +42,16 @@ public final class R {
         public static final int menu=0x7f050000;
     }
     public static final class string {
-        public static final int about_activity_title=0x7f040008;
-        public static final int about_menu_title=0x7f040007;
-        public static final int about_text=0x7f040009;
-        public static final int app_name=0x7f040001;
-        public static final int exit=0x7f04000c;
-        public static final int flip_coin_tv=0x7f040002;
-        public static final int flip_result=0x7f040004;
-        public static final int header_tv=0x7f040000;
-        public static final int heads=0x7f040005;
-        public static final int reset_coin_tv=0x7f040003;
-        public static final int selftest_activity_title=0x7f04000b;
-        public static final int selftest_menu_title=0x7f04000a;
-        public static final int tails=0x7f040006;
+        public static final int about_activity_title=0x7f040006;
+        public static final int about_menu_title=0x7f040005;
+        public static final int about_text=0x7f040007;
+        public static final int app_name=0x7f040000;
+        public static final int exit=0x7f04000a;
+        public static final int flip_coin_tv=0x7f040001;
+        public static final int heads=0x7f040003;
+        public static final int reset_coin_tv=0x7f040002;
+        public static final int selftest_activity_title=0x7f040009;
+        public static final int selftest_menu_title=0x7f040008;
+        public static final int tails=0x7f040004;
     }
 }

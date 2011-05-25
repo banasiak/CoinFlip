@@ -21,19 +21,17 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
-    <string name="header_tv">Welcome to Coin Flip!</string>
     <string name="app_name">Coin Flip</string>
     <string name="flip_coin_tv">Tap/Shake to Flip Coin</string>
-    <string name="reset_coin_tv">Tap to Reset Coin</string>
-    <string name="flip_result">Flip Result</string>
+    <string name="reset_coin_tv">Tap Coin to Reset</string>
     <string name="heads">HEADS</string>
     <string name="tails">TAILS</string>
     <string name="about_menu_title">About</string>
     <string name="about_activity_title">About Coin Flip</string>
-    <string name="about_text">version 1.1
+    <string name="about_text">version 1.2
         \n\nA convenient way to flip a coin, even if you don\'t have one. 
-        Simply tap the coin or shake and view the result. Tap the coin again 
-        to reset.
+        Simply tap the question mark or shake and view the result. Tap the 
+        coin again to reset.
         \n\nVerify the flip algorithm is truly pseudo-random by running the 
         Self Test and flipping the coin 10,000 times.
         \n\n\nQuarter-dollar coin images from the United States Mint. -
