@@ -5,7 +5,7 @@
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
- * 
+ *
  *    CoinFlip is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
@@ -27,12 +27,11 @@ import java.util.Random;
 import android.app.Activity;
 import android.util.Log;
 
-public class Coin
-    extends Activity
+public class Coin extends Activity
 {
     // Debugging tag.
     private static final String TAG = "Coin";
-    
+
     Random generator = new Random();
 
     public boolean flip()

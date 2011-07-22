@@ -23,8 +23,9 @@
 <TableLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tableLayout" 
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:layout_gravity="center_horizontal"
     android:orientation="vertical">
     <!-- 
     <TextView 
@@ -42,8 +43,8 @@
     -->
     <ImageView 
         android:id="@+id/coin_image_view" 
-        android:maxWidth="400dp"
-        android:maxHeight="400dp" 
+        android:maxWidth="390dp"
+        android:maxHeight="390dp" 
         android:layout_marginTop="30dp"
         android:src="@drawable/unknown">
     </ImageView>

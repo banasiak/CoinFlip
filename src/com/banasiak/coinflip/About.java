@@ -5,7 +5,7 @@
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
- * 
+ *
  *    CoinFlip is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
@@ -26,17 +26,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class About
-    extends Activity
+public class About extends Activity
 {
-    // Debugging tag.
+    // debugging tag
     private static final String TAG = "About";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        Log.d(TAG,
-              "onCreate()");
+        Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
     }

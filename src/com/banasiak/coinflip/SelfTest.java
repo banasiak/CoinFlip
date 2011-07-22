@@ -5,7 +5,7 @@
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
- * 
+ *
  *    CoinFlip is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
@@ -29,19 +29,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class SelfTest
-    extends Activity
+public class SelfTest extends Activity
 {
-
+    // debugging tag
     private static final String TAG = "SelfTest";
+
     private static final int NUMBER_OF_FLIPS = 10000;
-    private Coin theCoin = new Coin();
+    private final Coin theCoin = new Coin();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         Log.d(TAG, "onCreate()");
-        
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selftest);
         selfTest();
@@ -70,9 +70,13 @@ public class SelfTest
         for (total = 0; total < NUMBER_OF_FLIPS; total++)
         {
             if (theCoin.flip())
+            {
                 heads++;
+            }
             else
+            {
                 tails++;
+            }
         }
         long endTimeStamp = System.currentTimeMillis();
 
@@ -82,18 +86,14 @@ public class SelfTest
         Log.d(TAG, "time: " + Long.toString(endTimeStamp - startTimeStamp));
 
         headsValue.setText(Integer.toString(heads));
-        headsRatio.setText("(" +
-                           percentFormat
-                                   .format((double) heads / (double) total) +
-                           ")");
+        headsRatio.setText("("
+            + percentFormat.format((double) heads / (double) total) + ")");
         tailsValue.setText(Integer.toString(tails));
-        tailsRatio.setText("(" +
-                           percentFormat.format((double) tails / (double) total) +
-                           ")");
+        tailsRatio.setText("("
+            + percentFormat.format((double) tails / (double) total) + ")");
         totalValue.setText(Integer.toString(total));
-        totalRatio.setText("(" +
-                           percentFormat.format((double) total / (double) total) +
-                           ")");
+        totalRatio.setText("("
+            + percentFormat.format((double) total / (double) total) + ")");
 
         elapsedTime.setText(Long.toString(endTimeStamp - startTimeStamp));
 
