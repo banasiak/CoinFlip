@@ -1,9 +1,9 @@
 /*
- *------------------------------------------------------------------------
+ *========================================================================
  * CoinFlip.java
- * Jul 22, 2011 8:46:48 AM | variable
+ * Jul 23, 2011 9:37:07 AM | variable
  * Copyright (c) 2011 Richard Banasiak
- *------------------------------------------------------------------------
+ *========================================================================
  * This file is part of CoinFlip.
  *
  *    CoinFlip is free software: you can redistribute it and/or modify
@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -68,7 +69,7 @@ public class CoinFlip extends Activity
     {
         Log.d(TAG, "onCreateOptionsMenu()");
         super.onCreateOptionsMenu(menu);
-        MenuInflater inflater = getMenuInflater();
+        final MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
@@ -83,11 +84,11 @@ public class CoinFlip extends Activity
         switch (item.getItemId())
         {
             case R.id.about_menu:
-                Intent i = new Intent(this, About.class);
+                final Intent i = new Intent(this, About.class);
                 startActivity(i);
                 return true;
             case R.id.selftest_menu:
-                Intent j = new Intent(this, SelfTest.class);
+                final Intent j = new Intent(this, SelfTest.class);
                 startActivity(j);
                 return true;
             case R.id.exit:
@@ -129,7 +130,6 @@ public class CoinFlip extends Activity
         shaker = new ShakeListener(this);
         shaker.setOnShakeListener(new ShakeListener.OnShakeListener()
         {
-            @Override
             public void onShake()
             {
                 flipCoin();
@@ -140,7 +140,6 @@ public class CoinFlip extends Activity
         final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
         coinImage.setOnClickListener(new OnClickListener()
         {
-            @Override
             public void onClick(View v)
             {
                 flipCoin();
@@ -189,7 +188,7 @@ public class CoinFlip extends Activity
 
         Log.d(TAG, "updateState()");
 
-        ResultState resultState;
+        ResultState resultState = ResultState.UNKNOWN;
         currentResult = flipResult;
 
         if (previousResult == true)
@@ -216,7 +215,6 @@ public class CoinFlip extends Activity
         }
 
         return resultState;
-
     }
 
     private void renderResult(final ResultState resultState)
@@ -241,11 +239,12 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
+                        playCoinSound();
                         resultText.setText(R.string.heads);
                         resultText.setTextColor(Color.parseColor("green"));
                     }
                 };
-            break;
+                break;
             case HEADS_TAILS:
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.heads_tails);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
@@ -253,11 +252,12 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
+                        playCoinSound();
                         resultText.setText(R.string.tails);
                         resultText.setTextColor(Color.parseColor("red"));
                     }
                 };
-            break;
+                break;
             case TAILS_HEADS:
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.tails_heads);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
@@ -265,11 +265,12 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
+                        playCoinSound();
                         resultText.setText(R.string.heads);
                         resultText.setTextColor(Color.parseColor("green"));
                     }
                 };
-            break;
+                break;
             case TAILS_TAILS:
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.tails_tails);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
@@ -277,15 +278,24 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
+                        playCoinSound();
                         resultText.setText(R.string.tails);
                         resultText.setTextColor(Color.parseColor("red"));
                     }
                 };
-            break;
+                break;
         }
 
         // render the animation
+        coinAnimationCustom.setAlpha(255);
         coinImage.setBackgroundDrawable(coinAnimationCustom);
         coinAnimationCustom.start();
+    }
+
+    private void playCoinSound()
+    {
+        Log.d(TAG, "playCoinSound()");
+        final MediaPlayer coinSound = MediaPlayer.create(this, R.raw.coin);
+        coinSound.start();
     }
 }

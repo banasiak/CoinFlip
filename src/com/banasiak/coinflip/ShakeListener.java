@@ -1,9 +1,9 @@
 /*
- *------------------------------------------------------------------------
+ *========================================================================
  * ShakeListener.java
- * Jul 22, 2011 8:47:40 AM | variable
+ * Jul 23, 2011 9:42:08 AM | variable
  * Copyright (c) 2011 Richard Banasiak
- *------------------------------------------------------------------------
+ *========================================================================
  * This file is part of CoinFlip.
  *
  *    CoinFlip is free software: you can redistribute it and/or modify
@@ -84,7 +84,7 @@ public class ShakeListener implements SensorEventListener
                 mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_GAME);
         }
-        catch (Exception e)
+        catch (final Exception e)
         {
             Toast.makeText(mContext, "Shaking not supported!", Toast.LENGTH_LONG).show();
         }
@@ -106,13 +106,11 @@ public class ShakeListener implements SensorEventListener
         }
     }
 
-    @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy)
     {
         Log.d(TAG, "onAccuracyChanged()");
     }
 
-    @Override
     public void onSensorChanged(SensorEvent event)
     {
         Log.d(TAG, "onSensorChanged()");
@@ -122,7 +120,7 @@ public class ShakeListener implements SensorEventListener
             return;
         }
 
-        long now = System.currentTimeMillis();
+        final long now = System.currentTimeMillis();
 
         if ((now - mLastForce) > SHAKE_TIMEOUT)
         {
@@ -131,9 +129,9 @@ public class ShakeListener implements SensorEventListener
 
         if ((now - mLastTime) > TIME_THRESHOLD)
         {
-            long diff = now - mLastTime;
-            float speed = Math.abs(
-                  event.values[SensorManager.DATA_X] - mLastX
+            final long diff = now - mLastTime;
+            final float speed = Math.abs(
+                event.values[SensorManager.DATA_X] - mLastX
                 + event.values[SensorManager.DATA_Y] - mLastY)
                 / diff * 10000;
             if (speed > FORCE_THRESHOLD)

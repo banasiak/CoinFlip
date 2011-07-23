@@ -2,11 +2,11 @@
 <!--
  *========================================================================
  * strings.xml
- * Jul 22, 2011 9:55:36 AM | variable
+ * Jul 23, 2011 10:02:29 AM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
- * 
+ *
  *    CoinFlip is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
@@ -23,12 +23,11 @@
 <resources>
     <string name="app_name">Coin Flip</string>
     <string name="flip_coin_tv">Tap/Shake to Flip Coin</string>
-    <string name="reset_coin_tv">Tap Coin to Reset</string>
     <string name="heads">HEADS</string>
     <string name="tails">TAILS</string>
     <string name="about_menu_title">About</string>
     <string name="about_activity_title">About Coin Flip</string>
-    <string name="about_text">version 2.0
+    <string name="about_text">version 2.1
         \n\nA convenient way to flip a coin, even if you don\'t have one. 
         Simply tap the question mark or shake and view the result. Tap or shake
         to spin the coin again.

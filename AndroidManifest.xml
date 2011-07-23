@@ -2,11 +2,11 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * Jul 22, 2011 9:01:10 AM | variable
+ * Jul 23, 2011 9:44:19 AM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
- * 
+ *
  *    CoinFlip is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
@@ -23,8 +23,8 @@
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip" 
-    android:versionName="2.0" android:versionCode="4">
-
+    android:versionName="2.1" android:versionCode="5">
+    
     <application 
         android:icon="@drawable/icon" 
         android:label="@string/app_name">

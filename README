@@ -1,0 +1,33 @@
+/*
+ *========================================================================
+ * README
+ * Jul 23, 2011 9:37:07 AM | variable
+ * Copyright (c) 2011 Richard Banasiak
+ *========================================================================
+ * This file is part of CoinFlip.
+ *
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+https://market.android.com/details?id=com.banasiak.coinflip
+
+A convenient way to flip a coin, even if you don't have one!
+
+Simply tap the question mark or shake and view the result. Tap the coin again 
+or shake to flip again. Verify the flip algorithm is truly pseudo-random by 
+running the built-in Self Test and flipping the coin 10,000 times.
+
+Completely FREE (no-ads) and doesn't require any unsafe permissions. 
+Released under the GNU General Public License. Source code available here: 
+https://github.com/banasiak/CoinFlip

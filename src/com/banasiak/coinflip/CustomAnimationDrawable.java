@@ -1,9 +1,9 @@
 /*
- *------------------------------------------------------------------------
+ *========================================================================
  * CustomAnimationDrawable.java
- * Jul 22, 2011 11:29:45 AM | variable
+ * Jul 23, 2011 9:41:44 AM | variable
  * Copyright (c) 2011 Richard Banasiak
- *------------------------------------------------------------------------
+ *========================================================================
  * This file is part of CoinFlip.
  *
  *    CoinFlip is free software: you can redistribute it and/or modify
@@ -61,8 +61,6 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable
         mAnimationHandler = new Handler();
         mAnimationHandler.postDelayed(new Runnable()
         {
-
-            @Override
             public void run()
             {
                 onAnimationFinish();

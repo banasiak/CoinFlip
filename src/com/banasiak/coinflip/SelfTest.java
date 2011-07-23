@@ -63,10 +63,10 @@ public class SelfTest extends Activity
         int tails = 0;
         int total = 0;
 
-        NumberFormat percentFormat = NumberFormat.getPercentInstance();
+        final NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(1);
 
-        long startTimeStamp = System.currentTimeMillis();
+        final long startTimeStamp = System.currentTimeMillis();
         for (total = 0; total < NUMBER_OF_FLIPS; total++)
         {
             if (theCoin.flip())
@@ -78,7 +78,7 @@ public class SelfTest extends Activity
                 tails++;
             }
         }
-        long endTimeStamp = System.currentTimeMillis();
+        final long endTimeStamp = System.currentTimeMillis();
 
         Log.d(TAG, "heads: " + heads);
         Log.d(TAG, "tails: " + tails);

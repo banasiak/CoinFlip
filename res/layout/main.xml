@@ -27,20 +27,6 @@
     android:layout_height="wrap_content" 
     android:layout_gravity="center_horizontal"
     android:orientation="vertical">
-    <!-- 
-    <TextView 
-        android:id="@+id/header_text_view" 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" 
-        android:text="@string/header_tv"
-        android:textSize="24sp" 
-        android:textStyle="bold" 
-        android:gravity="center"
-        android:visibility="invisible">
-    </TextView>
-    -->
     <ImageView 
         android:id="@+id/coin_image_view" 
         android:maxWidth="390dp"
