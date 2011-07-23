@@ -60,6 +60,8 @@ public class CoinFlip extends Activity
     private final Boolean previousResult = true;
     private AnimationDrawable coinAnimation;
     private CustomAnimationDrawable coinAnimationCustom;
+    private ImageView coinImage;
+    private TextView resultText;
 
     /**
      * Called when the user presses the menu button.
@@ -91,6 +93,10 @@ public class CoinFlip extends Activity
                 final Intent j = new Intent(this, SelfTest.class);
                 startActivity(j);
                 return true;
+            case R.id.settings_menu:
+                final Intent k = new Intent(this, Settings.class);
+                startActivity(k);
+                return true;
             case R.id.exit:
                 finish();
                 return true;
@@ -102,8 +108,8 @@ public class CoinFlip extends Activity
     public void onResume()
     {
         Log.d(TAG, "onResume()");
-        shaker.resume();
         resetCoin();
+        shaker.resume();
         super.onResume();
     }
 
@@ -126,6 +132,10 @@ public class CoinFlip extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        // initialize the coin image and result text views
+        initCoinImageView();
+        initResultTextView();
+
         // initialize the shake listener
         shaker = new ShakeListener(this);
         shaker.setOnShakeListener(new ShakeListener.OnShakeListener()
@@ -137,7 +147,6 @@ public class CoinFlip extends Activity
         });
 
         // initialize the onclick listener
-        final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
         coinImage.setOnClickListener(new OnClickListener()
         {
             public void onClick(View v)
@@ -168,14 +177,9 @@ public class CoinFlip extends Activity
     {
         Log.d(TAG, "resetCoin()");
 
-        final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
-        final TextView resultText = (TextView) findViewById(R.id.result_text_view);
-
         // hide the animation and draw the reset image
-        if (coinAnimationCustom != null)
-        {
-            coinAnimationCustom.setAlpha(0);
-        }
+        displayCoinAnimation(false);
+        displayCoinImage(true);
         coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
         resultText.setText("");
     }
@@ -221,18 +225,17 @@ public class CoinFlip extends Activity
     {
         Log.d(TAG, "renderResult()");
 
-        final ImageView coinImage = (ImageView) findViewById(R.id.coin_image_view);
-        final TextView resultText = (TextView) findViewById(R.id.result_text_view);
-
-        // clear out the initial image
+        // hide the static image and clear the text
+        displayCoinImage(false);
+        displayCoinAnimation(false);
         resultText.setText("");
-        coinImage.setImageDrawable(null);
 
         // initialize the appropriate animation depending on the resultState
         switch (resultState)
         {
             default:
             case HEADS_HEADS:
+                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.heads_heads);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
@@ -240,12 +243,12 @@ public class CoinFlip extends Activity
                     void onAnimationFinish()
                     {
                         playCoinSound();
-                        resultText.setText(R.string.heads);
-                        resultText.setTextColor(Color.parseColor("green"));
+                        updateResultText(resultState);
                     }
                 };
                 break;
             case HEADS_TAILS:
+                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.tails));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.heads_tails);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
@@ -253,12 +256,12 @@ public class CoinFlip extends Activity
                     void onAnimationFinish()
                     {
                         playCoinSound();
-                        resultText.setText(R.string.tails);
-                        resultText.setTextColor(Color.parseColor("red"));
+                        updateResultText(resultState);
                     }
                 };
                 break;
             case TAILS_HEADS:
+                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.tails_heads);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
@@ -266,12 +269,12 @@ public class CoinFlip extends Activity
                     void onAnimationFinish()
                     {
                         playCoinSound();
-                        resultText.setText(R.string.heads);
-                        resultText.setTextColor(Color.parseColor("green"));
+                        updateResultText(resultState);
                     }
                 };
                 break;
             case TAILS_TAILS:
+                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.tails));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.tails_tails);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
@@ -279,23 +282,108 @@ public class CoinFlip extends Activity
                     void onAnimationFinish()
                     {
                         playCoinSound();
-                        resultText.setText(R.string.tails);
-                        resultText.setTextColor(Color.parseColor("red"));
+                        updateResultText(resultState);
                     }
                 };
                 break;
         }
 
-        // render the animation
-        coinAnimationCustom.setAlpha(255);
-        coinImage.setBackgroundDrawable(coinAnimationCustom);
-        coinAnimationCustom.start();
+        // display the result
+        if (Settings.getAnimationPref(this))
+        {
+            // hide the static image and render the animation
+            displayCoinImage(false);
+            displayCoinAnimation(true);
+            coinImage.setBackgroundDrawable(coinAnimationCustom);
+            coinAnimationCustom.start();
+            // handled by animation callback
+            // playCoinSound();
+            // updateResultText(resultState, resultText);
+        }
+        else
+        {
+            // hide the animation and display the static image
+            displayCoinImage(true);
+            displayCoinAnimation(false);
+            playCoinSound();
+            updateResultText(resultState);
+        }
     }
 
     private void playCoinSound()
     {
         Log.d(TAG, "playCoinSound()");
-        final MediaPlayer coinSound = MediaPlayer.create(this, R.raw.coin);
-        coinSound.start();
+        if (Settings.getSoundPref(this))
+        {
+            final MediaPlayer coinSound = MediaPlayer.create(this, R.raw.coin);
+            coinSound.start();
+        }
+    }
+    private void updateResultText(ResultState resultState)
+    {
+        Log.d(TAG, "updateResultText()");
+        switch (resultState)
+        {
+            case HEADS_HEADS:
+            case TAILS_HEADS:
+                resultText.setText(R.string.heads);
+                resultText.setTextColor(Color.parseColor("green"));
+                break;
+            case HEADS_TAILS:
+            case TAILS_TAILS:
+                resultText.setText(R.string.tails);
+                resultText.setTextColor(Color.parseColor("red"));
+                break;
+            default:
+                resultText.setText(R.string.unknown);
+                resultText.setTextColor(Color.parseColor("yellow"));
+                break;
+        }
+    }
+    private void displayCoinAnimation(boolean flag)
+    {
+        Log.d(TAG, "displayCoinAnimation()");
+
+        // safety first!
+        if (coinAnimationCustom != null )
+        {
+            if (flag)
+            {
+                coinAnimationCustom.setAlpha(255);
+            }
+            else
+            {
+                coinAnimationCustom.setAlpha(0);
+            }
+        }
+    }
+    private void displayCoinImage(boolean flag)
+    {
+        Log.d(TAG, "displayCoinImage");
+
+        // safety first!
+        if (coinImage != null)
+        {
+            if (flag)
+            {
+                // get rid of the animation background
+                coinImage.setBackgroundDrawable(null);
+                coinImage.setAlpha(255);
+            }
+            else
+            {
+                coinImage.setAlpha(0);
+            }
+        }
+    }
+    private void initCoinImageView ()
+    {
+        Log.d(TAG, "initCoinImageView()");
+        coinImage = (ImageView) findViewById(R.id.coin_image_view);
+    }
+    private void initResultTextView ()
+    {
+        Log.d(TAG, "initResultImageView()");
+        resultText = (TextView) findViewById(R.id.result_text_view);
     }
 }

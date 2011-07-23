@@ -23,7 +23,7 @@
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip" 
-    android:versionName="2.1" android:versionCode="5">
+    android:versionName="2.1.1" android:versionCode="6">
     
     <application 
         android:icon="@drawable/icon" 
@@ -40,6 +40,10 @@
                     android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Settings" 
+            android:label="@string/settings_activity_title">
+        </activity>        
         <activity 
             android:name=".SelfTest" 
             android:label="@string/selftest_activity_title"
