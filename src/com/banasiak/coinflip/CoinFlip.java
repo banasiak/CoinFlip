@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Jul 23, 2011 9:37:07 AM | variable
+ * Jul 24, 2011 10:18:43 AM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -57,7 +57,7 @@ public class CoinFlip extends Activity
     private final Coin theCoin = new Coin();
     private ShakeListener shaker;
     private Boolean currentResult = true;
-    private final Boolean previousResult = true;
+    private Boolean previousResult = true;
     private AnimationDrawable coinAnimation;
     private CustomAnimationDrawable coinAnimationCustom;
     private ImageView coinImage;
@@ -164,7 +164,12 @@ public class CoinFlip extends Activity
 
         // we're in the process of flipping the coin
         ResultState resultState = ResultState.UNKNOWN;
-        vibrator.vibrate(100);
+
+        // vibrate if enabled
+        if (Settings.getVibratePref(this))
+        {
+            vibrator.vibrate(100);
+        }
 
         // flip the coin and update the state with the result
         resultState = updateState(theCoin.flip());
@@ -195,28 +200,18 @@ public class CoinFlip extends Activity
         ResultState resultState = ResultState.UNKNOWN;
         currentResult = flipResult;
 
-        if (previousResult == true)
-        {
-            if (currentResult == true)
-            {
-                resultState = ResultState.HEADS_HEADS;
-            }
-            else
-            {
-                resultState = ResultState.HEADS_TAILS;
-            }
-        }
-        else
-        {
-            if (currentResult == true)
-            {
-                resultState = ResultState.TAILS_HEADS;
-            }
-            else
-            {
-                resultState = ResultState.TAILS_TAILS;
-            }
-        }
+        // this is easier to read than the old code
+        if (previousResult == true && currentResult == true)
+            resultState = ResultState.HEADS_HEADS;
+        if (previousResult == true && currentResult == false)
+            resultState = ResultState.HEADS_TAILS;
+        if (previousResult == false && currentResult == true)
+            resultState = ResultState.TAILS_HEADS;
+        if (previousResult == false && currentResult == false)
+            resultState = ResultState.TAILS_TAILS;
+
+        // update the previousResult for the next flip
+        previousResult = currentResult;
 
         return resultState;
     }

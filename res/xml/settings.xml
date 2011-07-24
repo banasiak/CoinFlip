@@ -33,4 +33,9 @@
         android:title="@string/settings_item_sound_title"
         android:summary="@string/settings_item_sound_summary"
         android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="vibrate"
+        android:title="@string/settings_item_vibrate_title"
+        android:summary="@string/settings_item_vibrate_summary"
+        android:defaultValue="true" />        
 </PreferenceScreen>

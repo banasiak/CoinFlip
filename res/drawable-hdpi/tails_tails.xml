@@ -57,10 +57,26 @@
     <item android:drawable="@drawable/tails2" android:duration="20" />
     <item android:drawable="@drawable/tails4" android:duration="20" />
     <item android:drawable="@drawable/tails6" android:duration="20" />
-    <item android:drawable="@drawable/tails8" android:duration="20" />
     <!-- End Flip 2 -->
     
     <!-- Begin Flip 3 --> 
+    <item android:drawable="@drawable/tails8" android:duration="20" />
+    <item android:drawable="@drawable/tails6" android:duration="20" />
+    <item android:drawable="@drawable/tails4" android:duration="20" />
+    <item android:drawable="@drawable/tails2" android:duration="20" />
+    <item android:drawable="@drawable/edge" android:duration="20" />
+    <item android:drawable="@drawable/heads2" android:duration="20" />
+    <item android:drawable="@drawable/heads4" android:duration="20" />
+    <item android:drawable="@drawable/heads6" android:duration="20" />
+    <item android:drawable="@drawable/heads8" android:duration="20" />
+    <item android:drawable="@drawable/heads6" android:duration="20" />
+    <item android:drawable="@drawable/heads4" android:duration="20" />
+    <item android:drawable="@drawable/heads2" android:duration="20" />
+    <item android:drawable="@drawable/edge" android:duration="20" />
+    <item android:drawable="@drawable/tails2" android:duration="20" />
+    <item android:drawable="@drawable/tails4" android:duration="20" />
+    <item android:drawable="@drawable/tails6" android:duration="20" />
+    <item android:drawable="@drawable/tails8" android:duration="20" />    
     <!-- End Flip 3 -->
 
 </animation-list>
