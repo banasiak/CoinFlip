@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * README
- * Jul 23, 2011 9:37:07 AM | variable
+ * Jul 24, 2011 10:18:43 AM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -19,7 +19,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+ 
 https://market.android.com/details?id=com.banasiak.coinflip
 
 A convenient way to flip a coin, even if you don't have one!
@@ -31,3 +31,5 @@ running the built-in Self Test and flipping the coin 10,000 times.
 Completely FREE (no-ads) and doesn't require any unsafe permissions. 
 Released under the GNU General Public License. Source code available here: 
 https://github.com/banasiak/CoinFlip
+
+Quarter-dollar coin images from the United States Mint.
