@@ -1,11 +1,11 @@
 <!--
  *========================================================================
  * heads_tails.xml
- * Jul 22, 2011 9:02:48 AM | variable
+ * Jul 24, 2011 10:46:33 AM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
- * 
+ *
  *    CoinFlip is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
@@ -19,9 +19,9 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="true">
+    
     <!-- Begin Flip 1 -->
     <item android:drawable="@drawable/heads8" android:duration="20" />
     <item android:drawable="@drawable/heads6" android:duration="20" />
