@@ -27,7 +27,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.media.MediaPlayer;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -54,6 +55,10 @@ public class CoinFlip extends Activity
         UNKNOWN
     }
 
+    // hashmaps perform poorly in Dalvik and there's a minimal number of sounds
+    private static final int[] SOUNDS = new int[1];
+    private static final int SOUND_COIN = 0;
+
     private final Coin theCoin = new Coin();
     private ShakeListener shaker;
     private Boolean currentResult = true;
@@ -62,6 +67,7 @@ public class CoinFlip extends Activity
     private CustomAnimationDrawable coinAnimationCustom;
     private ImageView coinImage;
     private TextView resultText;
+    private SoundPool soundPool;
 
     /**
      * Called when the user presses the menu button.
@@ -135,6 +141,9 @@ public class CoinFlip extends Activity
         // initialize the coin image and result text views
         initCoinImageView();
         initResultTextView();
+
+        // initialize the sounds
+        initSounds();
 
         // initialize the shake listener
         shaker = new ShakeListener(this);
@@ -237,7 +246,7 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
-                        playCoinSound();
+                        playSound(SOUND_COIN);
                         updateResultText(resultState);
                     }
                 };
@@ -250,7 +259,7 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
-                        playCoinSound();
+                        playSound(SOUND_COIN);
                         updateResultText(resultState);
                     }
                 };
@@ -263,7 +272,7 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
-                        playCoinSound();
+                        playSound(SOUND_COIN);
                         updateResultText(resultState);
                     }
                 };
@@ -276,7 +285,7 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
-                        playCoinSound();
+                        playSound(SOUND_COIN);
                         updateResultText(resultState);
                     }
                 };
@@ -300,20 +309,34 @@ public class CoinFlip extends Activity
             // hide the animation and display the static image
             displayCoinImage(true);
             displayCoinAnimation(false);
-            playCoinSound();
+            playSound(SOUND_COIN);
             updateResultText(resultState);
         }
     }
 
-    private void playCoinSound()
+    private void initSounds()
     {
-        Log.d(TAG, "playCoinSound()");
+        // MediaPlayer was causing ANR issues on some devices.
+        // SoundPool should be more efficient.
+        Log.d(TAG, "initSounds()");
+        soundPool  = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
+        SOUNDS[SOUND_COIN]= soundPool.load(this, R.raw.coin, 1);
+    }
+
+    private void playSound(int sound)
+    {
+        Log.d(TAG, "playSound()");
         if (Settings.getSoundPref(this))
         {
-            final MediaPlayer coinSound = MediaPlayer.create(this, R.raw.coin);
-            coinSound.start();
+            AudioManager mgr = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+            float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
+            float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            float volume = streamVolumeCurrent / streamVolumeMax;
+
+            soundPool.play(SOUNDS[sound], volume, volume, 1, 0, 1f);
         }
     }
+
     private void updateResultText(ResultState resultState)
     {
         Log.d(TAG, "updateResultText()");
