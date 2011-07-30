@@ -25,6 +25,7 @@ package com.banasiak.coinflip;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
@@ -56,8 +57,9 @@ public class CoinFlip extends Activity
     }
 
     // hashmaps perform poorly in Dalvik and there's a minimal number of sounds
-    private static final int[] SOUNDS = new int[1];
+    private static final int[] SOUNDS = new int[2];
     private static final int SOUND_COIN = 0;
+    private static final int SOUND_1UP = 1;
 
     private final Coin theCoin = new Coin();
     private ShakeListener shaker;
@@ -68,6 +70,7 @@ public class CoinFlip extends Activity
     private ImageView coinImage;
     private TextView resultText;
     private SoundPool soundPool;
+    private int flipCounter = 0;
 
     /**
      * Called when the user presses the menu button.
@@ -125,6 +128,12 @@ public class CoinFlip extends Activity
         Log.d(TAG, "onPause()");
         shaker.pause();
         super.onPause();
+
+        // persist state
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("flipCounter", flipCounter);
+        editor.commit();
     }
 
     /**
@@ -136,6 +145,11 @@ public class CoinFlip extends Activity
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
+
+        // restore state
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        flipCounter = preferences.getInt("flipCounter", 0);
+
         setContentView(R.layout.main);
 
         // initialize the coin image and result text views
@@ -185,6 +199,8 @@ public class CoinFlip extends Activity
 
         // update the screen with the result of the flip
         renderResult(resultState);
+
+        flipCounter++;
     }
 
     private void resetCoin()
@@ -320,7 +336,8 @@ public class CoinFlip extends Activity
         // SoundPool should be more efficient.
         Log.d(TAG, "initSounds()");
         soundPool  = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
-        SOUNDS[SOUND_COIN]= soundPool.load(this, R.raw.coin, 1);
+        SOUNDS[SOUND_COIN] = soundPool.load(this, R.raw.coin, 1);
+        SOUNDS[SOUND_1UP] = soundPool.load(this, R.raw.oneup, 1);
     }
 
     private void playSound(int sound)
@@ -334,6 +351,13 @@ public class CoinFlip extends Activity
             float volume = streamVolumeCurrent / streamVolumeMax;
 
             soundPool.play(SOUNDS[sound], volume, volume, 1, 0, 1f);
+
+            // Happy Easter!
+            if (flipCounter == 100)
+            {
+                soundPool.play(SOUNDS[SOUND_1UP], volume, volume, 1, 0, 1f);
+                flipCounter = 0;
+            }
         }
     }
 
