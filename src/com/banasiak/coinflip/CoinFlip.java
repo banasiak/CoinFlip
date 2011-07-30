@@ -262,7 +262,7 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
-                        playSound(SOUND_COIN);
+                        playCoinSound();
                         updateResultText(resultState);
                     }
                 };
@@ -275,7 +275,7 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
-                        playSound(SOUND_COIN);
+                        playCoinSound();
                         updateResultText(resultState);
                     }
                 };
@@ -288,7 +288,7 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
-                        playSound(SOUND_COIN);
+                        playCoinSound();
                         updateResultText(resultState);
                     }
                 };
@@ -301,7 +301,7 @@ public class CoinFlip extends Activity
                     @Override
                     void onAnimationFinish()
                     {
-                        playSound(SOUND_COIN);
+                        playCoinSound();
                         updateResultText(resultState);
                     }
                 };
@@ -325,7 +325,7 @@ public class CoinFlip extends Activity
             // hide the animation and display the static image
             displayCoinImage(true);
             displayCoinAnimation(false);
-            playSound(SOUND_COIN);
+            playCoinSound();
             updateResultText(resultState);
         }
     }
@@ -350,14 +350,20 @@ public class CoinFlip extends Activity
             float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
             float volume = streamVolumeCurrent / streamVolumeMax;
 
-            soundPool.play(SOUNDS[sound], volume, volume, 1, 0, 1f);
+            soundPool.play(sound, volume, volume, 1, 0, 1f);
+        }
+    }
 
-            // Happy Easter!
-            if (flipCounter == 100)
-            {
-                soundPool.play(SOUNDS[SOUND_1UP], volume, volume, 1, 0, 1f);
-                flipCounter = 0;
-            }
+    private void playCoinSound()
+    {
+        Log.d(TAG, "playCoinSound()");
+        playSound(SOUNDS[SOUND_COIN]);
+
+        //Happy Easter!  (For Ryan)
+        if (flipCounter == 100)
+        {
+            playSound(SOUNDS[SOUND_1UP]);
+            flipCounter = 0;
         }
     }
 
