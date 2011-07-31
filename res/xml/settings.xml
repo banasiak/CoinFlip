@@ -37,5 +37,18 @@
         android:key="vibrate"
         android:title="@string/settings_item_vibrate_title"
         android:summary="@string/settings_item_vibrate_summary"
-        android:defaultValue="true" />        
+        android:defaultValue="true" /> 
+    <ListPreference 
+        android:key="coin"
+        android:title="@string/settings_item_coin_title"
+        android:summary="@string/settings_item_coin_summary"
+        android:defaultValue="default" 
+        android:entries="@array/coins"
+        android:entryValues="@array/coins_values" />
+    <PreferenceScreen 
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:key="download"
+        android:title="Get More Coins"
+        android:summary="Download more coins from the market">
+    </PreferenceScreen>
 </PreferenceScreen>

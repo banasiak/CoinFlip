@@ -25,7 +25,6 @@ package com.banasiak.coinflip;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
@@ -130,10 +129,7 @@ public class CoinFlip extends Activity
         super.onPause();
 
         // persist state
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("flipCounter", flipCounter);
-        editor.commit();
+        Settings.setFlipCount(this, flipCounter);
     }
 
     /**
@@ -147,8 +143,7 @@ public class CoinFlip extends Activity
         super.onCreate(savedInstanceState);
 
         // restore state
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        flipCounter = preferences.getInt("flipCounter", 0);
+        flipCounter = Settings.getFlipCount(this);
 
         setContentView(R.layout.main);
 
@@ -255,7 +250,7 @@ public class CoinFlip extends Activity
         {
             default:
             case HEADS_HEADS:
-                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads));
+                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads8));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.heads_heads);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
@@ -268,7 +263,7 @@ public class CoinFlip extends Activity
                 };
                 break;
             case HEADS_TAILS:
-                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.tails));
+                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.tails8));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.heads_tails);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
@@ -281,7 +276,7 @@ public class CoinFlip extends Activity
                 };
                 break;
             case TAILS_HEADS:
-                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads));
+                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads8));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.tails_heads);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
@@ -294,7 +289,7 @@ public class CoinFlip extends Activity
                 };
                 break;
             case TAILS_TAILS:
-                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.tails));
+                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.tails8));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.tails_tails);
                 coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
@@ -407,7 +402,7 @@ public class CoinFlip extends Activity
     }
     private void displayCoinImage(boolean flag)
     {
-        Log.d(TAG, "displayCoinImage");
+        Log.d(TAG, "displayCoinImage()");
 
         // safety first!
         if (coinImage != null)

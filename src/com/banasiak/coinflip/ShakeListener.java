@@ -108,12 +108,12 @@ public class ShakeListener implements SensorEventListener
 
     public void onAccuracyChanged(Sensor sensor, int accuracy)
     {
-        Log.d(TAG, "onAccuracyChanged()");
+        //Log.d(TAG, "onAccuracyChanged()");
     }
 
     public void onSensorChanged(SensorEvent event)
     {
-        Log.d(TAG, "onSensorChanged()");
+        //Log.d(TAG, "onSensorChanged()");
 
         if (event.sensor.getType() != Sensor.TYPE_ACCELEROMETER)
         {

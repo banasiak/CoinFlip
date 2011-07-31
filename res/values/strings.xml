@@ -42,6 +42,8 @@
     <string name="settings_activity_title">Coin Flip Settings</string>
     <string name="settings_item_animation_summary">Render spinning coin animation</string>
     <string name="settings_item_animation_title">Animation</string>
+    <string name="settings_item_coin_summary">The type of coin to be displayed</string>
+    <string name="settings_item_coin_title">Coin Type</string>
     <string name="settings_item_sound_summary">Play sound after coin flip"</string>
     <string name="settings_item_sound_title">Sound</string>
     <string name="settings_item_vibrate_summary">Vibrate on coin flip"</string>
