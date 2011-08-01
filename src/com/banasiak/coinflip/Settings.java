@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Settings.java
- * Jul 24, 2011 10:22:05 AM | variable
+ * Jul 31, 2011 9:25:47 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -25,7 +25,6 @@ package com.banasiak.coinflip;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -59,6 +58,8 @@ public class Settings extends PreferenceActivity
     private static final String KEY_FLIPCOUNT = "flipCount";
     private static final int KEY_FLIPCOUNT_DEF = 0;
 
+    private final Util util = new Util(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -78,33 +79,12 @@ public class Settings extends PreferenceActivity
                 }
             });
 
-        if (isExtPkgInstalled())
+        if (util.isExtPkgInstalled(EXTPKG))
         {
             Toast.makeText(this, "Extension Package Detected", Toast.LENGTH_SHORT).show();
             getPreferenceScreen().removePreference(downloadPref);
             loadExtPkgCoins();
         }
-    }
-
-    // check to see if an extension package is installed
-    private boolean isExtPkgInstalled()
-    {
-        Log.d(TAG, "isExtPkgInstalled()");
-        boolean isInstalled = false;
-        try
-        {
-            PackageInfo packageInfo = getPackageManager().getPackageInfo(EXTPKG, 0);
-            if (packageInfo != null)
-            {
-                isInstalled = true;
-            }
-        }
-        catch (NameNotFoundException e)
-        {
-            Log.d(TAG, "NameNotFoundException");
-            e.printStackTrace();
-        }
-        return isInstalled;
     }
 
     // Load the "coins" available in the add-on package.
@@ -201,6 +181,17 @@ public class Settings extends PreferenceActivity
         Log.d(TAG, "getCoinPref()");
         return PreferenceManager.getDefaultSharedPreferences(context)
             .getString(KEY_COIN, KEY_COIN_DEF);
+    }
+
+    // reset the value of the coin preference
+    public static void resetCoinPref(Context context)
+    {
+        Log.d(TAG, "resetCoinPref()");
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.putString(KEY_COIN, KEY_COIN_DEF);
+        editor.commit();
     }
 
     // get the persisted flip counter

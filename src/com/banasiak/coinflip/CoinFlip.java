@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Jul 24, 2011 10:18:43 AM | variable
+ * Jul 31, 2011 9:25:32 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -25,6 +25,8 @@ package com.banasiak.coinflip;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
@@ -44,6 +46,9 @@ public class CoinFlip extends Activity
 {
     // debugging tag
     private static final String TAG = "CoinFlip";
+
+    // add-on package name
+    private static final String EXTPKG = "com.banasiak.coinflipext";
 
     // enumerator of all possible transition states
     private enum ResultState
@@ -71,6 +76,8 @@ public class CoinFlip extends Activity
     private SoundPool soundPool;
     private int flipCounter = 0;
 
+    private final Util util = new Util(this);
+
     /**
      * Called when the user presses the menu button.
      */
@@ -91,19 +98,22 @@ public class CoinFlip extends Activity
     public boolean onOptionsItemSelected(MenuItem item)
     {
         Log.d(TAG, "onOptionsItemSelected()");
+
+        Intent intent;
+
         switch (item.getItemId())
         {
             case R.id.about_menu:
-                final Intent i = new Intent(this, About.class);
-                startActivity(i);
+                intent = new Intent(this, About.class);
+                startActivity(intent);
                 return true;
             case R.id.selftest_menu:
-                final Intent j = new Intent(this, SelfTest.class);
-                startActivity(j);
+                intent = new Intent(this, SelfTest.class);
+                startActivity(intent);
                 return true;
             case R.id.settings_menu:
-                final Intent k = new Intent(this, Settings.class);
-                startActivity(k);
+                intent = new Intent(this, Settings.class);
+                startActivity(intent);
                 return true;
             case R.id.exit:
                 finish();
@@ -141,6 +151,12 @@ public class CoinFlip extends Activity
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
+
+        // reset settings if external package has been removed
+        if (!util.isExtPkgInstalled(EXTPKG))
+        {
+            Settings.resetCoinPref(this);
+        }
 
         // restore state
         flipCounter = Settings.getFlipCount(this);
@@ -236,19 +252,12 @@ public class CoinFlip extends Activity
         return resultState;
     }
 
-    private void renderResult(final ResultState resultState)
+    // load resources internal to the CoinFlip package
+    private void loadInternalResources(final ResultState resultState)
     {
-        Log.d(TAG, "renderResult()");
-
-        // hide the static image and clear the text
-        displayCoinImage(false);
-        displayCoinAnimation(false);
-        resultText.setText("");
-
         // initialize the appropriate animation depending on the resultState
         switch (resultState)
         {
-            default:
             case HEADS_HEADS:
                 coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads8));
                 coinAnimation = (AnimationDrawable) getResources().getDrawable(R.drawable.heads_heads);
@@ -301,7 +310,124 @@ public class CoinFlip extends Activity
                     }
                 };
                 break;
+            default:
+                Log.w(TAG, "Invalid state. Resetting coin.");
+                resetCoin();
+                break;
         }
+    }
+
+    // load resources from the external CoinFlipExt package
+    private void loadExternalResources(final ResultState resultState, final String coinPrefix)
+    {
+        int imageId = 0;
+        int animationId = 0;
+        Resources extPkgResources = null;
+
+        try
+        {
+            // load the resources from the add-in package
+            extPkgResources = getPackageManager().getResourcesForApplication(EXTPKG);
+
+            switch (resultState)
+            {
+                case HEADS_HEADS:
+                    imageId = extPkgResources.getIdentifier(coinPrefix + "_heads8", "drawable", EXTPKG);
+                    animationId = extPkgResources.getIdentifier(coinPrefix + "_heads_heads", "drawable", EXTPKG);
+                    coinImage.setImageDrawable(extPkgResources.getDrawable(imageId));
+                    coinAnimation = (AnimationDrawable) extPkgResources.getDrawable(animationId);
+                    coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
+                    {
+                        @Override
+                        void onAnimationFinish()
+                        {
+                            playCoinSound();
+                            updateResultText(resultState);
+                        }
+                    };
+                    break;
+                case HEADS_TAILS:
+                    imageId = extPkgResources.getIdentifier(coinPrefix + "_tails8", "drawable", EXTPKG);
+                    animationId = extPkgResources.getIdentifier(coinPrefix + "_heads_tails", "drawable", EXTPKG);
+                    coinImage.setImageDrawable(extPkgResources.getDrawable(imageId));
+                    coinAnimation = (AnimationDrawable) extPkgResources.getDrawable(animationId);
+                    coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
+                    {
+                        @Override
+                        void onAnimationFinish()
+                        {
+                            playCoinSound();
+                            updateResultText(resultState);
+                        }
+                    };
+                    break;
+                case TAILS_HEADS:
+                    imageId = extPkgResources.getIdentifier(coinPrefix + "_heads8", "drawable", EXTPKG);
+                    animationId = extPkgResources.getIdentifier(coinPrefix + "_tails_heads", "drawable", EXTPKG);
+                    coinImage.setImageDrawable(extPkgResources.getDrawable(imageId));
+                    coinAnimation = (AnimationDrawable) extPkgResources.getDrawable(animationId);
+                    coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
+                    {
+                        @Override
+                        void onAnimationFinish()
+                        {
+                            playCoinSound();
+                            updateResultText(resultState);
+                        }
+                    };
+                    break;
+                case TAILS_TAILS:
+                    imageId = extPkgResources.getIdentifier(coinPrefix + "_tails8", "drawable", EXTPKG);
+                    animationId = extPkgResources.getIdentifier(coinPrefix + "_tails_tails", "drawable", EXTPKG);
+                    coinImage.setImageDrawable(extPkgResources.getDrawable(imageId));
+                    coinAnimation = (AnimationDrawable) extPkgResources.getDrawable(animationId);
+                    coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
+                    {
+                        @Override
+                        void onAnimationFinish()
+                        {
+                            playCoinSound();
+                            updateResultText(resultState);
+                        }
+                    };
+                    break;
+                default:
+                    Log.w(TAG, "Invalid state. Resetting coin.");
+                    resetCoin();
+                    break;
+            }
+        }
+        catch (NameNotFoundException e)
+        {
+            Log.e(TAG, "NameNotFoundException");
+            e.printStackTrace();
+        }
+
+    }
+
+    private void renderResult(final ResultState resultState)
+    {
+        Log.d(TAG, "renderResult()");
+
+
+        // determine coin type to draw
+        String coinPrefix = Settings.getCoinPref(this);
+
+        if (coinPrefix.equals("default"))
+        {
+            Log.d (TAG, "Default coin selected");
+            loadInternalResources(resultState);
+        }
+        else
+        {
+            Log.d (TAG, "Add-on coin selected");
+            loadExternalResources(resultState, coinPrefix);
+        }
+
+        // hide the static image and clear the text
+        displayCoinImage(false);
+        displayCoinAnimation(false);
+        resultText.setText("");
 
         // display the result
         if (Settings.getAnimationPref(this))
@@ -429,4 +555,5 @@ public class CoinFlip extends Activity
         Log.d(TAG, "initResultImageView()");
         resultText = (TextView) findViewById(R.id.result_text_view);
     }
+
 }
