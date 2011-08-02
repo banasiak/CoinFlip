@@ -23,7 +23,7 @@
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip" 
-    android:versionName="2.2.1" android:versionCode="8"
+    android:versionName="3.0.1" android:versionCode="10"
     android:installLocation="auto">
     
     <application 
@@ -60,14 +60,5 @@
     <uses-sdk android:minSdkVersion="3" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
-
-<!-- 
-    <supports-screens 
-        android:anyDensity="true"
-        android:smallScreens="false"
-        android:normalScreens="true" 
-        android:largeScreens="true">
-    </supports-screens>
--->
 
 </manifest> 

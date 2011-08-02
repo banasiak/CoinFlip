@@ -56,7 +56,8 @@ public class Util
         catch (NameNotFoundException e)
         {
             Log.d(TAG, "NameNotFoundException");
-            e.printStackTrace();
+            Log.d(TAG, extPkg + " is not installed");
+            //e.printStackTrace();
         }
         return isInstalled;
     }

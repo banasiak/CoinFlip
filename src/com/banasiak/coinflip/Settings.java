@@ -35,7 +35,6 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 public class Settings extends PreferenceActivity
 {
@@ -81,7 +80,6 @@ public class Settings extends PreferenceActivity
 
         if (util.isExtPkgInstalled(EXTPKG))
         {
-            Toast.makeText(this, "Extension Package Detected", Toast.LENGTH_SHORT).show();
             getPreferenceScreen().removePreference(downloadPref);
             loadExtPkgCoins();
         }
