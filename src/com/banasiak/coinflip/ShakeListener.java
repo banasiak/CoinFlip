@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * ShakeListener.java
- * Jul 23, 2011 9:42:08 AM | variable
+ * Aug 4, 2011 7:45:57 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -27,28 +27,24 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
-import android.widget.Toast;
 
 public class ShakeListener implements SensorEventListener
 {
-    // debugging tag
-    private static final String TAG = "ShakeListener";
-
-    private static final int FORCE_THRESHOLD = 1000;
+    private static final int FORCE_THRESHOLD = 40;
     private static final int TIME_THRESHOLD = 100;
     private static final int SHAKE_TIMEOUT = 500;
     private static final int SHAKE_DURATION = 1000;
     private static final int SHAKE_COUNT = 3;
 
     private SensorManager mSensorMgr;
-    private float mLastX = -1.0f, mLastY = -1.0f;
+    private float mLastX = -1.0f, mLastY = -1.0f, mLastZ = -1.0f;
     private long mLastTime;
     private OnShakeListener mShakeListener;
     private final Context mContext;
     private int mShakeCount = 0;
     private long mLastShake;
     private long mLastForce;
+    private int mForceMultiplier = 50;
 
     public interface OnShakeListener
     {
@@ -58,24 +54,21 @@ public class ShakeListener implements SensorEventListener
     public ShakeListener(Context context)
     {
         mContext = context;
-        resume();
+        resume(mForceMultiplier);
     }
 
     public void setOnShakeListener(OnShakeListener listener)
     {
-        Log.d(TAG, "setOnShakeListener()");
-
         mShakeListener = listener;
     }
 
-    public void resume()
+    public void resume(int forceMultiplier)
     {
-        Log.d(TAG, "resume()");
-
+        mForceMultiplier = forceMultiplier;
         mSensorMgr = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         if (mSensorMgr == null)
         {
-            throw new UnsupportedOperationException("Sensors not supported!");
+            throw new UnsupportedOperationException("Sensors not supported");
         }
         boolean supported = false;
         try
@@ -84,21 +77,17 @@ public class ShakeListener implements SensorEventListener
                 mSensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_GAME);
         }
-        catch (final Exception e)
+        catch (Exception e)
         {
-            Toast.makeText(mContext, "Shaking not supported!", Toast.LENGTH_LONG).show();
+            // shaking not supported
         }
 
         if ((!supported) && (mSensorMgr != null))
-        {
             mSensorMgr.unregisterListener(this);
-        }
     }
 
     public void pause()
     {
-        Log.d(TAG, "pause()");
-
         if (mSensorMgr != null)
         {
             mSensorMgr.unregisterListener(this);
@@ -108,19 +97,14 @@ public class ShakeListener implements SensorEventListener
 
     public void onAccuracyChanged(Sensor sensor, int accuracy)
     {
-        //Log.d(TAG, "onAccuracyChanged()");
     }
 
     public void onSensorChanged(SensorEvent event)
     {
-        //Log.d(TAG, "onSensorChanged()");
-
         if (event.sensor.getType() != Sensor.TYPE_ACCELEROMETER)
-        {
             return;
-        }
 
-        final long now = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
 
         if ((now - mLastForce) > SHAKE_TIMEOUT)
         {
@@ -129,15 +113,15 @@ public class ShakeListener implements SensorEventListener
 
         if ((now - mLastTime) > TIME_THRESHOLD)
         {
-            final long diff = now - mLastTime;
-            final float speed = Math.abs(
-                event.values[SensorManager.DATA_X] - mLastX
-                + event.values[SensorManager.DATA_Y] - mLastY)
-                / diff * 10000;
-            if (speed > FORCE_THRESHOLD)
+            long diff = now - mLastTime;
+            float values = event.values[SensorManager.DATA_X] - mLastX
+                + event.values[SensorManager.DATA_Y] - mLastY
+                + event.values[SensorManager.DATA_Z] - mLastZ;
+            float speed = Math.abs(values/diff * 10000);
+
+            if (speed > FORCE_THRESHOLD*mForceMultiplier)
             {
-                if ((++mShakeCount >= SHAKE_COUNT)
-                    && (now - mLastShake > SHAKE_DURATION))
+                if ((++mShakeCount >= SHAKE_COUNT) && (now-mLastShake > SHAKE_DURATION))
                 {
                     mLastShake = now;
                     mShakeCount = 0;
@@ -151,6 +135,7 @@ public class ShakeListener implements SensorEventListener
             mLastTime = now;
             mLastX = event.values[SensorManager.DATA_X];
             mLastY = event.values[SensorManager.DATA_Y];
+            mLastZ = event.values[SensorManager.DATA_Z];
         }
     }
 }

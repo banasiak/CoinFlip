@@ -43,7 +43,7 @@
     </TextView>
     <TextView 
         android:id="@+id/instructions_text_view" 
-        android:text="@string/flip_coin_tv"
+        android:text=""
         android:textSize="18sp" 
         android:textStyle="bold" 
         android:gravity="center"

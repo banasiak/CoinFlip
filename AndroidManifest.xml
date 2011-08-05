@@ -2,28 +2,28 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * Jul 30, 2011 5:15:29 PM | variable
+ * Aug 4, 2011 8:45:58 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
- * This file is part of enclosing_project.
+ * This file is part of CoinFlip.
  *
- *    enclosing_project is free software: you can redistribute it and/or modify
+ *    CoinFlip is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
  *    (at your option) any later version.
  *
- *    enclosing_project is distributed in the hope that it will be useful,
+ *    CoinFlip is distributed in the hope that it will be useful,
  *    but WITHOUT ANY WARRANTY; without even the implied warranty of
  *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *    GNU General Public License for more details.
  *
  *    You should have received a copy of the GNU General Public License
- *    along with enclosing_project.  If not, see <http://www.gnu.org/licenses/>.
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip" 
-    android:versionName="3.0.1" android:versionCode="10"
+    android:versionName="3.1" android:versionCode="11"
     android:installLocation="auto">
     
     <application 

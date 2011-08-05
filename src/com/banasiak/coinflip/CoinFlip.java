@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Aug 1, 2011 7:50:35 PM | variable
+ * Aug 4, 2011 8:40:57 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -73,6 +73,7 @@ public class CoinFlip extends Activity
     private CustomAnimationDrawable coinAnimationCustom;
     private ImageView coinImage;
     private TextView resultText;
+    private TextView instructionsText;
     private SoundPool soundPool;
     private int flipCounter = 0;
 
@@ -126,8 +127,17 @@ public class CoinFlip extends Activity
     public void onResume()
     {
         Log.d(TAG, "onResume()");
+
+        int force = Settings.getForcePref(this);
+
         resetCoin();
-        shaker.resume();
+        resetInstructions(force);
+
+        if (force == 0)
+            shaker.pause();
+        else
+            shaker.resume(force);
+
         super.onResume();
     }
 
@@ -164,8 +174,7 @@ public class CoinFlip extends Activity
         setContentView(R.layout.main);
 
         // initialize the coin image and result text views
-        initCoinImageView();
-        initResultTextView();
+        initViews();
 
         // initialize the sounds
         initSounds();
@@ -223,6 +232,16 @@ public class CoinFlip extends Activity
         displayCoinImage(true);
         coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
         resultText.setText("");
+    }
+
+    private void resetInstructions(int force)
+    {
+        Log.d(TAG, "resetInstructions()");
+
+        if (force == 0)
+            instructionsText.setText(R.string.instructions_tap_tv);
+        else
+            instructionsText.setText(R.string.instructions_tap_shake_tv);
     }
 
     private ResultState updateState(boolean flipResult)
@@ -545,15 +564,12 @@ public class CoinFlip extends Activity
             }
         }
     }
-    private void initCoinImageView ()
+    private void initViews()
     {
         Log.d(TAG, "initCoinImageView()");
         coinImage = (ImageView) findViewById(R.id.coin_image_view);
-    }
-    private void initResultTextView ()
-    {
-        Log.d(TAG, "initResultImageView()");
         resultText = (TextView) findViewById(R.id.result_text_view);
+        instructionsText = (TextView) findViewById(R.id.instructions_text_view);
     }
 
 }

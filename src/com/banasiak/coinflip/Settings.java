@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Settings.java
- * Jul 31, 2011 9:25:47 PM | variable
+ * Aug 4, 2011 8:41:14 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -49,6 +49,8 @@ public class Settings extends PreferenceActivity
     private static final boolean KEY_ANIMATION_DEF = true;
     private static final String KEY_COIN = "coin";
     private static final String KEY_COIN_DEF = "default";
+    private static final String KEY_FORCE = "force";
+    private static final int KEY_FORCE_DEF = 50;
     private static final String KEY_SOUND = "sound";
     private static final boolean KEY_SOUND_DEF = true;
     private static final String KEY_VIBRATE = "vibrate";
@@ -171,6 +173,14 @@ public class Settings extends PreferenceActivity
         Log.d(TAG, "getVibratePref()");
         return PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(KEY_VIBRATE, KEY_VIBRATE_DEF);
+    }
+
+    // get the current value of the shake sensitivity preference
+    public static int getForcePref(Context context)
+    {
+        Log.d(TAG, "getForcePref()");
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getInt(KEY_FORCE, KEY_FORCE_DEF);
     }
 
     // get the current value of the coin preference
