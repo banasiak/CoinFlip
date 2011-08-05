@@ -24,7 +24,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="about_activity_title">About Coin Flip</string>
     <string name="about_menu_title">About</string>
-    <string name="about_text">version 3.1
+    <string name="about_text">version 3.1.1
         \n\nA convenient way to flip a coin, even if you don\'t have one. 
         Simply tap the question mark or shake and view the result. Tap or shake
         to spin the coin again.
@@ -49,7 +49,7 @@
     <string name="settings_item_coin_summary">The type of coin to be displayed</string>
     <string name="settings_item_coin_title">Coin Type</string>
     <string name="settings_item_download_summary">Download more coins from the market</string>
-    <string name="settings_item_download_title">Download</string>
+    <string name="settings_item_download_title">Get More Coins</string>
     <string name="settings_item_force_summary">Force required</string>
     <string name="settings_item_force_title">Shake</string>
     <string name="settings_item_sound_summary">Play sound after coin flip"</string>
