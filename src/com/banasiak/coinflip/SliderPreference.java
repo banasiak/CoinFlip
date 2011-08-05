@@ -28,8 +28,8 @@ import android.widget.TextView;
 public class SliderPreference extends Preference implements
 OnSeekBarChangeListener
 {
-    private final static int MAX_SLIDER_VALUE = 100;
-    private final static int INITIAL_VALUE = 50;
+    private final static int MAX_SLIDER_VALUE = 5;
+    private final static int INITIAL_VALUE = 2;
 
     private int mValue = INITIAL_VALUE;
     private String mMinText;
@@ -83,8 +83,7 @@ OnSeekBarChangeListener
         bar.setOnSeekBarChangeListener(this);
     }
 
-    public void onProgressChanged(SeekBar seekBar, int progress,
-        boolean fromUser)
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
     {
         if (fromUser)
         {

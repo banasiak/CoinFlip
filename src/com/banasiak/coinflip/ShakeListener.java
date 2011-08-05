@@ -44,7 +44,7 @@ public class ShakeListener implements SensorEventListener
     private int mShakeCount = 0;
     private long mLastShake;
     private long mLastForce;
-    private int mForceMultiplier = 50;
+    private int mForceMultiplier = 40;
 
     public interface OnShakeListener
     {
@@ -64,7 +64,9 @@ public class ShakeListener implements SensorEventListener
 
     public void resume(int forceMultiplier)
     {
-        mForceMultiplier = forceMultiplier;
+        // convert from discrete scale of 1-5 to 20-100
+        mForceMultiplier = forceMultiplier*20;
+
         mSensorMgr = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         if (mSensorMgr == null)
         {
@@ -83,7 +85,9 @@ public class ShakeListener implements SensorEventListener
         }
 
         if ((!supported) && (mSensorMgr != null))
+        {
             mSensorMgr.unregisterListener(this);
+        }
     }
 
     public void pause()
@@ -102,7 +106,9 @@ public class ShakeListener implements SensorEventListener
     public void onSensorChanged(SensorEvent event)
     {
         if (event.sensor.getType() != Sensor.TYPE_ACCELEROMETER)
+        {
             return;
+        }
 
         long now = System.currentTimeMillis();
 
