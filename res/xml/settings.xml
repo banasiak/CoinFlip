@@ -39,8 +39,8 @@
         android:summary="@string/settings_item_vibrate_summary"
         android:defaultValue="true" /> 
     <com.banasiak.coinflip.SliderPreference
-        android:key="force"
-        android:defaultValue="50"
+        android:key="shake"
+        android:defaultValue="2"
         android:title="@string/settings_item_force_title"
         android:summary="@string/settings_item_force_summary"
         android:persistent="true"/> 

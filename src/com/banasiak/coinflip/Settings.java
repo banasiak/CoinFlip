@@ -179,11 +179,8 @@ public class Settings extends PreferenceActivity
     public static int getShakePref(Context context)
     {
         Log.d(TAG, "getShakePref()");
-
-        int shake = PreferenceManager.getDefaultSharedPreferences(context)
+        return PreferenceManager.getDefaultSharedPreferences(context)
             .getInt(KEY_SHAKE, KEY_SHAKE_DEF);
-
-        return shake;
     }
 
     // get the current value of the coin preference
