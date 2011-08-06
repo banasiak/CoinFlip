@@ -128,7 +128,7 @@ public class CoinFlip extends Activity
     {
         Log.d(TAG, "onResume()");
 
-        int force = Settings.getForcePref(this);
+        int force = Settings.getShakePref(this);
 
         resetCoin();
         resetInstructions(force);

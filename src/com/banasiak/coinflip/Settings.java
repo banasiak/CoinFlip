@@ -49,8 +49,8 @@ public class Settings extends PreferenceActivity
     private static final boolean KEY_ANIMATION_DEF = true;
     private static final String KEY_COIN = "coin";
     private static final String KEY_COIN_DEF = "default";
-    private static final String KEY_FORCE = "force";
-    private static final int KEY_FORCE_DEF = 50;
+    private static final String KEY_SHAKE = "shake";
+    private static final int KEY_SHAKE_DEF = 2;
     private static final String KEY_SOUND = "sound";
     private static final boolean KEY_SOUND_DEF = true;
     private static final String KEY_VIBRATE = "vibrate";
@@ -176,11 +176,14 @@ public class Settings extends PreferenceActivity
     }
 
     // get the current value of the shake sensitivity preference
-    public static int getForcePref(Context context)
+    public static int getShakePref(Context context)
     {
-        Log.d(TAG, "getForcePref()");
-        return PreferenceManager.getDefaultSharedPreferences(context)
-            .getInt(KEY_FORCE, KEY_FORCE_DEF);
+        Log.d(TAG, "getShakePref()");
+
+        int shake = PreferenceManager.getDefaultSharedPreferences(context)
+            .getInt(KEY_SHAKE, KEY_SHAKE_DEF);
+
+        return shake;
     }
 
     // get the current value of the coin preference
