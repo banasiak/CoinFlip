@@ -134,9 +134,13 @@ public class CoinFlip extends Activity
         resetInstructions(force);
 
         if (force == 0)
+        {
             shaker.pause();
+        }
         else
+        {
             shaker.resume(force);
+        }
 
         super.onResume();
     }
@@ -203,6 +207,8 @@ public class CoinFlip extends Activity
     {
         Log.d(TAG, "flipCoin()");
 
+        flipCounter++;
+
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // we're in the process of flipping the coin
@@ -220,7 +226,6 @@ public class CoinFlip extends Activity
         // update the screen with the result of the flip
         renderResult(resultState);
 
-        flipCounter++;
     }
 
     private void resetCoin()
@@ -239,9 +244,13 @@ public class CoinFlip extends Activity
         Log.d(TAG, "resetInstructions()");
 
         if (force == 0)
+        {
             instructionsText.setText(R.string.instructions_tap_tv);
+        }
         else
+        {
             instructionsText.setText(R.string.instructions_tap_shake_tv);
+        }
     }
 
     private ResultState updateState(boolean flipResult)
@@ -257,13 +266,21 @@ public class CoinFlip extends Activity
 
         // this is easier to read than the old code
         if (previousResult == true && currentResult == true)
+        {
             resultState = ResultState.HEADS_HEADS;
+        }
         if (previousResult == true && currentResult == false)
+        {
             resultState = ResultState.HEADS_TAILS;
+        }
         if (previousResult == false && currentResult == true)
+        {
             resultState = ResultState.TAILS_HEADS;
+        }
         if (previousResult == false && currentResult == false)
+        {
             resultState = ResultState.TAILS_TAILS;
+        }
 
         // update the previousResult for the next flip
         previousResult = currentResult;
@@ -497,13 +514,19 @@ public class CoinFlip extends Activity
     private void playCoinSound()
     {
         Log.d(TAG, "playCoinSound()");
-        playSound(SOUNDS[SOUND_COIN]);
 
-        //Happy Easter!  (For Ryan)
-        if (flipCounter == 100)
-        {
-            playSound(SOUNDS[SOUND_1UP]);
-            flipCounter = 0;
+        synchronized (this) {
+            if (flipCounter < 100)
+            {
+                playSound(SOUNDS[SOUND_COIN]);
+            }
+            else
+            {
+                //Happy Easter!  (For Ryan)
+                //Toast.makeText(this, "1-UP", Toast.LENGTH_SHORT).show();
+                playSound(SOUNDS[SOUND_1UP]);
+                flipCounter = 0;
+            }
         }
     }
 
