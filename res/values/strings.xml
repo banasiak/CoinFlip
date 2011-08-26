@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Aug 12, 2011 9:02:31 PM | variable
+ * Aug 18, 2011 1:30:38 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -24,7 +24,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="about_activity_title">About Coin Flip</string>
     <string name="about_menu_title">About</string>
-    <string name="about_text">version 3.1.4
+    <string name="about_text">version 3.2
         \n\nA convenient way to flip a coin, even if you don\'t have one. 
         Simply tap the question mark or shake and view the result. Tap or shake
         to spin the coin again.
@@ -52,9 +52,11 @@
     <string name="settings_item_download_title">Get More Coins</string>
     <string name="settings_item_force_summary">Force required</string>
     <string name="settings_item_force_title">Shake</string>
-    <string name="settings_item_sound_summary">Play sound after coin flip"</string>
+    <string name="settings_item_sound_summary">Play sound after coin flip</string>
     <string name="settings_item_sound_title">Sound</string>
-    <string name="settings_item_vibrate_summary">Vibrate on coin flip"</string>
+    <string name="settings_item_text_summary">Display HEADS/TAILS text after coin flip</string>
+    <string name="settings_item_text_title">Text</string>
+    <string name="settings_item_vibrate_summary">Vibrate on coin flip</string>
     <string name="settings_item_vibrate_title">Vibrate</string>
     <string name="settings_menu_title">Settings</string>
     <string name="tails">TAILS</string>

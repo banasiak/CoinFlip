@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Settings.java
- * Aug 4, 2011 8:41:14 PM | variable
+ * Aug 18, 2011 1:30:24 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -53,6 +53,8 @@ public class Settings extends PreferenceActivity
     private static final int KEY_SHAKE_DEF = 2;
     private static final String KEY_SOUND = "sound";
     private static final boolean KEY_SOUND_DEF = true;
+    private static final String KEY_TEXT = "text";
+    private static final boolean KEY_TEXT_DEF = true;
     private static final String KEY_VIBRATE = "vibrate";
     private static final boolean KEY_VIBRATE_DEF = true;
 
@@ -165,6 +167,14 @@ public class Settings extends PreferenceActivity
         Log.d(TAG, "getSoundPref()");
         return PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(KEY_SOUND, KEY_SOUND_DEF);
+    }
+
+    // get the current value of the text preference
+    public static boolean getTextPref(Context context)
+    {
+        Log.d(TAG, "getTextPref()");
+        return PreferenceManager.getDefaultSharedPreferences(context)
+            .getBoolean(KEY_TEXT, KEY_TEXT_DEF);
     }
 
     // get the current value of the vibrate preference

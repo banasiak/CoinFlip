@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * Aug 12, 2011 9:01:55 PM | variable
+ * Aug 18, 2011 1:29:29 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -23,7 +23,7 @@
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip" 
-    android:versionName="3.1.4" android:versionCode="15"
+    android:versionName="3.2" android:versionCode="16"
     android:installLocation="auto">
     
     <application 

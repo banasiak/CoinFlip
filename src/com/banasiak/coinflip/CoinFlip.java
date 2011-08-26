@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Aug 12, 2011 9:02:49 PM | variable
+ * Aug 18, 2011 1:30:55 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -533,22 +533,30 @@ public class CoinFlip extends Activity
     private void updateResultText(ResultState resultState)
     {
         Log.d(TAG, "updateResultText()");
-        switch (resultState)
+
+        if (Settings.getTextPref(this))
         {
-            case HEADS_HEADS:
-            case TAILS_HEADS:
-                resultText.setText(R.string.heads);
-                resultText.setTextColor(Color.parseColor("green"));
-                break;
-            case HEADS_TAILS:
-            case TAILS_TAILS:
-                resultText.setText(R.string.tails);
-                resultText.setTextColor(Color.parseColor("red"));
-                break;
-            default:
-                resultText.setText(R.string.unknown);
-                resultText.setTextColor(Color.parseColor("yellow"));
-                break;
+            switch (resultState)
+            {
+                case HEADS_HEADS:
+                case TAILS_HEADS:
+                    resultText.setText(R.string.heads);
+                    resultText.setTextColor(Color.parseColor("green"));
+                    break;
+                case HEADS_TAILS:
+                case TAILS_TAILS:
+                    resultText.setText(R.string.tails);
+                    resultText.setTextColor(Color.parseColor("red"));
+                    break;
+                default:
+                    resultText.setText(R.string.unknown);
+                    resultText.setTextColor(Color.parseColor("yellow"));
+                    break;
+            }
+        }
+        else
+        {
+            resultText.setText("");
         }
     }
     private void displayCoinAnimation(boolean flag)
