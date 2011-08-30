@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Aug 18, 2011 1:30:38 PM | variable
+ * Aug 30, 2011 8:24:15 AM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -54,7 +54,7 @@
     <string name="settings_item_force_title">Shake</string>
     <string name="settings_item_sound_summary">Play sound after coin flip</string>
     <string name="settings_item_sound_title">Sound</string>
-    <string name="settings_item_text_summary">Display HEADS/TAILS text after coin flip</string>
+    <string name="settings_item_text_summary">Display HEADS/TAILS result text</string>
     <string name="settings_item_text_title">Text</string>
     <string name="settings_item_vibrate_summary">Vibrate on coin flip</string>
     <string name="settings_item_vibrate_title">Vibrate</string>
