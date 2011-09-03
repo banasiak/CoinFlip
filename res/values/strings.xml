@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Aug 30, 2011 8:24:15 AM | variable
+ * Sep 2, 2011 9:21:36 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -60,5 +60,7 @@
     <string name="settings_item_vibrate_title">Vibrate</string>
     <string name="settings_menu_title">Settings</string>
     <string name="tails">TAILS</string>
+    <string name="time">TIME</string>
+    <string name="total">TOTAL</string>
     <string name="unknown">UNKNOWN</string>
 </resources>

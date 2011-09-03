@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Settings.java
- * Aug 18, 2011 1:30:24 PM | variable
+ * Sep 2, 2011 9:20:35 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -157,48 +157,60 @@ public class Settings extends PreferenceActivity
     public static boolean getAnimationPref(Context context)
     {
         Log.d(TAG, "getAnimationPref()");
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        Boolean result = PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(KEY_ANIMATION, KEY_ANIMATION_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
     }
 
     // get the current value of the sound preference
     public static boolean getSoundPref(Context context)
     {
         Log.d(TAG, "getSoundPref()");
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        Boolean result = PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(KEY_SOUND, KEY_SOUND_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
     }
 
     // get the current value of the text preference
     public static boolean getTextPref(Context context)
     {
         Log.d(TAG, "getTextPref()");
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        Boolean result = PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(KEY_TEXT, KEY_TEXT_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
     }
 
     // get the current value of the vibrate preference
     public static boolean getVibratePref(Context context)
     {
         Log.d(TAG, "getVibratePref()");
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        Boolean result = PreferenceManager.getDefaultSharedPreferences(context)
             .getBoolean(KEY_VIBRATE, KEY_VIBRATE_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
     }
 
     // get the current value of the shake sensitivity preference
     public static int getShakePref(Context context)
     {
         Log.d(TAG, "getShakePref()");
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        int result = PreferenceManager.getDefaultSharedPreferences(context)
             .getInt(KEY_SHAKE, KEY_SHAKE_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
     }
 
     // get the current value of the coin preference
     public static String getCoinPref(Context context)
     {
         Log.d(TAG, "getCoinPref()");
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        String result = PreferenceManager.getDefaultSharedPreferences(context)
             .getString(KEY_COIN, KEY_COIN_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
     }
 
     // reset the value of the coin preference
@@ -215,15 +227,18 @@ public class Settings extends PreferenceActivity
     // get the persisted flip counter
     public static int getFlipCount(Context context)
     {
-        Log.d(TAG, "getFlipCount");
-        return PreferenceManager.getDefaultSharedPreferences(context)
+        Log.d(TAG, "getFlipCount()");
+        int result = PreferenceManager.getDefaultSharedPreferences(context)
             .getInt(KEY_FLIPCOUNT, KEY_FLIPCOUNT_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
     }
 
     // persist the flip counter for later use
     public static void setFlipCount(Context context, int flipCounter)
     {
         Log.d(TAG, "setFlipCount()");
+        Log.d(TAG, "flipCounter=" + flipCounter);
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = settings.edit();
 

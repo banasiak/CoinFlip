@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Aug 18, 2011 1:30:55 PM | variable
+ * Sep 2, 2011 9:20:52 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -208,6 +208,7 @@ public class CoinFlip extends Activity
         Log.d(TAG, "flipCoin()");
 
         flipCounter++;
+        Log.d(TAG, "flipCounter=" + flipCounter);
 
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 

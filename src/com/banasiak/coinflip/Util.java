@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Util.java
- * Jul 31, 2011 9:03:43 PM | variable
+ * Sep 2, 2011 9:30:57 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -43,22 +43,24 @@ public class Util
     public boolean isExtPkgInstalled(String extPkg)
     {
         Log.d(TAG, "isExtPkgInstalled()");
+        Log.d(TAG, "extPkg="+ extPkg);
         boolean isInstalled = false;
         try
         {
             PackageInfo packageInfo = mContext.getPackageManager().getPackageInfo(extPkg, 0);
             if (packageInfo != null)
             {
-                Log.d(TAG, extPkg + " is installed");
                 isInstalled = true;
             }
         }
         catch (NameNotFoundException e)
         {
             Log.d(TAG, "NameNotFoundException");
-            Log.d(TAG, extPkg + " is not installed");
             //e.printStackTrace();
         }
+
+        Log.d(TAG, "result=" + isInstalled);
         return isInstalled;
+
     }
 }

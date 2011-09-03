@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ *========================================================================
+ * values-es/strings.xml
+ * Sep 2, 2011 7:56:53 PM | variable
+ * Copyright (c) 2011 Richard Banasiak
+ *========================================================================
+ * This file is part of CoinFlip.
+ *
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="about_activity_title">Acerca de Coin Flip</string>
+    <string name="about_menu_title">Acerca</string>
+    <string name="about_text">la versión 3.2
+        \n\nA manera conveniente lanzar una moneda, incluso si usted no tiene uno.
+         Simplemente toque el signo de interrogación o agitar y ver el resultado. Toque o sacuda
+         para hacer girar la moneda otra vez.
+         \n\nVerifique que el algoritmo de la moneda es realmente pseudo-aleatorios mediante la ejecución del
+         Autocomprobación y voltear la moneda 10.000 veces.
+        \n\n\nQuarter-dollar coin images from the United States Mint. 
+        Presidential $1 Coin images from the United States Mint.
+        \n\n\n© Copyright 2011 - Richard Banasiak
+    </string>    
+    <string name="app_name">Coin Flip</string>
+    <string name="exit">Salida</string>
+    <string name="instructions_tap_shake_tv">Toque o Agite para Voltear</string>
+    <string name="instructions_tap_tv">Toque para Voltear</string>    
+    <string name="heads">CABEZAS</string>
+    <string name="max">MÁX</string>
+    <string name="min">EN</string>
+    <string name="selftest_activity_title">Resultados de Autodiagnóstico</string>
+    <string name="selftest_menu_title">Autodiagnóstico</string>
+    <string name="settings_activity_title">Coin Flip Configuración</string>
+    <string name="settings_item_animation_summary">Hacer que la animación moneda girando</string>
+    <string name="settings_item_animation_title">Animación</string>
+    <string name="settings_item_coin_summary">El tipo de moneda que se mostrará</string>
+    <string name="settings_item_coin_title">Tipo de Moneda</string>
+    <string name="settings_item_download_summary">Descargar más monedas en el mercado</string>
+    <string name="settings_item_download_title">Conseguir Más Conedas</string>
+    <string name="settings_item_force_summary">Fuerza que se requiere</string>
+    <string name="settings_item_force_title">Movimiento</string>
+    <string name="settings_item_sound_summary">Reproducir un sonido después de lanzar la moneda</string>
+    <string name="settings_item_sound_title">Sonido</string>
+    <string name="settings_item_text_summary">Mostrar texto de resultados</string>
+    <string name="settings_item_text_title">Texto</string>
+    <string name="settings_item_vibrate_summary">Vibrar en la cara o cruz</string>
+    <string name="settings_item_vibrate_title">Vibrar</string>
+    <string name="settings_menu_title">Configuración</string>
+    <string name="tails">COLAS</string>
+    <string name="time">TIEMPO</string>
+    <string name="total">TOTAL</string>
+    <string name="unknown">DESCONOCIDO</string>
+</resources>
