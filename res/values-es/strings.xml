@@ -24,7 +24,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="about_activity_title">Acerca de Coin Flip</string>
     <string name="about_menu_title">Acerca</string>
-    <string name="about_text">la versión 3.2
+    <string name="about_text">la versión 3.2.1
         \n\nA manera conveniente lanzar una moneda, incluso si usted no tiene uno.
          Simplemente toque el signo de interrogación o agitar y ver el resultado. Toque o sacuda
          para hacer girar la moneda otra vez.
