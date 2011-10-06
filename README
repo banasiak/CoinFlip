@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * README
- * Aug 1, 2011 7:50:35 PM | variable
+ * Oct 5, 2011 8:32:16 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -19,6 +19,9 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+NOTICE:  Simple Coin Flip 3.x (stable) code has been branched to SCF3.
+         Master branch contains experimental 4.0 code.
  
 https://market.android.com/details?id=com.banasiak.coinflip
 
