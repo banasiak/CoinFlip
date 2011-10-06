@@ -27,8 +27,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -287,6 +290,247 @@ public class CoinFlip extends Activity
         previousResult = currentResult;
 
         return resultState;
+    }
+
+    private AnimationDrawable generateAnimatedDrawable(final Drawable imageA, final Drawable imageB, final Drawable edge, ResultState resultState)
+    {
+        AnimationDrawable animation = new AnimationDrawable();
+
+        Bitmap imageA_8b = ((BitmapDrawable) imageA).getBitmap();
+        Bitmap imageA_6b = Bitmap.createScaledBitmap(imageA_8b, (int) (imageA_8b.getWidth()*0.75), imageA_8b.getHeight(), true);
+        Bitmap imageA_4b = Bitmap.createScaledBitmap(imageA_6b, (int) (imageA_8b.getWidth()*0.50), imageA_8b.getHeight(), true);
+        Bitmap imageA_2b = Bitmap.createScaledBitmap(imageA_8b, (int) (imageA_8b.getWidth()*0.25), imageA_8b.getHeight(), true);
+
+        BitmapDrawable imageA_8bmd = (BitmapDrawable) imageA;
+        BitmapDrawable imageA_6bmd = new BitmapDrawable(imageA_6b);
+        BitmapDrawable imageA_4bmd = new BitmapDrawable(imageA_4b);
+        BitmapDrawable imageA_2bmd = new BitmapDrawable(imageA_2b);
+
+        Bitmap imageB_8b = ((BitmapDrawable) imageB).getBitmap();
+        Bitmap imageB_6b = Bitmap.createScaledBitmap(imageB_8b, (int) (imageB_8b.getWidth()*0.75), imageB_8b.getHeight(), true);
+        Bitmap imageB_4b = Bitmap.createScaledBitmap(imageB_6b, (int) (imageB_8b.getWidth()*0.50), imageB_8b.getHeight(), true);
+        Bitmap imageB_2b = Bitmap.createScaledBitmap(imageB_8b, (int) (imageB_8b.getWidth()*0.25), imageB_8b.getHeight(), true);
+
+        BitmapDrawable imageB_8bmd = (BitmapDrawable) imageB;
+        BitmapDrawable imageB_6bmd = new BitmapDrawable(imageB_6b);
+        BitmapDrawable imageB_4bmd = new BitmapDrawable(imageB_4b);
+        BitmapDrawable imageB_2bmd = new BitmapDrawable(imageB_2b);
+
+        //BitmapDrawable edge_bmd = (BitmapDrawable) edge;
+
+        switch (resultState)
+        {
+            case HEADS_HEADS:
+                // Begin Flip 1
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                // Begin Flip 2
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                // Begin Flip 3
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_8bmd, 20);
+                break;
+            case HEADS_TAILS:
+                // Begin Flip 1
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                // Begin Flip 2
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                // Begin Flip 3 (half flip)
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_8bmd, 20);
+                break;
+            case TAILS_HEADS:
+                // Begin Flip 1
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                // Begin Flip 2
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                // Begin Flip 3 (half flip)
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_8bmd, 20);
+                break;
+            case TAILS_TAILS:
+                // Begin Flip 1
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                // Begin Flip 2
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                // Begin Flip 3
+                animation.addFrame(imageB_8bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_8bmd, 20);
+                animation.addFrame(imageA_6bmd, 20);
+                animation.addFrame(imageA_4bmd, 20);
+                animation.addFrame(imageA_2bmd, 20);
+                animation.addFrame(edge, 20);
+                animation.addFrame(imageB_2bmd, 20);
+                animation.addFrame(imageB_4bmd, 20);
+                animation.addFrame(imageB_6bmd, 20);
+                animation.addFrame(imageB_8bmd, 20);
+                break;
+            default:
+                Log.w(TAG, "Invalid state. Resetting coin.");
+                resetCoin();
+                break;
+
+        }
+
+        animation.setOneShot(true);
+
+        return animation;
+
     }
 
     // load resources internal to the CoinFlip package
