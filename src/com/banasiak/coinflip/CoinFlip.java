@@ -558,17 +558,21 @@ public class CoinFlip extends Activity
         Drawable tails = getResources().getDrawable(R.drawable.tails);
         Drawable edge = getResources().getDrawable(R.drawable.edge);
 
-        // draw the animation appropriate for the result state
-        coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
-        coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
+        // only do all the CPU-intensive animation rendering if animations are enabled
+        if (Settings.getAnimationPref(this))
         {
-            @Override
-            void onAnimationFinish()
+            // draw the animation appropriate for the result state
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
             {
-                playCoinSound();
-                updateResultText(resultState);
-            }
-        };
+                @Override
+                void onAnimationFinish()
+                {
+                    playCoinSound();
+                    updateResultText(resultState);
+                }
+            };
+        }
 
         //draw the static image appropriate for the result state
         switch (resultState)
@@ -606,17 +610,21 @@ public class CoinFlip extends Activity
             Drawable tails = extPkgResources.getDrawable(tailsId);
             Drawable edge = extPkgResources.getDrawable(edgeId);
 
-            // draw the animation appropriate for the result state
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
-            coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
+            // only do all the CPU-intensive animation rendering if animations are enabled
+            if (Settings.getAnimationPref(this))
             {
-                @Override
-                void onAnimationFinish()
+                // draw the animation appropriate for the result state
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
                 {
-                    playCoinSound();
-                    updateResultText(resultState);
-                }
-            };
+                    @Override
+                    void onAnimationFinish()
+                    {
+                        playCoinSound();
+                        updateResultText(resultState);
+                    }
+                };
+            }
 
             // draw the static image appropriate for the result state
             switch (resultState)
