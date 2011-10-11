@@ -61,6 +61,9 @@ public class Settings extends PreferenceActivity
     private static final String KEY_FLIPCOUNT = "flipCount";
     private static final int KEY_FLIPCOUNT_DEF = 0;
 
+    private static final String KEY_SCHEMA_VERSION = "schemaVersion";
+    private static final int KEY_SCHEMA_VERSION_DEF = -1;
+
     private final Util util = new Util(this);
 
     @Override
@@ -216,7 +219,7 @@ public class Settings extends PreferenceActivity
     // reset the value of the coin preference
     public static void resetCoinPref(Context context)
     {
-        Log.d(TAG, "resetCoinPref()");
+        Log.w(TAG, "resetCoinPref()");
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = settings.edit();
 
@@ -243,6 +246,39 @@ public class Settings extends PreferenceActivity
         SharedPreferences.Editor editor = settings.edit();
 
         editor.putInt(KEY_FLIPCOUNT, flipCounter);
+        editor.commit();
+    }
+
+    // get the settings schema used by this codebase
+    public static int getSchemaVersion(Context context)
+    {
+        Log.d(TAG, "getSchemaVersion()");
+        int result = PreferenceManager.getDefaultSharedPreferences(context)
+            .getInt(KEY_SCHEMA_VERSION, KEY_SCHEMA_VERSION_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
+    }
+
+    // set the settings schema used by this codebase
+    public static void setSchemaVersion(Context context, int schemaVersion)
+    {
+        Log.w(TAG, "setSchemaVersion()");
+        Log.w(TAG, "schemaVersion=" + schemaVersion);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.putInt(KEY_SCHEMA_VERSION, schemaVersion);
+        editor.commit();
+    }
+
+    // reset all saved preferences so their default is loaded next time
+    public static void resetAllPrefs(Context context)
+    {
+        Log.w(TAG, "resetAllPrefs()");
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.clear();
         editor.commit();
     }
 }

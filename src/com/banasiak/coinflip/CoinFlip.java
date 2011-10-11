@@ -54,6 +54,9 @@ public class CoinFlip extends Activity
     // add-on package name
     private static final String EXTPKG = "com.banasiak.coinflipext";
 
+    // version of the settings schema used by this codebase
+    private static final int SCHEMA_VERSION = 3;
+
     // enumerator of all possible transition states
     private enum ResultState
     {
@@ -175,6 +178,16 @@ public class CoinFlip extends Activity
         {
             Settings.resetCoinPref(this);
         }
+
+        // reset settings if they are from an earlier version.
+        // if any setting keys have changed and we don't reset, the app
+        // will force close and nasty e-mails soon follow
+        if( Settings.getSchemaVersion(this) != SCHEMA_VERSION )
+        {
+            Settings.resetAllPrefs(this);
+            Settings.setSchemaVersion(this, SCHEMA_VERSION);
+        }
+
 
         // restore state
         flipCounter = Settings.getFlipCount(this);
