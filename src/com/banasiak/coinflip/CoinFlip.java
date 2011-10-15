@@ -22,6 +22,8 @@
 
 package com.banasiak.coinflip;
 
+import java.util.EnumMap;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -67,21 +69,20 @@ public class CoinFlip extends Activity
         UNKNOWN
     }
 
-    // hashmaps perform poorly in Dalvik and there's a minimal number of sounds
-    private static final int[] SOUNDS = new int[2];
-    private static final int SOUND_COIN = 0;
-    private static final int SOUND_1UP = 1;
+    EnumMap<ResultState, AnimationDrawable> coinAnimationsMap;
+    EnumMap<ResultState, Drawable> coinImagesMap;
 
     private final Coin theCoin = new Coin();
     private ShakeListener shaker;
     private Boolean currentResult = true;
     private Boolean previousResult = true;
-    private AnimationDrawable coinAnimation;
-    private CustomAnimationDrawable coinAnimationCustom;
     private ImageView coinImage;
+    private CustomAnimationDrawable coinAnimationCustom;
     private TextView resultText;
     private TextView instructionsText;
     private SoundPool soundPool;
+    private int soundCoin;
+    private int soundOneUp;
     private int flipCounter = 0;
 
     private final Util util = new Util(this);
@@ -140,6 +141,20 @@ public class CoinFlip extends Activity
         resetCoin();
         resetInstructions(force);
 
+        // determine coin type to draw
+        String coinPrefix = Settings.getCoinPref(this);
+
+        if (coinPrefix.equals("default"))
+        {
+            Log.d (TAG, "Default coin selected");
+            loadInternalResources();
+        }
+        else
+        {
+            Log.d (TAG, "Add-on coin selected");
+            loadExternalResources(coinPrefix);
+        }
+
         if (force == 0)
         {
             shaker.pause();
@@ -188,7 +203,6 @@ public class CoinFlip extends Activity
             Settings.setSchemaVersion(this, SCHEMA_VERSION);
         }
 
-
         // restore state
         flipCounter = Settings.getFlipCount(this);
 
@@ -199,6 +213,10 @@ public class CoinFlip extends Activity
 
         // initialize the sounds
         initSounds();
+
+        // initialize the coin maps
+        coinAnimationsMap = new EnumMap<CoinFlip.ResultState, AnimationDrawable>(ResultState.class);
+        coinImagesMap = new EnumMap<CoinFlip.ResultState, Drawable>(ResultState.class);
 
         // initialize the shake listener
         shaker = new ShakeListener(this);
@@ -564,8 +582,13 @@ public class CoinFlip extends Activity
     }
 
     // load resources internal to the CoinFlip package
-    private void loadInternalResources(final ResultState resultState)
+    private void loadInternalResources()
     {
+        Log.d(TAG, "loadInternalResources()");
+
+        AnimationDrawable coinAnimation;
+        ResultState resultState;
+
         // load the images
         Drawable heads = getResources().getDrawable(R.drawable.heads);
         Drawable tails = getResources().getDrawable(R.drawable.tails);
@@ -574,41 +597,40 @@ public class CoinFlip extends Activity
         // only do all the CPU-intensive animation rendering if animations are enabled
         if (Settings.getAnimationPref(this))
         {
-            // draw the animation appropriate for the result state
+            // render the animation for each result state and store it in the animations map
+            resultState = ResultState.HEADS_HEADS;
             coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
-            coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
-            {
-                @Override
-                void onAnimationFinish()
-                {
-                    playCoinSound();
-                    updateResultText(resultState);
-                }
-            };
+            coinAnimationsMap.put(resultState, coinAnimation);
+
+            resultState = ResultState.HEADS_TAILS;
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimationsMap.put(resultState, coinAnimation);
+
+            resultState = ResultState.TAILS_HEADS;
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimationsMap.put(resultState, coinAnimation);
+
+            resultState = ResultState.TAILS_TAILS;
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimationsMap.put(resultState, coinAnimation);
         }
 
-        //draw the static image appropriate for the result state
-        switch (resultState)
-        {
-            case HEADS_HEADS:
-            case TAILS_HEADS:
-                // WTF?  There's some kind of rendering bug if you use the "heads" or "tails" variables here...
-                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.heads));
-                break;
-            case HEADS_TAILS:
-            case TAILS_TAILS:
-                coinImage.setImageDrawable(getResources().getDrawable(R.drawable.tails));
-                break;
-            default:
-                Log.w(TAG, "Invalid state. Resetting coin.");
-                resetCoin();
-                break;
-        }
+        // add the appropriate image for each result state to the images map
+        // WTF?  There's some kind of rendering bug if you use the "heads" or "tails" variables here...
+        coinImagesMap.put(ResultState.HEADS_HEADS, getResources().getDrawable(R.drawable.heads));
+        coinImagesMap.put(ResultState.HEADS_TAILS, getResources().getDrawable(R.drawable.tails));
+        coinImagesMap.put(ResultState.TAILS_HEADS, getResources().getDrawable(R.drawable.heads));
+        coinImagesMap.put(ResultState.TAILS_TAILS, getResources().getDrawable(R.drawable.tails));
     }
 
     // load resources from the external CoinFlipExt package
-    private void loadExternalResources(final ResultState resultState, final String coinPrefix)
+    private void loadExternalResources(final String coinPrefix)
     {
+        Log.d(TAG, "loadExternalResources()");
+
+        AnimationDrawable coinAnimation;
+        ResultState resultState;
+
         try
         {
             Resources extPkgResources = getPackageManager().getResourcesForApplication(EXTPKG);
@@ -626,36 +648,31 @@ public class CoinFlip extends Activity
             // only do all the CPU-intensive animation rendering if animations are enabled
             if (Settings.getAnimationPref(this))
             {
-                // draw the animation appropriate for the result state
+                // render the animation for each result state and store it in the animations map
+                resultState = ResultState.HEADS_HEADS;
                 coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
-                coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
-                {
-                    @Override
-                    void onAnimationFinish()
-                    {
-                        playCoinSound();
-                        updateResultText(resultState);
-                    }
-                };
+                coinAnimationsMap.put(resultState, coinAnimation);
+
+                resultState = ResultState.HEADS_TAILS;
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimationsMap.put(resultState, coinAnimation);
+
+                resultState = ResultState.TAILS_HEADS;
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimationsMap.put(resultState, coinAnimation);
+
+                resultState = ResultState.TAILS_TAILS;
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimationsMap.put(resultState, coinAnimation);
             }
 
-            // draw the static image appropriate for the result state
-            switch (resultState)
-            {
-                case HEADS_HEADS:
-                case TAILS_HEADS:
-                    // WTF?  There's some kind of rendering bug if you use the "heads" or "tails" variables here...
-                    coinImage.setImageDrawable(extPkgResources.getDrawable(headsId));
-                    break;
-                case HEADS_TAILS:
-                case TAILS_TAILS:
-                    coinImage.setImageDrawable(extPkgResources.getDrawable(tailsId));
-                    break;
-                default:
-                    Log.w(TAG, "Invalid state. Resetting coin.");
-                    resetCoin();
-                    break;
-            }
+            // add the appropriate image for each result state to the images map
+            // WTF?  There's (still) some kind of rendering bug if you use the "heads" or "tails" variables here...
+            coinImagesMap.put(ResultState.HEADS_HEADS, extPkgResources.getDrawable(headsId));
+            coinImagesMap.put(ResultState.HEADS_TAILS, extPkgResources.getDrawable(tailsId));
+            coinImagesMap.put(ResultState.TAILS_HEADS, extPkgResources.getDrawable(headsId));
+            coinImagesMap.put(ResultState.TAILS_TAILS, extPkgResources.getDrawable(tailsId));
+
         }
         catch (NameNotFoundException e)
         {
@@ -669,20 +686,21 @@ public class CoinFlip extends Activity
     {
         Log.d(TAG, "renderResult()");
 
+        AnimationDrawable coinAnimation;
 
-        // determine coin type to draw
-        String coinPrefix = Settings.getCoinPref(this);
+        // load the appropriate coin animation based on the state
+        coinAnimation = coinAnimationsMap.get(resultState);
+        coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
+        {
+            @Override
+            void onAnimationFinish()
+            {
+                playCoinSound();
+                updateResultText(resultState);
+            }
+        };
 
-        if (coinPrefix.equals("default"))
-        {
-            Log.d (TAG, "Default coin selected");
-            loadInternalResources(resultState);
-        }
-        else
-        {
-            Log.d (TAG, "Add-on coin selected");
-            loadExternalResources(resultState, coinPrefix);
-        }
+        coinImage.setImageDrawable(coinImagesMap.get(resultState));
 
         // hide the static image and clear the text
         displayCoinImage(false);
@@ -715,10 +733,12 @@ public class CoinFlip extends Activity
     {
         // MediaPlayer was causing ANR issues on some devices.
         // SoundPool should be more efficient.
+
         Log.d(TAG, "initSounds()");
         soundPool  = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
-        SOUNDS[SOUND_COIN] = soundPool.load(this, R.raw.coin, 1);
-        SOUNDS[SOUND_1UP] = soundPool.load(this, R.raw.oneup, 1);
+        soundCoin = soundPool.load(this, R.raw.coin, 1);
+        soundOneUp = soundPool.load(this, R.raw.oneup, 1);
+
     }
 
     private void playSound(int sound)
@@ -742,13 +762,13 @@ public class CoinFlip extends Activity
         synchronized (this) {
             if (flipCounter < 100)
             {
-                playSound(SOUNDS[SOUND_COIN]);
+                playSound(soundCoin);
             }
             else
             {
                 //Happy Easter!  (For Ryan)
                 //Toast.makeText(this, "1-UP", Toast.LENGTH_SHORT).show();
-                playSound(SOUNDS[SOUND_1UP]);
+                playSound(soundOneUp);
                 flipCounter = 0;
             }
         }
