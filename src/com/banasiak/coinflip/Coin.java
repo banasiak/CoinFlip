@@ -24,8 +24,6 @@ package com.banasiak.coinflip;
 
 import java.util.Random;
 
-import android.util.Log;
-
 public class Coin
 {
     // Debugging tag.
@@ -35,7 +33,7 @@ public class Coin
 
     public boolean flip()
     {
-        Log.d(TAG, "flip()");
+        //Log.d(TAG, "flip()");
         return generator.nextBoolean();
     }
 

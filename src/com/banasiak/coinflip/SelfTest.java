@@ -34,8 +34,15 @@ public class SelfTest extends Activity
     // debugging tag
     private static final String TAG = "SelfTest";
 
-    private static final int NUMBER_OF_FLIPS = 10000;
-    private final Coin theCoin = new Coin();
+    private TextView headsValue;
+    private TextView headsRatio;
+    private TextView tailsValue;
+    private TextView tailsRatio;
+    private TextView totalValue;
+    private TextView totalRatio;
+    private TextView elapsedTime;
+
+    private SelfTestTask backgroundTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,58 +51,48 @@ public class SelfTest extends Activity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selftest);
-        selfTest();
+
+        headsValue = (TextView) findViewById(R.id.heads_value_tv);
+        headsRatio = (TextView) findViewById(R.id.heads_ratio_tv);
+        tailsValue = (TextView) findViewById(R.id.tails_value_tv);
+        tailsRatio = (TextView) findViewById(R.id.tails_ratio_tv);
+        totalValue = (TextView) findViewById(R.id.total_value_tv);
+        totalRatio = (TextView) findViewById(R.id.total_ratio_tv);
+        elapsedTime = (TextView) findViewById(R.id.elapsed_time_tv);
+
+        backgroundTask = new SelfTestTask(this);
+        backgroundTask.execute(new SelfTestStatus());
     }
 
-    private void selfTest()
+    @Override
+    protected void onStop()
     {
-        Log.i(TAG, "selfTest()");
+        Log.d(TAG, "onStop()");
+        super.onStop();
+        backgroundTask.cancel(true);
+    }
 
-        final TextView headsValue = (TextView) findViewById(R.id.heads_value_tv);
-        final TextView headsRatio = (TextView) findViewById(R.id.heads_ratio_tv);
-        final TextView tailsValue = (TextView) findViewById(R.id.tails_value_tv);
-        final TextView tailsRatio = (TextView) findViewById(R.id.tails_ratio_tv);
-        final TextView totalValue = (TextView) findViewById(R.id.total_value_tv);
-        final TextView totalRatio = (TextView) findViewById(R.id.total_ratio_tv);
-        final TextView elapsedTime = (TextView) findViewById(R.id.elapsed_time_tv);
-
-        int heads = 0;
-        int tails = 0;
-        int total = 0;
+    // this method is called when the async task reports it has new information
+    public void updateDialog(SelfTestStatus taskStatus)
+    {
+        //Log.d(TAG, "updateDialog()");
 
         final NumberFormat percentFormat = NumberFormat.getPercentInstance();
         percentFormat.setMaximumFractionDigits(1);
 
-        final long startTimeStamp = System.currentTimeMillis();
-        for (total = 0; total < NUMBER_OF_FLIPS; total++)
-        {
-            if (theCoin.flip())
-            {
-                heads++;
-            }
-            else
-            {
-                tails++;
-            }
-        }
-        final long endTimeStamp = System.currentTimeMillis();
-
-        Log.d(TAG, "heads: " + heads);
-        Log.d(TAG, "tails: " + tails);
-        Log.d(TAG, "total: " + total);
-        Log.d(TAG, "time: " + Long.toString(endTimeStamp - startTimeStamp));
-
-        headsValue.setText(Integer.toString(heads));
+        headsValue.setText(Integer.toString(taskStatus.getHeads()));
         headsRatio.setText("("
-            + percentFormat.format((double) heads / (double) total) + ")");
-        tailsValue.setText(Integer.toString(tails));
-        tailsRatio.setText("("
-            + percentFormat.format((double) tails / (double) total) + ")");
-        totalValue.setText(Integer.toString(total));
-        totalRatio.setText("("
-            + percentFormat.format((double) total / (double) total) + ")");
+            + percentFormat.format(taskStatus.getHeadsPercentage()) + ")");
 
-        elapsedTime.setText(Long.toString(endTimeStamp - startTimeStamp));
+        tailsValue.setText(Integer.toString(taskStatus.getTails()));
+        tailsRatio.setText("("
+            + percentFormat.format(taskStatus.getTailsPercentage()) + ")");
+
+        totalValue.setText(Integer.toString(taskStatus.getTotal()));
+        totalRatio.setText("("
+            + percentFormat.format(taskStatus.getCompletionPercentage()) + ")");
+
+        elapsedTime.setText(Long.toString(taskStatus.getElapsedTime()));
 
     }
 
