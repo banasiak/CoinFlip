@@ -20,9 +20,10 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-NOTICE:  Simple Coin Flip 3.x (stable) code has been branched to SCF3.
-         Master branch contains experimental 4.0 code.
- 
+NOTICE:  Master branch contains Simple Coin Flip 4.x code.
+         Simple Coin Flip 3.x code has been branched to SCF3.
+         
+         
 https://market.android.com/details?id=com.banasiak.coinflip
 
 A convenient way to flip a coin, even if you don't have one!

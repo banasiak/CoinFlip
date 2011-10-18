@@ -77,6 +77,9 @@ public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, Self
 
                 if(total % 100 == 0)
                 {
+                    // update the UI thread with our current progress
+                    publishProgress(taskStatus);
+
                     try
                     {
                         // this tiny sleep smoothes out the GUI updating, particularly on fast CPUs.
@@ -86,8 +89,6 @@ public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, Self
                     {
                         // don't care
                     }
-                    // update the UI thread with our current progress
-                    publishProgress(taskStatus);
                 }
             }
 

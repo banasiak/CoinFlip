@@ -27,7 +27,6 @@ public class SelfTestStatus
     // debugging tag
     private static final String TAG = "SelfTestStatus";
 
-    // ONE MILLLLLLLLLLION DOLLARS!
     public static final int NUMBER_OF_FLIPS = 100000;
 
     private int headsCount = 0;
