@@ -689,12 +689,16 @@ public class CoinFlip extends Activity
         AnimationDrawable coinAnimation;
         Drawable coinImageDrawable;
 
-        // load the appropriate coin animation based on the state
-        coinAnimation = coinAnimationsMap.get(resultState);
+        // hide the static image and clear the text
+        displayCoinImage(false);
+        displayCoinAnimation(false);
+        resultText.setText("");
 
-        // weird edge case reported by user after upgrade...
-        if(coinAnimation != null)
+        // display the result
+        if (Settings.getAnimationPref(this))
         {
+            // load the appropriate coin animation based on the state
+            coinAnimation = coinAnimationsMap.get(resultState);
             coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
             {
                 @Override
@@ -704,34 +708,7 @@ public class CoinFlip extends Activity
                     updateResultText(resultState);
                 }
             };
-        }
-        else
-        {
-            Log.e(TAG, "Something went wrong with the coinAnimationsMap...");
-            resetCoin();
-            return;
-        }
 
-        coinImageDrawable = coinImagesMap.get(resultState);
-        if(coinImageDrawable != null)
-        {
-            Log.e(TAG, "Something went wrong with the coinImagesMap...");
-            coinImage.setImageDrawable(coinImageDrawable);
-        }
-        else
-        {
-            resetCoin();
-            return;
-        }
-
-        // hide the static image and clear the text
-        displayCoinImage(false);
-        displayCoinAnimation(false);
-        resultText.setText("");
-
-        // display the result
-        if (Settings.getAnimationPref(this))
-        {
             // hide the static image and render the animation
             displayCoinImage(false);
             displayCoinAnimation(true);
@@ -743,6 +720,10 @@ public class CoinFlip extends Activity
         }
         else
         {
+            // load the appropriate coin image based on the state
+            coinImageDrawable = coinImagesMap.get(resultState);
+            coinImage.setImageDrawable(coinImageDrawable);
+
             // hide the animation and display the static image
             displayCoinImage(true);
             displayCoinAnimation(false);
