@@ -687,20 +687,42 @@ public class CoinFlip extends Activity
         Log.d(TAG, "renderResult()");
 
         AnimationDrawable coinAnimation;
+        Drawable coinImageDrawable;
 
         // load the appropriate coin animation based on the state
         coinAnimation = coinAnimationsMap.get(resultState);
-        coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
-        {
-            @Override
-            void onAnimationFinish()
-            {
-                playCoinSound();
-                updateResultText(resultState);
-            }
-        };
 
-        coinImage.setImageDrawable(coinImagesMap.get(resultState));
+        // weird edge case reported by user after upgrade...
+        if(coinAnimation != null)
+        {
+            coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
+            {
+                @Override
+                void onAnimationFinish()
+                {
+                    playCoinSound();
+                    updateResultText(resultState);
+                }
+            };
+        }
+        else
+        {
+            Log.e(TAG, "Something went wrong with the coinAnimationsMap...");
+            resetCoin();
+            return;
+        }
+
+        coinImageDrawable = coinImagesMap.get(resultState);
+        if(coinImageDrawable != null)
+        {
+            Log.e(TAG, "Something went wrong with the coinImagesMap...");
+            coinImage.setImageDrawable(coinImageDrawable);
+        }
+        else
+        {
+            resetCoin();
+            return;
+        }
 
         // hide the static image and clear the text
         displayCoinImage(false);

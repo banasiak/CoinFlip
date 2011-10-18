@@ -41,7 +41,7 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable
     public CustomAnimationDrawable(AnimationDrawable aniDraw)
     {
         // Add each frame to this CustomAnimationDrawable
-        for (int i = 0; i < aniDraw.getNumberOfFrames(); i++)
+        for (int i=0; i < aniDraw.getNumberOfFrames(); i++)
         {
             this.addFrame(aniDraw.getFrame(i), aniDraw.getDuration(i));
         }
