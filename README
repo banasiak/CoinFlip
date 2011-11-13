@@ -1,8 +1,9 @@
 /*
  *========================================================================
  * README
- * Oct 18, 2011 8:09:06 AM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Nov 12, 2011 9:39:13 PM | variable
+ * Copyright (c) 2011 Richard Banasiak 
+ * http://www.banasiak.com
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -20,22 +21,26 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 NOTICE:  Master branch contains Simple Coin Flip 4.x code.
          Simple Coin Flip 3.x code has been branched to SCF3.
          
          
 https://market.android.com/details?id=com.banasiak.coinflip
 
-A convenient way to flip a coin, even if you don't have one!
+Completely FREE (no-ads) and doesn't require any unsafe permissions.
 
-Simply tap the question mark or shake and view the result. Tap the coin again 
-or shake to flip again. Verify the flip algorithm is truly pseudo-random by 
-running the built-in Self Test and flipping the coin 100,000 times.
+Simply tap the question mark or shake and view the result.  Tap the coin or 
+shake to flip again. Spinning coin animation, sound, text, vibration, 
+shake-to-flip and coin type are all configurable via the Settings menu.  Verify
+the flip algorithm is truly random by running the built-in Self Test and 
+flipping the coin 100,000 times while watching the results in real-time. 
+(Sorry, no cheating!)
 
-Completely FREE (no-ads) and doesn't require any unsafe permissions. 
-Released under the GNU General Public License. Source code available here: 
-https://github.com/banasiak/CoinFlip
+Open source app released under the GNU General Public License.  
+Source code available here:  https://github.com/banasiak/CoinFlip
+
+Currently supports both English and Spanish translations. Send me an e-mail if 
+you would like to help translate this app into your native language.
 
 Quarter-dollar coin images from the United States Mint. 
 Presidential $1 Coin images from the United States Mint.
