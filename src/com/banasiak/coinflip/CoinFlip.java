@@ -84,6 +84,7 @@ public class CoinFlip extends Activity
     private int soundCoin;
     private int soundOneUp;
     private int flipCounter = 0;
+    private int shakeForce = 1;
 
     private final Util util = new Util(this);
 
@@ -136,10 +137,10 @@ public class CoinFlip extends Activity
     {
         Log.d(TAG, "onResume()");
 
-        int force = Settings.getShakePref(this);
+        shakeForce = Settings.getShakePref(this);
 
         resetCoin();
-        resetInstructions(force);
+        resetInstructions(shakeForce);
 
         // determine coin type to draw
         String coinPrefix = Settings.getCoinPref(this);
@@ -161,13 +162,13 @@ public class CoinFlip extends Activity
             loadExternalResources(coinPrefix);
         }
 
-        if (force == 0)
+        if (shakeForce == 0)
         {
             shaker.pause();
         }
         else
         {
-            shaker.resume(force);
+            shaker.resume(shakeForce);
         }
 
         super.onResume();
@@ -255,6 +256,9 @@ public class CoinFlip extends Activity
 
         // we're in the process of flipping the coin
         ResultState resultState = ResultState.UNKNOWN;
+
+        // pause the shake listener until the result is rendered
+        shaker.pause();
 
         // vibrate if enabled
         if (Settings.getVibratePref(this))
@@ -712,6 +716,7 @@ public class CoinFlip extends Activity
                 {
                     playCoinSound();
                     updateResultText(resultState);
+                    shaker.resume(shakeForce);
                 }
             };
 
@@ -735,6 +740,7 @@ public class CoinFlip extends Activity
             displayCoinAnimation(false);
             playCoinSound();
             updateResultText(resultState);
+            shaker.resume(shakeForce);
         }
     }
 

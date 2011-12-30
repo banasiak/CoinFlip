@@ -89,6 +89,7 @@ public class Util
 
     public String getRandomCoin(String extPkg)
     {
+        Log.d(TAG, "getRandomCoin()");
         String coin = "default";
         int val = -1;
         Random generator = new Random();
@@ -111,7 +112,6 @@ public class Util
 
                 // choose a random item from the array
                 val = generator.nextInt(combinedEntryValues.length);
-
                 coin = (String) combinedEntryValues[val];
 
             }
