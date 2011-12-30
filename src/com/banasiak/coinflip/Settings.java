@@ -104,6 +104,9 @@ public class Settings extends PreferenceActivity
     {
         Log.d(TAG, "loadExtPkgCoins()");
 
+        CharSequence[] combinedEntries;
+        CharSequence[] combinedEntryValues;
+
         try
         {
             // load the built-in values
@@ -119,9 +122,15 @@ public class Settings extends PreferenceActivity
             CharSequence[] newEntries = extPkgResources.getStringArray(coinsId);
             CharSequence[] newEntryValues = extPkgResources.getStringArray(coinsValuesId);
 
-            // merge the two values
-            CharSequence[] combinedEntries = mergeArray(currentEntries, newEntries);
-            CharSequence[] combinedEntryValues = mergeArray(currentEntryValues, newEntryValues);
+            // merge the add-in values
+            combinedEntries = util.mergeArray(currentEntries, newEntries);
+            combinedEntryValues = util.mergeArray(currentEntryValues, newEntryValues);
+
+            // add a "random coin" option
+            CharSequence[] randomEntry = {"Random Coin"};
+            CharSequence[] randomEntryValue = {"random"};
+            combinedEntries = util.mergeArray(combinedEntries, randomEntry);
+            combinedEntryValues = util.mergeArray(combinedEntryValues, randomEntryValue);
 
             // update the ListPreference with the combined results
             ListPreference coinPref = (ListPreference) findPreference("coin");
@@ -134,26 +143,6 @@ public class Settings extends PreferenceActivity
             Log.e(TAG, "NameNotFoundException");
             e.printStackTrace();
         }
-    }
-
-    // concatenate two arrays
-    private CharSequence[] mergeArray(CharSequence[] a, CharSequence[] b)
-    {
-        Log.d(TAG, "mergeArray()");
-        CharSequence[] result = new CharSequence[a.length + b.length];
-        int i, j;
-
-        for(i=0; i<a.length; i++)
-        {
-            result[i] = a[i];
-        }
-
-        for(j=0; j<b.length; j++)
-        {
-            result[i+j] = b[j];
-        }
-
-        return result;
     }
 
     // get the current value of the animation preference

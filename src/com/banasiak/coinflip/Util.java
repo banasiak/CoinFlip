@@ -22,9 +22,12 @@
 
 package com.banasiak.coinflip;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.util.Log;
 
 public class Util
@@ -63,4 +66,64 @@ public class Util
         return isInstalled;
 
     }
+
+    // concatenate two arrays
+    public CharSequence[] mergeArray(CharSequence[] a, CharSequence[] b)
+    {
+        Log.d(TAG, "mergeArray()");
+        CharSequence[] result = new CharSequence[a.length + b.length];
+        int i, j;
+
+        for(i=0; i<a.length; i++)
+        {
+            result[i] = a[i];
+        }
+
+        for(j=0; j<b.length; j++)
+        {
+            result[i+j] = b[j];
+        }
+
+        return result;
+    }
+
+    public String getRandomCoin(String extPkg)
+    {
+        String coin = "default";
+        int val = -1;
+        Random generator = new Random();
+        if( isExtPkgInstalled(extPkg))
+        {
+            try
+            {
+                // load the built-in values
+                CharSequence[] currentEntryValues = mContext.getResources().getStringArray(R.array.coins_values);
+
+                // load the resources from the add-in package
+                Resources extPkgResources = mContext.getPackageManager().getResourcesForApplication(extPkg);
+
+                // load the values in the add-in package
+                int coinsValuesId = extPkgResources.getIdentifier("coins_values", "array", extPkg);
+                CharSequence[] newEntryValues = extPkgResources.getStringArray(coinsValuesId);
+
+                // merge the two values
+                CharSequence[] combinedEntryValues = mergeArray(currentEntryValues, newEntryValues);
+
+                // choose a random item from the array
+                val = generator.nextInt(combinedEntryValues.length);
+
+                coin = (String) combinedEntryValues[val];
+
+            }
+            catch (NameNotFoundException e)
+            {
+                // shouldn't happen because we already verified the package exists
+                Log.e(TAG, "NameNotFoundException");
+                e.printStackTrace();
+            }
+        }
+        Log.d(TAG, "result=" + coin);
+        return coin;
+    }
+
 }

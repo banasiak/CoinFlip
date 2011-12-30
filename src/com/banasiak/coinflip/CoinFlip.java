@@ -57,7 +57,7 @@ public class CoinFlip extends Activity
     private static final String EXTPKG = "com.banasiak.coinflipext";
 
     // version of the settings schema used by this codebase
-    private static final int SCHEMA_VERSION = 3;
+    private static final int SCHEMA_VERSION = 4;
 
     // enumerator of all possible transition states
     private enum ResultState
@@ -143,6 +143,12 @@ public class CoinFlip extends Activity
 
         // determine coin type to draw
         String coinPrefix = Settings.getCoinPref(this);
+
+        if (coinPrefix.equals("random"))
+        {
+            Log.d(TAG, "Random coin selected");
+            coinPrefix = util.getRandomCoin(EXTPKG);
+        }
 
         if (coinPrefix.equals("default"))
         {
