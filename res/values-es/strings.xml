@@ -39,7 +39,8 @@
     <string name="instructions_tap_tv">Toque para Voltear</string>    
     <string name="heads">CABEZAS</string>
     <string name="max">MÁX</string>
-    <string name="min">EN</string>
+    <string name="milliseconds">ms</string>    
+    <string name="min">DE</string>
     <string name="selftest_activity_title">Resultados de Autodiagnóstico</string>
     <string name="selftest_menu_title">Autodiagnóstico</string>
     <string name="settings_activity_title">Coin Flip Configuración</string>

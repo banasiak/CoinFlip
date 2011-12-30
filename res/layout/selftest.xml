@@ -28,7 +28,7 @@
     <TableLayout 
         android:gravity="center_vertical"
         android:layout_gravity="center_vertical" 
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_width="fill_parent">
         <TableRow>
             <TextView 
@@ -46,7 +46,6 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
-                android:text="0" 
                 android:textColor="#ff00ff00"
                 android:textSize="18dp" />
             <TextView 
@@ -55,7 +54,6 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="0dp"           
-                android:text="(0%)" 
                 android:textColor="#ff00ff00"   
                 android:textSize="18dp" />
         </TableRow>
@@ -75,7 +73,6 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
-                android:text="0" 
                 android:textColor="#ffff0000"                
                 android:textSize="18dp" />
             <TextView 
@@ -84,7 +81,6 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="0dp"
-                android:text="(0%)"
                 android:textColor="#ffff0000"                 
                 android:textSize="18dp" />
         </TableRow>
@@ -104,7 +100,6 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
-                android:text="0" 
                 android:textSize="18dp" />
             <TextView 
                 android:id="@+id/total_ratio_tv"
@@ -112,7 +107,6 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="0dp"
-                android:text="(0%)" 
                 android:textSize="18dp" />
         </TableRow>
         <TableRow 
@@ -131,13 +125,12 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
-                android:text="0" 
                 android:textSize="18dp" />
             <TextView android:gravity="left"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
-                android:text="ms" 
+                android:text="@string/milliseconds" 
                 android:textSize="18dp" />
         </TableRow>
     </TableLayout>

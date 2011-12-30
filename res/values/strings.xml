@@ -40,6 +40,7 @@
     <string name="instructions_tap_tv">Tap to Flip Coin</string>    
     <string name="heads">HEADS</string>
     <string name="max">MAX</string>
+    <string name="milliseconds">ms</string>
     <string name="min">OFF</string>
     <string name="selftest_activity_title">Coin Flip Self Test Results</string>
     <string name="selftest_menu_title">Self Test</string>
