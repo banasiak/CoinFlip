@@ -23,11 +23,11 @@
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip" 
-    android:versionName="4.2" android:versionCode="21"
+    android:versionName="4.2.1" android:versionCode="22"
     android:installLocation="auto">
     
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-sdk android:targetSdkVersion="15" android:minSdkVersion="3"/>
+    <uses-sdk android:targetSdkVersion="10" android:minSdkVersion="3"/>
     
     <application 
         android:icon="@drawable/icon" 

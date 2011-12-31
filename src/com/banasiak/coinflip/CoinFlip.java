@@ -150,7 +150,6 @@ public class CoinFlip extends Activity
             Log.d(TAG, "Random coin selected");
             coinPrefix = util.getRandomCoin(EXTPKG);
         }
-
         if (coinPrefix.equals("default"))
         {
             Log.d (TAG, "Default coin selected");
@@ -227,6 +226,7 @@ public class CoinFlip extends Activity
 
         // initialize the shake listener
         shaker = new ShakeListener(this);
+        shaker.pause();
         shaker.setOnShakeListener(new ShakeListener.OnShakeListener()
         {
             public void onShake()
@@ -716,7 +716,10 @@ public class CoinFlip extends Activity
                 {
                     playCoinSound();
                     updateResultText(resultState);
-                    shaker.resume(shakeForce);
+                    if (shakeForce != 0)
+                    {
+                        shaker.resume(shakeForce);
+                    }
                 }
             };
 
@@ -740,7 +743,10 @@ public class CoinFlip extends Activity
             displayCoinAnimation(false);
             playCoinSound();
             updateResultText(resultState);
-            shaker.resume(shakeForce);
+            if (shakeForce != 0)
+            {
+                shaker.resume(shakeForce);
+            }
         }
     }
 
@@ -861,5 +867,4 @@ public class CoinFlip extends Activity
         resultText = (TextView) findViewById(R.id.result_text_view);
         instructionsText = (TextView) findViewById(R.id.instructions_text_view);
     }
-
 }

@@ -128,7 +128,8 @@ public class ShakeListener implements SensorEventListener
                 shakeCount = 0;
             }
 
-            // get the current axis values
+            // get the current axis values - the SensorManager constants are
+            // deprecated and we don't really care which-axis-is-which anyway
             float curX = event.values[0];
             float curY = event.values[1];
             float curZ = event.values[2];
