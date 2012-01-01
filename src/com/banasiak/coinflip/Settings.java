@@ -39,7 +39,7 @@ import android.util.Log;
 public class Settings extends PreferenceActivity
 {
     // debugging tag
-    private static final String TAG = "CoinFlip";
+    private static final String TAG = "Settings";
 
     // add-on package name
     private static final String EXTPKG = "com.banasiak.coinflipext";

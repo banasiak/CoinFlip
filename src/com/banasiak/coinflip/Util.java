@@ -87,6 +87,7 @@ public class Util
         return result;
     }
 
+    // build an array of all possible coins and select a random one
     public String getRandomCoin(String extPkg)
     {
         Log.d(TAG, "getRandomCoin()");
@@ -118,8 +119,7 @@ public class Util
             catch (NameNotFoundException e)
             {
                 // shouldn't happen because we already verified the package exists
-                Log.e(TAG, "NameNotFoundException");
-                e.printStackTrace();
+                Log.e(TAG, "NameNotFoundException", e);
             }
         }
         Log.d(TAG, "result=" + coin);
