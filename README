@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * README
- * Dec 31, 2011 9:32:32 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Jan 14, 2012 11:41:02 AM | variable
+ * Copyright (c) 2012 Richard Banasiak
  * http://www.banasiak.com
  *========================================================================
  * This file is part of CoinFlip.
@@ -22,7 +22,8 @@
  */
  
 
-NOTICE:  Master branch contains Simple Coin Flip 4.x code.
+NOTICE:  Master branch contains Simple Coin Flip 5.x code.
+         Simple Coin Flip 4.x code has been branched to SCF4.
          Simple Coin Flip 3.x code has been branched to SCF3.
          
          
