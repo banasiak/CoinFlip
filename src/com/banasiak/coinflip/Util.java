@@ -44,36 +44,36 @@ public class Util
     }
 
     // check to see if an extension package is installed
-    public boolean isExtPkgInstalled(final String extPkg)
-    {
-        Log.d(TAG, "isExtPkgInstalled()");
-        Log.d(TAG, "extPkg=" + extPkg);
-        boolean isInstalled = false;
-        try
-        {
-            final PackageInfo packageInfo = mContext.getPackageManager()
-                .getPackageInfo(extPkg, 0);
-            if (packageInfo != null)
-            {
-                isInstalled = true;
-            }
-        }
-        catch (final NameNotFoundException e)
-        {
-            Log.d(TAG, "NameNotFoundException");
-            // e.printStackTrace();
-        }
-
-        Log.d(TAG, "result=" + isInstalled);
-        return isInstalled;
-
-    }
+    //    public boolean isExtPkgInstalled(final String extPkg)
+    //    {
+    //        Log.d(TAG, "isExtPkgInstalled()");
+    //
+    //        Log.d(TAG, "extPkg=" + extPkg);
+    //        boolean isInstalled = false;
+    //        try
+    //        {
+    //            final PackageInfo packageInfo = mContext.getPackageManager().getPackageInfo(extPkg, 0);
+    //            if (packageInfo != null)
+    //            {
+    //                isInstalled = true;
+    //            }
+    //        }
+    //        catch (final NameNotFoundException e)
+    //        {
+    //            Log.d(TAG, "NameNotFoundException");
+    //            // e.printStackTrace();
+    //        }
+    //
+    //        Log.d(TAG, "result=" + isInstalled);
+    //        return isInstalled;
+    //
+    //    }
 
     // concatenate two arrays
-    public CharSequence[] mergeArray(final CharSequence[] a,
-        final CharSequence[] b)
+    public CharSequence[] mergeArray(final CharSequence[] a, final CharSequence[] b)
     {
         Log.d(TAG, "mergeArray()");
+
         final CharSequence[] result = new CharSequence[a.length + b.length];
         int i, j;
 
@@ -94,37 +94,32 @@ public class Util
     public String getRandomCoin()
     {
         Log.d(TAG, "getRandomCoin()");
+
         String coin = "default";
         int val = -1;
         final Random generator = new Random();
         final List<PackageInfo> pkgs = findExternalPackages();
 
         // load the built-in values
-        CharSequence[] currentEntryValues = mContext.getResources()
-            .getStringArray(R.array.coins_values);
+        CharSequence[] currentEntryValues = mContext.getResources().getStringArray(R.array.coins_values);
 
         for (final PackageInfo info : pkgs)
         {
             try
             {
                 // load the resources from the add-in package
-                final Resources extPkgResources = mContext.getPackageManager()
-                    .getResourcesForApplication(info.packageName);
+                final Resources extPkgResources = mContext.getPackageManager().getResourcesForApplication(info.packageName);
 
                 // load the values in the add-in package
-                final int coinsValuesId = extPkgResources.getIdentifier(
-                    "coins_values", "array", (info.packageName));
-                final CharSequence[] newEntryValues = extPkgResources
-                    .getStringArray(coinsValuesId);
+                final int coinsValuesId = extPkgResources.getIdentifier("coins_values", "array", (info.packageName));
+                final CharSequence[] newEntryValues = extPkgResources.getStringArray(coinsValuesId);
 
                 // merge the two values
-                currentEntryValues = mergeArray(currentEntryValues,
-                    newEntryValues);
+                currentEntryValues = mergeArray(currentEntryValues, newEntryValues);
             }
             catch (final NameNotFoundException e)
             {
-                // shouldn't happen because we already verified the package
-                // exists
+                // shouldn't happen because we already verified the package exists
                 Log.e(TAG, "NameNotFoundException", e);
             }
         }
@@ -137,10 +132,12 @@ public class Util
         return coin;
     }
 
+    // load a list of packages installed on the system
     public List<PackageInfo> findExternalPackages()
     {
-        final List<PackageInfo> packageInfo = mContext.getPackageManager()
-            .getInstalledPackages(0);
+        Log.d(TAG, "findExternalPackages()");
+
+        final List<PackageInfo> packageInfo = mContext.getPackageManager().getInstalledPackages(0);
 
         for (int i = 0, n = packageInfo.size() - 1; i <= n; --n)
         {
@@ -150,57 +147,74 @@ public class Util
                 packageInfo.remove(n);
             }
         }
+
         return packageInfo;
     }
 
+    // if any part of the package name contains "coinflipext" then assume it
+    // is a valid add-on package for this application.
     private boolean isExternalCoinPackage(final PackageInfo info)
     {
+        Log.d(TAG, "isExternalCoinPackage()");
+
+        boolean isValid = false;
         final String[] parts = info.packageName.split("\\.");
-        return parts[parts.length - 1].startsWith("coin")
-            && parts[parts.length - 1].endsWith("ext");
+
+        for (String part : parts)
+        {
+            if (part.contentEquals("coinflipext"))
+            {
+                isValid = true;
+                break;
+            }
+        }
+        return isValid;
     }
 
+    // find external coin packages and verify it contains valid resources
     public String findExternalResourcePackage(final String coinPrefix)
     {
+        Log.d(TAG, "findExternalResourcePackage()");
+
         final List<PackageInfo> pkgs = findExternalPackages();
         for (final PackageInfo pkg : pkgs)
         {
             try
             {
-                final Resources res = mContext.getPackageManager()
-                    .getResourcesForApplication(pkg.packageName);
+                final Resources res = mContext.getPackageManager().getResourcesForApplication(pkg.packageName);
 
+                // see if the package contains a heads/tails/edge image resource for the requested prefix
                 if (getExternalResourceEdge(pkg.packageName, res, coinPrefix) != 0
-                    || getExternalResourceHeads(pkg.packageName, res,
-                        coinPrefix) != 0
-                        || getExternalResourceEdge(pkg.packageName, res, coinPrefix) != 0)
+                    || getExternalResourceHeads(pkg.packageName, res, coinPrefix) != 0
+                    || getExternalResourceTails(pkg.packageName, res, coinPrefix) != 0)
                 {
+                    // if all three resources exist, return the package name
                     return pkg.packageName;
                 }
             }
             catch (final NameNotFoundException e)
             {
-                // The resources probably wasn't in there anyway
+                // Ignore.  The resources probably aren't in this package anyway.
             }
         }
         return null;
     }
 
-    public int getExternalResourceHeads(final String packageName,
-        final Resources pkg, final String prefix)
+    public int getExternalResourceHeads(final String packageName, final Resources pkg, final String prefix)
     {
+        Log.d(TAG, "getExternalResourceHeads()");
         return pkg.getIdentifier(prefix + "_heads", "drawable", packageName);
     }
 
-    public int getExternalResourceTails(final String packageName,
-        final Resources pkg, final String prefix)
+    public int getExternalResourceTails(final String packageName, final Resources pkg, final String prefix)
     {
+        Log.d(TAG, "getExternalResourceTails()");
         return pkg.getIdentifier(prefix + "_tails", "drawable", packageName);
     }
 
-    public int getExternalResourceEdge(final String packageName,
-        final Resources pkg, final String prefix)
+    public int getExternalResourceEdge(final String packageName, final Resources pkg, final String prefix)
     {
+        Log.d(TAG, "getExternalResourceEdge()");
         return pkg.getIdentifier(prefix + "_edge", "drawable", packageName);
     }
 

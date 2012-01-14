@@ -45,7 +45,7 @@ public class Settings extends PreferenceActivity
     private static final String TAG = "Settings";
 
     // add-on package name
-    private static final String EXTPKG = "com.banasiak.coinflipext";
+    private static final String EXTPKG = "*.coinflipext.*";
 
     // option keys and default values
     private static final String KEY_ANIMATION = "animation";
@@ -76,25 +76,20 @@ public class Settings extends PreferenceActivity
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
 
-        final Preference downloadPref = getPreferenceManager().findPreference(
-            "download");
-        downloadPref
-        .setOnPreferenceClickListener(new OnPreferenceClickListener()
+        // create a link to the market to search for additional coin packages
+        final Preference downloadPref = getPreferenceManager().findPreference("download");
+        downloadPref.setOnPreferenceClickListener(new OnPreferenceClickListener()
         {
             public boolean onPreferenceClick(final Preference preference)
             {
-                final Intent goToMarket = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=" + EXTPKG));
+                final Intent goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=" + EXTPKG));
                 startActivity(goToMarket);
                 return true;
             }
         });
 
-        if (util.isExtPkgInstalled(EXTPKG))
-        {
-            getPreferenceScreen().removePreference(downloadPref);
-            loadExtPkgCoins();
-        }
+        // load any external coin packages installed on the system
+        loadExtPkgCoins();
     }
 
     // Load the "coins" available in the add-on package.
@@ -112,29 +107,21 @@ public class Settings extends PreferenceActivity
         try
         {
             // load the built-in values
-            CharSequence[] currentEntries = getResources().getStringArray(
-                R.array.coins);
-            CharSequence[] currentEntryValues = getResources().getStringArray(
-                R.array.coins_values);
+            CharSequence[] currentEntries = getResources().getStringArray(R.array.coins);
+            CharSequence[] currentEntryValues = getResources().getStringArray(R.array.coins_values);
 
-            final List<PackageInfo> externalPackages = util
-                .findExternalPackages();
+            final List<PackageInfo> externalPackages = util.findExternalPackages();
 
             for (final PackageInfo externalPackage : externalPackages)
             {
                 // load the resources from the add-in package
-                final Resources extPkgResources = getPackageManager()
-                    .getResourcesForApplication(externalPackage.applicationInfo);
+                final Resources extPkgResources = getPackageManager().getResourcesForApplication(externalPackage.applicationInfo);
 
                 // load the values in the add-in package
-                final int coinsId = extPkgResources.getIdentifier("coins",
-                    "array", externalPackage.packageName);
-                final int coinsValuesId = extPkgResources.getIdentifier(
-                    "coins_values", "array", externalPackage.packageName);
-                final CharSequence[] newEntries = extPkgResources
-                    .getStringArray(coinsId);
-                final CharSequence[] newEntryValues = extPkgResources
-                    .getStringArray(coinsValuesId);
+                final int coinsId = extPkgResources.getIdentifier("coins", "array", externalPackage.packageName);
+                final int coinsValuesId = extPkgResources.getIdentifier("coins_values", "array", externalPackage.packageName);
+                final CharSequence[] newEntries = extPkgResources.getStringArray(coinsId);
+                final CharSequence[] newEntryValues = extPkgResources.getStringArray(coinsValuesId);
 
                 // merge the add-in values
                 currentEntries = util.mergeArray(currentEntries, newEntries);
@@ -148,14 +135,14 @@ public class Settings extends PreferenceActivity
                 final CharSequence[] randomEntry = { "Random Coin" };
                 final CharSequence[] randomEntryValue = { "random" };
                 currentEntries = util.mergeArray(currentEntries, randomEntry);
-                currentEntryValues = util.mergeArray(currentEntryValues,
-                    randomEntryValue);
+                currentEntryValues = util.mergeArray(currentEntryValues, randomEntryValue);
             }
 
             // update the ListPreference with the combined results
             final ListPreference coinPref = (ListPreference) findPreference("coin");
             coinPref.setEntries(currentEntries);
             coinPref.setEntryValues(currentEntryValues);
+
         }
         catch (final NameNotFoundException e)
         {
