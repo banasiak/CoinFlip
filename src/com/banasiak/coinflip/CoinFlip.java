@@ -1,21 +1,23 @@
 /*
- * ========================================================================
- * CoinFlip.java Dec 30, 2011 12:45:51 PM | variable Copyright (c) 2011 Richard
- * Banasiak
- * ======================================================================== This
- * file is part of CoinFlip.
- * 
- * CoinFlip is free software: you can redistribute it and/or modify it under the
- * terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- * 
- * CoinFlip is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License along with
- * CoinFlip. If not, see <http://www.gnu.org/licenses/>.
+ *========================================================================
+ * CoinFlip.java
+ * Jan 14, 2012 11:41:20 AM | variable
+ * Copyright (c) 2012 Richard Banasiak
+ *========================================================================
+ * This file is part of CoinFlip.
+ *
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.banasiak.coinflip;
@@ -61,11 +63,7 @@ public class CoinFlip extends Activity
     // enumerator of all possible transition states
     private enum ResultState
     {
-        HEADS_HEADS,
-        HEADS_TAILS,
-        TAILS_HEADS,
-        TAILS_TAILS,
-        UNKNOWN
+        HEADS_HEADS, HEADS_TAILS, TAILS_HEADS, TAILS_TAILS, UNKNOWN
     }
 
     EnumMap<ResultState, AnimationDrawable> coinAnimationsMap;
@@ -220,15 +218,16 @@ public class CoinFlip extends Activity
         initSounds();
 
         // initialize the coin maps
-        coinAnimationsMap = new EnumMap<CoinFlip.ResultState, AnimationDrawable>(ResultState.class);
-        coinImagesMap = new EnumMap<CoinFlip.ResultState, Drawable>(ResultState.class);
+        coinAnimationsMap = new EnumMap<CoinFlip.ResultState, AnimationDrawable>(
+            ResultState.class);
+        coinImagesMap = new EnumMap<CoinFlip.ResultState, Drawable>(
+            ResultState.class);
 
         // initialize the shake listener
         shaker = new ShakeListener(this);
         shaker.pause();
         shaker.setOnShakeListener(new ShakeListener.OnShakeListener()
         {
-            @Override
             public void onShake()
             {
                 flipCoin();
@@ -238,7 +237,6 @@ public class CoinFlip extends Activity
         // initialize the onclick listener
         coinImage.setOnClickListener(new OnClickListener()
         {
-            @Override
             public void onClick(final View v)
             {
                 flipCoin();
@@ -282,7 +280,8 @@ public class CoinFlip extends Activity
         // hide the animation and draw the reset image
         displayCoinAnimation(false);
         displayCoinImage(true);
-        coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
+        coinImage.setImageDrawable(getResources().getDrawable(
+            R.drawable.unknown));
         resultText.setText("");
     }
 
@@ -335,24 +334,30 @@ public class CoinFlip extends Activity
         return resultState;
     }
 
-    private BitmapDrawable resizeBitmapDrawable(final BitmapDrawable image, final int width, final int height)
+    private BitmapDrawable resizeBitmapDrawable(final BitmapDrawable image,
+        final int width, final int height)
     {
         // load the transparent background and convert to a bitmap
-        final BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(R.drawable.background);
+        final BitmapDrawable background = (BitmapDrawable) getResources()
+            .getDrawable(R.drawable.background);
         final Bitmap background_bm = background.getBitmap();
 
         // convert the passed in image to a bitmap and resize according to
         // parameters
-        final Bitmap image_bm = Bitmap.createScaledBitmap(image.getBitmap(), width, height, true);
+        final Bitmap image_bm = Bitmap.createScaledBitmap(image.getBitmap(),
+            width, height, true);
 
         // create a new canvas to combine the two images on
-        final Bitmap comboImage_bm = Bitmap.createBitmap(background_bm.getWidth(), background_bm.getHeight(), Bitmap.Config.ARGB_8888);
+        final Bitmap comboImage_bm = Bitmap.createBitmap(
+            background_bm.getWidth(), background_bm.getHeight(),
+            Bitmap.Config.ARGB_8888);
         final Canvas comboImage = new Canvas(comboImage_bm);
 
         // add the background as well as the new image to the horizontal center
         // of the image
         comboImage.drawBitmap(background_bm, 0f, 0f, null);
-        comboImage.drawBitmap(image_bm, (background_bm.getWidth() - image_bm.getWidth()) / 2, 0f, null);
+        comboImage.drawBitmap(image_bm,
+            (background_bm.getWidth() - image_bm.getWidth()) / 2, 0f, null);
 
         // convert the new combo image bitmap to a BitmapDrawable
         final BitmapDrawable comboImage_bmd = new BitmapDrawable(comboImage_bm);
@@ -360,7 +365,9 @@ public class CoinFlip extends Activity
         return comboImage_bmd;
     }
 
-    private AnimationDrawable generateAnimatedDrawable(final Drawable imageA, final Drawable imageB, final Drawable edge, final ResultState resultState)
+    private AnimationDrawable generateAnimatedDrawable(final Drawable imageA,
+        final Drawable imageB, final Drawable edge,
+        final ResultState resultState)
     {
         final AnimationDrawable animation = new AnimationDrawable();
         final int widthA = ((BitmapDrawable) imageA).getBitmap().getWidth();
@@ -370,15 +377,21 @@ public class CoinFlip extends Activity
 
         // create the individual animation frames for the heads side
         final BitmapDrawable imageA_8 = (BitmapDrawable) imageA;
-        final BitmapDrawable imageA_6 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.75), heightA);
-        final BitmapDrawable imageA_4 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.50), heightA);
-        final BitmapDrawable imageA_2 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.25), heightA);
+        final BitmapDrawable imageA_6 = resizeBitmapDrawable(imageA_8,
+            (int) (widthA * 0.75), heightA);
+        final BitmapDrawable imageA_4 = resizeBitmapDrawable(imageA_8,
+            (int) (widthA * 0.50), heightA);
+        final BitmapDrawable imageA_2 = resizeBitmapDrawable(imageA_8,
+            (int) (widthA * 0.25), heightA);
 
         // create the individual animation frames for the tails side
         final BitmapDrawable imageB_8 = (BitmapDrawable) imageB;
-        final BitmapDrawable imageB_6 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.75), heightB);
-        final BitmapDrawable imageB_4 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.50), heightB);
-        final BitmapDrawable imageB_2 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.25), heightB);
+        final BitmapDrawable imageB_6 = resizeBitmapDrawable(imageB_8,
+            (int) (widthB * 0.75), heightB);
+        final BitmapDrawable imageB_4 = resizeBitmapDrawable(imageB_8,
+            (int) (widthB * 0.50), heightB);
+        final BitmapDrawable imageB_2 = resizeBitmapDrawable(imageB_8,
+            (int) (widthB * 0.25), heightB);
 
         // create the appropriate animation depending on the result state
         final int duration = 20;
@@ -437,7 +450,7 @@ public class CoinFlip extends Activity
                 animation.addFrame(imageA_4, duration);
                 animation.addFrame(imageA_6, duration);
                 animation.addFrame(imageA_8, duration);
-            break;
+                break;
             case HEADS_TAILS:
                 // Begin Flip 1
                 animation.addFrame(imageA_8, duration);
@@ -483,7 +496,7 @@ public class CoinFlip extends Activity
                 animation.addFrame(imageB_4, duration);
                 animation.addFrame(imageB_6, duration);
                 animation.addFrame(imageB_8, duration);
-            break;
+                break;
             case TAILS_HEADS:
                 // Begin Flip 1
                 animation.addFrame(imageB_8, duration);
@@ -529,7 +542,7 @@ public class CoinFlip extends Activity
                 animation.addFrame(imageA_4, duration);
                 animation.addFrame(imageA_6, duration);
                 animation.addFrame(imageA_8, duration);
-            break;
+                break;
             case TAILS_TAILS:
                 // Begin Flip 1
                 animation.addFrame(imageB_8, duration);
@@ -583,11 +596,11 @@ public class CoinFlip extends Activity
                 animation.addFrame(imageB_4, duration);
                 animation.addFrame(imageB_6, duration);
                 animation.addFrame(imageB_8, duration);
-            break;
+                break;
             default:
                 Log.w(TAG, "Invalid state. Resetting coin.");
                 resetCoin();
-            break;
+                break;
         }
 
         animation.setOneShot(true);
@@ -615,29 +628,37 @@ public class CoinFlip extends Activity
             // render the animation for each result state and store it in the
             // animations map
             resultState = ResultState.HEADS_HEADS;
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge,
+                resultState);
             coinAnimationsMap.put(resultState, coinAnimation);
 
             resultState = ResultState.HEADS_TAILS;
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge,
+                resultState);
             coinAnimationsMap.put(resultState, coinAnimation);
 
             resultState = ResultState.TAILS_HEADS;
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge,
+                resultState);
             coinAnimationsMap.put(resultState, coinAnimation);
 
             resultState = ResultState.TAILS_TAILS;
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge,
+                resultState);
             coinAnimationsMap.put(resultState, coinAnimation);
         }
 
         // add the appropriate image for each result state to the images map
         // WTF? There's some kind of rendering bug if you use the "heads" or
         // "tails" variables here...
-        coinImagesMap.put(ResultState.HEADS_HEADS, getResources().getDrawable(R.drawable.heads));
-        coinImagesMap.put(ResultState.HEADS_TAILS, getResources().getDrawable(R.drawable.tails));
-        coinImagesMap.put(ResultState.TAILS_HEADS, getResources().getDrawable(R.drawable.heads));
-        coinImagesMap.put(ResultState.TAILS_TAILS, getResources().getDrawable(R.drawable.tails));
+        coinImagesMap.put(ResultState.HEADS_HEADS,
+            getResources().getDrawable(R.drawable.heads));
+        coinImagesMap.put(ResultState.HEADS_TAILS,
+            getResources().getDrawable(R.drawable.tails));
+        coinImagesMap.put(ResultState.TAILS_HEADS,
+            getResources().getDrawable(R.drawable.heads));
+        coinImagesMap.put(ResultState.TAILS_TAILS,
+            getResources().getDrawable(R.drawable.tails));
     }
 
     // load resources from the external CoinFlipExt package
@@ -650,13 +671,18 @@ public class CoinFlip extends Activity
 
         try
         {
-            final String packageName = util.findExternalResourcePackage(coinPrefix);
-            final Resources extPkgResources = getPackageManager().getResourcesForApplication(packageName);
+            final String packageName = util
+                .findExternalResourcePackage(coinPrefix);
+            final Resources extPkgResources = getPackageManager()
+                .getResourcesForApplication(packageName);
 
             // load the image IDs from the add-in package
-            final int headsId = util.getExternalResourceHeads(packageName, extPkgResources, coinPrefix);
-            final int tailsId = util.getExternalResourceTails(packageName, extPkgResources, coinPrefix);
-            final int edgeId = util.getExternalResourceEdge(packageName, extPkgResources, coinPrefix);
+            final int headsId = util.getExternalResourceHeads(packageName,
+                extPkgResources, coinPrefix);
+            final int tailsId = util.getExternalResourceTails(packageName,
+                extPkgResources, coinPrefix);
+            final int edgeId = util.getExternalResourceEdge(packageName,
+                extPkgResources, coinPrefix);
 
             // load the images from the add-in package via their ID
             final Drawable heads = extPkgResources.getDrawable(headsId);
@@ -670,29 +696,37 @@ public class CoinFlip extends Activity
                 // render the animation for each result state and store it in
                 // the animations map
                 resultState = ResultState.HEADS_HEADS;
-                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge,
+                    resultState);
                 coinAnimationsMap.put(resultState, coinAnimation);
 
                 resultState = ResultState.HEADS_TAILS;
-                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge,
+                    resultState);
                 coinAnimationsMap.put(resultState, coinAnimation);
 
                 resultState = ResultState.TAILS_HEADS;
-                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge,
+                    resultState);
                 coinAnimationsMap.put(resultState, coinAnimation);
 
                 resultState = ResultState.TAILS_TAILS;
-                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge,
+                    resultState);
                 coinAnimationsMap.put(resultState, coinAnimation);
             }
 
             // add the appropriate image for each result state to the images map
             // WTF? There's (still) some kind of rendering bug if you use the
             // "heads" or "tails" variables here...
-            coinImagesMap.put(ResultState.HEADS_HEADS, extPkgResources.getDrawable(headsId));
-            coinImagesMap.put(ResultState.HEADS_TAILS, extPkgResources.getDrawable(tailsId));
-            coinImagesMap.put(ResultState.TAILS_HEADS, extPkgResources.getDrawable(headsId));
-            coinImagesMap.put(ResultState.TAILS_TAILS, extPkgResources.getDrawable(tailsId));
+            coinImagesMap.put(ResultState.HEADS_HEADS,
+                extPkgResources.getDrawable(headsId));
+            coinImagesMap.put(ResultState.HEADS_TAILS,
+                extPkgResources.getDrawable(tailsId));
+            coinImagesMap.put(ResultState.TAILS_HEADS,
+                extPkgResources.getDrawable(headsId));
+            coinImagesMap.put(ResultState.TAILS_TAILS,
+                extPkgResources.getDrawable(tailsId));
 
         }
         catch (final NameNotFoundException e)
@@ -782,9 +816,12 @@ public class CoinFlip extends Activity
         Log.d(TAG, "playSound()");
         if (Settings.getSoundPref(this))
         {
-            final AudioManager mgr = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-            final float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
-            final float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            final AudioManager mgr = (AudioManager) this
+                .getSystemService(Context.AUDIO_SERVICE);
+            final float streamVolumeCurrent = mgr
+                .getStreamVolume(AudioManager.STREAM_MUSIC);
+            final float streamVolumeMax = mgr
+                .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
             final float volume = streamVolumeCurrent / streamVolumeMax;
 
             soundPool.play(sound, volume, volume, 1, 0, 1f);
@@ -823,16 +860,16 @@ public class CoinFlip extends Activity
                 case TAILS_HEADS:
                     resultText.setText(R.string.heads);
                     resultText.setTextColor(Color.parseColor("green"));
-                break;
+                    break;
                 case HEADS_TAILS:
                 case TAILS_TAILS:
                     resultText.setText(R.string.tails);
                     resultText.setTextColor(Color.parseColor("red"));
-                break;
+                    break;
                 default:
                     resultText.setText(R.string.unknown);
                     resultText.setTextColor(Color.parseColor("yellow"));
-                break;
+                    break;
             }
         }
         else
