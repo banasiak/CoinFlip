@@ -48,6 +48,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CoinFlip extends Activity
 {
@@ -151,10 +152,16 @@ public class CoinFlip extends Activity
             Log.d(TAG, "Random coin selected");
             coinPrefix = util.getRandomCoin();
         }
+
         if (coinPrefix.equals("default"))
         {
             Log.d(TAG, "Default coin selected");
             loadInternalResources();
+        }
+        else if (coinPrefix.equals("custom"))
+        {
+            Log.d(TAG, "Custom coin selected");
+            loadCustomResources();
         }
         else
         {
@@ -194,12 +201,6 @@ public class CoinFlip extends Activity
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
-
-        //        // reset settings if external package has been removed
-        //        if (!util.isExtPkgInstalled("com.banasiak.coinflip"))
-        //        {
-        //            Settings.resetCoinPref(this);
-        //        }
 
         // reset settings if they are from an earlier version.
         // if any setting keys have changed and we don't reset, the app
@@ -284,6 +285,8 @@ public class CoinFlip extends Activity
         displayCoinImage(true);
         coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
         resultText.setText("");
+        coinAnimationsMap.clear();
+        coinImagesMap.clear();
     }
 
     private void resetInstructions(final int force)
@@ -655,6 +658,16 @@ public class CoinFlip extends Activity
         {
             // figure out which add-on package contains the resources we need for this coin prefix
             final String packageName = util.findExternalResourcePackage(coinPrefix);
+
+            if (packageName == null)
+            {
+                // the coin prefix doesn't exist in any external package
+                Toast.makeText(this, "Coin Not Found.  Resetting Coin Selection.", Toast.LENGTH_SHORT).show();
+                Settings.resetCoinPref(this);
+                onResume();
+                return;
+            }
+
             final Resources extPkgResources = getPackageManager().getResourcesForApplication(packageName);
 
             // load the image IDs from the add-in package
@@ -707,6 +720,15 @@ public class CoinFlip extends Activity
             Log.e(TAG, "NotFoundException " + e.getMessage());
         }
 
+    }
+
+    private void loadCustomResources()
+    {
+        // TODO one day we'll be able to load custom images from the SD card...
+
+        // ... but not today.
+        Settings.resetCoinPref(this);
+        onResume();
     }
 
     private void renderResult(final ResultState resultState)

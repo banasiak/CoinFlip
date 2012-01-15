@@ -43,32 +43,6 @@ public class Util
         mContext = context;
     }
 
-    // check to see if an extension package is installed
-    //    public boolean isExtPkgInstalled(final String extPkg)
-    //    {
-    //        Log.d(TAG, "isExtPkgInstalled()");
-    //
-    //        Log.d(TAG, "extPkg=" + extPkg);
-    //        boolean isInstalled = false;
-    //        try
-    //        {
-    //            final PackageInfo packageInfo = mContext.getPackageManager().getPackageInfo(extPkg, 0);
-    //            if (packageInfo != null)
-    //            {
-    //                isInstalled = true;
-    //            }
-    //        }
-    //        catch (final NameNotFoundException e)
-    //        {
-    //            Log.d(TAG, "NameNotFoundException");
-    //            // e.printStackTrace();
-    //        }
-    //
-    //        Log.d(TAG, "result=" + isInstalled);
-    //        return isInstalled;
-    //
-    //    }
-
     // concatenate two arrays
     public CharSequence[] mergeArray(final CharSequence[] a, final CharSequence[] b)
     {
@@ -168,13 +142,14 @@ public class Util
                 break;
             }
         }
+        Log.d(TAG, "packageName=" + info.packageName + " | result=" + isValid);
         return isValid;
     }
 
     // find external coin packages and verify it contains valid resources
     public String findExternalResourcePackage(final String coinPrefix)
     {
-        Log.d(TAG, "findExternalResourcePackage()");
+        Log.d(TAG, "findExternalResourcePackage() | coinPrefix=" + coinPrefix);
 
         final List<PackageInfo> pkgs = findExternalPackages();
         for (final PackageInfo pkg : pkgs)
@@ -189,6 +164,7 @@ public class Util
                     || getExternalResourceTails(pkg.packageName, res, coinPrefix) != 0)
                 {
                     // if all three resources exist, return the package name
+                    Log.d(TAG, "package found | name=" + pkg.packageName);
                     return pkg.packageName;
                 }
             }
@@ -197,6 +173,7 @@ public class Util
                 // Ignore.  The resources probably aren't in this package anyway.
             }
         }
+        Log.w(TAG, "package not found!");
         return null;
     }
 
