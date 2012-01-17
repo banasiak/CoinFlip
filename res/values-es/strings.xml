@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * strings.xml
- * Dec 31, 2011 12:31:20 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Jan 16, 2012 6:19:23 PM | variable
+ * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -33,7 +33,7 @@
         \n\n\nQuarter-dollar coin images from the United States Mint. 
         Presidential $1 Coin images from the United States Mint.
         \n\n\nCopyright © 2012 - Richard Banasiak
-        \nContribuciones de código abierto de Alex Baker
+        \nDe código abierto contribuciones de Alex Baker
     </string>    
     <string name="app_name">Coin Flip</string>
     <string name="exit">Salida</string>
@@ -63,6 +63,7 @@
     <string name="settings_menu_title">Configuración</string>
     <string name="tails">COLAS</string>
     <string name="time">TIEMPO</string>
+    <string name="toast_coin_error">No se ha encontrado la moneda - Selección de restablecimiento</string>
     <string name="total">TOTAL</string>
     <string name="unknown">DESCONOCIDO</string>
 </resources>

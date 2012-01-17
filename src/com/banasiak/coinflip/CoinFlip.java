@@ -144,31 +144,6 @@ public class CoinFlip extends Activity
         resetCoin();
         resetInstructions(shakeForce);
 
-        // determine coin type to draw
-        String coinPrefix = Settings.getCoinPref(this);
-
-        if (coinPrefix.equals("random"))
-        {
-            Log.d(TAG, "Random coin selected");
-            coinPrefix = util.getRandomCoin();
-        }
-
-        if (coinPrefix.equals("default"))
-        {
-            Log.d(TAG, "Default coin selected");
-            loadInternalResources();
-        }
-        else if (coinPrefix.equals("custom"))
-        {
-            Log.d(TAG, "Custom coin selected");
-            loadCustomResources();
-        }
-        else
-        {
-            Log.d(TAG, "Add-on coin selected");
-            loadExternalResources(coinPrefix);
-        }
-
         if (shakeForce == 0)
         {
             shaker.pause();
@@ -177,6 +152,8 @@ public class CoinFlip extends Activity
         {
             shaker.resume(shakeForce);
         }
+
+        loadResources();
 
         super.onResume();
     }
@@ -601,6 +578,37 @@ public class CoinFlip extends Activity
         return animation;
     }
 
+    // check the coin preference and determine how to load its resources
+    private void loadResources()
+    {
+        Log.d(TAG, "loadResources()");
+
+        // determine coin type to draw
+        String coinPrefix = Settings.getCoinPref(this);
+
+        if (coinPrefix.equals("random"))
+        {
+            Log.d(TAG, "Random coin selected");
+            coinPrefix = util.getRandomCoin();
+        }
+
+        if (coinPrefix.equals("default"))
+        {
+            Log.d(TAG, "Default coin selected");
+            loadInternalResources();
+        }
+        else if (coinPrefix.equals("custom"))
+        {
+            Log.d(TAG, "Custom coin selected");
+            loadCustomResources();
+        }
+        else
+        {
+            Log.d(TAG, "Add-on coin selected");
+            loadExternalResources(coinPrefix);
+        }
+    }
+
     // load resources internal to the CoinFlip package
     private void loadInternalResources()
     {
@@ -662,9 +670,9 @@ public class CoinFlip extends Activity
             if (packageName == null)
             {
                 // the coin prefix doesn't exist in any external package
-                Toast.makeText(this, "Coin Not Found.  Resetting Coin Selection.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.toast_coin_error, Toast.LENGTH_SHORT).show();
                 Settings.resetCoinPref(this);
-                onResume();
+                loadResources();
                 return;
             }
 
@@ -725,10 +733,9 @@ public class CoinFlip extends Activity
     private void loadCustomResources()
     {
         // TODO one day we'll be able to load custom images from the SD card...
-
         // ... but not today.
         Settings.resetCoinPref(this);
-        onResume();
+        loadResources();
     }
 
     private void renderResult(final ResultState resultState)
