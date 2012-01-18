@@ -2,11 +2,11 @@
 <!--
  *========================================================================
  * main.xml
- * May 16, 2011 10:46:49 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Jan 18, 2012 3:07:51 PM | variable
+ * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
- * 
+ *
  *    CoinFlip is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation, either version 3 of the License, or
@@ -23,9 +23,10 @@
 <TableLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/table_layout" 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" 
+    android:clickable="true"
     android:layout_gravity="center_horizontal"
+    android:layout_height="fill_parent" 
+    android:layout_width="wrap_content"    
     android:orientation="vertical">
     <ImageView 
         android:id="@+id/coin_image_view" 

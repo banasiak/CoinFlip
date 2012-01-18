@@ -47,6 +47,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +80,7 @@ public class CoinFlip extends Activity
     private Boolean currentResult = true;
     private Boolean previousResult = true;
     private ImageView coinImage;
+    private TableLayout tableLayout;
     private CustomAnimationDrawable coinAnimationCustom;
     private TextView resultText;
     private TextView instructionsText;
@@ -215,7 +217,7 @@ public class CoinFlip extends Activity
         });
 
         // initialize the onclick listener
-        coinImage.setOnClickListener(new OnClickListener()
+        tableLayout.setOnClickListener(new OnClickListener()
         {
             public void onClick(final View v)
             {
@@ -917,5 +919,6 @@ public class CoinFlip extends Activity
         coinImage = (ImageView) findViewById(R.id.coin_image_view);
         resultText = (TextView) findViewById(R.id.result_text_view);
         instructionsText = (TextView) findViewById(R.id.instructions_text_view);
+        tableLayout = (TableLayout) findViewById(R.id.table_layout);
     }
 }
