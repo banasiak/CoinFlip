@@ -321,16 +321,15 @@ public class CoinFlip extends Activity
         final int width, final int height)
     {
         // load the transparent background and convert to a bitmap
-        final BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(R.drawable.background);
-        final Bitmap background_bm = background.getBitmap();
+        BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(R.drawable.background);
+        Bitmap background_bm = background.getBitmap();
 
-        // convert the passed in image to a bitmap and resize according to
-        // parameters
-        final Bitmap image_bm = Bitmap.createScaledBitmap(image.getBitmap(), width, height, true);
+        // convert the passed in image to a bitmap and resize according to parameters
+        Bitmap image_bm = Bitmap.createScaledBitmap(image.getBitmap(), width, height, true);
 
         // create a new canvas to combine the two images on
-        final Bitmap comboImage_bm = Bitmap.createBitmap(background_bm.getWidth(), background_bm.getHeight(), Bitmap.Config.ARGB_8888);
-        final Canvas comboImage = new Canvas(comboImage_bm);
+        Bitmap comboImage_bm = Bitmap.createBitmap(background_bm.getWidth(), background_bm.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas comboImage = new Canvas(comboImage_bm);
 
         // add the background as well as the new image to the horizontal center
         // of the image
@@ -339,6 +338,16 @@ public class CoinFlip extends Activity
 
         // convert the new combo image bitmap to a BitmapDrawable
         final BitmapDrawable comboImage_bmd = new BitmapDrawable(comboImage_bm);
+
+        // I don't know if this is the right thing to do, but this method
+        // usually always blows out the heap on pre-Froyo devices.  Clearing
+        // the temporary resources and recommending a GC seems to help.
+        background = null;
+        background_bm = null;
+        image_bm = null;
+        comboImage_bm = null;
+        comboImage = null;
+        System.gc();
 
         return comboImage_bmd;
     }
