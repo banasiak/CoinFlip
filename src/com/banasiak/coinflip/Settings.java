@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Settings.java
- * Jan 14, 2012 11:41:11 AM | variable
+ * Jan 24, 2012 8:11:23 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -125,8 +125,7 @@ public class Settings extends PreferenceActivity
 
                 // merge the add-in values
                 currentEntries = util.mergeArray(currentEntries, newEntries);
-                currentEntryValues = util.mergeArray(currentEntryValues,
-                    newEntryValues);
+                currentEntryValues = util.mergeArray(currentEntryValues, newEntryValues);
             }
 
             if (!externalPackages.isEmpty())
