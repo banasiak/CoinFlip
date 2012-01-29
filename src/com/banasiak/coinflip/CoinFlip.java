@@ -347,7 +347,7 @@ public class CoinFlip extends Activity
         image_bm = null;
         comboImage_bm = null;
         comboImage = null;
-        System.gc();
+        //System.gc();
 
         return comboImage_bmd;
     }
