@@ -22,9 +22,9 @@
 -->
 <resources
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <string name="about_activity_title">Acerca de Coin Flip</string>
+    <string name="about_activity_title">Acerca de Coin Flip HD</string>
     <string name="about_menu_title">Acerca</string>
-    <string name="about_text">la versión 5.0.1
+    <string name="about_text">la versión 5.0.1.HD
         \n\nA manera conveniente lanzar una moneda, incluso si usted no tiene uno.
          Simplemente toque el signo de interrogación o agitar y ver el resultado. Toque o sacuda
          para hacer girar la moneda otra vez.
@@ -35,7 +35,7 @@
         \n\n\nCopyright © 2012 - Richard Banasiak
         \nDe código abierto contribuciones de Alex Baker
     </string>    
-    <string name="app_name">Coin Flip</string>
+    <string name="app_name">Coin Flip HD</string>
     <string name="exit">Salida</string>
     <string name="instructions_tap_shake_tv">Toque o Agite para Voltear</string>
     <string name="instructions_tap_tv">Toque para Voltear</string>    
@@ -45,7 +45,7 @@
     <string name="min">DE</string>
     <string name="selftest_activity_title">Resultados de Autodiagnóstico</string>
     <string name="selftest_menu_title">Autodiagnóstico</string>
-    <string name="settings_activity_title">Coin Flip Configuración</string>
+    <string name="settings_activity_title">Coin Flip HD Configuración</string>
     <string name="settings_item_animation_summary">Hacer que la animación moneda girando</string>
     <string name="settings_item_animation_title">Animación</string>
     <string name="settings_item_coin_summary">El tipo de moneda que se mostrará</string>

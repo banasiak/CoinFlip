@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * settings.xml
- * Aug 18, 2011 1:29:51 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Feb 5, 2012 1:36:25 PM | variable
+ * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -42,7 +42,7 @@
         android:title="@string/settings_item_vibrate_title"
         android:summary="@string/settings_item_vibrate_summary"
         android:defaultValue="true" /> 
-    <com.banasiak.coinflip.SliderPreference
+    <com.banasiak.coinfliphd.SliderPreference
         android:key="shake"
         android:defaultValue="2"
         android:title="@string/settings_item_force_title"
@@ -55,10 +55,4 @@
         android:defaultValue="default" 
         android:entries="@array/coins"
         android:entryValues="@array/coins_values" />
-    <PreferenceScreen 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:key="download"
-        android:title="@string/settings_item_download_title"
-        android:summary="@string/settings_item_download_summary">
-    </PreferenceScreen>
 </PreferenceScreen>

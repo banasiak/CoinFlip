@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.banasiak.coinflip;
+package com.banasiak.coinfliphd;
 
 import android.content.Context;
 import android.content.res.Resources;

@@ -1,9 +1,8 @@
 /*
  *========================================================================
  * README
- * Jan 14, 2012 11:41:02 AM | variable
+ * Feb 5, 2012 1:37:01 PM | variable
  * Copyright (c) 2012 Richard Banasiak
- * http://www.banasiak.com
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -23,17 +22,11 @@
  
 ================================================================================
 
-NOTICE:  Master branch contains Simple Coin Flip 5.x code.
-         Simple Coin Flip 4.x code has been branched to SCF4.
-         Simple Coin Flip 3.x code has been branched to SCF3.
-
-DEVELOPERS: Did you know you can create add-in packs with your favorite coins
-            for SCF 5.0+?  Find everything you need right here: 
-            http://github.com/banasiak/CoinFlipExtExample         
+NOTICE:  Experimental Simple Coin Flip HD (SCFHD) branch.     
 
 ================================================================================
 
-https://market.android.com/details?id=com.banasiak.coinflip
+https://market.android.com/details?id=com.banasiak.coinfliphd
 
 Completely FREE (no-ads) and doesn't require any unsafe permissions.
 

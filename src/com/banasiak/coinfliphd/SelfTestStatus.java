@@ -19,7 +19,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.banasiak.coinflip;
+package com.banasiak.coinfliphd;
 
 
 public class SelfTestStatus

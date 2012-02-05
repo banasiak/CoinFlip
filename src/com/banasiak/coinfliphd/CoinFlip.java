@@ -20,7 +20,7 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinflip;
+package com.banasiak.coinfliphd;
 
 import java.util.EnumMap;
 
@@ -263,7 +263,7 @@ public class CoinFlip extends Activity
         displayCoinAnimation(false);
         displayCoinImage(true);
         coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
-        resultText.setText("");
+        resultText.setText(" ");
         coinAnimationsMap.clear();
         coinImagesMap.clear();
     }

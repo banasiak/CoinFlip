@@ -22,9 +22,9 @@
 -->
 <resources
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <string name="about_activity_title">About Coin Flip</string>
+    <string name="about_activity_title">About Coin Flip HD</string>
     <string name="about_menu_title">About</string>
-    <string name="about_text">version 5.0.1
+    <string name="about_text">version 5.0.1.HD
         \n\nA convenient way to flip a coin, even if you don\'t have one. 
         Simply tap the question mark or shake and view the result. Tap or shake
         to spin the coin again.
@@ -35,7 +35,7 @@
         \n\n\nCopyright © 2012 - Richard Banasiak
         \nOpen-source contributions from Alex Baker
     </string>    
-    <string name="app_name">Coin Flip</string>
+    <string name="app_name">Coin Flip HD</string>
     <string name="exit">Exit</string>
     <string name="instructions_tap_shake_tv">Tap/Shake to Flip Coin</string>
     <string name="instructions_tap_tv">Tap to Flip Coin</string>    
@@ -45,7 +45,7 @@
     <string name="min">OFF</string>
     <string name="selftest_activity_title">Coin Flip Self Test Results</string>
     <string name="selftest_menu_title">Self Test</string>
-    <string name="settings_activity_title">Coin Flip Settings</string>
+    <string name="settings_activity_title">Coin Flip HD Settings</string>
     <string name="settings_item_animation_summary">Render spinning coin animation</string>
     <string name="settings_item_animation_title">Animation</string>
     <string name="settings_item_coin_summary">The type of coin to be displayed</string>

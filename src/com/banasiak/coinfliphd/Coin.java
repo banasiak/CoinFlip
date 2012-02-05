@@ -1,7 +1,7 @@
 /*
  *========================================================================
- * About.java
- * May 16, 2011 11:05:47 PM | variable
+ * Coin.java
+ * Oct 15, 2011 2:11:54 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,22 +20,21 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinflip;
+package com.banasiak.coinfliphd;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.util.Log;
+import java.util.Random;
 
-public class About extends Activity
+public class Coin
 {
-    // debugging tag
-    private static final String TAG = "About";
+    // Debugging tag.
+    private static final String TAG = "Coin";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
+    Random generator = new Random();
+
+    public boolean flip()
     {
-        Log.d(TAG, "onCreate()");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.about);
+        //Log.d(TAG, "flip()");
+        return generator.nextBoolean();
     }
+
 }
