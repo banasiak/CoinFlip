@@ -263,7 +263,7 @@ public class CoinFlip extends Activity
         displayCoinAnimation(false);
         displayCoinImage(true);
         coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
-        resultText.setText("");
+        resultText.setText(" ");
         coinAnimationsMap.clear();
         coinImagesMap.clear();
     }

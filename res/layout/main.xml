@@ -37,7 +37,7 @@
     </ImageView>
     <TextView 
         android:id="@+id/result_text_view" 
-        android:text=""
+        android:text=" "
         android:textSize="64sp" 
         android:textStyle="bold" 
         android:gravity="center">

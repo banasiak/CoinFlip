@@ -59,6 +59,5 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:key="download"
         android:title="@string/settings_item_download_title"
-        android:summary="@string/settings_item_download_summary">
-    </PreferenceScreen>
+        android:summary="@string/settings_item_download_summary" />
 </PreferenceScreen>

@@ -63,7 +63,5 @@
             android:theme="@android:style/Theme.Dialog">
         </activity>
     </application>
-
-
-
+    
 </manifest> 
