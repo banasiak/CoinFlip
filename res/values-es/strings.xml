@@ -65,5 +65,5 @@
     <string name="time">TIEMPO</string>
     <string name="toast_coin_error">No se ha encontrado la moneda - Selección de restablecimiento</string>
     <string name="total">TOTAL</string>
-    <string name="unknown">DESCONOCIDO</string>
+    <string name="unknown"> </string>
 </resources>

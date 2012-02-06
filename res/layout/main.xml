@@ -38,15 +38,16 @@
     <TextView 
         android:id="@+id/result_text_view" 
         android:text=" "
-        android:textSize="115sp" 
+        android:textSize="100sp" 
         android:textStyle="bold" 
         android:gravity="center">
     </TextView>
     <TextView 
         android:id="@+id/instructions_text_view" 
         android:text=""
-        android:textSize="32sp" 
+        android:textSize="28sp" 
         android:textStyle="bold" 
         android:gravity="center"
-        android:padding="10dp" />
+        android:paddingTop="10dp" 
+        android:paddingBottom="0dp" />
 </TableLayout>
