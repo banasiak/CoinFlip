@@ -79,7 +79,6 @@ public class CoinFlip extends Activity
     private ShakeListener shaker;
     private Boolean currentResult = true;
     private Boolean previousResult = true;
-    private ResultState resultState;
     private ImageView coinImage;
     private TableLayout tableLayout;
     private CustomAnimationDrawable coinAnimationCustom;
@@ -135,29 +134,6 @@ public class CoinFlip extends Activity
                 return true;
         }
         return false;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle icicle)
-    {
-        Log.d(TAG, "onSaveInstanceState()");
-
-        if(resultState != null)
-        {
-            icicle.putString("state", resultState.name());
-        }
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle icicle)
-    {
-        Log.d(TAG, "onRestoreInstanceState()");
-
-        String state = icicle.getString("state");
-        if(state != null)
-        {
-            resultState = ResultState.valueOf(state);
-        }
     }
 
     @Override
@@ -260,7 +236,7 @@ public class CoinFlip extends Activity
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // we're in the process of flipping the coin
-        resultState = ResultState.UNKNOWN;
+        ResultState resultState = ResultState.UNKNOWN;
 
         // pause the shake listener until the result is rendered
         shaker.pause();
@@ -275,7 +251,7 @@ public class CoinFlip extends Activity
         resultState = updateState(theCoin.flip());
 
         // update the screen with the result of the flip
-        renderResult();
+        renderResult(resultState);
 
     }
 
@@ -286,8 +262,8 @@ public class CoinFlip extends Activity
         // hide the animation and draw the reset image
         displayCoinAnimation(false);
         displayCoinImage(true);
-        //coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
-        //resultText.setText(" ");
+        coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
+        resultText.setText(" ");
         coinAnimationsMap.clear();
         coinImagesMap.clear();
     }
@@ -642,19 +618,6 @@ public class CoinFlip extends Activity
             Log.d(TAG, "Add-on coin selected");
             loadExternalResources(coinPrefix);
         }
-
-        // if a previous state exists (i.e. the screen rotated), restore those resources
-        if(resultState != null)
-        {
-            Drawable coinImageDrawable = coinImagesMap.get(resultState);
-            coinImage.setImageDrawable(coinImageDrawable);
-
-            // hide the animation and display the static image
-            displayCoinImage(true);
-            displayCoinAnimation(false);
-
-            updateResultText();
-        }
     }
 
     // load resources internal to the CoinFlip package
@@ -663,7 +626,7 @@ public class CoinFlip extends Activity
         Log.d(TAG, "loadInternalResources()");
 
         AnimationDrawable coinAnimation;
-        ResultState state;
+        ResultState resultState;
 
         // load the images
         final Drawable heads = getResources().getDrawable(R.drawable.heads);
@@ -676,21 +639,21 @@ public class CoinFlip extends Activity
         {
             // render the animation for each result state and store it in the
             // animations map
-            state = ResultState.HEADS_HEADS;
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, state);
-            coinAnimationsMap.put(state, coinAnimation);
+            resultState = ResultState.HEADS_HEADS;
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimationsMap.put(resultState, coinAnimation);
 
-            state = ResultState.HEADS_TAILS;
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, state);
-            coinAnimationsMap.put(state, coinAnimation);
+            resultState = ResultState.HEADS_TAILS;
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimationsMap.put(resultState, coinAnimation);
 
-            state = ResultState.TAILS_HEADS;
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, state);
-            coinAnimationsMap.put(state, coinAnimation);
+            resultState = ResultState.TAILS_HEADS;
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimationsMap.put(resultState, coinAnimation);
 
-            state = ResultState.TAILS_TAILS;
-            coinAnimation = generateAnimatedDrawable(heads, tails, edge, state);
-            coinAnimationsMap.put(state, coinAnimation);
+            resultState = ResultState.TAILS_TAILS;
+            coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+            coinAnimationsMap.put(resultState, coinAnimation);
         }
 
         // add the appropriate image for each result state to the images map
@@ -708,7 +671,7 @@ public class CoinFlip extends Activity
         Log.d(TAG, "loadExternalResources()");
 
         AnimationDrawable coinAnimation;
-        ResultState state;
+        ResultState resultState;
 
         try
         {
@@ -740,21 +703,21 @@ public class CoinFlip extends Activity
             if (Settings.getAnimationPref(this))
             {
                 // render the animation for each result state and store it in the animations map
-                state = ResultState.HEADS_HEADS;
-                coinAnimation = generateAnimatedDrawable(heads, tails, edge, state);
-                coinAnimationsMap.put(state, coinAnimation);
+                resultState = ResultState.HEADS_HEADS;
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimationsMap.put(resultState, coinAnimation);
 
-                state = ResultState.HEADS_TAILS;
-                coinAnimation = generateAnimatedDrawable(heads, tails, edge, state);
-                coinAnimationsMap.put(state, coinAnimation);
+                resultState = ResultState.HEADS_TAILS;
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimationsMap.put(resultState, coinAnimation);
 
-                state = ResultState.TAILS_HEADS;
-                coinAnimation = generateAnimatedDrawable(heads, tails, edge, state);
-                coinAnimationsMap.put(state, coinAnimation);
+                resultState = ResultState.TAILS_HEADS;
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimationsMap.put(resultState, coinAnimation);
 
-                state = ResultState.TAILS_TAILS;
-                coinAnimation = generateAnimatedDrawable(heads, tails, edge, state);
-                coinAnimationsMap.put(state, coinAnimation);
+                resultState = ResultState.TAILS_TAILS;
+                coinAnimation = generateAnimatedDrawable(heads, tails, edge, resultState);
+                coinAnimationsMap.put(resultState, coinAnimation);
             }
 
             // add the appropriate image for each result state to the images map
@@ -786,7 +749,7 @@ public class CoinFlip extends Activity
         loadResources();
     }
 
-    private void renderResult()
+    private void renderResult(final ResultState resultState)
     {
         Log.d(TAG, "renderResult()");
 
@@ -809,7 +772,7 @@ public class CoinFlip extends Activity
                 void onAnimationFinish()
                 {
                     playCoinSound();
-                    updateResultText();
+                    updateResultText(resultState);
                     if (shakeForce != 0)
                     {
                         shaker.resume(shakeForce);
@@ -836,7 +799,7 @@ public class CoinFlip extends Activity
             displayCoinImage(true);
             displayCoinAnimation(false);
             playCoinSound();
-            updateResultText();
+            updateResultText(resultState);
             if (shakeForce != 0)
             {
                 shaker.resume(shakeForce);
@@ -890,7 +853,7 @@ public class CoinFlip extends Activity
         }
     }
 
-    private void updateResultText()
+    private void updateResultText(final ResultState resultState)
     {
         Log.d(TAG, "updateResultText()");
 
