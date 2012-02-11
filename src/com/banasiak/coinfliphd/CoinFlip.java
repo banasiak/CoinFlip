@@ -290,31 +290,31 @@ public class CoinFlip extends Activity
 
         Log.d(TAG, "updateState()");
 
-        ResultState state = ResultState.UNKNOWN;
+        ResultState resultState = ResultState.UNKNOWN;
         currentResult = flipResult;
 
         // this is easier to read than the old code
         if (previousResult == true && currentResult == true)
         {
-            state = ResultState.HEADS_HEADS;
+            resultState = ResultState.HEADS_HEADS;
         }
         if (previousResult == true && currentResult == false)
         {
-            state = ResultState.HEADS_TAILS;
+            resultState = ResultState.HEADS_TAILS;
         }
         if (previousResult == false && currentResult == true)
         {
-            state = ResultState.TAILS_HEADS;
+            resultState = ResultState.TAILS_HEADS;
         }
         if (previousResult == false && currentResult == false)
         {
-            state = ResultState.TAILS_TAILS;
+            resultState = ResultState.TAILS_TAILS;
         }
 
         // update the previousResult for the next flip
         previousResult = currentResult;
 
-        return state;
+        return resultState;
     }
 
     private BitmapDrawable resizeBitmapDrawable(final BitmapDrawable image,
@@ -354,7 +354,7 @@ public class CoinFlip extends Activity
 
     private AnimationDrawable generateAnimatedDrawable(final Drawable imageA,
         final Drawable imageB, final Drawable edge,
-        final ResultState state)
+        final ResultState resultState)
     {
         final AnimationDrawable animation = new AnimationDrawable();
         final int widthA = ((BitmapDrawable) imageA).getBitmap().getWidth();
@@ -376,7 +376,7 @@ public class CoinFlip extends Activity
 
         // create the appropriate animation depending on the result state
         final int duration = 20;
-        switch (state)
+        switch (resultState)
         {
             case HEADS_HEADS:
                 // Begin Flip 1
