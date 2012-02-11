@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Util.java
- * Jan 14, 2012 11:41:02 AM | variable
+ * Feb 10, 2012 6:24:56 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,7 +20,7 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinfliphd;
+package com.cyberguyenterprises.blackberry.coinflip;
 
 import java.util.List;
 import java.util.Random;

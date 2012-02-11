@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * About.java
- * May 16, 2011 11:05:47 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Feb 10, 2012 6:23:30 PM | variable
+ * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -20,7 +20,7 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinfliphd;
+package com.cyberguyenterprises.blackberry.coinflip;
 
 import android.app.Activity;
 import android.os.Bundle;

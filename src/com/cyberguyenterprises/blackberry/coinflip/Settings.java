@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Settings.java
- * Feb 5, 2012 1:37:01 PM | variable
+ * Feb 10, 2012 6:24:44 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,7 +20,7 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinfliphd;
+package com.cyberguyenterprises.blackberry.coinflip;
 
 import java.util.List;
 

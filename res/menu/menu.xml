@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * menu.xml
- * Feb 5, 2012 1:27:04 PM | variable
+ * Feb 10, 2012 6:25:55 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -25,21 +25,17 @@
         <item 
         android:id="@+id/settings_menu" 
         android:title="@string/settings_menu_title"
-        android:icon="@drawable/ic_menu_preferences" 
-        android:showAsAction="ifRoom|withText" />
+        android:icon="@drawable/ic_menu_preferences" />
     <item 
         android:id="@+id/selftest_menu" 
         android:title="@string/selftest_menu_title"
-        android:icon="@drawable/ic_menu_view" 
-        android:showAsAction="ifRoom|withText" />
+        android:icon="@drawable/ic_menu_view" />
     <item 
         android:id="@+id/about_menu" 
         android:title="@string/about_menu_title"
-        android:icon="@drawable/ic_menu_info_details" 
-        android:showAsAction="ifRoom|withText" />        
+        android:icon="@drawable/ic_menu_info_details"  />        
     <item 
         android:id="@+id/exit" 
         android:title="@string/exit"
-        android:icon="@drawable/ic_menu_close_clear_cancel" 
-        android:showAsAction="ifRoom|withText" />
+        android:icon="@drawable/ic_menu_close_clear_cancel" />
 </menu>

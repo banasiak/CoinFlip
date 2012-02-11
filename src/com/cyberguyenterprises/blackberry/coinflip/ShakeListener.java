@@ -20,7 +20,7 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinfliphd;
+package com.cyberguyenterprises.blackberry.coinflip;
 
 import android.content.Context;
 import android.hardware.Sensor;

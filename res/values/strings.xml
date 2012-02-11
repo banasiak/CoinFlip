@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Jan 24, 2012 8:10:50 PM | variable
+ * Feb 10, 2012 6:25:11 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -24,7 +24,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="about_activity_title">About Coin Flip HD</string>
     <string name="about_menu_title">About</string>
-    <string name="about_text">version 5.0.1.HD
+    <string name="about_text">version 1.0.0
         \n\nA convenient way to flip a coin, even if you don\'t have one. 
         Simply tap the question mark or shake and view the result. Tap or shake
         to spin the coin again.
@@ -32,8 +32,7 @@
         Self Test and flipping the coin 100,000 times.
         \n\n\nQuarter-dollar coin images from the United States Mint. 
         Presidential $1 Coin images from the United States Mint.
-        \n\n\nCopyright © 2012 - Richard Banasiak
-        \nOpen-source contributions from Alex Baker
+        \n\n\nCopyright © 2012 - CyberGuy Enterprises
     </string>    
     <string name="app_name">Coin Flip HD</string>
     <string name="exit">Exit</string>

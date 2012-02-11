@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.banasiak.coinfliphd;
+package com.cyberguyenterprises.blackberry.coinflip;
 
 import android.content.Context;
 import android.content.res.Resources;
