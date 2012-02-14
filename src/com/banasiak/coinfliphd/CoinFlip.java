@@ -210,6 +210,7 @@ public class CoinFlip extends Activity
         shaker.pause();
         shaker.setOnShakeListener(new ShakeListener.OnShakeListener()
         {
+            @Override
             public void onShake()
             {
                 flipCoin();
@@ -219,6 +220,7 @@ public class CoinFlip extends Activity
         // initialize the onclick listener
         tableLayout.setOnClickListener(new OnClickListener()
         {
+            @Override
             public void onClick(final View v)
             {
                 flipCoin();
