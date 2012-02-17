@@ -210,7 +210,6 @@ public class CoinFlip extends Activity
         shaker.pause();
         shaker.setOnShakeListener(new ShakeListener.OnShakeListener()
         {
-            @Override
             public void onShake()
             {
                 flipCoin();
@@ -220,7 +219,6 @@ public class CoinFlip extends Activity
         // initialize the onclick listener
         tableLayout.setOnClickListener(new OnClickListener()
         {
-            @Override
             public void onClick(final View v)
             {
                 flipCoin();
@@ -593,10 +591,14 @@ public class CoinFlip extends Activity
         ResultState resultState;
         AnimationDrawable coinAnimation;
 
-        final int widthA = ((BitmapDrawable) imageA).getBitmap().getWidth();
-        final int heightA = ((BitmapDrawable) imageA).getBitmap().getHeight();
-        final int widthB = ((BitmapDrawable) imageB).getBitmap().getWidth();
-        final int heightB = ((BitmapDrawable) imageB).getBitmap().getHeight();
+        BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(R.drawable.background);
+
+        // get the dimensions of the transparent background image and use these to scale up
+        // lower resolution coins from the add-in pack (originally designed for phones).
+        final int widthA = background.getBitmap().getWidth();
+        final int heightA = background.getBitmap().getHeight();
+        final int widthB = background.getBitmap().getWidth();
+        final int heightB = background.getBitmap().getHeight();
 
         // create the individual animation frames for the heads side
         final BitmapDrawable imageA_8 = (BitmapDrawable) imageA;

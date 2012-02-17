@@ -25,12 +25,16 @@ package com.banasiak.coinfliphd;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -73,19 +77,19 @@ public class Settings extends PreferenceActivity
         addPreferencesFromResource(R.xml.settings);
 
         // create a link to the market to search for additional coin packages
-        //        final Preference downloadPref = getPreferenceManager().findPreference("download");
-        //        downloadPref.setOnPreferenceClickListener(new OnPreferenceClickListener()
-        //        {
-        //            public boolean onPreferenceClick(final Preference preference)
-        //            {
-        //                final Intent goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=" + EXTPKG));
-        //                startActivity(goToMarket);
-        //                return true;
-        //            }
-        //        });
+        final Preference downloadPref = getPreferenceManager().findPreference("download");
+        downloadPref.setOnPreferenceClickListener(new OnPreferenceClickListener()
+        {
+            public boolean onPreferenceClick(final Preference preference)
+            {
+                final Intent goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=" + EXTPKG));
+                startActivity(goToMarket);
+                return true;
+            }
+        });
 
         // load any external coin packages installed on the system
-        //        loadExtPkgCoins();
+        loadExtPkgCoins();
     }
 
     // Load the "coins" available in the add-on package.
