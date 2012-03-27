@@ -61,6 +61,7 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable
         mAnimationHandler = new Handler();
         mAnimationHandler.postDelayed(new Runnable()
         {
+            @Override
             public void run()
             {
                 onAnimationFinish();

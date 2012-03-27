@@ -30,8 +30,8 @@
     android:orientation="vertical">
     <ImageView 
         android:id="@+id/coin_image_view" 
-        android:maxWidth="700dp"
-        android:maxHeight="700dp" 
+        android:maxWidth="600dp"
+        android:maxHeight="6000dp" 
         android:layout_marginTop="10dp"
         android:src="@drawable/unknown">
     </ImageView>

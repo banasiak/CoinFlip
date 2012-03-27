@@ -22,15 +22,9 @@
 
 package com.cyberguyenterprises.blackberry.coinflip;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -40,22 +34,17 @@ public class Settings extends PreferenceActivity
     // debugging tag
     private static final String TAG = "Settings";
 
-    // add-on package name
-    private static final String EXTPKG = "*.coinflipext.*";
-
     // option keys and default values
     private static final String KEY_ANIMATION = "animation";
     private static final boolean KEY_ANIMATION_DEF = true;
     private static final String KEY_COIN = "coin";
-    private static final String KEY_COIN_DEF = "default";
+    private static final String KEY_COIN_DEF = "minnesota";
     private static final String KEY_SHAKE = "shake";
     private static final int KEY_SHAKE_DEF = 2;
     private static final String KEY_SOUND = "sound";
     private static final boolean KEY_SOUND_DEF = true;
     private static final String KEY_TEXT = "text";
     private static final boolean KEY_TEXT_DEF = true;
-    private static final String KEY_VIBRATE = "vibrate";
-    private static final boolean KEY_VIBRATE_DEF = true;
 
     private static final String KEY_FLIPCOUNT = "flipCount";
     private static final int KEY_FLIPCOUNT_DEF = 0;
@@ -63,7 +52,6 @@ public class Settings extends PreferenceActivity
     private static final String KEY_SCHEMA_VERSION = "schemaVersion";
     private static final int KEY_SCHEMA_VERSION_DEF = -1;
 
-    private final Util util = new Util(this);
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -71,80 +59,6 @@ public class Settings extends PreferenceActivity
         Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
-
-        // create a link to the market to search for additional coin packages
-        //        final Preference downloadPref = getPreferenceManager().findPreference("download");
-        //        downloadPref.setOnPreferenceClickListener(new OnPreferenceClickListener()
-        //        {
-        //            public boolean onPreferenceClick(final Preference preference)
-        //            {
-        //                final Intent goToMarket = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=" + EXTPKG));
-        //                startActivity(goToMarket);
-        //                return true;
-        //            }
-        //        });
-
-        // load any external coin packages installed on the system
-        //        loadExtPkgCoins();
-    }
-
-    // Load the "coins" available in the add-on package.
-    //
-    // The theory here is that the add-on package will contain an array of
-    // "coins" and "coin_values". The coin_value should be the prefix to the
-    // associated resources. For example, if coin_values[1]="washington", all
-    // resources should be named "washington_". This gives CoinFlip a
-    // mechanism for loading resources from CoinFlipExt without having to be
-    // aware of all the contents of CoinFlipExt in advance.
-    private void loadExtPkgCoins()
-    {
-        Log.d(TAG, "loadExtPkgCoins()");
-
-        try
-        {
-            // load the built-in values
-            CharSequence[] currentEntries = getResources().getStringArray(R.array.coins);
-            CharSequence[] currentEntryValues = getResources().getStringArray(R.array.coins_values);
-
-            final List<PackageInfo> externalPackages = util.findExternalPackages();
-
-            for (final PackageInfo externalPackage : externalPackages)
-            {
-                // load the resources from the add-in package
-                final Resources extPkgResources = getPackageManager().getResourcesForApplication(externalPackage.applicationInfo);
-
-                // load the values in the add-in package
-                final int coinsId = extPkgResources.getIdentifier("coins", "array", externalPackage.packageName);
-                final int coinsValuesId = extPkgResources.getIdentifier("coins_values", "array", externalPackage.packageName);
-                final CharSequence[] newEntries = extPkgResources.getStringArray(coinsId);
-                final CharSequence[] newEntryValues = extPkgResources.getStringArray(coinsValuesId);
-
-                // merge the add-in values
-                currentEntries = util.mergeArray(currentEntries, newEntries);
-                currentEntryValues = util.mergeArray(currentEntryValues, newEntryValues);
-            }
-
-            if (!externalPackages.isEmpty())
-            {
-                // add a "random coin" option
-                final CharSequence[] randomEntry = { "Random Coin" };
-                final CharSequence[] randomEntryValue = { "random" };
-                currentEntries = util.mergeArray(currentEntries, randomEntry);
-                currentEntryValues = util.mergeArray(currentEntryValues, randomEntryValue);
-            }
-
-            // update the ListPreference with the combined results
-            final ListPreference coinPref = (ListPreference) findPreference("coin");
-            coinPref.setEntries(currentEntries);
-            coinPref.setEntryValues(currentEntryValues);
-
-        }
-        catch (final NameNotFoundException e)
-        {
-            // shouldn't happen because we already verified the package exists
-            Log.e(TAG, "NameNotFoundException");
-            e.printStackTrace();
-        }
     }
 
     // get the current value of the animation preference
@@ -173,16 +87,6 @@ public class Settings extends PreferenceActivity
         Log.d(TAG, "getTextPref()");
         final Boolean result = PreferenceManager.getDefaultSharedPreferences(
             context).getBoolean(KEY_TEXT, KEY_TEXT_DEF);
-        Log.d(TAG, "result=" + result);
-        return result;
-    }
-
-    // get the current value of the vibrate preference
-    public static boolean getVibratePref(final Context context)
-    {
-        Log.d(TAG, "getVibratePref()");
-        final Boolean result = PreferenceManager.getDefaultSharedPreferences(
-            context).getBoolean(KEY_VIBRATE, KEY_VIBRATE_DEF);
         Log.d(TAG, "result=" + result);
         return result;
     }

@@ -113,6 +113,7 @@ public class ShakeListener implements SensorEventListener
         }
     }
 
+    @Override
     public void onSensorChanged(SensorEvent event)
     {
         //Log.d(TAG, "onSensorChanged()");
@@ -162,6 +163,7 @@ public class ShakeListener implements SensorEventListener
         }
     }
 
+    @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy)
     {
         // we dont' really care about this, but its been inherited...

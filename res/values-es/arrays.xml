@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * arrays.xml
- * Jul 30, 2011 1:34:07 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Mar 26, 2012 6:38:15 PM | variable
+ * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -24,8 +24,12 @@
 <resources>  
     <string-array name="coins">
         <item>Minnesota Quarter</item>
+        <item>Sacagawea Dollar</item>
+        <item>Buffalo Nickel</item>
     </string-array>
     <string-array name="coins_values">
-        <item>default</item>
+        <item>minnesota</item>
+        <item>sacagawea</item>
+        <item>buffalo</item>
     </string-array>
 </resources>

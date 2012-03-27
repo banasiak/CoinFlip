@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * settings.xml
- * Feb 10, 2012 6:24:08 PM | variable
+ * Mar 26, 2012 7:17:10 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -37,11 +37,6 @@
         android:title="@string/settings_item_text_title"
         android:summary="@string/settings_item_text_summary"
         android:defaultValue="true" />        
-    <CheckBoxPreference
-        android:key="vibrate"
-        android:title="@string/settings_item_vibrate_title"
-        android:summary="@string/settings_item_vibrate_summary"
-        android:defaultValue="true" /> 
     <com.cyberguyenterprises.blackberry.coinflip.SliderPreference
         android:key="shake"
         android:defaultValue="2"
