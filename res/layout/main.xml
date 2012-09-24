@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * main.xml
- * Jan 18, 2012 3:07:51 PM | variable
+ * Sep 24, 2012 10:12:16 AM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,14 +20,14 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<TableLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/table_layout" 
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/table_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:layout_gravity="center_horizontal|center_vertical"
     android:clickable="true"
-    android:layout_gravity="center_horizontal"
-    android:layout_height="fill_parent" 
-    android:layout_width="wrap_content"    
-    android:orientation="vertical">
+    android:orientation="vertical" >
+
     <ImageView 
         android:id="@+id/coin_image_view" 
         android:maxWidth="390dp"
@@ -37,7 +37,7 @@
     </ImageView>
     <TextView 
         android:id="@+id/result_text_view" 
-        android:text=" "
+        android:text=""
         android:textSize="64sp" 
         android:textStyle="bold" 
         android:gravity="center">
@@ -48,5 +48,54 @@
         android:textSize="18sp" 
         android:textStyle="bold" 
         android:gravity="center"
-        android:padding="20dp" />
+        android:padding="20dp">
+    </TextView>
+
+    <TableRow
+        android:id="@+id/statistics_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:text="@string/heads"
+            android:textColor="#ff00ff00"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/heads_stat_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="24dp"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:text="@string/tails" 
+            android:textColor="#ffff0000"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/tails_stat_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="24dp"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <Button
+            android:id="@+id/stats_reset_button"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset" />
+
+    </TableRow>
+
 </TableLayout>

@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Jan 24, 2012 8:10:50 PM | variable
+ * Sep 24, 2012 10:12:16 AM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -43,6 +43,7 @@
     <string name="max">MAX</string>
     <string name="milliseconds">ms</string>
     <string name="min">OFF</string>
+    <string name="reset">Reset</string>
     <string name="selftest_activity_title">Coin Flip Self Test Results</string>
     <string name="selftest_menu_title">Self Test</string>
     <string name="settings_activity_title">Coin Flip Settings</string>
@@ -56,6 +57,8 @@
     <string name="settings_item_force_title">Shake</string>
     <string name="settings_item_sound_summary">Play sound after coin flip</string>
     <string name="settings_item_sound_title">Sound</string>
+    <string name="settings_item_stats_summary">Keep track of HEADS vs TAILS</string>
+    <string name="settings_item_stats_title">Statistics</string>    
     <string name="settings_item_text_summary">Display HEADS/TAILS result text</string>
     <string name="settings_item_text_title">Text</string>
     <string name="settings_item_vibrate_summary">Vibrate on coin flip</string>

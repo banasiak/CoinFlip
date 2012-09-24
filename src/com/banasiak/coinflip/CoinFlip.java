@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Feb 13, 2012 6:23:13 PM | variable
+ * Sep 24, 2012 10:12:16 AM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -46,8 +46,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +62,7 @@ public class CoinFlip extends Activity
     // private static final String EXTPKG = "com.banasiak.coinflipext";
 
     // version of the settings schema used by this codebase
-    private static final int SCHEMA_VERSION = 5;
+    private static final int SCHEMA_VERSION = 6;
 
     // enumerator of all possible transition states
     private enum ResultState
@@ -84,10 +86,16 @@ public class CoinFlip extends Activity
     private CustomAnimationDrawable coinAnimationCustom;
     private TextView resultText;
     private TextView instructionsText;
+    private TextView headsStatText;
+    private TextView tailsStatText;
+    private Button statsResetButton;
+    private TableRow statsLayout;
     private SoundPool soundPool;
     private int soundCoin;
     private int soundOneUp;
     private int flipCounter = 0;
+    private int headsCounter = 0;
+    private int tailsCounter = 0;
     private int shakeForce = 1;
 
     private final Util util = new Util(this);
@@ -156,6 +164,7 @@ public class CoinFlip extends Activity
         }
 
         loadResources();
+        updateStatsText();
 
         super.onResume();
     }
@@ -169,6 +178,8 @@ public class CoinFlip extends Activity
 
         // persist state
         Settings.setFlipCount(this, flipCounter);
+        Settings.setHeadsCount(this, headsCounter);
+        Settings.setTailsCount(this, tailsCounter);
     }
 
     /**
@@ -192,6 +203,8 @@ public class CoinFlip extends Activity
 
         // restore state
         flipCounter = Settings.getFlipCount(this);
+        headsCounter = Settings.getHeadsCount(this);
+        tailsCounter = Settings.getTailsCount(this);
 
         setContentView(R.layout.main);
 
@@ -224,6 +237,14 @@ public class CoinFlip extends Activity
                 flipCoin();
             }
         });
+        
+        statsResetButton.setOnClickListener(new OnClickListener()
+        {
+        	public void onClick(final View v)
+        	{
+        		resetStatistics();
+        	}
+        });
     }
 
     private void flipCoin()
@@ -248,7 +269,17 @@ public class CoinFlip extends Activity
         }
 
         // flip the coin and update the state with the result
-        resultState = updateState(theCoin.flip());
+        boolean flipResult = theCoin.flip();
+        if (flipResult)
+        {
+        	headsCounter++;
+        }
+        else
+        {
+        	tailsCounter++;
+        }
+        Log.d(TAG, "headsCounter=" + headsCounter + " | tailsCounter=" + tailsCounter);
+        resultState = updateState(flipResult);
 
         // update the screen with the result of the flip
         renderResult(resultState);
@@ -354,15 +385,15 @@ public class CoinFlip extends Activity
     }
 
     private AnimationDrawable generateAnimatedDrawable(final BitmapDrawable imageA_8,
-        final BitmapDrawable imageA_6,
-        final BitmapDrawable imageA_4,
-        final BitmapDrawable imageA_2,
-        final BitmapDrawable imageB_8,
-        final BitmapDrawable imageB_6,
-        final BitmapDrawable imageB_4,
-        final BitmapDrawable imageB_2,
-        final BitmapDrawable edge,
-        final ResultState resultState)
+											           final BitmapDrawable imageA_6,
+											           final BitmapDrawable imageA_4,
+											           final BitmapDrawable imageA_2,
+											           final BitmapDrawable imageB_8,
+											           final BitmapDrawable imageB_6,
+											           final BitmapDrawable imageB_4,
+											           final BitmapDrawable imageB_2,
+											           final BitmapDrawable edge,
+											           final ResultState resultState)
     {
         Log.d(TAG, "generateAnimatedDrawable()");
 
@@ -897,8 +928,34 @@ public class CoinFlip extends Activity
         {
             resultText.setText("");
         }
+        
+        updateStatsText();
+
     }
 
+    private void updateStatsText()
+    {
+    	Log.d(TAG, "updateStatsText()");
+    	if (Settings.getStatsPref(this))
+    	{
+    		statsLayout.setVisibility(0);
+    	}
+    	else
+    	{
+    		statsLayout.setVisibility(255);
+    	}
+    	headsStatText.setText(Integer.toString(headsCounter));
+    	tailsStatText.setText(Integer.toString(tailsCounter));    	
+    }
+    
+    private void resetStatistics()
+    {
+    	Log.d(TAG, "resetStatistics()");
+    	headsCounter = 0;
+    	tailsCounter = 0;
+    	updateStatsText();
+    }    
+    
     private void displayCoinAnimation(final boolean flag)
     {
         Log.d(TAG, "displayCoinAnimation()");
@@ -945,5 +1002,9 @@ public class CoinFlip extends Activity
         resultText = (TextView) findViewById(R.id.result_text_view);
         instructionsText = (TextView) findViewById(R.id.instructions_text_view);
         tableLayout = (TableLayout) findViewById(R.id.table_layout);
+        headsStatText = (TextView) findViewById(R.id.heads_stat_text_view);
+        tailsStatText = (TextView) findViewById(R.id.tails_stat_text_view);
+        statsResetButton = (Button) findViewById(R.id.stats_reset_button);
+        statsLayout = (TableRow) findViewById(R.id.statistics_row);
     }
 }

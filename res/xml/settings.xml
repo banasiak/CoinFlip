@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * settings.xml
- * Aug 18, 2011 1:29:51 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 24, 2012 10:12:16 AM | variable
+ * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -32,6 +32,11 @@
         android:title="@string/settings_item_sound_title"
         android:summary="@string/settings_item_sound_summary"
         android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="stats"
+        android:title="@string/settings_item_stats_title"
+        android:summary="@string/settings_item_stats_summary"
+        android:defaultValue="false" />    
     <CheckBoxPreference
         android:key="text"
         android:title="@string/settings_item_text_title"

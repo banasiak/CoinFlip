@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Settings.java
- * Jan 24, 2012 8:11:23 PM | variable
+ * Sep 24, 2012 10:12:16 AM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -56,13 +56,20 @@ public class Settings extends PreferenceActivity
     private static final int KEY_SHAKE_DEF = 2;
     private static final String KEY_SOUND = "sound";
     private static final boolean KEY_SOUND_DEF = true;
+    private static final String KEY_STATS = "stats";
+    private static final boolean KEY_STATS_DEF = false;
     private static final String KEY_TEXT = "text";
     private static final boolean KEY_TEXT_DEF = true;
     private static final String KEY_VIBRATE = "vibrate";
     private static final boolean KEY_VIBRATE_DEF = true;
 
-    private static final String KEY_FLIPCOUNT = "flipCount";
-    private static final int KEY_FLIPCOUNT_DEF = 0;
+    private static final String KEY_FLIP_COUNT = "flipCount";
+    private static final int KEY_FLIP_COUNT_DEF = 0;
+    
+    private static final String KEY_HEADS_COUNT = "headsCount";
+    private static final int KEY_HEADS_COUNT_DEF = 0;
+    private static final String KEY_TAILS_COUNT = "tailsCount";
+    private static final int KEY_TAILS_COUNT_DEF = 0;
 
     private static final String KEY_SCHEMA_VERSION = "schemaVersion";
     private static final int KEY_SCHEMA_VERSION_DEF = -1;
@@ -200,6 +207,16 @@ public class Settings extends PreferenceActivity
         Log.d(TAG, "result=" + result);
         return result;
     }
+    
+    // get the current value of the statistics preference
+    public static boolean getStatsPref(final Context context)
+    {
+    	Log.d(TAG, "getStatsPref()");
+    	final Boolean result = PreferenceManager.getDefaultSharedPreferences(
+    			context).getBoolean(KEY_STATS, KEY_STATS_DEF);
+    	Log.d(TAG, "result=" + result);
+    	return result;
+    }
 
     // get the current value of the coin preference
     public static String getCoinPref(final Context context)
@@ -228,7 +245,7 @@ public class Settings extends PreferenceActivity
     {
         Log.d(TAG, "getFlipCount()");
         final int result = PreferenceManager.getDefaultSharedPreferences(
-            context).getInt(KEY_FLIPCOUNT, KEY_FLIPCOUNT_DEF);
+            context).getInt(KEY_FLIP_COUNT, KEY_FLIP_COUNT_DEF);
         Log.d(TAG, "result=" + result);
         return result;
     }
@@ -242,9 +259,55 @@ public class Settings extends PreferenceActivity
             .getDefaultSharedPreferences(context);
         final SharedPreferences.Editor editor = settings.edit();
 
-        editor.putInt(KEY_FLIPCOUNT, flipCounter);
+        editor.putInt(KEY_FLIP_COUNT, flipCounter);
         editor.commit();
     }
+    
+    // get the persisted heads statistic
+    public static int getHeadsCount(final Context context)
+    {
+        Log.d(TAG, "getHeadsCount()");
+        final int result = PreferenceManager.getDefaultSharedPreferences(
+            context).getInt(KEY_HEADS_COUNT, KEY_HEADS_COUNT_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
+    }
+    
+    // persist the heads statistic for later use
+    public static void setHeadsCount(final Context context, final int headsCounter)
+    {
+        Log.d(TAG, "setHeadsCount()");
+        Log.d(TAG, "headsCounter=" + headsCounter);
+        final SharedPreferences settings = PreferenceManager
+            .getDefaultSharedPreferences(context);
+        final SharedPreferences.Editor editor = settings.edit();
+
+        editor.putInt(KEY_HEADS_COUNT, headsCounter);
+        editor.commit();
+    }
+    
+    // get the persisted tails statistic
+    public static int getTailsCount(final Context context)
+    {
+        Log.d(TAG, "getTailsCount()");
+        final int result = PreferenceManager.getDefaultSharedPreferences(
+            context).getInt(KEY_TAILS_COUNT, KEY_TAILS_COUNT_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
+    }   
+    
+    // persist the tails statistic for later use
+    public static void setTailsCount(final Context context, final int tailsCounter)
+    {
+        Log.d(TAG, "setTailsCount()");
+        Log.d(TAG, "tailsCounter=" + tailsCounter);
+        final SharedPreferences settings = PreferenceManager
+            .getDefaultSharedPreferences(context);
+        final SharedPreferences.Editor editor = settings.edit();
+
+        editor.putInt(KEY_TAILS_COUNT, tailsCounter);
+        editor.commit();
+    }    
 
     // get the settings schema used by this codebase
     public static int getSchemaVersion(final Context context)

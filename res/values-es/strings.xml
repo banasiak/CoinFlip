@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Jan 24, 2012 8:10:50 PM | variable
+ * Sep 24, 2012 10:12:16 AM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -43,6 +43,7 @@
     <string name="max">MÁX</string>
     <string name="milliseconds">ms</string>    
     <string name="min">DE</string>
+    <string name="reset">Reajustar</string>
     <string name="selftest_activity_title">Resultados de Autodiagnóstico</string>
     <string name="selftest_menu_title">Autodiagnóstico</string>
     <string name="settings_activity_title">Coin Flip Configuración</string>
@@ -56,6 +57,8 @@
     <string name="settings_item_force_title">Movimiento</string>
     <string name="settings_item_sound_summary">Reproducir un sonido después de lanzar la moneda</string>
     <string name="settings_item_sound_title">Sonido</string>
+    <string name="settings_item_stats_summary">Lleve un registro de CABEZAS frente a COLAS</string>
+    <string name="settings_item_stats_title">Estadística</string>     
     <string name="settings_item_text_summary">Mostrar texto de resultados</string>
     <string name="settings_item_text_title">Texto</string>
     <string name="settings_item_vibrate_summary">Vibrar en la cara o cruz</string>
