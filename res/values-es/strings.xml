@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Sep 24, 2012 10:12:16 AM | variable
+ * Sep 26, 2012 03:02:52 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,22 +20,24 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
+
 <resources
     xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="about_activity_title">Acerca de Coin Flip</string>
     <string name="about_menu_title">Acerca</string>
-    <string name="about_text">la versión 5.1
-        \n\nA manera conveniente lanzar una moneda, incluso si usted no tiene uno.
-         Simplemente toque el signo de interrogación o agitar y ver el resultado. Toque o sacuda
-         para hacer girar la moneda otra vez.
-         \n\nVerifique que el algoritmo de la moneda es realmente pseudo-aleatorios mediante la ejecución del
-         Autocomprobación y voltear la moneda 100.000 veces.
+    <string name="about_text">
+        A manera conveniente lanzar una moneda, incluso si usted no tiene uno.
+        Simplemente toque el signo de interrogación o agitar y ver el resultado. Toque o sacuda
+        para hacer girar la moneda otra vez.
+        \n\nVerifique que el algoritmo de la moneda es realmente pseudo-aleatorios mediante la ejecución del
+        Autocomprobación y voltear la moneda 100.000 veces.
         \n\n\nQuarter-dollar coin images from the United States Mint. 
         Presidential $1 Coin images from the United States Mint.
         \n\n\nCopyright © 2012 - Richard Banasiak
         \nDe código abierto contribuciones de Alex Baker
     </string>    
     <string name="app_name">Coin Flip</string>
+    <string name="coin_animation">Animación de la moneda</string>
     <string name="exit">Salida</string>
     <string name="instructions_tap_shake_tv">Toque o Agite para Voltear</string>
     <string name="instructions_tap_tv">Toque para Voltear</string>    
@@ -69,4 +71,5 @@
     <string name="toast_coin_error">No se ha encontrado la moneda - Selección de restablecimiento</string>
     <string name="total">TOTAL</string>
     <string name="unknown">DESCONOCIDO</string>
+    <string name="version">versión</string>
 </resources>

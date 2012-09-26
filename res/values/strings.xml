@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Sep 24, 2012 10:12:16 AM | variable
+ * Sep 26, 2012 03:02:52 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,12 +20,13 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
+
 <resources
     xmlns:android="http://schemas.android.com/apk/res/android">
     <string name="about_activity_title">About Coin Flip</string>
     <string name="about_menu_title">About</string>
-    <string name="about_text">version 5.1
-        \n\nA convenient way to flip a coin, even if you don\'t have one. 
+    <string name="about_text">
+        A convenient way to flip a coin, even if you don\'t have one. 
         Simply tap the question mark or shake and view the result. Tap or shake
         to spin the coin again.
         \n\nVerify the flip algorithm is truly pseudo-random by running the 
@@ -36,6 +37,7 @@
         \nOpen-source contributions from Alex Baker
     </string>    
     <string name="app_name">Coin Flip</string>
+    <string name="coin_animation">Coin Animation</string>
     <string name="exit">Exit</string>
     <string name="instructions_tap_shake_tv">Tap/Shake to Flip Coin</string>
     <string name="instructions_tap_tv">Tap to Flip Coin</string>    
@@ -69,4 +71,5 @@
     <string name="toast_coin_error">Coin Not Found - Resetting Selection</string>
     <string name="total">TOTAL</string>
     <string name="unknown">UNKNOWN</string>
+    <string name="version">version</string>
 </resources>

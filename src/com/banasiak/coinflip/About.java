@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * About.java
- * May 16, 2011 11:05:47 PM | variable
+ * Sep 26, 2012 03:02:52 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -23,8 +23,10 @@
 package com.banasiak.coinflip;
 
 import android.app.Activity;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class About extends Activity
 {
@@ -37,5 +39,18 @@ public class About extends Activity
         Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
+        
+        // pull the version name from the manifest so it doesn't have to be manually updated in the strings files
+        try 
+        {
+			String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+			TextView versionText = (TextView) findViewById(R.id.about_version_text_view);
+			versionText.setText(versionName);
+		} 
+        catch (NameNotFoundException e) 
+        {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

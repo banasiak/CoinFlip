@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * about.xml
- * May 16, 2011 10:45:27 PM | variable
+ * Sep 26, 2012 03:02:52 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
   * This file is part of CoinFlip.
@@ -20,14 +20,31 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<ScrollView 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent"
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
     android:padding="10dp">
-    <TextView 
-        android:id="@+id/about_content" 
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="@string/about_text" />
-</ScrollView>
+        android:paddingBottom="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:text="@string/version">
+        </TextView>
+        <TextView
+            android:id="@+id/about_version_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+    </TableRow>
+    <TextView
+        android:id="@+id/about_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_text">
+    </TextView>
+</TableLayout>
