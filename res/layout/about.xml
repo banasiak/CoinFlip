@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * about.xml
- * Sep 26, 2012 03:02:52 PM | variable
+ * Oct 14, 2012 02:28:21 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
   * This file is part of CoinFlip.
@@ -45,6 +45,11 @@
         android:id="@+id/about_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
         android:text="@string/about_text">
     </TextView>
+    <Button 
+        android:id="@+id/about_rate_button"
+        android:text="@string/rate_app_text">
+    </Button>     
 </TableLayout>

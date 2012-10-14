@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Sep 26, 2012 03:02:52 PM | variable
+ * Oct 14, 2012 02:28:21 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -45,6 +45,7 @@
     <string name="max">MÁX</string>
     <string name="milliseconds">ms</string>    
     <string name="min">DE</string>
+    <string name="rate_app_text">Tasa App en Google Play</string>    
     <string name="reset">Reajustar</string>
     <string name="selftest_activity_title">Resultados de Autodiagnóstico</string>
     <string name="selftest_menu_title">Autodiagnóstico</string>

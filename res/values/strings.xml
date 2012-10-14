@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Sep 26, 2012 03:02:52 PM | variable
+ * Oct 14, 2012 02:28:21 PM | variable
  * Copyright (c) 2012 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -45,6 +45,7 @@
     <string name="max">MAX</string>
     <string name="milliseconds">ms</string>
     <string name="min">OFF</string>
+    <string name="rate_app_text">Rate App on Google Play</string>
     <string name="reset">Reset</string>
     <string name="selftest_activity_title">Coin Flip Self Test Results</string>
     <string name="selftest_menu_title">Self Test</string>
