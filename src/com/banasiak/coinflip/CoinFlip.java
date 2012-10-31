@@ -352,6 +352,8 @@ public class CoinFlip extends Activity
         final int width, final int height)
     {
         Log.d(TAG, "resizeBitmapDrawable()");
+        
+        // TODO resize the bitmaps proportional to 80% of the screen size
 
         // load the transparent background and convert to a bitmap
         BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(R.drawable.background);

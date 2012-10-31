@@ -48,8 +48,14 @@
         android:paddingBottom="20dp"
         android:text="@string/about_text">
     </TextView>
-    <Button 
-        android:id="@+id/about_rate_button"
-        android:text="@string/rate_app_text">
-    </Button>     
+    <FrameLayout
+        android:layout_height="wrap_content">
+	    <Button
+	        android:id="@+id/about_rate_button"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_width="wrap_content"
+	        android:text="@string/rate_app_text" >
+	    </Button>     
+    </FrameLayout>
 </TableLayout>

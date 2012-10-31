@@ -30,6 +30,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 
 public class Util
 {
@@ -193,6 +195,18 @@ public class Util
     {
         Log.d(TAG, "getExternalResourceEdge()");
         return pkg.getIdentifier(prefix + "_edge", "drawable", packageName);
+    }
+    
+    public int getScreenWidth()
+    {
+    	Log.d(TAG, "getScreenWidth()");
+    	
+    	WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+    	Display display = wm.getDefaultDisplay();
+    	
+    	int width = display.getWidth();
+    	Log.d(TAG, "screenWidth=" + width);
+    	return width;
     }
 
 }

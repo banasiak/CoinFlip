@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * slider.xml
- * Sep 26, 2012 03:02:52 PM | variable
+ * Oct 14, 2012 02:28:21 PM | variable
  * Copyright (c) 2011 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -26,21 +26,21 @@
     android:layout_height="wrap_content" 
     android:layout_width="wrap_content" 
     android:layout_gravity="center_horizontal">
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android" 
+    <TextView 
         android:id="@+id/min"
         android:text="@string/min" 
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
         android:layout_gravity="center_vertical">
     </TextView>
-    <SeekBar xmlns:android="http://schemas.android.com/apk/res/android"
+    <SeekBar 
         android:id="@+id/slider"
         android:layout_height="wrap_content" 
         android:layout_gravity="center_vertical" 
         android:layout_width="125dp" 
         android:layout_margin="10dp">
     </SeekBar>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android" 
+    <TextView 
         android:id="@+id/max"
         android:text="@string/max"
         android:layout_height="wrap_content"
