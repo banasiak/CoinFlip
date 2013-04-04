@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * Nov 1, 2012 12:19:58 PM | variable
- * Copyright (c) 2012 Richard Banasiak
+ * Apr 4, 2013 11:14:58 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -24,7 +24,7 @@
 <manifest 
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip" 
-    android:versionName="5.3.1" android:versionCode="29"
+    android:versionName="5.3.2" android:versionCode="30"
     android:installLocation="auto">
     
     <uses-permission android:name="android.permission.VIBRATE" />

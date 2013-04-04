@@ -37,7 +37,7 @@
                 android:paddingRight="10dp"
                 android:text="@string/heads"
                 android:textColor="#ff00ff00"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
             <TextView 
                 android:id="@+id/heads_value_tv"
@@ -46,7 +46,7 @@
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
                 android:textColor="#ff00ff00"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
             <TextView 
                 android:id="@+id/heads_ratio_tv"
                 android:gravity="left" 
@@ -54,7 +54,7 @@
                 android:paddingLeft="0dp" 
                 android:paddingRight="0dp"           
                 android:textColor="#ff00ff00"   
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </TableRow>
         <TableRow>
             <TextView 
@@ -64,7 +64,7 @@
                 android:paddingRight="10dp"
                 android:text="@string/tails" 
                 android:textColor="#ffff0000"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
             <TextView 
                 android:id="@+id/tails_value_tv"
@@ -73,7 +73,7 @@
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
                 android:textColor="#ffff0000"                
-                android:textSize="18dp" />
+                android:textSize="18sp" />
             <TextView 
                 android:id="@+id/tails_ratio_tv"
                 android:gravity="left" 
@@ -81,7 +81,7 @@
                 android:paddingLeft="0dp" 
                 android:paddingRight="0dp"
                 android:textColor="#ffff0000"                 
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </TableRow>
         <TableRow 
             android:paddingBottom="10dp">
@@ -91,7 +91,7 @@
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
                 android:text="@string/total" 
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
             <TextView 
                 android:id="@+id/total_value_tv"
@@ -99,14 +99,14 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
             <TextView 
                 android:id="@+id/total_ratio_tv"
                 android:gravity="left" 
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="0dp"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </TableRow>
         <TableRow 
                 android:paddingBottom="10dp">
@@ -116,7 +116,7 @@
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
                 android:text="@string/time" 
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
             <TextView 
                 android:id="@+id/elapsed_time_tv"
@@ -124,13 +124,13 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
             <TextView android:gravity="left"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp" 
                 android:paddingRight="10dp"
                 android:text="@string/milliseconds" 
-                android:textSize="18dp" />
+                android:textSize="18sp" />
         </TableRow>
     </TableLayout>
 </ScrollView>
