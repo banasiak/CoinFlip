@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * arrays.xml
- * Jul 30, 2011 1:34:07 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 23, 2013 6:48 PM 1:34:07 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -21,7 +21,7 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<resources>  
+<resources>
     <string-array name="coins">
         <item>Minnesota Quarter</item>
     </string-array>

@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * settings.xml
- * Sep 24, 2012 10:12:16 AM | variable
- * Copyright (c) 2012 Richard Banasiak
+ * Sep 23, 2013 6:49 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -20,49 +20,59 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
-        android:key="animation"
-        android:title="@string/settings_item_animation_title"
-        android:summary="@string/settings_item_animation_summary"
-        android:defaultValue="true" />    
-    <CheckBoxPreference
-        android:key="sound"
-        android:title="@string/settings_item_sound_title"
-        android:summary="@string/settings_item_sound_summary"
-        android:defaultValue="true" />
-    <CheckBoxPreference
-        android:key="stats"
-        android:title="@string/settings_item_stats_title"
-        android:summary="@string/settings_item_stats_summary"
-        android:defaultValue="false" />    
-    <CheckBoxPreference
-        android:key="text"
-        android:title="@string/settings_item_text_title"
-        android:summary="@string/settings_item_text_summary"
-        android:defaultValue="true" />        
-    <CheckBoxPreference
-        android:key="vibrate"
-        android:title="@string/settings_item_vibrate_title"
-        android:summary="@string/settings_item_vibrate_summary"
-        android:defaultValue="true" /> 
-    <com.banasiak.coinflip.SliderPreference
-        android:key="shake"
-        android:defaultValue="2"
-        android:title="@string/settings_item_force_title"
-        android:summary="@string/settings_item_force_summary"
-        android:persistent="true"/> 
-    <ListPreference 
-        android:key="coin"
-        android:title="@string/settings_item_coin_title"
-        android:summary="@string/settings_item_coin_summary"
-        android:defaultValue="default" 
-        android:entries="@array/coins"
-        android:entryValues="@array/coins_values" />
-    <PreferenceScreen 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:key="download"
-        android:title="@string/settings_item_download_title"
-        android:summary="@string/settings_item_download_summary" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settings_header_basic_title">
+        <CheckBoxPreference
+            android:key="animation"
+            android:title="@string/settings_item_animation_title"
+            android:summary="@string/settings_item_animation_summary"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="sound"
+            android:title="@string/settings_item_sound_title"
+            android:summary="@string/settings_item_sound_summary"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="text"
+            android:title="@string/settings_item_text_title"
+            android:summary="@string/settings_item_text_summary"
+            android:defaultValue="true" />
+        <CheckBoxPreference
+            android:key="vibrate"
+            android:title="@string/settings_item_vibrate_title"
+            android:summary="@string/settings_item_vibrate_summary"
+            android:defaultValue="true" />
+        <com.banasiak.coinflip.SliderPreference
+            android:key="shake"
+            android:defaultValue="2"
+            android:title="@string/settings_item_force_title"
+            android:summary="@string/settings_item_force_summary"
+            android:persistent="true" />
+        <ListPreference
+            android:key="coin"
+            android:title="@string/settings_item_coin_title"
+            android:summary="@string/settings_item_coin_summary"
+            android:defaultValue="default"
+            android:entries="@array/coins"
+            android:entryValues="@array/coins_values" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_header_advanced_title">
+        <CheckBoxPreference
+            android:key="stats"
+            android:title="@string/settings_item_stats_title"
+            android:summary="@string/settings_item_stats_summary"
+            android:defaultValue="false" />
+        <EditTextPreference
+            android:key="diagnostics"
+            android:title="@string/settings_item_selftest_title"
+            android:inputType="number"
+            android:numeric="integer"
+            android:dialogIcon="@drawable/ic_menu_diagnostics"
+            android:dialogTitle="@string/settings_item_selftest_dialog"
+            android:defaultValue="100000" />
+        <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+            android:key="download"
+            android:title="@string/settings_item_download_title"
+            android:summary="@string/settings_item_download_summary" />
+    </PreferenceCategory>
 </PreferenceScreen>

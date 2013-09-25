@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * CustomAnimationDrawable.java
- * Jul 23, 2011 9:41:44 AM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 23, 2013 7:31 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -31,25 +31,22 @@ import android.util.Log;
 // after the final frame of the animation is rendered.
 // http://stackoverflow.com/questions/2214735/android-animationdrawable-and-knowing-when-animation-ends
 
-public abstract class CustomAnimationDrawable extends AnimationDrawable
-{
+public abstract class CustomAnimationDrawable extends AnimationDrawable {
+
     // debugging tag
     private static final String TAG = "CustomAnimationDrawable";
 
     Handler mAnimationHandler;
 
-    public CustomAnimationDrawable(AnimationDrawable aniDraw)
-    {
+    public CustomAnimationDrawable(AnimationDrawable aniDraw) {
         // Add each frame to this CustomAnimationDrawable
-        for (int i=0; i < aniDraw.getNumberOfFrames(); i++)
-        {
+        for (int i = 0; i < aniDraw.getNumberOfFrames(); i++) {
             this.addFrame(aniDraw.getFrame(i), aniDraw.getDuration(i));
         }
     }
 
     @Override
-    public void start()
-    {
+    public void start() {
         super.start();
 
         Log.d(TAG, "start()");
@@ -59,24 +56,20 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable
         // duration for the animation has passed.
 
         mAnimationHandler = new Handler();
-        mAnimationHandler.postDelayed(new Runnable()
-        {
-            public void run()
-            {
+        mAnimationHandler.postDelayed(new Runnable() {
+            public void run() {
                 onAnimationFinish();
             }
         }, getTotalDuration());
 
     }
 
-    public int getTotalDuration()
-    {
+    public int getTotalDuration() {
         Log.d(TAG, "getTotalDuration()");
 
         int iDuration = 0;
 
-        for (int i = 0; i < this.getNumberOfFrames(); i++)
-        {
+        for (int i = 0; i < this.getNumberOfFrames(); i++) {
             iDuration += this.getDuration(i);
         }
 

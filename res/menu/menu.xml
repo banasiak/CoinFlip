@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * menu.xml
- * Dec 30, 2011 12:46:16 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 23, 2013 5:00 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -20,26 +20,25 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<menu 
-    xmlns:android="http://schemas.android.com/apk/res/android">
-        <item 
-        android:id="@+id/settings_menu" 
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/settings_menu"
         android:title="@string/settings_menu_title"
-        android:icon="@drawable/ic_menu_preferences" 
+        android:icon="@drawable/ic_menu_preferences"
         android:showAsAction="ifRoom|withText" />
-    <item 
-        android:id="@+id/selftest_menu" 
+    <item
+        android:id="@+id/selftest_menu"
         android:title="@string/selftest_menu_title"
-        android:icon="@drawable/ic_menu_view" 
+        android:icon="@drawable/ic_menu_diagnostics"
         android:showAsAction="ifRoom|withText" />
-    <item 
-        android:id="@+id/about_menu" 
+    <item
+        android:id="@+id/about_menu"
         android:title="@string/about_menu_title"
-        android:icon="@drawable/ic_menu_info_details" 
-        android:showAsAction="ifRoom|withText" />        
-    <item 
-        android:id="@+id/exit" 
+        android:icon="@drawable/ic_menu_info_details"
+        android:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/exit"
         android:title="@string/exit"
-        android:icon="@drawable/ic_menu_close_clear_cancel" 
+        android:icon="@drawable/ic_menu_close_clear_cancel"
         android:showAsAction="ifRoom|withText" />
 </menu>

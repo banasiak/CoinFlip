@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * SelfTest.java
- * May 16, 2011 11:14:07 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 23, 2013 7:33 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -22,31 +22,38 @@
 
 package com.banasiak.coinflip;
 
-import java.text.NumberFormat;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class SelfTest extends Activity
-{
+import java.text.NumberFormat;
+
+public class SelfTest extends Activity {
+
     // debugging tag
     private static final String TAG = "SelfTest";
 
+    private long maxNumberFlips;
+
     private TextView headsValue;
+
     private TextView headsRatio;
+
     private TextView tailsValue;
+
     private TextView tailsRatio;
+
     private TextView totalValue;
+
     private TextView totalRatio;
+
     private TextView elapsedTime;
 
     private SelfTestTask backgroundTask;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
@@ -60,40 +67,44 @@ public class SelfTest extends Activity
         totalRatio = (TextView) findViewById(R.id.total_ratio_tv);
         elapsedTime = (TextView) findViewById(R.id.elapsed_time_tv);
 
+        maxNumberFlips = Settings.getDiagnosticsPref(this);
+
         backgroundTask = new SelfTestTask(this);
         backgroundTask.execute(new SelfTestStatus());
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         Log.d(TAG, "onStop()");
         super.onStop();
         backgroundTask.cancel(true);
     }
 
     // this method is called when the async task reports it has new information
-    public void updateDialog(SelfTestStatus taskStatus)
-    {
+    public void updateDialog(SelfTestStatus taskStatus) {
         //Log.d(TAG, "updateDialog()");
 
         final NumberFormat percentFormat = NumberFormat.getPercentInstance();
-        percentFormat.setMaximumFractionDigits(1);
+        percentFormat.setMaximumFractionDigits(2);
 
         headsValue.setText(Integer.toString(taskStatus.getHeads()));
         headsRatio.setText("("
-            + percentFormat.format(taskStatus.getHeadsPercentage()) + ")");
+                + percentFormat.format(taskStatus.getHeadsPercentage()) + ")");
 
         tailsValue.setText(Integer.toString(taskStatus.getTails()));
         tailsRatio.setText("("
-            + percentFormat.format(taskStatus.getTailsPercentage()) + ")");
+                + percentFormat.format(taskStatus.getTailsPercentage()) + ")");
 
         totalValue.setText(Integer.toString(taskStatus.getTotal()));
         totalRatio.setText("("
-            + percentFormat.format(taskStatus.getCompletionPercentage()) + ")");
+                + percentFormat.format((double) taskStatus.getTotal() / maxNumberFlips)
+                + ")");
 
         elapsedTime.setText(Long.toString(taskStatus.getElapsedTime()));
+    }
 
+    public long getMaxNumberFlips() {
+        return maxNumberFlips;
     }
 
 }

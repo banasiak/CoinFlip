@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * ShakeListener.java
- * Dec 30, 2011 2:19:15 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 23, 2013 7:32 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -29,50 +29,54 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
-public class ShakeListener implements SensorEventListener
-{
+public class ShakeListener implements SensorEventListener {
+
     // debugging tag
     private static final String TAG = "ShakeListener";
 
     // number of shakes required to trigger callback
     private static final int SHAKE_COUNT = 4;
+
     // timeout before resetting detected shakes in milliseconds
     private static final int SHAKE_TIMEOUT = 1000;
+
     // minimum registered movement before shake detected
     private static final float SHAKE_FORCE = 2.5f;
 
     private SensorManager mSensorManager;
+
     private OnShakeListener mShakeListener;
+
     private final Context mContext;
 
     private long lastTime = -1;
+
     private int shakeCount = 0;
 
     private float lastX = -1.0f;
+
     private float lastY = -1.0f;
+
     private float lastZ = -1.0f;
 
     private int mForceMultiplier = -1;
 
-    public interface OnShakeListener
-    {
+    public interface OnShakeListener {
+
         public void onShake();
     }
 
-    public ShakeListener(Context context)
-    {
+    public ShakeListener(Context context) {
         mContext = context;
         resume(mForceMultiplier);
     }
 
-    public void setOnShakeListener(OnShakeListener listener)
-    {
+    public void setOnShakeListener(OnShakeListener listener) {
         Log.d(TAG, "setOnShakeListener()");
         mShakeListener = listener;
     }
 
-    public void resume(int forceMultiplier)
-    {
+    public void resume(int forceMultiplier) {
         Log.d(TAG, "resume()");
 
         // the force multiplier may have changed in the settings
@@ -80,51 +84,41 @@ public class ShakeListener implements SensorEventListener
 
         // check to see if we can access the system's sensors
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-        if (mSensorManager != null)
-        {
+        if (mSensorManager != null) {
             // if we can, register a listener for the accelerometer
-            try
-            {
+            try {
                 Sensor accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-                mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
-            }
-            catch (Exception e)
-            {
+                mSensorManager
+                        .registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+            } catch (Exception e) {
                 Log.w(TAG, "Accelerometer not supported", e);
                 mSensorManager.unregisterListener(this);
             }
-        }
-        else
-        {
+        } else {
             Exception e = new UnsupportedOperationException();
             Log.w(TAG, "Sensors not supported", e);
         }
     }
 
-    public void pause()
-    {
+    public void pause() {
         Log.d(TAG, "pause()");
 
-        if (mSensorManager != null)
-        {
+        if (mSensorManager != null) {
             // we have manually unregister the listener on pause()
             mSensorManager.unregisterListener(this);
             mSensorManager = null;
         }
     }
 
-    public void onSensorChanged(SensorEvent event)
-    {
+    public void onSensorChanged(SensorEvent event) {
         //Log.d(TAG, "onSensorChanged()");
 
         // make sure its the accelerometer that has changed
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-        {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             long now = System.currentTimeMillis();
 
             // if the shake timeout has elapsed, reset the shake count
-            if ((now-lastTime) > SHAKE_TIMEOUT)
-            {
+            if ((now - lastTime) > SHAKE_TIMEOUT) {
                 shakeCount = 0;
             }
 
@@ -138,17 +132,14 @@ public class ShakeListener implements SensorEventListener
             float movement = Math.abs(curX + curY + curZ - lastX - lastY - lastZ);
 
             // if a movement over the force threshold was detected, count it
-            if (movement > SHAKE_FORCE*mForceMultiplier)
-            {
+            if (movement > SHAKE_FORCE * mForceMultiplier) {
                 lastTime = now;
                 shakeCount++;
             }
 
             // trigger the callback if the shake count is reached
-            if (shakeCount >= SHAKE_COUNT)
-            {
-                if (mShakeListener != null)
-                {
+            if (shakeCount >= SHAKE_COUNT) {
+                if (mShakeListener != null) {
                     mShakeListener.onShake();
                 }
                 shakeCount = 0;
@@ -162,8 +153,7 @@ public class ShakeListener implements SensorEventListener
         }
     }
 
-    public void onAccuracyChanged(Sensor sensor, int accuracy)
-    {
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // we dont' really care about this, but its been inherited...
     }
 
