@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * Util.java
- * Jan 14, 2012 11:41:02 AM | variable
- * Copyright (c) 2012 Richard Banasiak
+ * Sep 23, 2013 7:32 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -22,9 +22,6 @@
 
 package com.banasiak.coinflip;
 
-import java.util.List;
-import java.util.Random;
-
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -33,33 +30,32 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-public class Util
-{
+import java.util.List;
+import java.util.Random;
+
+public class Util {
+
     // debugging tag
     private static final String TAG = "Util";
 
     private final Context mContext;
 
-    public Util(final Context context)
-    {
+    public Util(final Context context) {
         mContext = context;
     }
 
     // concatenate two arrays
-    public CharSequence[] mergeArray(final CharSequence[] a, final CharSequence[] b)
-    {
+    public CharSequence[] mergeArray(final CharSequence[] a, final CharSequence[] b) {
         Log.d(TAG, "mergeArray()");
 
         final CharSequence[] result = new CharSequence[a.length + b.length];
         int i, j;
 
-        for (i = 0; i < a.length; i++)
-        {
+        for (i = 0; i < a.length; i++) {
             result[i] = a[i];
         }
 
-        for (j = 0; j < b.length; j++)
-        {
+        for (j = 0; j < b.length; j++) {
             result[i + j] = b[j];
         }
 
@@ -67,8 +63,7 @@ public class Util
     }
 
     // build an array of all possible coins and select a random one
-    public String getRandomCoin()
-    {
+    public String getRandomCoin() {
         Log.d(TAG, "getRandomCoin()");
 
         String coin = "default";
@@ -77,24 +72,23 @@ public class Util
         final List<PackageInfo> pkgs = findExternalPackages();
 
         // load the built-in values
-        CharSequence[] currentEntryValues = mContext.getResources().getStringArray(R.array.coins_values);
+        CharSequence[] currentEntryValues = mContext.getResources()
+                .getStringArray(R.array.coins_values);
 
-        for (final PackageInfo info : pkgs)
-        {
-            try
-            {
+        for (final PackageInfo info : pkgs) {
+            try {
                 // load the resources from the add-in package
-                final Resources extPkgResources = mContext.getPackageManager().getResourcesForApplication(info.packageName);
+                final Resources extPkgResources = mContext.getPackageManager()
+                        .getResourcesForApplication(info.packageName);
 
                 // load the values in the add-in package
-                final int coinsValuesId = extPkgResources.getIdentifier("coins_values", "array", (info.packageName));
+                final int coinsValuesId = extPkgResources
+                        .getIdentifier("coins_values", "array", (info.packageName));
                 final CharSequence[] newEntryValues = extPkgResources.getStringArray(coinsValuesId);
 
                 // merge the two values
                 currentEntryValues = mergeArray(currentEntryValues, newEntryValues);
-            }
-            catch (final NameNotFoundException e)
-            {
+            } catch (final NameNotFoundException e) {
                 // shouldn't happen because we already verified the package exists
                 Log.e(TAG, "NameNotFoundException", e);
             }
@@ -109,17 +103,14 @@ public class Util
     }
 
     // load a list of packages installed on the system
-    public List<PackageInfo> findExternalPackages()
-    {
+    public List<PackageInfo> findExternalPackages() {
         Log.d(TAG, "findExternalPackages()");
 
         final List<PackageInfo> packageInfo = mContext.getPackageManager().getInstalledPackages(0);
 
-        for (int i = 0, n = packageInfo.size() - 1; i <= n; --n)
-        {
+        for (int i = 0, n = packageInfo.size() - 1; i <= n; --n) {
             final PackageInfo info = packageInfo.get(n);
-            if (!isExternalCoinPackage(info))
-            {
+            if (!isExternalCoinPackage(info)) {
                 packageInfo.remove(n);
             }
         }
@@ -129,17 +120,14 @@ public class Util
 
     // if any part of the package name contains "coinflipext" then assume it
     // is a valid add-on package for this application.
-    private boolean isExternalCoinPackage(final PackageInfo info)
-    {
+    private boolean isExternalCoinPackage(final PackageInfo info) {
         Log.d(TAG, "isExternalCoinPackage()");
 
         boolean isValid = false;
         final String[] parts = info.packageName.split("\\.");
 
-        for (String part : parts)
-        {
-            if (part.contentEquals("coinflipext"))
-            {
+        for (String part : parts) {
+            if (part.contentEquals("coinflipext")) {
                 isValid = true;
                 break;
             }
@@ -149,29 +137,24 @@ public class Util
     }
 
     // find external coin packages and verify it contains valid resources
-    public String findExternalResourcePackage(final String coinPrefix)
-    {
+    public String findExternalResourcePackage(final String coinPrefix) {
         Log.d(TAG, "findExternalResourcePackage() | coinPrefix=" + coinPrefix);
 
         final List<PackageInfo> pkgs = findExternalPackages();
-        for (final PackageInfo pkg : pkgs)
-        {
-            try
-            {
-                final Resources res = mContext.getPackageManager().getResourcesForApplication(pkg.packageName);
+        for (final PackageInfo pkg : pkgs) {
+            try {
+                final Resources res = mContext.getPackageManager()
+                        .getResourcesForApplication(pkg.packageName);
 
                 // see if the package contains a heads/tails/edge image resource for the requested prefix
                 if (getExternalResourceEdge(pkg.packageName, res, coinPrefix) != 0
-                    || getExternalResourceHeads(pkg.packageName, res, coinPrefix) != 0
-                    || getExternalResourceTails(pkg.packageName, res, coinPrefix) != 0)
-                {
+                        || getExternalResourceHeads(pkg.packageName, res, coinPrefix) != 0
+                        || getExternalResourceTails(pkg.packageName, res, coinPrefix) != 0) {
                     // if all three resources exist, return the package name
                     Log.d(TAG, "package found | name=" + pkg.packageName);
                     return pkg.packageName;
                 }
-            }
-            catch (final NameNotFoundException e)
-            {
+            } catch (final NameNotFoundException e) {
                 // Ignore.  The resources probably aren't in this package anyway.
             }
         }
@@ -179,34 +162,33 @@ public class Util
         return null;
     }
 
-    public int getExternalResourceHeads(final String packageName, final Resources pkg, final String prefix)
-    {
+    public int getExternalResourceHeads(final String packageName, final Resources pkg,
+            final String prefix) {
         Log.d(TAG, "getExternalResourceHeads()");
         return pkg.getIdentifier(prefix + "_heads", "drawable", packageName);
     }
 
-    public int getExternalResourceTails(final String packageName, final Resources pkg, final String prefix)
-    {
+    public int getExternalResourceTails(final String packageName, final Resources pkg,
+            final String prefix) {
         Log.d(TAG, "getExternalResourceTails()");
         return pkg.getIdentifier(prefix + "_tails", "drawable", packageName);
     }
 
-    public int getExternalResourceEdge(final String packageName, final Resources pkg, final String prefix)
-    {
+    public int getExternalResourceEdge(final String packageName, final Resources pkg,
+            final String prefix) {
         Log.d(TAG, "getExternalResourceEdge()");
         return pkg.getIdentifier(prefix + "_edge", "drawable", packageName);
     }
-    
-    public int getScreenWidth()
-    {
-    	Log.d(TAG, "getScreenWidth()");
-    	
-    	WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-    	Display display = wm.getDefaultDisplay();
-    	
-    	int width = display.getWidth();
-    	Log.d(TAG, "screenWidth=" + width);
-    	return width;
+
+    public int getScreenWidth() {
+        Log.d(TAG, "getScreenWidth()");
+
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+
+        int width = display.getWidth();
+        Log.d(TAG, "screenWidth=" + width);
+        return width;
     }
 
 }

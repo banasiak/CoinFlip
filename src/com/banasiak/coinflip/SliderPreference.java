@@ -26,31 +26,31 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 public class SliderPreference extends Preference implements
-OnSeekBarChangeListener
-{
+        OnSeekBarChangeListener {
+
     private final static int MAX_SLIDER_VALUE = 5;
+
     private final static int INITIAL_VALUE = 2;
 
     private int mValue = INITIAL_VALUE;
+
     private String mMinText;
+
     private String mMaxText;
 
-    public SliderPreference(Context context)
-    {
+    public SliderPreference(Context context) {
         super(context);
 
         setWidgetLayoutResource(R.layout.slider);
     }
 
-    public SliderPreference(Context context, AttributeSet attrs)
-    {
+    public SliderPreference(Context context, AttributeSet attrs) {
         this(context, attrs, android.R.attr.preferenceStyle);
 
         setWidgetLayoutResource(R.layout.slider);
     }
 
-    public SliderPreference(Context context, AttributeSet attrs, int defStyle)
-    {
+    public SliderPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         Resources res = context.getResources();
@@ -61,18 +61,15 @@ OnSeekBarChangeListener
     }
 
     @Override
-    protected void onBindView(View view)
-    {
+    protected void onBindView(View view) {
         super.onBindView(view);
 
-        if (mMinText != null)
-        {
+        if (mMinText != null) {
             TextView minText = (TextView) view.findViewById(R.id.min);
             minText.setText(mMinText);
         }
 
-        if (mMaxText != null)
-        {
+        if (mMaxText != null) {
             TextView maxText = (TextView) view.findViewById(R.id.max);
             maxText.setText(mMaxText);
         }
@@ -83,34 +80,26 @@ OnSeekBarChangeListener
         bar.setOnSeekBarChangeListener(this);
     }
 
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-    {
-        if (fromUser)
-        {
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+        if (fromUser) {
             mValue = progress;
             persistInt(mValue);
         }
     }
 
-    public void onStartTrackingTouch(SeekBar seekBar)
-    {
+    public void onStartTrackingTouch(SeekBar seekBar) {
     }
 
-    public void onStopTrackingTouch(SeekBar seekBar)
-    {
+    public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
     @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue)
-    {
+    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
         mValue = defaultValue != null ? (Integer) defaultValue : INITIAL_VALUE;
 
-        if (!restoreValue)
-        {
+        if (!restoreValue) {
             persistInt(mValue);
-        }
-        else
-        {
+        } else {
             mValue = getPersistedInt(mValue);
         }
     }

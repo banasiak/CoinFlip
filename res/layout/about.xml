@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * about.xml
- * Oct 14, 2012 02:28:21 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 23, 2013 4:59 PM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
   * This file is part of CoinFlip.
  * 
@@ -23,39 +23,40 @@
 
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" 
+    android:layout_height="fill_parent"
     android:padding="10dp">
+
     <TableRow
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:paddingBottom="20dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingRight="5dp"
-            android:text="@string/version">
-        </TextView>
+            android:text="@string/version" />
+
         <TextView
             android:id="@+id/about_version_text_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
+            android:layout_height="wrap_content" />
     </TableRow>
+
     <TextView
         android:id="@+id/about_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="20dp"
-        android:text="@string/about_text">
-    </TextView>
-    <FrameLayout
-        android:layout_height="wrap_content">
-	    <Button
-	        android:id="@+id/about_rate_button"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center"
-	        android:layout_width="wrap_content"
-	        android:text="@string/rate_app_text" >
-	    </Button>     
+        android:text="@string/about_text" />
+
+    <FrameLayout android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/about_rate_button"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:text="@string/rate_app_text" />
     </FrameLayout>
 </TableLayout>

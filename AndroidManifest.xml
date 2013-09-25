@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * Apr 4, 2013 11:14:58 PM | variable
+ * Sep 23, 2013 6:51 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,50 +20,44 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<manifest 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.banasiak.coinflip" 
-    android:versionName="5.3.2" android:versionCode="30"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.banasiak.coinflip"
+    android:versionName="5.4"
+    android:versionCode="31"
     android:installLocation="auto">
-    
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-sdk android:targetSdkVersion="17" android:minSdkVersion="3"/>
-    
-    <application 
+    <uses-permission
+        android:name="android.permission.VIBRATE" />
+    <uses-sdk
+        android:targetSdkVersion="18"
+        android:minSdkVersion="3" />
+    <application
         android:allowBackup="true"
-        android:icon="@drawable/icon" 
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:hardwareAccelerated="true">
-        <activity 
-            android:name=".CoinFlip" 
+        <activity
+            android:name=".CoinFlip"
             android:screenOrientation="portrait"
-            android:label="@string/app_name" 
+            android:label="@string/app_name"
             android:theme="@style/ThemeSelector">
             <intent-filter>
-                <action 
-                    android:name="android.intent.action.MAIN" />
-                <category 
-                    android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Settings" 
+            android:name=".Settings"
             android:screenOrientation="portrait"
-            android:label="@string/settings_activity_title">
-        </activity>        
-        <activity 
-            android:name=".SelfTest" 
+            android:label="@string/settings_activity_title" />
+        <activity
+            android:name=".SelfTest"
             android:screenOrientation="portrait"
             android:label="@string/selftest_activity_title"
-            android:theme="@android:style/Theme.Dialog">
-        </activity>
-        <activity 
-            android:name=".About" 
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".About"
             android:screenOrientation="portrait"
             android:label="@string/about_activity_title"
-            android:theme="@android:style/Theme.Dialog">
-        </activity>
+            android:theme="@android:style/Theme.Dialog" />
     </application>
-    
 </manifest> 
