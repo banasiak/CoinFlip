@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * SelfTestAsyncTask.java
- * Sep 25, 2013 11:43 AM | variable
+ * Sep 25, 2013 12:54 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -52,7 +52,7 @@ public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, Self
             // otherwise it's recursive! :)
             taskStatus = params[0];
             taskStatus.setStartTime(System.currentTimeMillis());
-            for (int total = 0; total < SelfTestStatus.NUMBER_OF_FLIPS; total++) {
+            for (int total = 0; total < activity.getMaxNumberFlips(); total++) {
                 // if the self test activity has been closed, might as well terminate the self test
                 if (isCancelled()) {
                     break;
@@ -72,7 +72,7 @@ public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, Self
 
                     try {
                         // this tiny sleep smoothes out the GUI updating, particularly on fast CPUs.
-                        Thread.sleep(10);
+                        Thread.sleep(5);
                     } catch (InterruptedException e) {
                         // don't care
                     }

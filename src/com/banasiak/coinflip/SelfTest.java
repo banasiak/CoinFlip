@@ -34,6 +34,8 @@ public class SelfTest extends Activity {
     // debugging tag
     private static final String TAG = "SelfTest";
 
+    private long maxNumberFlips;
+
     private TextView headsValue;
 
     private TextView headsRatio;
@@ -65,6 +67,8 @@ public class SelfTest extends Activity {
         totalRatio = (TextView) findViewById(R.id.total_ratio_tv);
         elapsedTime = (TextView) findViewById(R.id.elapsed_time_tv);
 
+        maxNumberFlips = Settings.getDiagnosticsPref(this);
+
         backgroundTask = new SelfTestTask(this);
         backgroundTask.execute(new SelfTestStatus());
     }
@@ -81,7 +85,7 @@ public class SelfTest extends Activity {
         //Log.d(TAG, "updateDialog()");
 
         final NumberFormat percentFormat = NumberFormat.getPercentInstance();
-        percentFormat.setMaximumFractionDigits(1);
+        percentFormat.setMaximumFractionDigits(2);
 
         headsValue.setText(Integer.toString(taskStatus.getHeads()));
         headsRatio.setText("("
@@ -93,10 +97,14 @@ public class SelfTest extends Activity {
 
         totalValue.setText(Integer.toString(taskStatus.getTotal()));
         totalRatio.setText("("
-                + percentFormat.format(taskStatus.getCompletionPercentage()) + ")");
+                + percentFormat.format((double) taskStatus.getTotal() / maxNumberFlips)
+                + ")");
 
         elapsedTime.setText(Long.toString(taskStatus.getElapsedTime()));
+    }
 
+    public long getMaxNumberFlips() {
+        return maxNumberFlips;
     }
 
 }

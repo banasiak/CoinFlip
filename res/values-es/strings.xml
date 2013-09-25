@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Sep 25, 2013 11:41 AM | variable
+ * Sep 25, 2013 1:09 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -27,9 +27,11 @@
         A manera conveniente lanzar una moneda, incluso si usted no tiene uno.
         Simplemente toque el signo de interrogación o agitar y ver el resultado. Toque o sacuda
         para hacer girar la moneda otra vez.
-        \n\nVerifique que el algoritmo de la moneda es realmente pseudo-aleatorios mediante la ejecución del
-        Autocomprobación y voltear la moneda 100.000 veces.
-        \n\n\nQuarter-dollar coin images from the United States Mint. 
+        \n\nAnimación, sonido, texto, vibraciones, sacudir, tipo de moneda, estadística y
+        configuración de la prueba de diagnóstico son todos configurable a través del menú de
+        ajustes. Verifique que el algoritmo de la moneda es realmente pseudo-aleatorios mediante la
+        ejecución de la herramienta de diagnóstico y voltear las monedas 100.000 veces (o más!).
+        \n\n\nQuarter-dollar coin images from the United States Mint.
         Presidential $1 Coin images from the United States Mint.
         \n\n\nCopyright © 2013 - Richard Banasiak
         \nDe código abierto contribuciones de Alex Baker
@@ -45,17 +47,22 @@
     <string name="min">DE</string>
     <string name="rate_app_text">Tasa App en Google Play</string>
     <string name="reset">Reajustar</string>
-    <string name="selftest_activity_title">Resultados de Autodiagnóstico</string>
-    <string name="selftest_menu_title">Autodiagnóstico</string>
+    <string name="selftest_activity_title">Resultados de Diagnóstico</string>
+    <string name="selftest_menu_title">Diagnóstico</string>
     <string name="settings_activity_title">Coin Flip Configuración</string>
+    <string name="settings_header_basic_title">Configuración Básica</string>
+    <string name="settings_header_advanced_title">Configuración Avanzado</string>
     <string name="settings_item_animation_summary">Hacer que la animación moneda girando</string>
     <string name="settings_item_animation_title">Animación</string>
     <string name="settings_item_coin_summary">El tipo de moneda que se mostrará</string>
     <string name="settings_item_coin_title">Tipo de Moneda</string>
-    <string name="settings_item_download_summary">Descargar más monedas en el mercado</string>
+    <string name="settings_item_download_summary">Descarga más monedas desde Google Play</string>
     <string name="settings_item_download_title">Conseguir Más Conedas</string>
     <string name="settings_item_force_summary">Fuerza que se requiere</string>
     <string name="settings_item_force_title">Movimiento</string>
+    <string name="settings_item_selftest_title">Prueba de Diagnóstico</string>
+    <string name="settings_item_selftest_summary">iteraciones</string>
+    <string name="settings_item_selftest_dialog">Número de iteraciones</string>
     <string name="settings_item_sound_summary">Reproducir un sonido después de lanzar la moneda</string>
     <string name="settings_item_sound_title">Sonido</string>
     <string name="settings_item_stats_summary">Lleve un registro de CABEZAS frente a COLAS</string>

@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Sep 25, 2013 11:40 AM | variable
+ * Sep 25, 2013 12:33 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -27,9 +27,11 @@
         A convenient way to flip a coin, even if you don\'t have one. 
         Simply tap the question mark or shake and view the result. Tap or shake
         to spin the coin again.
-        \n\nVerify the flip algorithm is truly pseudo-random by running the 
-        Self Test and flipping the coin 100,000 times.
-        \n\n\nQuarter-dollar coin images from the United States Mint. 
+        \n\nAnimation, Sound, Text, Vibration, Shake-to-Flip, Coin Type, Statistics and Diagnostic
+        Test settings are all configurable via the Settings Menu. Verify the flip algorithm is
+        truly pseudo-random by running the diagnostics test and flipping the coin 100,000 times
+        (or more!).
+        \n\n\nQuarter-dollar coin images from the United States Mint.
         Presidential $1 Coin images from the United States Mint.
         \n\n\nCopyright © 2013 - Richard Banasiak
         \nOpen-source contributions from Alex Baker
@@ -45,17 +47,22 @@
     <string name="min">OFF</string>
     <string name="rate_app_text">Rate App on Google Play</string>
     <string name="reset">Reset</string>
-    <string name="selftest_activity_title">Coin Flip Self Test Results</string>
-    <string name="selftest_menu_title">Self Test</string>
+    <string name="selftest_activity_title">Coin Flip Diagnostic Test</string>
+    <string name="selftest_menu_title">Diagnostics</string>
     <string name="settings_activity_title">Coin Flip Settings</string>
+    <string name="settings_header_basic_title">Basic Settings</string>
+    <string name="settings_header_advanced_title">Advanced Settings</string>
     <string name="settings_item_animation_summary">Render spinning coin animation</string>
     <string name="settings_item_animation_title">Animation</string>
     <string name="settings_item_coin_summary">The type of coin to be displayed</string>
     <string name="settings_item_coin_title">Coin Type</string>
-    <string name="settings_item_download_summary">Download more coins from the market</string>
+    <string name="settings_item_download_summary">Download more coins from Google Play</string>
     <string name="settings_item_download_title">Get More Coins</string>
     <string name="settings_item_force_summary">Force required</string>
     <string name="settings_item_force_title">Shake</string>
+    <string name="settings_item_selftest_title">Diagnostic Test</string>
+    <string name="settings_item_selftest_summary">iterations</string>
+    <string name="settings_item_selftest_dialog">Number of Iterations</string>
     <string name="settings_item_sound_summary">Play sound after coin flip</string>
     <string name="settings_item_sound_title">Sound</string>
     <string name="settings_item_stats_summary">Keep track of HEADS vs TAILS</string>

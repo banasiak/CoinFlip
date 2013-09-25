@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * SelfTestStatus.java
- * Sep 25, 2013 11:43 AM | variable
+ * Sep 25, 2013 12:43 AM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -19,15 +19,13 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.banasiak.coinflip;
 
+package com.banasiak.coinflip;
 
 public class SelfTestStatus {
 
     // debugging tag
     private static final String TAG = "SelfTestStatus";
-
-    public static final int NUMBER_OF_FLIPS = 100000;
 
     private int headsCount = 0;
 
@@ -36,7 +34,6 @@ public class SelfTestStatus {
     private long startTime = 0;
 
     private long endTime = 0;
-
 
     public int getHeads() {
         return headsCount;
@@ -84,10 +81,6 @@ public class SelfTestStatus {
 
     public long getElapsedTime() {
         return endTime - startTime;
-    }
-
-    public double getCompletionPercentage() {
-        return (double) getTotal() / (double) NUMBER_OF_FLIPS;
     }
 
 }

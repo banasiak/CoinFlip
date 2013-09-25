@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * selftest.xml
- * Sep 25, 2013 11:36 AM | variable
+ * Sep 25, 2013 1:13 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -39,7 +39,7 @@
                 android:paddingLeft="0dp"
                 android:paddingRight="10dp"
                 android:text="@string/heads"
-                android:textColor="#ff00ff00"
+                android:textColor="@color/lime"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp"
                 android:paddingRight="10dp"
-                android:textColor="#ff00ff00"
+                android:textColor="@color/lime"
                 android:textSize="18sp" />
 
             <TextView
@@ -58,7 +58,7 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp"
                 android:paddingRight="0dp"
-                android:textColor="#ff00ff00"
+                android:textColor="@color/lime"
                 android:textSize="18sp" />
         </TableRow>
 
@@ -70,7 +70,7 @@
                 android:paddingLeft="0dp"
                 android:paddingRight="10dp"
                 android:text="@string/tails"
-                android:textColor="#ffff0000"
+                android:textColor="@color/red"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -80,7 +80,7 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp"
                 android:paddingRight="10dp"
-                android:textColor="#ffff0000"
+                android:textColor="@color/red"
                 android:textSize="18sp" />
 
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="0dp"
                 android:paddingRight="0dp"
-                android:textColor="#ffff0000"
+                android:textColor="@color/red"
                 android:textSize="18sp" />
         </TableRow>
 

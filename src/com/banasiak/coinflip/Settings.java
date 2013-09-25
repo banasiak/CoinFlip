@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Settings.java
- * Sep 25, 2013 11:43 AM | variable
+ * Sep 25, 2013 12:55 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -39,7 +39,8 @@ import android.util.Log;
 
 import java.util.List;
 
-public class Settings extends PreferenceActivity {
+public class Settings extends PreferenceActivity implements
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     // debugging tag
     private static final String TAG = "Settings";
@@ -67,6 +68,10 @@ public class Settings extends PreferenceActivity {
     private static final String KEY_STATS = "stats";
 
     private static final boolean KEY_STATS_DEF = false;
+
+    private static final String KEY_DIAGNOSTICS = "diagnostics";
+
+    private static final String KEY_DIAGNOSTICS_DEF = "100000";
 
     private static final String KEY_TEXT = "text";
 
@@ -100,6 +105,12 @@ public class Settings extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
 
+        // set the self test summary with the configured value
+        setDiagnosticsPrefSummary(findPreference(KEY_DIAGNOSTICS));
+
+        // add shared preferences change listener
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+
         // create a link to the market to search for additional coin packages
         final Preference downloadPref = getPreferenceManager().findPreference("download");
         downloadPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -113,6 +124,21 @@ public class Settings extends PreferenceActivity {
 
         // load any external coin packages installed on the system
         loadExtPkgCoins();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        final Preference pref = findPreference(key);
+        if (key.equals(KEY_DIAGNOSTICS)) {
+            setDiagnosticsPrefSummary(pref);
+        }
+    }
+
+    private void setDiagnosticsPrefSummary(Preference pref) {
+        Log.d(TAG, "setDiagnosticsPrefSummary()");
+        long iterations = getDiagnosticsPref(this);
+        pref.setSummary(String.valueOf(iterations) + " " + getResources()
+                .getText(R.string.settings_item_selftest_summary));
     }
 
     // Load the "coins" available in the add-on package.
@@ -221,6 +247,22 @@ public class Settings extends PreferenceActivity {
         Log.d(TAG, "getStatsPref()");
         final Boolean result = PreferenceManager.getDefaultSharedPreferences(
                 context).getBoolean(KEY_STATS, KEY_STATS_DEF);
+        Log.d(TAG, "result=" + result);
+        return result;
+    }
+
+    // get the value of the diagnostics preference
+    public static long getDiagnosticsPref(final Context context) {
+        Log.d(TAG, "getDiagnosticsPref()");
+        final String diagPrefString = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(KEY_DIAGNOSTICS, KEY_DIAGNOSTICS_DEF);
+        long result;
+        try {
+            result = Long.parseLong(diagPrefString);
+        } catch (NumberFormatException e) {
+            result = Long.parseLong(KEY_DIAGNOSTICS_DEF);
+        }
+
         Log.d(TAG, "result=" + result);
         return result;
     }

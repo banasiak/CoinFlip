@@ -29,7 +29,7 @@ public class Coin {
     // Debugging tag.
     private static final String TAG = "Coin";
 
-    Random generator = new Random();
+    final Random generator = new Random();
 
     public boolean flip() {
         //Log.d(TAG, "flip()");

@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * main.xml
- * Sep 25, 2013 11:35 AM | variable
+ * Sep 25, 2013 1:14 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="8dp"
             android:text="@string/heads"
-            android:textColor="#ff00ff00"
+            android:textColor="@color/lime"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="8dp"
             android:text="@string/tails"
-            android:textColor="#ffff0000"
+            android:textColor="@color/red"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView

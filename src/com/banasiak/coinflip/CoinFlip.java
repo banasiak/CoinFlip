@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Sep 25, 2013 11:43 AM | variable
+ * Sep 25, 2013 1:13 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -30,7 +30,6 @@ import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -874,16 +873,16 @@ public class CoinFlip extends Activity {
                 case HEADS_HEADS:
                 case TAILS_HEADS:
                     resultText.setText(R.string.heads);
-                    resultText.setTextColor(Color.parseColor("green"));
+                    resultText.setTextColor(getResources().getColor(R.color.lime));
                     break;
                 case HEADS_TAILS:
                 case TAILS_TAILS:
                     resultText.setText(R.string.tails);
-                    resultText.setTextColor(Color.parseColor("red"));
+                    resultText.setTextColor(getResources().getColor(R.color.red));
                     break;
                 default:
                     resultText.setText(R.string.unknown);
-                    resultText.setTextColor(Color.parseColor("yellow"));
+                    resultText.setTextColor(getResources().getColor(R.color.yellow));
                     break;
             }
         } else {
@@ -897,9 +896,9 @@ public class CoinFlip extends Activity {
     private void updateStatsText() {
         Log.d(TAG, "updateStatsText()");
         if (Settings.getStatsPref(this)) {
-            statsLayout.setVisibility(0);
+            statsLayout.setVisibility(View.VISIBLE);
         } else {
-            statsLayout.setVisibility(255);
+            statsLayout.setVisibility(View.INVISIBLE);
         }
         headsStatText.setText(Integer.toString(headsCounter));
         tailsStatText.setText(Integer.toString(tailsCounter));
