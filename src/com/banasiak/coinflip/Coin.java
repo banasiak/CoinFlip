@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * Coin.java
- * Oct 15, 2011 2:11:54 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 25, 2013 11:42 AM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -24,15 +24,14 @@ package com.banasiak.coinflip;
 
 import java.util.Random;
 
-public class Coin
-{
+public class Coin {
+
     // Debugging tag.
     private static final String TAG = "Coin";
 
     Random generator = new Random();
 
-    public boolean flip()
-    {
+    public boolean flip() {
         //Log.d(TAG, "flip()");
         return generator.nextBoolean();
     }

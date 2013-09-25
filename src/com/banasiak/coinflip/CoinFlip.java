@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Sep 24, 2012 10:12:16 AM | variable
- * Copyright (c) 2012 Richard Banasiak
+ * Sep 25, 2013 11:43 AM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -21,8 +21,6 @@
  */
 
 package com.banasiak.coinflip;
-
-import java.util.EnumMap;
 
 import android.app.Activity;
 import android.content.Context;
@@ -53,8 +51,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CoinFlip extends Activity
-{
+import java.util.EnumMap;
+
+public class CoinFlip extends Activity {
+
     // debugging tag
     private static final String TAG = "CoinFlip";
 
@@ -65,8 +65,7 @@ public class CoinFlip extends Activity
     private static final int SCHEMA_VERSION = 6;
 
     // enumerator of all possible transition states
-    private enum ResultState
-    {
+    private enum ResultState {
         HEADS_HEADS,
         HEADS_TAILS,
         TAILS_HEADS,
@@ -75,27 +74,47 @@ public class CoinFlip extends Activity
     }
 
     EnumMap<ResultState, AnimationDrawable> coinAnimationsMap;
+
     EnumMap<ResultState, Drawable> coinImagesMap;
 
     private final Coin theCoin = new Coin();
+
     private ShakeListener shaker;
+
     private Boolean currentResult = true;
+
     private Boolean previousResult = true;
+
     private ImageView coinImage;
+
     private TableLayout tableLayout;
+
     private CustomAnimationDrawable coinAnimationCustom;
+
     private TextView resultText;
+
     private TextView instructionsText;
+
     private TextView headsStatText;
+
     private TextView tailsStatText;
+
     private Button statsResetButton;
+
     private TableRow statsLayout;
+
     private SoundPool soundPool;
+
     private int soundCoin;
+
     private int soundOneUp;
+
     private int flipCounter = 0;
+
     private int headsCounter = 0;
+
     private int tailsCounter = 0;
+
     private int shakeForce = 1;
 
     private final Util util = new Util(this);
@@ -104,8 +123,7 @@ public class CoinFlip extends Activity
      * Called when the user presses the menu button.
      */
     @Override
-    public boolean onCreateOptionsMenu(final Menu menu)
-    {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         Log.d(TAG, "onCreateOptionsMenu()");
         super.onCreateOptionsMenu(menu);
         final MenuInflater inflater = getMenuInflater();
@@ -117,14 +135,12 @@ public class CoinFlip extends Activity
      * Called when the user selects an item from the options menu.
      */
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item)
-    {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         Log.d(TAG, "onOptionsItemSelected()");
 
         Intent intent;
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.about_menu:
                 intent = new Intent(this, About.class);
                 startActivity(intent);
@@ -145,8 +161,7 @@ public class CoinFlip extends Activity
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         Log.d(TAG, "onResume()");
 
         shakeForce = Settings.getShakePref(this);
@@ -154,12 +169,9 @@ public class CoinFlip extends Activity
         resetCoin();
         resetInstructions(shakeForce);
 
-        if (shakeForce == 0)
-        {
+        if (shakeForce == 0) {
             shaker.pause();
-        }
-        else
-        {
+        } else {
             shaker.resume(shakeForce);
         }
 
@@ -170,8 +182,7 @@ public class CoinFlip extends Activity
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         Log.d(TAG, "onPause()");
         shaker.pause();
         super.onPause();
@@ -186,8 +197,7 @@ public class CoinFlip extends Activity
      * Called when the activity is first created.
      */
     @Override
-    public void onCreate(final Bundle savedInstanceState)
-    {
+    public void onCreate(final Bundle savedInstanceState) {
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
@@ -195,8 +205,7 @@ public class CoinFlip extends Activity
         // reset settings if they are from an earlier version.
         // if any setting keys have changed and we don't reset, the app
         // will force close and nasty e-mails soon follow
-        if (Settings.getSchemaVersion(this) != SCHEMA_VERSION)
-        {
+        if (Settings.getSchemaVersion(this) != SCHEMA_VERSION) {
             Settings.resetAllPrefs(this);
             Settings.setSchemaVersion(this, SCHEMA_VERSION);
         }
@@ -221,34 +230,27 @@ public class CoinFlip extends Activity
         // initialize the shake listener
         shaker = new ShakeListener(this);
         shaker.pause();
-        shaker.setOnShakeListener(new ShakeListener.OnShakeListener()
-        {
-            public void onShake()
-            {
+        shaker.setOnShakeListener(new ShakeListener.OnShakeListener() {
+            public void onShake() {
                 flipCoin();
             }
         });
 
         // initialize the onclick listener
-        tableLayout.setOnClickListener(new OnClickListener()
-        {
-            public void onClick(final View v)
-            {
+        tableLayout.setOnClickListener(new OnClickListener() {
+            public void onClick(final View v) {
                 flipCoin();
             }
         });
-        
-        statsResetButton.setOnClickListener(new OnClickListener()
-        {
-        	public void onClick(final View v)
-        	{
-        		resetStatistics();
-        	}
+
+        statsResetButton.setOnClickListener(new OnClickListener() {
+            public void onClick(final View v) {
+                resetStatistics();
+            }
         });
     }
 
-    private void flipCoin()
-    {
+    private void flipCoin() {
         Log.d(TAG, "flipCoin()");
 
         flipCounter++;
@@ -263,20 +265,16 @@ public class CoinFlip extends Activity
         shaker.pause();
 
         // vibrate if enabled
-        if (Settings.getVibratePref(this))
-        {
+        if (Settings.getVibratePref(this)) {
             vibrator.vibrate(100);
         }
 
         // flip the coin and update the state with the result
         boolean flipResult = theCoin.flip();
-        if (flipResult)
-        {
-        	headsCounter++;
-        }
-        else
-        {
-        	tailsCounter++;
+        if (flipResult) {
+            headsCounter++;
+        } else {
+            tailsCounter++;
         }
         Log.d(TAG, "headsCounter=" + headsCounter + " | tailsCounter=" + tailsCounter);
         resultState = updateState(flipResult);
@@ -286,8 +284,7 @@ public class CoinFlip extends Activity
 
     }
 
-    private void resetCoin()
-    {
+    private void resetCoin() {
         Log.d(TAG, "resetCoin()");
 
         // hide the animation and draw the reset image
@@ -299,22 +296,17 @@ public class CoinFlip extends Activity
         coinImagesMap.clear();
     }
 
-    private void resetInstructions(final int force)
-    {
+    private void resetInstructions(final int force) {
         Log.d(TAG, "resetInstructions()");
 
-        if (force == 0)
-        {
+        if (force == 0) {
             instructionsText.setText(R.string.instructions_tap_tv);
-        }
-        else
-        {
+        } else {
             instructionsText.setText(R.string.instructions_tap_shake_tv);
         }
     }
 
-    private ResultState updateState(final boolean flipResult)
-    {
+    private ResultState updateState(final boolean flipResult) {
         // Analyze the current coin state and the new coin state and determine
         // the proper transition between the two.
         // true = HEADS | false = TAILS
@@ -325,20 +317,16 @@ public class CoinFlip extends Activity
         currentResult = flipResult;
 
         // this is easier to read than the old code
-        if (previousResult == true && currentResult == true)
-        {
+        if (previousResult == true && currentResult == true) {
             resultState = ResultState.HEADS_HEADS;
         }
-        if (previousResult == true && currentResult == false)
-        {
+        if (previousResult == true && currentResult == false) {
             resultState = ResultState.HEADS_TAILS;
         }
-        if (previousResult == false && currentResult == true)
-        {
+        if (previousResult == false && currentResult == true) {
             resultState = ResultState.TAILS_HEADS;
         }
-        if (previousResult == false && currentResult == false)
-        {
+        if (previousResult == false && currentResult == false) {
             resultState = ResultState.TAILS_TAILS;
         }
 
@@ -349,27 +337,29 @@ public class CoinFlip extends Activity
     }
 
     private BitmapDrawable resizeBitmapDrawable(final BitmapDrawable image,
-        final int width, final int height)
-    {
+            final int width, final int height) {
         Log.d(TAG, "resizeBitmapDrawable()");
-        
+
         // TODO resize the bitmaps proportional to 80% of the screen size
 
         // load the transparent background and convert to a bitmap
-        BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(R.drawable.background);
+        BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(
+                R.drawable.background);
         Bitmap background_bm = background.getBitmap();
 
         // convert the passed in image to a bitmap and resize according to parameters
         Bitmap image_bm = Bitmap.createScaledBitmap(image.getBitmap(), width, height, true);
 
         // create a new canvas to combine the two images on
-        Bitmap comboImage_bm = Bitmap.createBitmap(background_bm.getWidth(), background_bm.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap comboImage_bm = Bitmap.createBitmap(background_bm.getWidth(),
+                background_bm.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas comboImage = new Canvas(comboImage_bm);
 
         // add the background as well as the new image to the horizontal center
         // of the image
         comboImage.drawBitmap(background_bm, 0f, 0f, null);
-        comboImage.drawBitmap(image_bm, (background_bm.getWidth() - image_bm.getWidth()) / 2, 0f, null);
+        comboImage.drawBitmap(image_bm, (background_bm.getWidth() - image_bm.getWidth()) / 2, 0f,
+                null);
 
         // convert the new combo image bitmap to a BitmapDrawable
         final BitmapDrawable comboImage_bmd = new BitmapDrawable(comboImage_bm);
@@ -387,24 +377,22 @@ public class CoinFlip extends Activity
     }
 
     private AnimationDrawable generateAnimatedDrawable(final BitmapDrawable imageA_8,
-											           final BitmapDrawable imageA_6,
-											           final BitmapDrawable imageA_4,
-											           final BitmapDrawable imageA_2,
-											           final BitmapDrawable imageB_8,
-											           final BitmapDrawable imageB_6,
-											           final BitmapDrawable imageB_4,
-											           final BitmapDrawable imageB_2,
-											           final BitmapDrawable edge,
-											           final ResultState resultState)
-    {
+            final BitmapDrawable imageA_6,
+            final BitmapDrawable imageA_4,
+            final BitmapDrawable imageA_2,
+            final BitmapDrawable imageB_8,
+            final BitmapDrawable imageB_6,
+            final BitmapDrawable imageB_4,
+            final BitmapDrawable imageB_2,
+            final BitmapDrawable edge,
+            final ResultState resultState) {
         Log.d(TAG, "generateAnimatedDrawable()");
 
         final int duration = 20;
         final AnimationDrawable animation = new AnimationDrawable();
 
         // create the appropriate animation depending on the result state
-        switch (resultState)
-        {
+        switch (resultState) {
             case HEADS_HEADS:
                 // Begin Flip 1
                 animation.addFrame(imageA_8, duration);
@@ -617,8 +605,8 @@ public class CoinFlip extends Activity
     }
 
 
-    private void generateAnimations(final Drawable imageA, final Drawable imageB, final Drawable edge)
-    {
+    private void generateAnimations(final Drawable imageA, final Drawable imageB,
+            final Drawable edge) {
         Log.d(TAG, "generateAnimations()");
 
         ResultState resultState;
@@ -631,15 +619,21 @@ public class CoinFlip extends Activity
 
         // create the individual animation frames for the heads side
         final BitmapDrawable imageA_8 = (BitmapDrawable) imageA;
-        final BitmapDrawable imageA_6 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.75), heightA);
-        final BitmapDrawable imageA_4 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.50), heightA);
-        final BitmapDrawable imageA_2 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.25), heightA);
+        final BitmapDrawable imageA_6 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.75),
+                heightA);
+        final BitmapDrawable imageA_4 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.50),
+                heightA);
+        final BitmapDrawable imageA_2 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.25),
+                heightA);
 
         // create the individual animation frames for the tails side
         final BitmapDrawable imageB_8 = (BitmapDrawable) imageB;
-        final BitmapDrawable imageB_6 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.75), heightB);
-        final BitmapDrawable imageB_4 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.50), heightB);
-        final BitmapDrawable imageB_2 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.25), heightB);
+        final BitmapDrawable imageB_6 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.75),
+                heightB);
+        final BitmapDrawable imageB_4 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.50),
+                heightB);
+        final BitmapDrawable imageB_2 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.25),
+                heightB);
 
         // the temporary bitmaps have already been cleared, this might be a good place for a garbage collection
         System.gc();
@@ -647,64 +641,56 @@ public class CoinFlip extends Activity
         // create the appropriate animation depending on the result state
         resultState = ResultState.HEADS_HEADS;
         coinAnimation = generateAnimatedDrawable(imageA_8, imageA_6, imageA_4, imageA_2,
-            imageB_8, imageB_6, imageB_4, imageB_2,
-            (BitmapDrawable) edge, resultState);
+                imageB_8, imageB_6, imageB_4, imageB_2,
+                (BitmapDrawable) edge, resultState);
         coinAnimationsMap.put(resultState, coinAnimation);
 
         resultState = ResultState.HEADS_TAILS;
         coinAnimation = generateAnimatedDrawable(imageA_8, imageA_6, imageA_4, imageA_2,
-            imageB_8, imageB_6, imageB_4, imageB_2,
-            (BitmapDrawable) edge, resultState);
+                imageB_8, imageB_6, imageB_4, imageB_2,
+                (BitmapDrawable) edge, resultState);
         coinAnimationsMap.put(resultState, coinAnimation);
 
         resultState = ResultState.TAILS_HEADS;
         coinAnimation = generateAnimatedDrawable(imageA_8, imageA_6, imageA_4, imageA_2,
-            imageB_8, imageB_6, imageB_4, imageB_2,
-            (BitmapDrawable) edge, resultState);
+                imageB_8, imageB_6, imageB_4, imageB_2,
+                (BitmapDrawable) edge, resultState);
         coinAnimationsMap.put(resultState, coinAnimation);
 
         resultState = ResultState.TAILS_TAILS;
         coinAnimation = generateAnimatedDrawable(imageA_8, imageA_6, imageA_4, imageA_2,
-            imageB_8, imageB_6, imageB_4, imageB_2,
-            (BitmapDrawable) edge, resultState);
+                imageB_8, imageB_6, imageB_4, imageB_2,
+                (BitmapDrawable) edge, resultState);
         coinAnimationsMap.put(resultState, coinAnimation);
 
     }
 
     // check the coin preference and determine how to load its resources
-    private void loadResources()
-    {
+    private void loadResources() {
         Log.d(TAG, "loadResources()");
 
         // determine coin type to draw
         String coinPrefix = Settings.getCoinPref(this);
 
-        if (coinPrefix.equals("random"))
-        {
+        if (coinPrefix.equals("random")) {
             Log.d(TAG, "Random coin selected");
             coinPrefix = util.getRandomCoin();
         }
 
-        if (coinPrefix.equals("default"))
-        {
+        if (coinPrefix.equals("default")) {
             Log.d(TAG, "Default coin selected");
             loadInternalResources();
-        }
-        else if (coinPrefix.equals("custom"))
-        {
+        } else if (coinPrefix.equals("custom")) {
             Log.d(TAG, "Custom coin selected");
             loadCustomResources();
-        }
-        else
-        {
+        } else {
             Log.d(TAG, "Add-on coin selected");
             loadExternalResources(coinPrefix);
         }
     }
 
     // load resources internal to the CoinFlip package
-    private void loadInternalResources()
-    {
+    private void loadInternalResources() {
         Log.d(TAG, "loadInternalResources()");
 
         // load the images
@@ -713,8 +699,7 @@ public class CoinFlip extends Activity
         final Drawable edge = getResources().getDrawable(R.drawable.edge);
 
         // only do all the CPU-intensive animation rendering if animations are enabled
-        if (Settings.getAnimationPref(this))
-        {
+        if (Settings.getAnimationPref(this)) {
             // render the animation for each result state and store it in the
             // animations map
             generateAnimations(heads, tails, edge);
@@ -731,17 +716,14 @@ public class CoinFlip extends Activity
     }
 
     // load resources from the external CoinFlipExt package
-    private void loadExternalResources(final String coinPrefix)
-    {
+    private void loadExternalResources(final String coinPrefix) {
         Log.d(TAG, "loadExternalResources()");
 
-        try
-        {
+        try {
             // figure out which add-on package contains the resources we need for this coin prefix
             final String packageName = util.findExternalResourcePackage(coinPrefix);
 
-            if (packageName == null)
-            {
+            if (packageName == null) {
                 // the coin prefix doesn't exist in any external package
                 Toast.makeText(this, R.string.toast_coin_error, Toast.LENGTH_SHORT).show();
                 Settings.resetCoinPref(this);
@@ -749,12 +731,16 @@ public class CoinFlip extends Activity
                 return;
             }
 
-            final Resources extPkgResources = getPackageManager().getResourcesForApplication(packageName);
+            final Resources extPkgResources = getPackageManager().getResourcesForApplication(
+                    packageName);
 
             // load the image IDs from the add-in package
-            final int headsId = util.getExternalResourceHeads(packageName, extPkgResources, coinPrefix);
-            final int tailsId = util.getExternalResourceTails(packageName, extPkgResources, coinPrefix);
-            final int edgeId = util.getExternalResourceEdge(packageName, extPkgResources, coinPrefix);
+            final int headsId = util.getExternalResourceHeads(packageName, extPkgResources,
+                    coinPrefix);
+            final int tailsId = util.getExternalResourceTails(packageName, extPkgResources,
+                    coinPrefix);
+            final int edgeId = util.getExternalResourceEdge(packageName, extPkgResources,
+                    coinPrefix);
 
             // load the images from the add-in package via their ID
             final Drawable heads = extPkgResources.getDrawable(headsId);
@@ -762,8 +748,7 @@ public class CoinFlip extends Activity
             final Drawable edge = extPkgResources.getDrawable(edgeId);
 
             // only do all the CPU-intensive animation rendering if animations are enabled
-            if (Settings.getAnimationPref(this))
-            {
+            if (Settings.getAnimationPref(this)) {
                 // render the animation for each result state and store it in the
                 // animations map
                 generateAnimations(heads, tails, edge);
@@ -777,29 +762,23 @@ public class CoinFlip extends Activity
             coinImagesMap.put(ResultState.TAILS_HEADS, extPkgResources.getDrawable(headsId));
             coinImagesMap.put(ResultState.TAILS_TAILS, extPkgResources.getDrawable(tailsId));
 
-        }
-        catch (final NameNotFoundException e)
-        {
+        } catch (final NameNotFoundException e) {
             Log.e(TAG, "NameNotFoundException");
             e.printStackTrace();
-        }
-        catch (final NotFoundException e)
-        {
+        } catch (final NotFoundException e) {
             Log.e(TAG, "NotFoundException " + e.getMessage());
         }
 
     }
 
-    private void loadCustomResources()
-    {
+    private void loadCustomResources() {
         // TODO one day we'll be able to load custom images from the SD card...
         // ... but not today.
         Settings.resetCoinPref(this);
         loadResources();
     }
 
-    private void renderResult(final ResultState resultState)
-    {
+    private void renderResult(final ResultState resultState) {
         Log.d(TAG, "renderResult()");
 
         AnimationDrawable coinAnimation;
@@ -811,19 +790,15 @@ public class CoinFlip extends Activity
         resultText.setText("");
 
         // display the result
-        if (Settings.getAnimationPref(this))
-        {
+        if (Settings.getAnimationPref(this)) {
             // load the appropriate coin animation based on the state
             coinAnimation = coinAnimationsMap.get(resultState);
-            coinAnimationCustom = new CustomAnimationDrawable(coinAnimation)
-            {
+            coinAnimationCustom = new CustomAnimationDrawable(coinAnimation) {
                 @Override
-                void onAnimationFinish()
-                {
+                void onAnimationFinish() {
                     playCoinSound();
                     updateResultText(resultState);
-                    if (shakeForce != 0)
-                    {
+                    if (shakeForce != 0) {
                         shaker.resume(shakeForce);
                     }
                 }
@@ -837,9 +812,7 @@ public class CoinFlip extends Activity
             // handled by animation callback
             // playCoinSound();
             // updateResultText(resultState, resultText);
-        }
-        else
-        {
+        } else {
             // load the appropriate coin image based on the state
             coinImageDrawable = coinImagesMap.get(resultState);
             coinImage.setImageDrawable(coinImageDrawable);
@@ -849,15 +822,13 @@ public class CoinFlip extends Activity
             displayCoinAnimation(false);
             playCoinSound();
             updateResultText(resultState);
-            if (shakeForce != 0)
-            {
+            if (shakeForce != 0) {
                 shaker.resume(shakeForce);
             }
         }
     }
 
-    private void initSounds()
-    {
+    private void initSounds() {
         // MediaPlayer was causing ANR issues on some devices.
         // SoundPool should be more efficient.
 
@@ -868,11 +839,9 @@ public class CoinFlip extends Activity
 
     }
 
-    private void playSound(final int sound)
-    {
+    private void playSound(final int sound) {
         Log.d(TAG, "playSound()");
-        if (Settings.getSoundPref(this))
-        {
+        if (Settings.getSoundPref(this)) {
             final AudioManager mgr = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
             final float streamVolumeCurrent = mgr.getStreamVolume(AudioManager.STREAM_MUSIC);
             final float streamVolumeMax = mgr.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -882,18 +851,13 @@ public class CoinFlip extends Activity
         }
     }
 
-    private void playCoinSound()
-    {
+    private void playCoinSound() {
         Log.d(TAG, "playCoinSound()");
 
-        synchronized (this)
-        {
-            if (flipCounter < 100)
-            {
+        synchronized (this) {
+            if (flipCounter < 100) {
                 playSound(soundCoin);
-            }
-            else
-            {
+            } else {
                 // Happy Easter! (For Ryan)
                 // Toast.makeText(this, "1-UP", Toast.LENGTH_SHORT).show();
                 playSound(soundOneUp);
@@ -902,14 +866,11 @@ public class CoinFlip extends Activity
         }
     }
 
-    private void updateResultText(final ResultState resultState)
-    {
+    private void updateResultText(final ResultState resultState) {
         Log.d(TAG, "updateResultText()");
 
-        if (Settings.getTextPref(this))
-        {
-            switch (resultState)
-            {
+        if (Settings.getTextPref(this)) {
+            switch (resultState) {
                 case HEADS_HEADS:
                 case TAILS_HEADS:
                     resultText.setText(R.string.heads);
@@ -925,79 +886,61 @@ public class CoinFlip extends Activity
                     resultText.setTextColor(Color.parseColor("yellow"));
                     break;
             }
-        }
-        else
-        {
+        } else {
             resultText.setText("");
         }
-        
+
         updateStatsText();
 
     }
 
-    private void updateStatsText()
-    {
-    	Log.d(TAG, "updateStatsText()");
-    	if (Settings.getStatsPref(this))
-    	{
-    		statsLayout.setVisibility(0);
-    	}
-    	else
-    	{
-    		statsLayout.setVisibility(255);
-    	}
-    	headsStatText.setText(Integer.toString(headsCounter));
-    	tailsStatText.setText(Integer.toString(tailsCounter));    	
+    private void updateStatsText() {
+        Log.d(TAG, "updateStatsText()");
+        if (Settings.getStatsPref(this)) {
+            statsLayout.setVisibility(0);
+        } else {
+            statsLayout.setVisibility(255);
+        }
+        headsStatText.setText(Integer.toString(headsCounter));
+        tailsStatText.setText(Integer.toString(tailsCounter));
     }
-    
-    private void resetStatistics()
-    {
-    	Log.d(TAG, "resetStatistics()");
-    	headsCounter = 0;
-    	tailsCounter = 0;
-    	updateStatsText();
-    }    
-    
-    private void displayCoinAnimation(final boolean flag)
-    {
+
+    private void resetStatistics() {
+        Log.d(TAG, "resetStatistics()");
+        headsCounter = 0;
+        tailsCounter = 0;
+        updateStatsText();
+    }
+
+    private void displayCoinAnimation(final boolean flag) {
         Log.d(TAG, "displayCoinAnimation()");
 
         // safety first!
-        if (coinAnimationCustom != null)
-        {
-            if (flag)
-            {
+        if (coinAnimationCustom != null) {
+            if (flag) {
                 coinAnimationCustom.setAlpha(255);
-            }
-            else
-            {
+            } else {
                 coinAnimationCustom.setAlpha(0);
             }
         }
     }
 
-    private void displayCoinImage(final boolean flag)
-    {
+    private void displayCoinImage(final boolean flag) {
         Log.d(TAG, "displayCoinImage()");
 
         // safety first!
-        if (coinImage != null)
-        {
-            if (flag)
-            {
+        if (coinImage != null) {
+            if (flag) {
                 // get rid of the animation background
                 coinImage.setBackgroundDrawable(null);
                 coinImage.setAlpha(255);
-            }
-            else
-            {
+            } else {
                 coinImage.setAlpha(0);
             }
         }
     }
 
-    private void initViews()
-    {
+    private void initViews() {
         Log.d(TAG, "initViews()");
 
         coinImage = (ImageView) findViewById(R.id.coin_image_view);

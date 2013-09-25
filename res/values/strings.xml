@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Apr 4, 2013 11:14:58 PM | variable
+ * Sep 25, 2013 11:40 AM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,9 +20,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<resources
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
     <string name="about_activity_title">About Coin Flip</string>
     <string name="about_menu_title">About</string>
     <string name="about_text">
@@ -35,12 +33,12 @@
         Presidential $1 Coin images from the United States Mint.
         \n\n\nCopyright © 2013 - Richard Banasiak
         \nOpen-source contributions from Alex Baker
-    </string>    
+    </string>
     <string name="app_name">Coin Flip</string>
     <string name="coin_animation">Coin Animation</string>
     <string name="exit">Exit</string>
     <string name="instructions_tap_shake_tv">Tap/Shake to Flip Coin</string>
-    <string name="instructions_tap_tv">Tap to Flip Coin</string>    
+    <string name="instructions_tap_tv">Tap to Flip Coin</string>
     <string name="heads">HEADS</string>
     <string name="max">MAX</string>
     <string name="milliseconds">ms</string>
@@ -61,7 +59,7 @@
     <string name="settings_item_sound_summary">Play sound after coin flip</string>
     <string name="settings_item_sound_title">Sound</string>
     <string name="settings_item_stats_summary">Keep track of HEADS vs TAILS</string>
-    <string name="settings_item_stats_title">Statistics</string>    
+    <string name="settings_item_stats_title">Statistics</string>
     <string name="settings_item_text_summary">Display HEADS/TAILS result text</string>
     <string name="settings_item_text_title">Text</string>
     <string name="settings_item_vibrate_summary">Vibrate on coin flip</string>

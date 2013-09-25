@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * SelfTest.java
- * May 16, 2011 11:14:07 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 25, 2013 11:43 AM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -22,31 +22,36 @@
 
 package com.banasiak.coinflip;
 
-import java.text.NumberFormat;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class SelfTest extends Activity
-{
+import java.text.NumberFormat;
+
+public class SelfTest extends Activity {
+
     // debugging tag
     private static final String TAG = "SelfTest";
 
     private TextView headsValue;
+
     private TextView headsRatio;
+
     private TextView tailsValue;
+
     private TextView tailsRatio;
+
     private TextView totalValue;
+
     private TextView totalRatio;
+
     private TextView elapsedTime;
 
     private SelfTestTask backgroundTask;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
@@ -65,16 +70,14 @@ public class SelfTest extends Activity
     }
 
     @Override
-    protected void onStop()
-    {
+    protected void onStop() {
         Log.d(TAG, "onStop()");
         super.onStop();
         backgroundTask.cancel(true);
     }
 
     // this method is called when the async task reports it has new information
-    public void updateDialog(SelfTestStatus taskStatus)
-    {
+    public void updateDialog(SelfTestStatus taskStatus) {
         //Log.d(TAG, "updateDialog()");
 
         final NumberFormat percentFormat = NumberFormat.getPercentInstance();
@@ -82,15 +85,15 @@ public class SelfTest extends Activity
 
         headsValue.setText(Integer.toString(taskStatus.getHeads()));
         headsRatio.setText("("
-            + percentFormat.format(taskStatus.getHeadsPercentage()) + ")");
+                + percentFormat.format(taskStatus.getHeadsPercentage()) + ")");
 
         tailsValue.setText(Integer.toString(taskStatus.getTails()));
         tailsRatio.setText("("
-            + percentFormat.format(taskStatus.getTailsPercentage()) + ")");
+                + percentFormat.format(taskStatus.getTailsPercentage()) + ")");
 
         totalValue.setText(Integer.toString(taskStatus.getTotal()));
         totalRatio.setText("("
-            + percentFormat.format(taskStatus.getCompletionPercentage()) + ")");
+                + percentFormat.format(taskStatus.getCompletionPercentage()) + ")");
 
         elapsedTime.setText(Long.toString(taskStatus.getElapsedTime()));
 

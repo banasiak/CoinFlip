@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * SelfTestAsyncTask.java
- * Oct 15, 2011 6:24:25 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 25, 2013 11:43 AM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -25,68 +25,55 @@ package com.banasiak.coinflip;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, SelfTestStatus>
-{
+public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, SelfTestStatus> {
+
     // debugging tag
     private static final String TAG = "SelfTestTask";
 
     private final SelfTest activity;
+
     private final Coin theCoin;
 
-    public SelfTestTask(final SelfTest iActivity)
-    {
+    public SelfTestTask(final SelfTest iActivity) {
         Log.d(TAG, "SelfTestTask()");
         activity = iActivity;
         theCoin = new Coin();
     }
 
     @Override
-    protected SelfTestStatus doInBackground(SelfTestStatus... params)
-    {
+    protected SelfTestStatus doInBackground(SelfTestStatus... params) {
         //Log.d(TAG, "doInBackground()");
 
         SelfTestStatus taskStatus;
-        if(params.length < 1)
-        {
+        if (params.length < 1) {
             // must be the first time we've been called
             taskStatus = new SelfTestStatus();
-        }
-        else
-        {
+        } else {
             // otherwise it's recursive! :)
             taskStatus = params[0];
             taskStatus.setStartTime(System.currentTimeMillis());
-            for (int total = 0; total < SelfTestStatus.NUMBER_OF_FLIPS; total++)
-            {
+            for (int total = 0; total < SelfTestStatus.NUMBER_OF_FLIPS; total++) {
                 // if the self test activity has been closed, might as well terminate the self test
-                if(isCancelled())
-                {
+                if (isCancelled()) {
                     break;
                 }
 
                 // flip the coin and update the model
-                if (theCoin.flip())
-                {
+                if (theCoin.flip()) {
                     taskStatus.incrementHeads();
-                }
-                else
-                {
+                } else {
                     taskStatus.incrementTails();
                 }
                 taskStatus.setEndTime(System.currentTimeMillis());
 
-                if(total % 100 == 0)
-                {
+                if (total % 100 == 0) {
                     // update the UI thread with our current progress
                     publishProgress(taskStatus);
 
-                    try
-                    {
+                    try {
                         // this tiny sleep smoothes out the GUI updating, particularly on fast CPUs.
                         Thread.sleep(10);
-                    }
-                    catch (InterruptedException e)
-                    {
+                    } catch (InterruptedException e) {
                         // don't care
                     }
                 }
@@ -102,20 +89,17 @@ public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, Self
     }
 
     @Override
-    protected void onProgressUpdate(SelfTestStatus... values)
-    {
+    protected void onProgressUpdate(SelfTestStatus... values) {
         //Log.d(TAG, "onProgressUpdate()");
         super.onProgressUpdate(values);
-        if(values.length > 0)
-        {
+        if (values.length > 0) {
             // update the SelfTest activity with our current values
             activity.updateDialog(values[0]);
         }
     }
 
     @Override
-    protected void onPostExecute(SelfTestStatus result)
-    {
+    protected void onPostExecute(SelfTestStatus result) {
         Log.d(TAG, "onPostExecute()");
         super.onPostExecute(result);
         activity.updateDialog(result);

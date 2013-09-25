@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * SelfTestStatus.java
- * Oct 15, 2011 6:20:16 PM | variable
- * Copyright (c) 2011 Richard Banasiak
+ * Sep 25, 2013 11:43 AM | variable
+ * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -22,83 +22,72 @@
 package com.banasiak.coinflip;
 
 
-public class SelfTestStatus
-{
+public class SelfTestStatus {
+
     // debugging tag
     private static final String TAG = "SelfTestStatus";
 
     public static final int NUMBER_OF_FLIPS = 100000;
 
     private int headsCount = 0;
+
     private int tailsCount = 0;
 
     private long startTime = 0;
+
     private long endTime = 0;
 
 
-    public int getHeads()
-    {
+    public int getHeads() {
         return headsCount;
     }
 
-    public int getTails()
-    {
+    public int getTails() {
         return tailsCount;
     }
 
-    public int getTotal()
-    {
+    public int getTotal() {
         return headsCount + tailsCount;
     }
 
-    public void incrementHeads()
-    {
+    public void incrementHeads() {
         headsCount++;
     }
 
-    public void incrementTails()
-    {
+    public void incrementTails() {
         tailsCount++;
     }
 
-    public double getHeadsPercentage()
-    {
-        return (double)headsCount / (double)getTotal();
+    public double getHeadsPercentage() {
+        return (double) headsCount / (double) getTotal();
     }
 
-    public double getTailsPercentage()
-    {
-        return (double)tailsCount / (double)getTotal();
+    public double getTailsPercentage() {
+        return (double) tailsCount / (double) getTotal();
     }
 
-    public long getStartTime()
-    {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(long iTime)
-    {
+    public void setStartTime(long iTime) {
         startTime = iTime;
     }
 
-    public long getEndTime()
-    {
+    public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(long iTime)
-    {
+    public void setEndTime(long iTime) {
         endTime = iTime;
     }
 
-    public long getElapsedTime()
-    {
+    public long getElapsedTime() {
         return endTime - startTime;
     }
 
-    public double getCompletionPercentage()
-    {
-        return (double)getTotal() / (double)NUMBER_OF_FLIPS;
+    public double getCompletionPercentage() {
+        return (double) getTotal() / (double) NUMBER_OF_FLIPS;
     }
 
 }

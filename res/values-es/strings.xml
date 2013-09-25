@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * strings.xml
- * Apr 4, 2013 11:14:58 PM | variable
+ * Sep 25, 2013 11:41 AM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -20,9 +20,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<resources
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
     <string name="about_activity_title">Acerca de Coin Flip</string>
     <string name="about_menu_title">Acerca</string>
     <string name="about_text">
@@ -35,17 +33,17 @@
         Presidential $1 Coin images from the United States Mint.
         \n\n\nCopyright © 2013 - Richard Banasiak
         \nDe código abierto contribuciones de Alex Baker
-    </string>    
+    </string>
     <string name="app_name">Coin Flip</string>
     <string name="coin_animation">Animación de la moneda</string>
     <string name="exit">Salida</string>
     <string name="instructions_tap_shake_tv">Toque o Agite para Voltear</string>
-    <string name="instructions_tap_tv">Toque para Voltear</string>    
+    <string name="instructions_tap_tv">Toque para Voltear</string>
     <string name="heads">CABEZAS</string>
     <string name="max">MÁX</string>
-    <string name="milliseconds">ms</string>    
+    <string name="milliseconds">ms</string>
     <string name="min">DE</string>
-    <string name="rate_app_text">Tasa App en Google Play</string>    
+    <string name="rate_app_text">Tasa App en Google Play</string>
     <string name="reset">Reajustar</string>
     <string name="selftest_activity_title">Resultados de Autodiagnóstico</string>
     <string name="selftest_menu_title">Autodiagnóstico</string>
@@ -61,7 +59,7 @@
     <string name="settings_item_sound_summary">Reproducir un sonido después de lanzar la moneda</string>
     <string name="settings_item_sound_title">Sonido</string>
     <string name="settings_item_stats_summary">Lleve un registro de CABEZAS frente a COLAS</string>
-    <string name="settings_item_stats_title">Estadística</string>     
+    <string name="settings_item_stats_title">Estadística</string>
     <string name="settings_item_text_summary">Mostrar texto de resultados</string>
     <string name="settings_item_text_title">Texto</string>
     <string name="settings_item_vibrate_summary">Vibrar en la cara o cruz</string>
