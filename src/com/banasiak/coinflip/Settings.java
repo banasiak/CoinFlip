@@ -46,7 +46,7 @@ public class Settings extends PreferenceActivity implements
     private static final String TAG = "Settings";
 
     // add-on package name
-    private static final String EXTPKG = "*.coinflipext.*";
+    private static final String EXTPKG = ".coinflipext.";
 
     // option keys and default values
     private static final String KEY_ANIMATION = "animation";
@@ -116,7 +116,7 @@ public class Settings extends PreferenceActivity implements
         downloadPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             public boolean onPreferenceClick(final Preference preference) {
                 final Intent goToMarket = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("market://search?q=" + EXTPKG));
+                        Uri.parse("market://search?q=" + EXTPKG + "&c=apps"));
                 startActivity(goToMarket);
                 return true;
             }
