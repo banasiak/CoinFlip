@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * About.java
- * Sep 25, 2013 11:42 AM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jan 24, 2013 7:14 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -52,8 +52,7 @@ public class About extends Activity {
             TextView versionText = (TextView) findViewById(R.id.about_version_text_view);
             versionText.setText(versionName);
         } catch (NameNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            // nothing
         }
 
         // create a link to the Play store so users can easily rate this app

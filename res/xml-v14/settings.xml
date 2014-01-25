@@ -22,22 +22,22 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="@string/settings_header_basic_title">
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="animation"
             android:title="@string/settings_item_animation_title"
             android:summary="@string/settings_item_animation_summary"
             android:defaultValue="true" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="sound"
             android:title="@string/settings_item_sound_title"
             android:summary="@string/settings_item_sound_summary"
             android:defaultValue="true" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="text"
             android:title="@string/settings_item_text_title"
             android:summary="@string/settings_item_text_summary"
             android:defaultValue="true" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="vibrate"
             android:title="@string/settings_item_vibrate_title"
             android:summary="@string/settings_item_vibrate_summary"
@@ -57,7 +57,7 @@
             android:entryValues="@array/coins_values" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_header_advanced_title">
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="stats"
             android:title="@string/settings_item_stats_title"
             android:summary="@string/settings_item_stats_summary"

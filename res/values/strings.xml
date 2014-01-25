@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * strings.xml
- * Sep 25, 2013 12:33 PM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jan 24, 2013 7:14 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -33,7 +33,7 @@
         (or more!).
         \n\n\nQuarter-dollar coin images from the United States Mint.
         Presidential $1 Coin images from the United States Mint.
-        \n\n\nCopyright © 2013 - Richard Banasiak
+        \n\n\nCopyright © 2014 - Richard Banasiak
         \nOpen-source contributions from Alex Baker
     </string>
     <string name="app_name">Coin Flip</string>
@@ -52,7 +52,7 @@
     <string name="settings_activity_title">Coin Flip Settings</string>
     <string name="settings_header_basic_title">Basic Settings</string>
     <string name="settings_header_advanced_title">Advanced Settings</string>
-    <string name="settings_item_animation_summary">Render spinning coin animation</string>
+    <string name="settings_item_animation_summary">Render spinning coin</string>
     <string name="settings_item_animation_title">Animation</string>
     <string name="settings_item_coin_summary">The type of coin to be displayed</string>
     <string name="settings_item_coin_title">Coin Type</string>
@@ -65,9 +65,9 @@
     <string name="settings_item_selftest_dialog">Number of Iterations</string>
     <string name="settings_item_sound_summary">Play sound after coin flip</string>
     <string name="settings_item_sound_title">Sound</string>
-    <string name="settings_item_stats_summary">Keep track of HEADS vs TAILS</string>
+    <string name="settings_item_stats_summary">Display running total</string>
     <string name="settings_item_stats_title">Statistics</string>
-    <string name="settings_item_text_summary">Display HEADS/TAILS result text</string>
+    <string name="settings_item_text_summary">Display HEADS/TAILS</string>
     <string name="settings_item_text_title">Text</string>
     <string name="settings_item_vibrate_summary">Vibrate on coin flip</string>
     <string name="settings_item_vibrate_title">Vibrate</string>

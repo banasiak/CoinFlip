@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * strings.xml
- * Sep 25, 2013 1:09 PM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jan 24, 2013 7:14 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -33,7 +33,7 @@
         ejecución de la herramienta de diagnóstico y voltear las monedas 100.000 veces (o más!).
         \n\n\nQuarter-dollar coin images from the United States Mint.
         Presidential $1 Coin images from the United States Mint.
-        \n\n\nCopyright © 2013 - Richard Banasiak
+        \n\n\nCopyright © 2014 - Richard Banasiak
         \nDe código abierto contribuciones de Alex Baker
     </string>
     <string name="app_name">Coin Flip</string>

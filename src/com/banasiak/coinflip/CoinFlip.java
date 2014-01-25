@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * CoinFlip.java
- * Sep 25, 2013 1:13 PM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jan 24, 2013 7:47 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -80,6 +80,8 @@ public class CoinFlip extends Activity {
 
     private ShakeListener shaker;
 
+    private OnClickListener tapper;
+
     private Boolean currentResult = true;
 
     private Boolean previousResult = true;
@@ -114,7 +116,7 @@ public class CoinFlip extends Activity {
 
     private int tailsCounter = 0;
 
-    private int shakeForce = 1;
+    private boolean flipInProgress = false;
 
     private final Util util = new Util(this);
 
@@ -163,19 +165,11 @@ public class CoinFlip extends Activity {
     public void onResume() {
         Log.d(TAG, "onResume()");
 
-        shakeForce = Settings.getShakePref(this);
-
         resetCoin();
-        resetInstructions(shakeForce);
-
-        if (shakeForce == 0) {
-            shaker.pause();
-        } else {
-            shaker.resume(shakeForce);
-        }
-
+        resetInstructions();
         loadResources();
         updateStatsText();
+        resumeListeners();
 
         super.onResume();
     }
@@ -183,13 +177,21 @@ public class CoinFlip extends Activity {
     @Override
     public void onPause() {
         Log.d(TAG, "onPause()");
-        shaker.pause();
-        super.onPause();
+
+        pauseListeners();
+
+        if (coinAnimationCustom != null) {
+            // shut down the animation thread, otherwise the callback will resume the shake
+            // listener in the background even though the app is supposed to be suspended
+            coinAnimationCustom.removeCallbacks();
+        }
 
         // persist state
         Settings.setFlipCount(this, flipCounter);
         Settings.setHeadsCount(this, headsCounter);
         Settings.setTailsCount(this, tailsCounter);
+
+        super.onPause();
     }
 
     /**
@@ -227,20 +229,24 @@ public class CoinFlip extends Activity {
         coinImagesMap = new EnumMap<CoinFlip.ResultState, Drawable>(ResultState.class);
 
         // initialize the shake listener
-        shaker = new ShakeListener(this);
-        shaker.pause();
-        shaker.setOnShakeListener(new ShakeListener.OnShakeListener() {
-            public void onShake() {
-                flipCoin();
-            }
-        });
+        if (shaker == null) {
+            shaker = new ShakeListener(this);
+            shaker.pause();
+            shaker.setOnShakeListener(new ShakeListener.OnShakeListener() {
+                public void onShake() {
+                    flipCoin();
+                }
+            });
+        }
 
         // initialize the onclick listener
-        tableLayout.setOnClickListener(new OnClickListener() {
-            public void onClick(final View v) {
-                flipCoin();
-            }
-        });
+        if (tapper == null) {
+            tapper = new OnClickListener() {
+                @Override public void onClick(View v) {
+                    flipCoin();
+                }
+            };
+        }
 
         statsResetButton.setOnClickListener(new OnClickListener() {
             public void onClick(final View v) {
@@ -261,7 +267,7 @@ public class CoinFlip extends Activity {
         ResultState resultState = ResultState.UNKNOWN;
 
         // pause the shake listener until the result is rendered
-        shaker.pause();
+        pauseListeners();
 
         // vibrate if enabled
         if (Settings.getVibratePref(this)) {
@@ -295,10 +301,12 @@ public class CoinFlip extends Activity {
         coinImagesMap.clear();
     }
 
-    private void resetInstructions(final int force) {
+    private void resetInstructions() {
         Log.d(TAG, "resetInstructions()");
 
-        if (force == 0) {
+        int shakeForce = Settings.getShakePref(this);
+
+        if (shakeForce == 0) {
             instructionsText.setText(R.string.instructions_tap_tv);
         } else {
             instructionsText.setText(R.string.instructions_tap_shake_tv);
@@ -339,7 +347,7 @@ public class CoinFlip extends Activity {
             final int width, final int height) {
         Log.d(TAG, "resizeBitmapDrawable()");
 
-        // TODO resize the bitmaps proportional to 80% of the screen size
+        // TODO: resize the bitmaps proportional to 80% of the screen size
 
         // load the transparent background and convert to a bitmap
         BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(
@@ -771,7 +779,7 @@ public class CoinFlip extends Activity {
     }
 
     private void loadCustomResources() {
-        // TODO one day we'll be able to load custom images from the SD card...
+        // TODO: one day we'll be able to load custom images from the SD card...
         // ... but not today.
         Settings.resetCoinPref(this);
         loadResources();
@@ -797,9 +805,7 @@ public class CoinFlip extends Activity {
                 void onAnimationFinish() {
                     playCoinSound();
                     updateResultText(resultState);
-                    if (shakeForce != 0) {
-                        shaker.resume(shakeForce);
-                    }
+                    resumeListeners();
                 }
             };
 
@@ -821,9 +827,7 @@ public class CoinFlip extends Activity {
             displayCoinAnimation(false);
             playCoinSound();
             updateResultText(resultState);
-            if (shakeForce != 0) {
-                shaker.resume(shakeForce);
-            }
+            resumeListeners();
         }
     }
 
@@ -950,5 +954,32 @@ public class CoinFlip extends Activity {
         tailsStatText = (TextView) findViewById(R.id.tails_stat_text_view);
         statsResetButton = (Button) findViewById(R.id.stats_reset_button);
         statsLayout = (TableRow) findViewById(R.id.statistics_row);
+    }
+
+    private void pauseListeners() {
+        Log.d(TAG, "pauseListeners()");
+        if (shaker != null) {
+            shaker.pause();
+        }
+        if (tapper != null) {
+            tableLayout.setOnClickListener(null);
+        }
+    }
+
+    private void resumeListeners() {
+        Log.d(TAG, "resumeListeners()");
+
+        int shakeForce = Settings.getShakePref(this);
+
+        if (shaker != null) {
+            if (shakeForce == 0) {
+                shaker.pause();
+            } else {
+                shaker.resume(shakeForce);
+            }
+        }
+        if (tapper != null) {
+            tableLayout.setOnClickListener(tapper);
+        }
     }
 }

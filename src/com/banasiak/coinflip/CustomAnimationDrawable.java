@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * CustomAnimationDrawable.java
- * Sep 25, 2013 11:43 AM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jan 24, 2013 7:47 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -37,6 +37,7 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable {
     private static final String TAG = "CustomAnimationDrawable";
 
     Handler mAnimationHandler;
+    Runnable mAnimationRunable;
 
     public CustomAnimationDrawable(AnimationDrawable aniDraw) {
         // Add each frame to this CustomAnimationDrawable
@@ -55,12 +56,14 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable {
         // Then add a handler to call onAnimationFinish() when the total
         // duration for the animation has passed.
 
-        mAnimationHandler = new Handler();
-        mAnimationHandler.postDelayed(new Runnable() {
-            public void run() {
+        mAnimationRunable = new Runnable() {
+            @Override public void run() {
                 onAnimationFinish();
             }
-        }, getTotalDuration());
+        };
+
+        mAnimationHandler = new Handler();
+        mAnimationHandler.postDelayed(mAnimationRunable, getTotalDuration());
 
     }
 
@@ -74,6 +77,12 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable {
         }
 
         return iDuration;
+    }
+
+    // call via onPause() to shut this thread down when the app drops to the background.
+    public void removeCallbacks() {
+        Log.d(TAG, "removeCallbacks()");
+        mAnimationHandler.removeCallbacks(mAnimationRunable);
     }
 
     // called when the animation finishes
