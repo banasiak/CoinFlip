@@ -116,8 +116,6 @@ public class CoinFlip extends Activity {
 
     private int tailsCounter = 0;
 
-    private boolean flipInProgress = false;
-
     private final Util util = new Util(this);
 
     /**
