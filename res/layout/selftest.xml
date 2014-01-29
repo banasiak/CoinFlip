@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * selftest.xml
- * Sep 25, 2013 1:13 PM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jan 28, 2014 10:16 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -21,132 +21,132 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="10dp">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="10dp">
 
     <TableLayout
-        android:gravity="center_vertical"
-        android:layout_gravity="center_vertical"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent">
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
 
         <TableRow>
 
             <TextView
-                android:gravity="left"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:text="@string/heads"
-                android:textColor="@color/lime"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/heads"
+                    android:textColor="@color/lime"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/heads_value_tv"
-                android:gravity="right"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:textColor="@color/lime"
-                android:textSize="18sp" />
+                    android:id="@+id/heads_value_tv"
+                    android:gravity="right"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/lime"
+                    android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/heads_ratio_tv"
-                android:gravity="left"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
-                android:textColor="@color/lime"
-                android:textSize="18sp" />
+                    android:id="@+id/heads_ratio_tv"
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:textColor="@color/lime"
+                    android:textSize="18sp"/>
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:gravity="left"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:text="@string/tails"
-                android:textColor="@color/red"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/tails"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tails_value_tv"
-                android:gravity="right"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:textColor="@color/red"
-                android:textSize="18sp" />
+                    android:id="@+id/tails_value_tv"
+                    android:gravity="right"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/tails_ratio_tv"
-                android:gravity="left"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
-                android:textColor="@color/red"
-                android:textSize="18sp" />
+                    android:id="@+id/tails_ratio_tv"
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"/>
         </TableRow>
 
         <TableRow android:paddingBottom="10dp">
 
             <TextView
-                android:gravity="left"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:text="@string/total"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/total"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/total_value_tv"
-                android:gravity="right"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:textSize="18sp" />
+                    android:id="@+id/total_value_tv"
+                    android:gravity="right"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:textSize="18sp"/>
 
             <TextView
-                android:id="@+id/total_ratio_tv"
-                android:gravity="left"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="0dp"
-                android:textSize="18sp" />
+                    android:id="@+id/total_ratio_tv"
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:textSize="18sp"/>
         </TableRow>
 
         <TableRow android:paddingBottom="10dp">
 
             <TextView
-                android:gravity="left"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:text="@string/time"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/time"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/elapsed_time_tv"
-                android:gravity="right"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:textSize="18sp" />
+                    android:id="@+id/elapsed_time_tv"
+                    android:gravity="right"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:textSize="18sp"/>
 
             <TextView
-                android:gravity="left"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="0dp"
-                android:paddingRight="10dp"
-                android:text="@string/milliseconds"
-                android:textSize="18sp" />
+                    android:gravity="left"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/milliseconds"
+                    android:textSize="18sp"/>
         </TableRow>
     </TableLayout>
 </ScrollView>

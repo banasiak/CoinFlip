@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * main.xml
- * Sep 25, 2013 1:14 PM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jan 28, 2014 10:16 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -20,76 +20,81 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/table_layout"
-    android:layout_width="wrap_content"
-    android:layout_height="fill_parent"
-    android:layout_gravity="center_horizontal|center_vertical"
-    android:clickable="true"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/main_layout"
+              android:layout_width="wrap_content"
+              android:layout_height="fill_parent"
+              android:layout_gravity="center_horizontal|center_vertical"
+              android:clickable="true"
+              android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/coin_image_view"
-        android:contentDescription="@string/coin_animation"
-        android:maxWidth="390dp"
-        android:maxHeight="390dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/unknown" />
+            android:id="@+id/coin_image_view"
+            android:contentDescription="@string/coin_animation"
+            android:maxWidth="390dp"
+            android:maxHeight="390dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/unknown" android:scaleType="center"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/result_text_view"
-        android:textSize="64sp"
-        android:textStyle="bold"
-        android:gravity="center" />
+            android:id="@+id/result_text_view"
+            android:textSize="64sp"
+            android:textStyle="bold"
+            android:gravity="center" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/instructions_text_view"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="20dp" />
+            android:id="@+id/instructions_text_view"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="20dp" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center"/>
 
-    <TableRow
-        android:id="@+id/statistics_row"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+    <LinearLayout
+            android:id="@+id/statistics_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" android:layout_gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="8dp"
-            android:text="@string/heads"
-            android:textColor="@color/lime"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="8dp"
+                android:text="@string/heads"
+                android:textColor="@color/lime"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <TextView
-            android:id="@+id/heads_stat_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="24dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:id="@+id/heads_stat_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="24dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="8dp"
-            android:text="@string/tails"
-            android:textColor="@color/red"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="8dp"
+                android:text="@string/tails"
+                android:textColor="@color/red"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <TextView
-            android:id="@+id/tails_stat_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="24dp"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:id="@+id/tails_stat_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="24dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <Button
-            android:id="@+id/stats_reset_button"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reset" />
-    </TableRow>
-</TableLayout>
+                android:id="@+id/stats_reset_button"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"/>
+    </LinearLayout>
+</LinearLayout>

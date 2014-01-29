@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * about.xml
- * Sep 25, 2013 11:35 AM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jan 28, 2014 10:16 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
   * This file is part of CoinFlip.
  * 
@@ -21,41 +21,41 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="10dp">
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             android:padding="10dp">
 
     <TableRow
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp">
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="5dp"
-            android:text="@string/version" />
+            android:paddingBottom="20dp">
 
         <TextView
-            android:id="@+id/about_version_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="5dp"
+                android:text="@string/version"/>
+
+        <TextView
+                android:id="@+id/about_version_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
     </TableRow>
 
     <TextView
-        android:id="@+id/about_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:text="@string/about_text" />
+            android:id="@+id/about_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:text="@string/about_text"/>
 
     <FrameLayout android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/about_rate_button"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:text="@string/rate_app_text" />
+                android:id="@+id/about_rate_button"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:text="@string/rate_app_text"/>
     </FrameLayout>
 </TableLayout>

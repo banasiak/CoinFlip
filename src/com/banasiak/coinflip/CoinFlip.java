@@ -45,8 +45,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +87,7 @@ public class CoinFlip extends Activity {
 
     private ImageView coinImage;
 
-    private TableLayout tableLayout;
+    private LinearLayout mainLayout;
 
     private CustomAnimationDrawable coinAnimationCustom;
 
@@ -102,7 +101,7 @@ public class CoinFlip extends Activity {
 
     private Button statsResetButton;
 
-    private TableRow statsLayout;
+    private LinearLayout statsLayout;
 
     private SoundPool soundPool;
 
@@ -947,11 +946,11 @@ public class CoinFlip extends Activity {
         coinImage = (ImageView) findViewById(R.id.coin_image_view);
         resultText = (TextView) findViewById(R.id.result_text_view);
         instructionsText = (TextView) findViewById(R.id.instructions_text_view);
-        tableLayout = (TableLayout) findViewById(R.id.table_layout);
+        mainLayout = (LinearLayout) findViewById(R.id.main_layout);
         headsStatText = (TextView) findViewById(R.id.heads_stat_text_view);
         tailsStatText = (TextView) findViewById(R.id.tails_stat_text_view);
         statsResetButton = (Button) findViewById(R.id.stats_reset_button);
-        statsLayout = (TableRow) findViewById(R.id.statistics_row);
+        statsLayout = (LinearLayout) findViewById(R.id.statistics_layout);
     }
 
     private void pauseListeners() {
@@ -960,7 +959,7 @@ public class CoinFlip extends Activity {
             shaker.pause();
         }
         if (tapper != null) {
-            tableLayout.setOnClickListener(null);
+            mainLayout.setOnClickListener(null);
         }
     }
 
@@ -977,7 +976,7 @@ public class CoinFlip extends Activity {
             }
         }
         if (tapper != null) {
-            tableLayout.setOnClickListener(tapper);
+            mainLayout.setOnClickListener(tapper);
         }
     }
 }
