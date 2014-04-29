@@ -33,7 +33,8 @@ DEVELOPERS: Did you know you can create add-in packs with your favorite coins
 
 ================================================================================
 
-https://market.android.com/details?id=com.banasiak.coinflip
+https://play.google.com/store/apps/details?id=com.banasiak.coinflip
+https://f-droid.org/repository/browse/?fdfilter=coin&fdid=com.banasiak.coinflip
 
 Completely FREE (no-ads) and doesn't require any unsafe permissions.
 
@@ -42,8 +43,8 @@ shake to flip again. Spinning coin animation, sound, text, vibration,
 shake-to-flip and coin type are all configurable via the Settings menu.  Verify
 the flip algorithm is truly random by running the built-in Self Test and 
 flipping the coin 100,000 times while watching the results in real-time. 
-(Sorry, no cheating!)  Add new coins from the Android Market by clicking 
-Settings -> Get More Coins.
+(Sorry, no cheating!)  Add new coins from the Google Play by clicking 
+Settings -> Get More Coins or from F-Droid.
 
 Open source app released under the GNU General Public License.  
 Source code available here:  https://github.com/banasiak/CoinFlip
