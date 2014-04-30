@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ *========================================================================
+ * strings.xml
+ * Copyright (c) 2014 Spanti Nicola (RyDroid)
+ *========================================================================
+ * This file is part of CoinFlip.
+ *
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+    <string name="about_activity_title">À propos de Coin Flip</string>
+    <string name="about_menu_title">À propos</string>
+    <string name="about_text">
+        Un moyen simple de de retoruner une pièce, même si vous n\'en avez pas une. 
+        Tapotez simplement sur le point d\'interrogation ou secouez et regardez le résultat.
+        Tapotez ou secouez pour retourner à nouveau la pièce.
+        \n\nAnimation, son, texte, vibration, secouer-pour-retourner, type de pièce, statistiques et les paramètres de test de diagnostique sont tous configurables via le menu paramètres.
+        Vérifier que l\'algorithme de retournement soit vraiment pseudo-aléatoire en éxécutant le test de diagnostique et le retournement de la pièce (ou plus !).
+        \n\n\nDes images de quart de dollar coin images de United States Mint.
+        Images de 1$ présidentiel de United States Mint.
+        \n\n\nCopyright © 2014 - Richard Banasiak
+        \nContributions open-source contributions de Alex Baker
+        \nFrench translation by Spanti Nicola (RyDroid)
+    </string>
+    <string name="app_name">Coin Flip</string>
+    <string name="coin_animation">Animation de la pièce</string>
+    <string name="exit">Quitter</string>
+    <string name="instructions_tap_shake_tv">Tapotez/Secouez pour retourner la pièce</string>
+    <string name="instructions_tap_tv">Tapotez pour retourner la pièce</string>
+    <string name="heads">AVANT</string>
+    <string name="max">MAX</string>
+    <string name="milliseconds">ms</string>
+    <string name="min">OFF</string>
+    <string name="rate_app_text">Noter l\'app sur Google Play</string>
+    <string name="reset">Reset</string>
+    <string name="selftest_activity_title">Test de diagnostic du retournement de la pièce</string>
+    <string name="selftest_menu_title">Diagnostiques</string>
+    <string name="settings_activity_title">Paramètres de Coin Flip</string>
+    <string name="settings_header_basic_title">Paramètres basiques</string>
+    <string name="settings_header_advanced_title">Paramètres avancés</string>
+    <string name="settings_item_animation_summary">Afficher la rotation de la pièce</string>
+    <string name="settings_item_animation_title">Animation</string>
+    <string name="settings_item_coin_summary">Le type de monnaie à afficher</string>
+    <string name="settings_item_coin_title">Type de monnaie</string>
+    <string name="settings_item_download_summary">Télécharger plus de pièces depuis le Google Play</string>
+    <string name="settings_item_download_title">Obtenir plus de pièces</string>
+    <!--<string name="settings_item_force_summary">Force required</string>-->
+    <string name="settings_item_force_title">Secouer</string>
+    <string name="settings_item_selftest_title">Test de diagnostic</string>
+    <string name="settings_item_selftest_summary">itérations</string>
+    <string name="settings_item_selftest_dialog">Nombre d\'itérations</string>
+    <string name="settings_item_sound_summary">Jouer un son après le retournement de la pièce</string>
+    <string name="settings_item_sound_title">Son</string>
+    <string name="settings_item_stats_summary">Afficher le total courant</string>
+    <string name="settings_item_stats_title">Statistiques</string>
+    <string name="settings_item_text_summary">Afficher AVANT/ARRIÈRE</string>
+    <string name="settings_item_text_title">Texte</string>
+    <string name="settings_item_vibrate_summary">Vibrer au retournement de la pièce</string>
+    <string name="settings_item_vibrate_title">Vibrer</string>
+    <string name="settings_menu_title">Paramètres</string>
+    <string name="tails">ARRIÈRE</string>
+    <string name="time">TEMPS</string>
+    <string name="toast_coin_error">Pièce non trouvé - Réinitialisation de la sélection</string>
+    <string name="total">TOTAL</string>
+    <string name="unknown">INCONNU</string>
+    <string name="version">version</string>
+</resources>
