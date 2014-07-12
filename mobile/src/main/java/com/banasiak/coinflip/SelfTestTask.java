@@ -22,6 +22,8 @@
 
 package com.banasiak.coinflip;
 
+import com.banasiak.coinflip.lib.Coin;
+
 import android.os.AsyncTask;
 import android.util.Log;
 

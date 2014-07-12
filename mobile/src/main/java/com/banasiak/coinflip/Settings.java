@@ -22,6 +22,8 @@
 
 package com.banasiak.coinflip;
 
+import com.banasiak.coinflip.lib.Util;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -97,8 +99,6 @@ public class Settings extends PreferenceActivity implements
 
     private static final int KEY_SCHEMA_VERSION_DEF = -1;
 
-    private final Util util = new Util(this);
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
@@ -157,7 +157,7 @@ public class Settings extends PreferenceActivity implements
             CharSequence[] currentEntries = getResources().getStringArray(R.array.coins);
             CharSequence[] currentEntryValues = getResources().getStringArray(R.array.coins_values);
 
-            final List<PackageInfo> externalPackages = util.findExternalPackages();
+            final List<PackageInfo> externalPackages = Util.findExternalPackages(this);
 
             for (final PackageInfo externalPackage : externalPackages) {
                 // load the resources from the add-in package
@@ -173,16 +173,16 @@ public class Settings extends PreferenceActivity implements
                 final CharSequence[] newEntryValues = extPkgResources.getStringArray(coinsValuesId);
 
                 // merge the add-in values
-                currentEntries = util.mergeArray(currentEntries, newEntries);
-                currentEntryValues = util.mergeArray(currentEntryValues, newEntryValues);
+                currentEntries = Util.mergeArray(currentEntries, newEntries);
+                currentEntryValues = Util.mergeArray(currentEntryValues, newEntryValues);
             }
 
             if (!externalPackages.isEmpty()) {
                 // add a "random coin" option
                 final CharSequence[] randomEntry = {"Random Coin"};
                 final CharSequence[] randomEntryValue = {"random"};
-                currentEntries = util.mergeArray(currentEntries, randomEntry);
-                currentEntryValues = util.mergeArray(currentEntryValues, randomEntryValue);
+                currentEntries = Util.mergeArray(currentEntries, randomEntry);
+                currentEntryValues = Util.mergeArray(currentEntryValues, randomEntryValue);
             }
 
             // update the ListPreference with the combined results

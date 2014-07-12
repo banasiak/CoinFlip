@@ -20,7 +20,7 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinflip;
+package com.banasiak.coinflip.lib;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -36,16 +36,14 @@ import java.util.Random;
 public class Util {
 
     // debugging tag
-    private static final String TAG = "Util";
+    private static final String TAG = Util.class.getSimpleName();
 
-    private final Context mContext;
-
-    public Util(final Context context) {
-        mContext = context;
+    public Util() {
+        //singleton
     }
 
     // concatenate two arrays
-    public CharSequence[] mergeArray(final CharSequence[] a, final CharSequence[] b) {
+    public static CharSequence[] mergeArray(final CharSequence[] a, final CharSequence[] b) {
         Log.d(TAG, "mergeArray()");
 
         final CharSequence[] result = new CharSequence[a.length + b.length];
@@ -63,24 +61,22 @@ public class Util {
     }
 
     // build an array of all possible coins and select a random one
-    public String getRandomCoin() {
+    public static String getRandomCoin(final Context context, final int arrayId) {
         Log.d(TAG, "getRandomCoin()");
 
         String coin = "default";
         int val = -1;
         final Random generator = new Random();
-        final List<PackageInfo> pkgs = findExternalPackages();
+        final List<PackageInfo> pkgs = findExternalPackages(context);
 
         // load the built-in values
-        CharSequence[] currentEntryValues = mContext.getResources().getStringArray(
-                R.array.coins_values);
+        CharSequence[] currentEntryValues = context.getResources().getStringArray(arrayId);
 
         for (final PackageInfo info : pkgs) {
             try {
                 // load the resources from the add-in package
-                final Resources extPkgResources = mContext.getPackageManager()
-                        .getResourcesForApplication(
-                                info.packageName);
+                final Resources extPkgResources = context.getPackageManager()
+                        .getResourcesForApplication(info.packageName);
 
                 // load the values in the add-in package
                 final int coinsValuesId = extPkgResources.getIdentifier("coins_values", "array",
@@ -104,10 +100,10 @@ public class Util {
     }
 
     // load a list of packages installed on the system
-    public List<PackageInfo> findExternalPackages() {
+    public static List<PackageInfo> findExternalPackages(Context context) {
         Log.d(TAG, "findExternalPackages()");
 
-        final List<PackageInfo> packageInfo = mContext.getPackageManager().getInstalledPackages(0);
+        final List<PackageInfo> packageInfo = context.getPackageManager().getInstalledPackages(0);
 
         for (int i = 0, n = packageInfo.size() - 1; i <= n; --n) {
             final PackageInfo info = packageInfo.get(n);
@@ -121,7 +117,7 @@ public class Util {
 
     // if any part of the package name contains "coinflipext" then assume it
     // is a valid add-on package for this application.
-    private boolean isExternalCoinPackage(final PackageInfo info) {
+    private static boolean isExternalCoinPackage(final PackageInfo info) {
         Log.d(TAG, "isExternalCoinPackage()");
 
         boolean isValid = false;
@@ -138,13 +134,13 @@ public class Util {
     }
 
     // find external coin packages and verify it contains valid resources
-    public String findExternalResourcePackage(final String coinPrefix) {
+    public static String findExternalResourcePackage(final Context context, final String coinPrefix) {
         Log.d(TAG, "findExternalResourcePackage() | coinPrefix=" + coinPrefix);
 
-        final List<PackageInfo> pkgs = findExternalPackages();
+        final List<PackageInfo> pkgs = findExternalPackages(context);
         for (final PackageInfo pkg : pkgs) {
             try {
-                final Resources res = mContext.getPackageManager().getResourcesForApplication(
+                final Resources res = context.getPackageManager().getResourcesForApplication(
                         pkg.packageName);
 
                 // see if the package contains a heads/tails/edge image resource for the requested prefix
@@ -163,28 +159,28 @@ public class Util {
         return null;
     }
 
-    public int getExternalResourceHeads(final String packageName, final Resources pkg,
+    public static int getExternalResourceHeads(final String packageName, final Resources pkg,
             final String prefix) {
         Log.d(TAG, "getExternalResourceHeads()");
         return pkg.getIdentifier(prefix + "_heads", "drawable", packageName);
     }
 
-    public int getExternalResourceTails(final String packageName, final Resources pkg,
+    public static int getExternalResourceTails(final String packageName, final Resources pkg,
             final String prefix) {
         Log.d(TAG, "getExternalResourceTails()");
         return pkg.getIdentifier(prefix + "_tails", "drawable", packageName);
     }
 
-    public int getExternalResourceEdge(final String packageName, final Resources pkg,
+    public static int getExternalResourceEdge(final String packageName, final Resources pkg,
             final String prefix) {
         Log.d(TAG, "getExternalResourceEdge()");
         return pkg.getIdentifier(prefix + "_edge", "drawable", packageName);
     }
 
-    public int getScreenWidth() {
+    public static int getScreenWidth(final Context context) {
         Log.d(TAG, "getScreenWidth()");
 
-        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
 
         int width = display.getWidth();

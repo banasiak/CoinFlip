@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 dependencies {
     compile project(':dependencies:lib')
-    compile project(':dependencies:wear')
+    wearApp project(':dependencies:wear')
 }
 
 android {

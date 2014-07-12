@@ -20,7 +20,7 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinflip;
+package com.banasiak.coinflip.lib;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
@@ -34,7 +34,7 @@ import android.util.Log;
 public abstract class CustomAnimationDrawable extends AnimationDrawable {
 
     // debugging tag
-    private static final String TAG = "CustomAnimationDrawable";
+    private static final String TAG = CustomAnimationDrawable.class.getSimpleName();
 
     Handler mAnimationHandler;
     Runnable mAnimationRunable;
@@ -86,5 +86,5 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable {
     }
 
     // called when the animation finishes
-    abstract void onAnimationFinish();
+    protected abstract void onAnimationFinish();
 }

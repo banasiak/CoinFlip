@@ -22,16 +22,18 @@
 
 package com.banasiak.coinflip;
 
+import com.banasiak.coinflip.lib.Animation;
+import com.banasiak.coinflip.lib.Coin;
+import com.banasiak.coinflip.lib.CustomAnimationDrawable;
+import com.banasiak.coinflip.lib.Util;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -51,10 +53,12 @@ import android.widget.Toast;
 
 import java.util.EnumMap;
 
+import static com.banasiak.coinflip.lib.Animation.generateAnimations;
+
 public class CoinFlip extends Activity {
 
     // debugging tag
-    private static final String TAG = "CoinFlip";
+    private static final String TAG = CoinFlip.class.getSimpleName();
 
     // add-on package name
     // private static final String EXTPKG = "com.banasiak.coinflipext";
@@ -62,18 +66,7 @@ public class CoinFlip extends Activity {
     // version of the settings schema used by this codebase
     private static final int SCHEMA_VERSION = 6;
 
-    // enumerator of all possible transition states
-    private enum ResultState {
-        HEADS_HEADS,
-        HEADS_TAILS,
-        TAILS_HEADS,
-        TAILS_TAILS,
-        UNKNOWN
-    }
-
-    EnumMap<ResultState, AnimationDrawable> coinAnimationsMap;
-
-    EnumMap<ResultState, Drawable> coinImagesMap;
+    EnumMap<Animation.ResultState, Drawable> coinImagesMap;
 
     private final Coin theCoin = new Coin();
 
@@ -114,8 +107,6 @@ public class CoinFlip extends Activity {
     private int headsCounter = 0;
 
     private int tailsCounter = 0;
-
-    private final Util util = new Util(this);
 
     /**
      * Called when the user presses the menu button.
@@ -222,8 +213,8 @@ public class CoinFlip extends Activity {
         initSounds();
 
         // initialize the coin maps
-        coinAnimationsMap = new EnumMap<CoinFlip.ResultState, AnimationDrawable>(ResultState.class);
-        coinImagesMap = new EnumMap<CoinFlip.ResultState, Drawable>(ResultState.class);
+        Animation.init();
+        coinImagesMap = new EnumMap<Animation.ResultState, Drawable>(Animation.ResultState.class);
 
         // initialize the shake listener
         if (shaker == null) {
@@ -261,7 +252,7 @@ public class CoinFlip extends Activity {
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // we're in the process of flipping the coin
-        ResultState resultState = ResultState.UNKNOWN;
+        Animation.ResultState resultState = Animation.ResultState.UNKNOWN;
 
         // pause the shake listener until the result is rendered
         pauseListeners();
@@ -294,7 +285,7 @@ public class CoinFlip extends Activity {
         displayCoinImage(true);
         coinImage.setImageDrawable(getResources().getDrawable(R.drawable.unknown));
         resultText.setText(" ");
-        coinAnimationsMap.clear();
+        Animation.clearAnimations();
         coinImagesMap.clear();
     }
 
@@ -310,363 +301,34 @@ public class CoinFlip extends Activity {
         }
     }
 
-    private ResultState updateState(final boolean flipResult) {
+    private Animation.ResultState updateState(final boolean flipResult) {
         // Analyze the current coin state and the new coin state and determine
         // the proper transition between the two.
         // true = HEADS | false = TAILS
 
         Log.d(TAG, "updateState()");
 
-        ResultState resultState = ResultState.UNKNOWN;
+        Animation.ResultState resultState = Animation.ResultState.UNKNOWN;
         currentResult = flipResult;
 
         // this is easier to read than the old code
         if (previousResult == true && currentResult == true) {
-            resultState = ResultState.HEADS_HEADS;
+            resultState = Animation.ResultState.HEADS_HEADS;
         }
         if (previousResult == true && currentResult == false) {
-            resultState = ResultState.HEADS_TAILS;
+            resultState = Animation.ResultState.HEADS_TAILS;
         }
         if (previousResult == false && currentResult == true) {
-            resultState = ResultState.TAILS_HEADS;
+            resultState = Animation.ResultState.TAILS_HEADS;
         }
         if (previousResult == false && currentResult == false) {
-            resultState = ResultState.TAILS_TAILS;
+            resultState = Animation.ResultState.TAILS_TAILS;
         }
 
         // update the previousResult for the next flip
         previousResult = currentResult;
 
         return resultState;
-    }
-
-    private BitmapDrawable resizeBitmapDrawable(final BitmapDrawable image,
-            final int width, final int height) {
-        Log.d(TAG, "resizeBitmapDrawable()");
-
-        // TODO: resize the bitmaps proportional to 80% of the screen size
-
-        // load the transparent background and convert to a bitmap
-        BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(
-                R.drawable.background);
-        Bitmap background_bm = background.getBitmap();
-
-        // convert the passed in image to a bitmap and resize according to parameters
-        Bitmap image_bm = Bitmap.createScaledBitmap(image.getBitmap(), width, height, true);
-
-        // create a new canvas to combine the two images on
-        Bitmap comboImage_bm = Bitmap.createBitmap(background_bm.getWidth(),
-                background_bm.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas comboImage = new Canvas(comboImage_bm);
-
-        // add the background as well as the new image to the horizontal center
-        // of the image
-        comboImage.drawBitmap(background_bm, 0f, 0f, null);
-        comboImage.drawBitmap(image_bm, (background_bm.getWidth() - image_bm.getWidth()) / 2, 0f,
-                null);
-
-        // convert the new combo image bitmap to a BitmapDrawable
-        final BitmapDrawable comboImage_bmd = new BitmapDrawable(comboImage_bm);
-
-        // I don't know if this is the right thing to do, but this method
-        // usually always blows out the heap on pre-Froyo devices.  Clearing
-        // the temporary resources and recommending a GC seems to help.
-        background = null;
-        background_bm = null;
-        image_bm = null;
-        comboImage_bm = null;
-        comboImage = null;
-
-        return comboImage_bmd;
-    }
-
-    private AnimationDrawable generateAnimatedDrawable(final BitmapDrawable imageA_8,
-            final BitmapDrawable imageA_6,
-            final BitmapDrawable imageA_4,
-            final BitmapDrawable imageA_2,
-            final BitmapDrawable imageB_8,
-            final BitmapDrawable imageB_6,
-            final BitmapDrawable imageB_4,
-            final BitmapDrawable imageB_2,
-            final BitmapDrawable edge,
-            final ResultState resultState) {
-        Log.d(TAG, "generateAnimatedDrawable()");
-
-        final int duration = 20;
-        final AnimationDrawable animation = new AnimationDrawable();
-
-        // create the appropriate animation depending on the result state
-        switch (resultState) {
-            case HEADS_HEADS:
-                // Begin Flip 1
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                // Begin Flip 2
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                // Begin Flip 3
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_8, duration);
-                break;
-            case HEADS_TAILS:
-                // Begin Flip 1
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                // Begin Flip 2
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                // Begin Flip 3 (half flip)
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_8, duration);
-                break;
-            case TAILS_HEADS:
-                // Begin Flip 1
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                // Begin Flip 2
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                // Begin Flip 3 (half flip)
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_8, duration);
-                break;
-            case TAILS_TAILS:
-                // Begin Flip 1
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                // Begin Flip 2
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                // Begin Flip 3
-                animation.addFrame(imageB_8, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_8, duration);
-                animation.addFrame(imageA_6, duration);
-                animation.addFrame(imageA_4, duration);
-                animation.addFrame(imageA_2, duration);
-                animation.addFrame(edge, duration);
-                animation.addFrame(imageB_2, duration);
-                animation.addFrame(imageB_4, duration);
-                animation.addFrame(imageB_6, duration);
-                animation.addFrame(imageB_8, duration);
-                break;
-            default:
-                Log.w(TAG, "Invalid state. Resetting coin.");
-                resetCoin();
-                break;
-        }
-
-        animation.setOneShot(true);
-
-        return animation;
-    }
-
-
-    private void generateAnimations(final Drawable imageA, final Drawable imageB,
-            final Drawable edge) {
-        Log.d(TAG, "generateAnimations()");
-
-        ResultState resultState;
-        AnimationDrawable coinAnimation;
-
-        final int widthA = ((BitmapDrawable) imageA).getBitmap().getWidth();
-        final int heightA = ((BitmapDrawable) imageA).getBitmap().getHeight();
-        final int widthB = ((BitmapDrawable) imageB).getBitmap().getWidth();
-        final int heightB = ((BitmapDrawable) imageB).getBitmap().getHeight();
-
-        // create the individual animation frames for the heads side
-        final BitmapDrawable imageA_8 = (BitmapDrawable) imageA;
-        final BitmapDrawable imageA_6 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.75),
-                heightA);
-        final BitmapDrawable imageA_4 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.50),
-                heightA);
-        final BitmapDrawable imageA_2 = resizeBitmapDrawable(imageA_8, (int) (widthA * 0.25),
-                heightA);
-
-        // create the individual animation frames for the tails side
-        final BitmapDrawable imageB_8 = (BitmapDrawable) imageB;
-        final BitmapDrawable imageB_6 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.75),
-                heightB);
-        final BitmapDrawable imageB_4 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.50),
-                heightB);
-        final BitmapDrawable imageB_2 = resizeBitmapDrawable(imageB_8, (int) (widthB * 0.25),
-                heightB);
-
-        // the temporary bitmaps have already been cleared, this might be a good place for a garbage collection
-        System.gc();
-
-        // create the appropriate animation depending on the result state
-        resultState = ResultState.HEADS_HEADS;
-        coinAnimation = generateAnimatedDrawable(imageA_8, imageA_6, imageA_4, imageA_2,
-                imageB_8, imageB_6, imageB_4, imageB_2,
-                (BitmapDrawable) edge, resultState);
-        coinAnimationsMap.put(resultState, coinAnimation);
-
-        resultState = ResultState.HEADS_TAILS;
-        coinAnimation = generateAnimatedDrawable(imageA_8, imageA_6, imageA_4, imageA_2,
-                imageB_8, imageB_6, imageB_4, imageB_2,
-                (BitmapDrawable) edge, resultState);
-        coinAnimationsMap.put(resultState, coinAnimation);
-
-        resultState = ResultState.TAILS_HEADS;
-        coinAnimation = generateAnimatedDrawable(imageA_8, imageA_6, imageA_4, imageA_2,
-                imageB_8, imageB_6, imageB_4, imageB_2,
-                (BitmapDrawable) edge, resultState);
-        coinAnimationsMap.put(resultState, coinAnimation);
-
-        resultState = ResultState.TAILS_TAILS;
-        coinAnimation = generateAnimatedDrawable(imageA_8, imageA_6, imageA_4, imageA_2,
-                imageB_8, imageB_6, imageB_4, imageB_2,
-                (BitmapDrawable) edge, resultState);
-        coinAnimationsMap.put(resultState, coinAnimation);
-
     }
 
     // check the coin preference and determine how to load its resources
@@ -678,7 +340,7 @@ public class CoinFlip extends Activity {
 
         if (coinPrefix.equals("random")) {
             Log.d(TAG, "Random coin selected");
-            coinPrefix = util.getRandomCoin();
+            coinPrefix = Util.getRandomCoin(this, R.array.coins_values);
         }
 
         if (coinPrefix.equals("default")) {
@@ -701,22 +363,23 @@ public class CoinFlip extends Activity {
         final Drawable heads = getResources().getDrawable(R.drawable.heads);
         final Drawable tails = getResources().getDrawable(R.drawable.tails);
         final Drawable edge = getResources().getDrawable(R.drawable.edge);
+        final Drawable background = getResources().getDrawable(R.drawable.background);
 
         // only do all the CPU-intensive animation rendering if animations are enabled
         if (Settings.getAnimationPref(this)) {
             // render the animation for each result state and store it in the
             // animations map
-            generateAnimations(heads, tails, edge);
+            generateAnimations(heads, tails, edge, background);
 
         }
 
         // add the appropriate image for each result state to the images map
         // WTF? There's some kind of rendering bug if you use the "heads" or
         // "tails" variables here...
-        coinImagesMap.put(ResultState.HEADS_HEADS, getResources().getDrawable(R.drawable.heads));
-        coinImagesMap.put(ResultState.HEADS_TAILS, getResources().getDrawable(R.drawable.tails));
-        coinImagesMap.put(ResultState.TAILS_HEADS, getResources().getDrawable(R.drawable.heads));
-        coinImagesMap.put(ResultState.TAILS_TAILS, getResources().getDrawable(R.drawable.tails));
+        coinImagesMap.put(Animation.ResultState.HEADS_HEADS, getResources().getDrawable(R.drawable.heads));
+        coinImagesMap.put(Animation.ResultState.HEADS_TAILS, getResources().getDrawable(R.drawable.tails));
+        coinImagesMap.put(Animation.ResultState.TAILS_HEADS, getResources().getDrawable(R.drawable.heads));
+        coinImagesMap.put(Animation.ResultState.TAILS_TAILS, getResources().getDrawable(R.drawable.tails));
     }
 
     // load resources from the external CoinFlipExt package
@@ -725,7 +388,7 @@ public class CoinFlip extends Activity {
 
         try {
             // figure out which add-on package contains the resources we need for this coin prefix
-            final String packageName = util.findExternalResourcePackage(coinPrefix);
+            final String packageName = Util.findExternalResourcePackage(this, coinPrefix);
 
             if (packageName == null) {
                 // the coin prefix doesn't exist in any external package
@@ -739,32 +402,33 @@ public class CoinFlip extends Activity {
                     packageName);
 
             // load the image IDs from the add-in package
-            final int headsId = util.getExternalResourceHeads(packageName, extPkgResources,
+            final int headsId = Util.getExternalResourceHeads(packageName, extPkgResources,
                     coinPrefix);
-            final int tailsId = util.getExternalResourceTails(packageName, extPkgResources,
+            final int tailsId = Util.getExternalResourceTails(packageName, extPkgResources,
                     coinPrefix);
-            final int edgeId = util.getExternalResourceEdge(packageName, extPkgResources,
+            final int edgeId = Util.getExternalResourceEdge(packageName, extPkgResources,
                     coinPrefix);
 
             // load the images from the add-in package via their ID
             final Drawable heads = extPkgResources.getDrawable(headsId);
             final Drawable tails = extPkgResources.getDrawable(tailsId);
             final Drawable edge = extPkgResources.getDrawable(edgeId);
+            final Drawable background = getResources().getDrawable(R.drawable.background);
 
             // only do all the CPU-intensive animation rendering if animations are enabled
             if (Settings.getAnimationPref(this)) {
                 // render the animation for each result state and store it in the
                 // animations map
-                generateAnimations(heads, tails, edge);
+                generateAnimations(heads, tails, edge, background);
             }
 
             // add the appropriate image for each result state to the images map
             // WTF? There's (still) some kind of rendering bug if you use the
             // "heads" or "tails" variables here...
-            coinImagesMap.put(ResultState.HEADS_HEADS, extPkgResources.getDrawable(headsId));
-            coinImagesMap.put(ResultState.HEADS_TAILS, extPkgResources.getDrawable(tailsId));
-            coinImagesMap.put(ResultState.TAILS_HEADS, extPkgResources.getDrawable(headsId));
-            coinImagesMap.put(ResultState.TAILS_TAILS, extPkgResources.getDrawable(tailsId));
+            coinImagesMap.put(Animation.ResultState.HEADS_HEADS, extPkgResources.getDrawable(headsId));
+            coinImagesMap.put(Animation.ResultState.HEADS_TAILS, extPkgResources.getDrawable(tailsId));
+            coinImagesMap.put(Animation.ResultState.TAILS_HEADS, extPkgResources.getDrawable(headsId));
+            coinImagesMap.put(Animation.ResultState.TAILS_TAILS, extPkgResources.getDrawable(tailsId));
 
         } catch (final NameNotFoundException e) {
             Log.e(TAG, "NameNotFoundException");
@@ -782,7 +446,7 @@ public class CoinFlip extends Activity {
         loadResources();
     }
 
-    private void renderResult(final ResultState resultState) {
+    private void renderResult(final Animation.ResultState resultState) {
         Log.d(TAG, "renderResult()");
 
         AnimationDrawable coinAnimation;
@@ -796,10 +460,10 @@ public class CoinFlip extends Activity {
         // display the result
         if (Settings.getAnimationPref(this)) {
             // load the appropriate coin animation based on the state
-            coinAnimation = coinAnimationsMap.get(resultState);
+            coinAnimation = Animation.getAnimation(resultState);
             coinAnimationCustom = new CustomAnimationDrawable(coinAnimation) {
                 @Override
-                void onAnimationFinish() {
+                protected void onAnimationFinish() {
                     playCoinSound();
                     updateResultText(resultState);
                     resumeListeners();
@@ -866,7 +530,7 @@ public class CoinFlip extends Activity {
         }
     }
 
-    private void updateResultText(final ResultState resultState) {
+    private void updateResultText(final Animation.ResultState resultState) {
         Log.d(TAG, "updateResultText()");
 
         if (Settings.getTextPref(this)) {

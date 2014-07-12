@@ -20,14 +20,14 @@
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.banasiak.coinflip;
+package com.banasiak.coinflip.lib;
 
 import java.util.Random;
 
 public class Coin {
 
     // Debugging tag.
-    private static final String TAG = "Coin";
+    private static final String TAG = Coin.class.getSimpleName();
 
     final Random generator = new Random();
 

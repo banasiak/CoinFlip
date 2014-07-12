@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 
+dependencies {
+}
+
 android {
     compileSdkVersion 20
     buildToolsVersion '20.0.0'
