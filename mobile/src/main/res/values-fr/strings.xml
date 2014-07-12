@@ -26,8 +26,6 @@
         Un moyen simple de de retoruner une pièce, même si vous n\'en avez pas une. 
         Tapotez simplement sur le point d\'interrogation ou secouez et regardez le résultat.
         Tapotez ou secouez pour retourner à nouveau la pièce.
-        \n\nAnimation, son, texte, vibration, secouer-pour-retourner, type de pièce, statistiques et les paramètres de test de diagnostique sont tous configurables via le menu paramètres.
-        Vérifier que l\'algorithme de retournement soit vraiment pseudo-aléatoire en éxécutant le test de diagnostique et le retournement de la pièce (ou plus !).
         \n\n\nDes images de quart de dollar coin images de United States Mint.
         Images de 1$ présidentiel de United States Mint.
         \n\n\nCopyright © 2014 - Richard Banasiak
@@ -56,7 +54,7 @@
     <string name="settings_item_coin_title">Type de monnaie</string>
     <string name="settings_item_download_summary">Télécharger plus de pièces depuis le Google Play</string>
     <string name="settings_item_download_title">Obtenir plus de pièces</string>
-    <!--<string name="settings_item_force_summary">Force required</string>-->
+    <string name="settings_item_force_summary">Force requise</string>
     <string name="settings_item_force_title">Secouer</string>
     <string name="settings_item_selftest_title">Test de diagnostic</string>
     <string name="settings_item_selftest_summary">itérations</string>

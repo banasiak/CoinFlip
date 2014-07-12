@@ -22,14 +22,9 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banasiak.coinflip"
-    android:versionName="5.5.2"
-    android:versionCode="35"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-sdk
-        android:targetSdkVersion="19"
-        android:minSdkVersion="3" />
 
     <application
         android:allowBackup="true"

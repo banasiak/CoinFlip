@@ -1,0 +1,34 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+}
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion '19.1.0'
+
+    defaultConfig {
+        applicationId "com.banasiak.coinflip"
+        minSdkVersion 8
+        targetSdkVersion 19
+        versionCode 36
+        versionName "6.0"
+    }
+
+    signingConfigs {
+        release {
+            // the required parameters should be configured in gradle.properties
+        }
+    }
+
+    buildTypes {
+        release {
+            if (project.hasProperty('signRelease')) {
+                if (signRelease.equals("true")) {
+                    signingConfig signingConfigs.release
+                }
+            }
+        }
+    }
+}
+

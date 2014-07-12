@@ -1,0 +1,10 @@
+.gradle/
+.idea/
+build/
+mobile/build/
+wear/build/
+*.iml
+.classpath
+.project
+gradle.properties
+local.properties

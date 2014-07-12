@@ -2,7 +2,7 @@
 <!--
 *========================================================================
 * strings.xml
-* Jan 27, 2014 9:49 PM | variable
+* Jul 11, 2014 7:44 PM | variable
 * Copyright (c) 2014 Richard Banasiak
 *========================================================================
 * This file is part of CoinFlip.
@@ -29,7 +29,8 @@
         \n\n\nQuarter-dollar moneda imágenes de la United States Mint.
         Presidential $1 moneda imágenes de la United States Mint.
         \n\n\nCopyright © 2014 - Richard Banasiak
-        \nContribuciones de código abierto de Alex Baker</string>
+        \nContribuciones de código abierto de Alex Baker
+        \nFrench translation by Spanti Nicola (RyDroid)</string>
     <string name="app_name">Coin Flip</string>
     <string name="coin_animation">Animación de moneda</string>
     <string name="exit">Salir</string>

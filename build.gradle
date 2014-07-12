@@ -1,0 +1,23 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.+'
+    }
+
+    // load these signing variables from gradle.properties, if they exist
+    if (project.hasProperty('storeFile')) {
+        android.signingConfigs.release.storeFile = file(storeFile)
+    }
+    if (project.hasProperty('storePassword')) {
+        android.signingConfigs.release.storePassword = storePassword
+    }
+    if (project.hasProperty('keyAlias')) {
+        android.signingConfigs.release.keyAlias = keyAlias
+    }
+    if (project.hasProperty('keyPassword')) {
+        android.signingConfigs.release.keyPassword = keyPassword
+    }
+}

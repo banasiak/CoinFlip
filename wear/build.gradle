@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "com.banasiak.coinflip.wear"
+        minSdkVersion 20
+        targetSdkVersion 20
+        versionCode 36
+        versionName "6.0"
+    }
+
+    signingConfigs {
+        release {
+            // the required parameters should be configured in gradle.properties
+        }
+    }
+
+    buildTypes {
+        release {
+            if (project.hasProperty('signRelease')) {
+                if (signRelease.equals("true")) {
+                    signingConfig signingConfigs.release
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.google.android.support:wearable:+'
+    compile 'com.google.android.gms:play-services-wearable:+'
+}
