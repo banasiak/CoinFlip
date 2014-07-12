@@ -17,12 +17,6 @@ android {
         versionName "6.0"
     }
 
-    signingConfigs {
-        release {
-            // the required parameters should be configured in gradle.properties
-        }
-    }
-
     buildTypes {
         release {
             if (project.hasProperty('signRelease')) {

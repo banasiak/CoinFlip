@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 *========================================================================
-* strings.xml
+* round_main.xml
 * Jul 12, 2014 6:39 PM | variable
 * Copyright (c) 2014 Richard Banasiak
 *========================================================================
@@ -20,8 +20,20 @@
 *    You should have received a copy of the GNU General Public License
 *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear_round">
 
-    <string name="app_name">Coin Flip</string>
-
-</resources>
+    <ImageView
+            android:id="@+id/coin_image_view"
+            android:maxWidth="280dp"
+            android:maxHeight="280dp"
+            android:background="@drawable/unknown"
+            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+</RelativeLayout>

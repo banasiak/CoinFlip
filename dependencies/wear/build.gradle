@@ -11,17 +11,11 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "com.banasiak.coinflip.wear"
+        applicationId "com.banasiak.coinflip"
         minSdkVersion 20
         targetSdkVersion 20
         versionCode 36
         versionName "6.0"
-    }
-
-    signingConfigs {
-        release {
-            // the required parameters should be configured in gradle.properties
-        }
     }
 
     buildTypes {
