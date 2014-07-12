@@ -1,7 +1,7 @@
 /*
  *========================================================================
- * CoinFlip.java
- * Jan 24, 2014 7:47 PM | variable
+ * CoinFlipActivity.java
+ * Jul 12, 2014 4:31 PM | variable
  * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -53,12 +53,10 @@ import android.widget.Toast;
 
 import java.util.EnumMap;
 
-import static com.banasiak.coinflip.lib.Animation.generateAnimations;
-
-public class CoinFlip extends Activity {
+public class CoinFlipActivity extends Activity {
 
     // debugging tag
-    private static final String TAG = CoinFlip.class.getSimpleName();
+    private static final String TAG = CoinFlipActivity.class.getSimpleName();
 
     // add-on package name
     // private static final String EXTPKG = "com.banasiak.coinflipext";
@@ -131,11 +129,11 @@ public class CoinFlip extends Activity {
 
         switch (item.getItemId()) {
             case R.id.about_menu:
-                intent = new Intent(this, About.class);
+                intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.selftest_menu:
-                intent = new Intent(this, SelfTest.class);
+                intent = new Intent(this, SelfTestActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.settings_menu:
@@ -369,7 +367,7 @@ public class CoinFlip extends Activity {
         if (Settings.getAnimationPref(this)) {
             // render the animation for each result state and store it in the
             // animations map
-            generateAnimations(heads, tails, edge, background);
+            Animation.generateAnimations(heads, tails, edge, background);
 
         }
 
@@ -419,7 +417,7 @@ public class CoinFlip extends Activity {
             if (Settings.getAnimationPref(this)) {
                 // render the animation for each result state and store it in the
                 // animations map
-                generateAnimations(heads, tails, edge, background);
+                Animation.generateAnimations(heads, tails, edge, background);
             }
 
             // add the appropriate image for each result state to the images map

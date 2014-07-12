@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CustomAnimationDrawable.java
- * Jan 24, 2014 7:47 PM | variable
+ * Jul 12, 2014 4:31 PM | variable
  * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.

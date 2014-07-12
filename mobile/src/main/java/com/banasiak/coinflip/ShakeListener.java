@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * ShakeListener.java
- * Sep 25, 2013 11:44 AM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jul 12, 2014 4:31 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -32,7 +32,7 @@ import android.util.Log;
 public class ShakeListener implements SensorEventListener {
 
     // debugging tag
-    private static final String TAG = "ShakeListener";
+    private static final String TAG = ShakeListener.class.getSimpleName();
 
     // number of shakes required to trigger callback
     private static final int SHAKE_COUNT = 4;

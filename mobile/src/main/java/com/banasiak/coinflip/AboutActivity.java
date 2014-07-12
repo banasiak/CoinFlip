@@ -1,7 +1,7 @@
 /*
  *========================================================================
- * About.java
- * Jan 24, 2014 7:14 PM | variable
+ * AboutActivity.java
+ * Jul 12, 2014 4:31 PM | variable
  * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -33,10 +33,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class About extends Activity {
+public class AboutActivity extends Activity {
 
     // debugging tag
-    private static final String TAG = "About";
+    private static final String TAG = AboutActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

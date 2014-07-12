@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * Settings.java
- * Sep 25, 2013 12:55 PM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jul 12, 2014 4:31 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -45,7 +45,7 @@ public class Settings extends PreferenceActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     // debugging tag
-    private static final String TAG = "Settings";
+    private static final String TAG = Settings.class.getSimpleName();
 
     // add-on package name
     private static final String EXTPKG = ".coinflipext.";

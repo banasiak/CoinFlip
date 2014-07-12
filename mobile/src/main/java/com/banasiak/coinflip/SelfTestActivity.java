@@ -1,7 +1,7 @@
 /*
  *========================================================================
- * SelfTest.java
- * Sep 25, 2013 11:43 AM | variable
+ * SelfTestActivity.java
+ * Jul 12, 2014 4:31 PM | variable
  * Copyright (c) 2013 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -29,10 +29,10 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 
-public class SelfTest extends Activity {
+public class SelfTestActivity extends Activity {
 
     // debugging tag
-    private static final String TAG = "SelfTest";
+    private static final String TAG = SelfTestActivity.class.getSimpleName();
 
     private long maxNumberFlips;
 

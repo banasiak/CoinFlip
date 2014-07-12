@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * SelfTestAsyncTask.java
- * Sep 25, 2013 12:54 PM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jul 12, 2014 4:31 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -30,13 +30,13 @@ import android.util.Log;
 public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, SelfTestStatus> {
 
     // debugging tag
-    private static final String TAG = "SelfTestTask";
+    private static final String TAG = SelfTestTask.class.getSimpleName();
 
-    private final SelfTest activity;
+    private final SelfTestActivity activity;
 
     private final Coin theCoin;
 
-    public SelfTestTask(final SelfTest iActivity) {
+    public SelfTestTask(final SelfTestActivity iActivity) {
         Log.d(TAG, "SelfTestTask()");
         activity = iActivity;
         theCoin = new Coin();

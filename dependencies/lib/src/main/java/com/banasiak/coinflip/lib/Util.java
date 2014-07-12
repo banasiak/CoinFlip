@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * Util.java
- * Sep 25, 2013 11:44 AM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jul 12, 2014 4:31 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *

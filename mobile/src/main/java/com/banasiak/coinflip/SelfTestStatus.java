@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * SelfTestStatus.java
- * Sep 25, 2013 12:43 AM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Jul 12, 2014 4:31 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -25,7 +25,7 @@ package com.banasiak.coinflip;
 public class SelfTestStatus {
 
     // debugging tag
-    private static final String TAG = "SelfTestStatus";
+    private static final String TAG = SelfTestTask.class.getSimpleName();
 
     private int headsCount = 0;
 
