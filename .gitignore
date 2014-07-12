@@ -2,6 +2,7 @@
 .idea/
 build/
 mobile/build/
+lib/build/
 wear/build/
 *.iml
 .classpath

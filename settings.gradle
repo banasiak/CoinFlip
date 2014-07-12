@@ -1,1 +1,3 @@
-include ':mobile', ':wear'
+include ':mobile'
+include ':dependencies:lib'
+include ':dependencies:wear'

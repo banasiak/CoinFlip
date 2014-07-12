@@ -1,13 +1,12 @@
-apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
-        applicationId "com.banasiak.coinflip.wear"
-        minSdkVersion 20
+        applicationId "com.banasiak.coinflip.lib"
+        minSdkVersion 8
         targetSdkVersion 20
         versionCode 36
         versionName "6.0"
@@ -28,10 +27,4 @@ android {
             }
         }
     }
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.google.android.support:wearable:+'
-    compile 'com.google.android.gms:play-services-wearable:+'
 }
