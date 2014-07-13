@@ -39,24 +39,16 @@ SPECIAL THANKS: Alex Baker, Ciaran Gultnieks, Spanti Nicola, <Your Name Here?>
 https://play.google.com/store/apps/details?id=com.banasiak.coinflip
 https://f-droid.org/repository/browse/?fdfilter=coin&fdid=com.banasiak.coinflip
 
-Completely FREE (no-ads) and doesn't require any unsafe permissions.
-Now supports phones and Android Wear watches!
+Completely FREE (no-ads) and doesn't require any unsafe permissions. Now supports phones and Android Wear watches!
 
-On your phone: Simply tap the question mark or shake and view the result.  Tap the coin or shake to
-spin the coin again.
-On your watch: Say "Ok, Google. Start Coin Flip." Tap the question mark to spin the coin. (Expansion
-pack coins are not supported at this time.)
+On your phone: Simply tap the question mark or shake and view the result.  Tap the coin or shake to spin the coin again.
+On your watch: Say "Ok, Google. Start Coin Flip." Tap the question mark to spin the coin. (Expansion pack coins are not supported at this time.)
 
-Spinning coin animation, sound, text, vibration, shake-to-flip and coin type are all configurable
-via the Settings menu.  Verify the flip algorithm is truly random by running the built-in Diagnostic
-Test and flipping the coin 100,000 times (or more) while watching the results in real-time. (Sorry,
-no cheating!) Add new coins from Google Play by clicking Settings -> Get More Coins.
+Spinning coin animation, sound, text, vibration, shake-to-flip and coin type are all configurable via the Settings menu.  Verify the flip algorithm is truly random by running the built-in Diagnostic Test and flipping the coin 100,000 times (or more) while watching the results in real-time. (Sorry, no cheating!) Add new coins from Google Play by clicking Settings -> Get More Coins.
 
-Open source app released under the GNU General Public License.
-Source code available here:  https://github.com/banasiak/CoinFlip
+Open source app released under the GNU General Public License. Source code available here:  https://github.com/banasiak/CoinFlip
 
-Currently supports both English, Spanish & French translations. Send me an email if you would like
-to help translate this app into your native language.
+Currently supports both English, Spanish & French translations. Send me an email if you would like to help translate this app into your native language.
 
 Quarter-dollar coin images from the United States Mint.
 Presidential $1 Coin images from the United States Mint.
