@@ -14,7 +14,7 @@ android {
         applicationId "com.banasiak.coinflip"
         minSdkVersion 20
         targetSdkVersion 20
-        versionCode 36
+        versionCode 37
         versionName "6.0"
     }
 
