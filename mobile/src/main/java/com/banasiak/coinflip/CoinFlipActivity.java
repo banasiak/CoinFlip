@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlipActivity.java
- * Jul 12, 2014 4:31 PM | variable
+ * Jul 25, 2014 11:26 AM | variable
  * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -331,9 +331,7 @@ public class CoinFlipActivity extends Activity {
 
                 pendingResult.setResultCallback(new ResultCallback<DataApi.DataItemResult>() {
                     @Override public void onResult(DataApi.DataItemResult dataItemResult) {
-                        if(dataItemResult.getStatus().isSuccess()) {
-                            Toast.makeText(getApplicationContext(), "Coins loaded and sent to wearable!",
-                                    Toast.LENGTH_SHORT).show();
+                        if (dataItemResult.getStatus().isSuccess()) {
                             Log.d(TAG, "Data item set: " + dataItemResult.getDataItem().getUri());
                             googleApiClient.disconnect();
                         }
@@ -352,7 +350,6 @@ public class CoinFlipActivity extends Activity {
         final ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteStream);
         return Asset.createFromBytes(byteStream.toByteArray());
-
     }
 
     private void flipCoin() {

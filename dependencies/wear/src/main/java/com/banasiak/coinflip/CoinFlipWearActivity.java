@@ -1,7 +1,7 @@
 /*
  *========================================================================
- * CoinFlipActivity.java
- * Jul 12, 2014 6:39 PM | variable
+ * CoinFlipWearActivity.java
+ * Jul 25, 2014 11:26 AM | variable
  * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -19,6 +19,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package com.banasiak.coinflip;
 
 import com.banasiak.coinflip.lib.Animation;
@@ -79,14 +80,13 @@ public class CoinFlipWearActivity extends Activity {
                 tapper = new View.OnClickListener() {
                     @Override public void onClick(View v) {
                         if (heads == null || tails == null || edge == null || background == null) {
-                            if(loadResources()) {
+                            if (loadResources()) {
                                 flipCoin();
+                            } else {
+                                Toast.makeText(getApplicationContext(), R.string.no_coins,
+                                        Toast.LENGTH_LONG).show();
                             }
-                            else {
-                                Toast.makeText(getApplicationContext(), R.string.no_coins, Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        else {
+                        } else {
                             flipCoin();
                         }
                     }
@@ -184,23 +184,22 @@ public class CoinFlipWearActivity extends Activity {
     private boolean loadResources() {
         Log.d(TAG, "loadResources()");
 
-        heads = loadFromExternalStorage("heads");
-        tails = loadFromExternalStorage("tails");
-        edge = loadFromExternalStorage("edge");
-        background = loadFromExternalStorage("background");
+        heads = loadFromStorage("heads");
+        tails = loadFromStorage("tails");
+        edge = loadFromStorage("edge");
+        background = loadFromStorage("background");
 
-        if(heads == null || tails == null || edge == null || background == null) {
+        if (heads == null || tails == null || edge == null || background == null) {
             Log.w(TAG, "Images unavailable");
             return false;
-        }
-        else {
+        } else {
             Animation.generateAnimations(heads, tails, edge, background);
             return true;
         }
     }
 
-    private Drawable loadFromExternalStorage(String fileName) {
-        Log.d(TAG, "loadFromExternalStorage(" + fileName + ")");
+    private Drawable loadFromStorage(String fileName) {
+        Log.d(TAG, "loadFromStorage(" + fileName + ")");
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File dir = cw.getDir("coins", Context.MODE_PRIVATE);
 

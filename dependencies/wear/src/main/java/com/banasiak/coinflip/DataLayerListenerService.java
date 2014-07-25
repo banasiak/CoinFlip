@@ -1,3 +1,24 @@
+/*
+ *========================================================================
+ * DataLayerListenerService.java
+ * Jul 25, 2014 11:26 AM | variable
+ * Copyright (c) 2014 Richard Banasiak
+ *========================================================================
+ * This file is part of CoinFlip.
+ *
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.banasiak.coinflip;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -20,10 +41,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by variable on 7/24/14.
- */
+
 public class DataLayerListenerService extends WearableListenerService {
+
     private static final String TAG = DataLayerListenerService.class.getSimpleName();
 
     @Override
@@ -39,8 +59,6 @@ public class DataLayerListenerService extends WearableListenerService {
     @Override
     public void onDataChanged(DataEventBuffer dataEvents) {
         Log.d(TAG, "onDataChanged()");
-//        final List<DataEvent> events = FreezableUtils
-//                .freezeIterable(dataEvents);
 
         GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
@@ -68,10 +86,18 @@ public class DataLayerListenerService extends WearableListenerService {
                 Asset aBackground = dataMapItem.getDataMap().getAsset("background");
 
                 Log.d(TAG, "Receiving bitmaps");
-                Bitmap heads = BitmapFactory.decodeStream(Wearable.DataApi.getFdForAsset(googleApiClient, aHeads).await().getInputStream());
-                Bitmap tails = BitmapFactory.decodeStream(Wearable.DataApi.getFdForAsset(googleApiClient, aTails).await().getInputStream());
-                Bitmap edge = BitmapFactory.decodeStream(Wearable.DataApi.getFdForAsset(googleApiClient, aEdge).await().getInputStream());
-                Bitmap background = BitmapFactory.decodeStream(Wearable.DataApi.getFdForAsset(googleApiClient, aBackground).await().getInputStream());
+                Bitmap heads = BitmapFactory.decodeStream(
+                        Wearable.DataApi.getFdForAsset(googleApiClient, aHeads).await()
+                                .getInputStream());
+                Bitmap tails = BitmapFactory.decodeStream(
+                        Wearable.DataApi.getFdForAsset(googleApiClient, aTails).await()
+                                .getInputStream());
+                Bitmap edge = BitmapFactory.decodeStream(
+                        Wearable.DataApi.getFdForAsset(googleApiClient, aEdge).await()
+                                .getInputStream());
+                Bitmap background = BitmapFactory.decodeStream(
+                        Wearable.DataApi.getFdForAsset(googleApiClient, aBackground).await()
+                                .getInputStream());
 
                 Log.d(TAG, "Saving bitmaps");
                 saveToInternalStorage(heads, "heads");
