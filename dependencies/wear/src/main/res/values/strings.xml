@@ -23,5 +23,6 @@
 <resources>
 
     <string name="app_name">Coin Flip</string>
+    <string name="no_coins">Select Coin on Mobile Device to Continue</string>
 
 </resources>

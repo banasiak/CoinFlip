@@ -19,7 +19,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.banasiak.coinflip.wear;
+package com.banasiak.coinflip;
 
 import com.banasiak.coinflip.lib.Animation;
 import com.banasiak.coinflip.lib.Coin;
@@ -27,6 +27,7 @@ import com.banasiak.coinflip.lib.CustomAnimationDrawable;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -35,13 +36,22 @@ import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
-public class CoinFlipActivity extends Activity {
+import java.io.File;
+
+public class CoinFlipWearActivity extends Activity {
 
     // debugging tag
-    private static final String TAG = CoinFlipActivity.class.getSimpleName();
+    private static final String TAG = CoinFlipWearActivity.class.getSimpleName();
+
+    private Drawable heads = null;
+
+    private Drawable tails = null;
+
+    private Drawable edge = null;
+
+    private Drawable background = null;
 
     private final Coin theCoin = new Coin();
 
@@ -68,7 +78,17 @@ public class CoinFlipActivity extends Activity {
                 coinImage = (ImageView) findViewById(R.id.coin_image_view);
                 tapper = new View.OnClickListener() {
                     @Override public void onClick(View v) {
-                        flipCoin();
+                        if (heads == null || tails == null || edge == null || background == null) {
+                            if(loadResources()) {
+                                flipCoin();
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), R.string.no_coins, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else {
+                            flipCoin();
+                        }
                     }
                 };
                 coinImage.setOnClickListener(tapper);
@@ -161,20 +181,29 @@ public class CoinFlipActivity extends Activity {
         }
     }
 
-    private void loadResources() {
-        Log.d(TAG, "Default coin selected");
-        loadInternalResources();
+    private boolean loadResources() {
+        Log.d(TAG, "loadResources()");
+
+        heads = loadFromExternalStorage("heads");
+        tails = loadFromExternalStorage("tails");
+        edge = loadFromExternalStorage("edge");
+        background = loadFromExternalStorage("background");
+
+        if(heads == null || tails == null || edge == null || background == null) {
+            Log.w(TAG, "Images unavailable");
+            return false;
+        }
+        else {
+            Animation.generateAnimations(heads, tails, edge, background);
+            return true;
+        }
     }
 
-    private void loadInternalResources(){
-        Log.d(TAG, "loadInternalResources()");
+    private Drawable loadFromExternalStorage(String fileName) {
+        Log.d(TAG, "loadFromExternalStorage(" + fileName + ")");
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File dir = cw.getDir("coins", Context.MODE_PRIVATE);
 
-        // load the images
-        final Drawable heads = getResources().getDrawable(R.drawable.heads);
-        final Drawable tails = getResources().getDrawable(R.drawable.tails);
-        final Drawable edge = getResources().getDrawable(R.drawable.edge);
-        final Drawable background = getResources().getDrawable(R.drawable.background);
-
-        Animation.generateAnimations(heads, tails, edge, background);
+        return Drawable.createFromPath(dir + "/" + fileName + ".png");
     }
 }

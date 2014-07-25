@@ -22,6 +22,17 @@
 
 package com.banasiak.coinflip;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.wearable.Asset;
+import com.google.android.gms.wearable.DataApi;
+import com.google.android.gms.wearable.PutDataMapRequest;
+import com.google.android.gms.wearable.PutDataRequest;
+import com.google.android.gms.wearable.Wearable;
+
 import com.banasiak.coinflip.lib.Animation;
 import com.banasiak.coinflip.lib.Coin;
 import com.banasiak.coinflip.lib.CustomAnimationDrawable;
@@ -33,7 +44,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
+import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -51,6 +64,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.EnumMap;
 
 public class CoinFlipActivity extends Activity {
@@ -65,6 +79,14 @@ public class CoinFlipActivity extends Activity {
     private static final int SCHEMA_VERSION = 6;
 
     EnumMap<Animation.ResultState, Drawable> coinImagesMap;
+
+    private Drawable heads = null;
+
+    private Drawable tails = null;
+
+    private Drawable edge = null;
+
+    private Drawable background = null;
 
     private final Coin theCoin = new Coin();
 
@@ -105,6 +127,8 @@ public class CoinFlipActivity extends Activity {
     private int headsCounter = 0;
 
     private int tailsCounter = 0;
+
+    private GoogleApiClient googleApiClient = null;
 
     /**
      * Called when the user presses the menu button.
@@ -157,6 +181,8 @@ public class CoinFlipActivity extends Activity {
         updateStatsText();
         resumeListeners();
 
+        connectToWearable();
+
         super.onResume();
     }
 
@@ -188,6 +214,8 @@ public class CoinFlipActivity extends Activity {
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
+
+        initializeWearable();
 
         // reset settings if they are from an earlier version.
         // if any setting keys have changed and we don't reset, the app
@@ -239,6 +267,92 @@ public class CoinFlipActivity extends Activity {
                 resetStatistics();
             }
         });
+    }
+
+    private void initializeWearable() {
+        Log.d(TAG, "initializeWearable()");
+        if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)
+                == ConnectionResult.SUCCESS) {
+            googleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                        @Override public void onConnected(Bundle connectionHint) {
+                            Log.d(TAG, "Wearable connected");
+                            // Now you can use the data layer API
+                            pushCoinsToWearable();
+                        }
+
+                        @Override public void onConnectionSuspended(int cause) {
+                            Log.d(TAG, "Wearable connection suspended");
+
+                        }
+                    })
+                    .addOnConnectionFailedListener(
+                            new GoogleApiClient.OnConnectionFailedListener() {
+                                @Override public void onConnectionFailed(
+                                        ConnectionResult result) {
+                                    Log.d(TAG, "Wearable connection failed");
+
+                                }
+                            }
+                    )
+                    .addApi(Wearable.API)
+                    .build();
+        }
+    }
+
+    private void connectToWearable() {
+        Log.d(TAG, "connectToWearable()");
+        if (googleApiClient != null) {
+            googleApiClient.connect();
+        }
+    }
+
+    private void pushCoinsToWearable() {
+        Log.d(TAG, "pushCoinsToWearable()");
+        if (heads != null && tails != null && edge != null && background != null) {
+
+            Asset aHeads = createAssetForWearable(heads);
+            Asset aTails = createAssetForWearable(tails);
+            Asset aEdge = createAssetForWearable(edge);
+            Asset aBackground = createAssetForWearable(background);
+
+            if (googleApiClient != null && googleApiClient.isConnected()) {
+                PutDataMapRequest dataMap = PutDataMapRequest.create("/coins");
+                dataMap.getDataMap().putAsset("heads", aHeads);
+                dataMap.getDataMap().putAsset("tails", aTails);
+                dataMap.getDataMap().putAsset("edge", aEdge);
+                dataMap.getDataMap().putAsset("background", aBackground);
+
+                PutDataRequest request = dataMap.asPutDataRequest();
+
+                Log.d(TAG, "Sending assets to wearable");
+                PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi
+                        .putDataItem(googleApiClient, request);
+
+                pendingResult.setResultCallback(new ResultCallback<DataApi.DataItemResult>() {
+                    @Override public void onResult(DataApi.DataItemResult dataItemResult) {
+                        if(dataItemResult.getStatus().isSuccess()) {
+                            Toast.makeText(getApplicationContext(), "Coins loaded and sent to wearable!",
+                                    Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "Data item set: " + dataItemResult.getDataItem().getUri());
+                            googleApiClient.disconnect();
+                        }
+
+                    }
+                });
+            }
+        }
+    }
+
+    private Asset createAssetForWearable(Drawable image) {
+        Log.d(TAG, "createAssetForWearable()");
+        Bitmap b = ((BitmapDrawable) image).getBitmap();
+        // 280dp @ 1.5x (HDPI) = 420px
+        Bitmap bitmap = Bitmap.createScaledBitmap(b, 420, 420, false);
+        final ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteStream);
+        return Asset.createFromBytes(byteStream.toByteArray());
+
     }
 
     private void flipCoin() {
@@ -358,10 +472,10 @@ public class CoinFlipActivity extends Activity {
         Log.d(TAG, "loadInternalResources()");
 
         // load the images
-        final Drawable heads = getResources().getDrawable(R.drawable.heads);
-        final Drawable tails = getResources().getDrawable(R.drawable.tails);
-        final Drawable edge = getResources().getDrawable(R.drawable.edge);
-        final Drawable background = getResources().getDrawable(R.drawable.background);
+        heads = getResources().getDrawable(R.drawable.heads);
+        tails = getResources().getDrawable(R.drawable.tails);
+        edge = getResources().getDrawable(R.drawable.edge);
+        background = getResources().getDrawable(R.drawable.background);
 
         // only do all the CPU-intensive animation rendering if animations are enabled
         if (Settings.getAnimationPref(this)) {
@@ -374,10 +488,10 @@ public class CoinFlipActivity extends Activity {
         // add the appropriate image for each result state to the images map
         // WTF? There's some kind of rendering bug if you use the "heads" or
         // "tails" variables here...
-        coinImagesMap.put(Animation.ResultState.HEADS_HEADS, getResources().getDrawable(R.drawable.heads));
-        coinImagesMap.put(Animation.ResultState.HEADS_TAILS, getResources().getDrawable(R.drawable.tails));
-        coinImagesMap.put(Animation.ResultState.TAILS_HEADS, getResources().getDrawable(R.drawable.heads));
-        coinImagesMap.put(Animation.ResultState.TAILS_TAILS, getResources().getDrawable(R.drawable.tails));
+        coinImagesMap.put(Animation.ResultState.HEADS_HEADS, heads);
+        coinImagesMap.put(Animation.ResultState.HEADS_TAILS, tails);
+        coinImagesMap.put(Animation.ResultState.TAILS_HEADS, heads);
+        coinImagesMap.put(Animation.ResultState.TAILS_TAILS, tails);
     }
 
     // load resources from the external CoinFlipExt package
@@ -408,10 +522,10 @@ public class CoinFlipActivity extends Activity {
                     coinPrefix);
 
             // load the images from the add-in package via their ID
-            final Drawable heads = extPkgResources.getDrawable(headsId);
-            final Drawable tails = extPkgResources.getDrawable(tailsId);
-            final Drawable edge = extPkgResources.getDrawable(edgeId);
-            final Drawable background = getResources().getDrawable(R.drawable.background);
+            heads = extPkgResources.getDrawable(headsId);
+            tails = extPkgResources.getDrawable(tailsId);
+            edge = extPkgResources.getDrawable(edgeId);
+            background = getResources().getDrawable(R.drawable.background);
 
             // only do all the CPU-intensive animation rendering if animations are enabled
             if (Settings.getAnimationPref(this)) {
@@ -423,10 +537,10 @@ public class CoinFlipActivity extends Activity {
             // add the appropriate image for each result state to the images map
             // WTF? There's (still) some kind of rendering bug if you use the
             // "heads" or "tails" variables here...
-            coinImagesMap.put(Animation.ResultState.HEADS_HEADS, extPkgResources.getDrawable(headsId));
-            coinImagesMap.put(Animation.ResultState.HEADS_TAILS, extPkgResources.getDrawable(tailsId));
-            coinImagesMap.put(Animation.ResultState.TAILS_HEADS, extPkgResources.getDrawable(headsId));
-            coinImagesMap.put(Animation.ResultState.TAILS_TAILS, extPkgResources.getDrawable(tailsId));
+            coinImagesMap.put(Animation.ResultState.HEADS_HEADS, heads);
+            coinImagesMap.put(Animation.ResultState.HEADS_TAILS, tails);
+            coinImagesMap.put(Animation.ResultState.TAILS_HEADS, heads);
+            coinImagesMap.put(Animation.ResultState.TAILS_TAILS, tails);
 
         } catch (final NameNotFoundException e) {
             Log.e(TAG, "NameNotFoundException");
