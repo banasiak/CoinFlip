@@ -8,17 +8,15 @@ android {
     buildToolsVersion '20.0.0'
 
     defaultConfig {
-        applicationId "com.banasiak.coinflip.lib"
+        applicationId 'com.banasiak.coinflip.lib'
         minSdkVersion 8
         targetSdkVersion 20
-        versionCode 36
-        versionName "6.0"
     }
 
     buildTypes {
         release {
             if (project.hasProperty('signRelease')) {
-                if (signRelease.equals("true")) {
+                if (signRelease.equals('true')) {
                     signingConfig signingConfigs.release
                 }
             }
