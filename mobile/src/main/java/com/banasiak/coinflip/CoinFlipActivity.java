@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlipActivity.java
- * Jul 25, 2014 11:26 AM | variable
+ * Oct 23, 2014 12:07 PM | variable
  * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -50,6 +50,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -308,38 +309,47 @@ public class CoinFlipActivity extends Activity {
     }
 
     private void pushCoinsToWearable() {
-        Log.d(TAG, "pushCoinsToWearable()");
-        if (heads != null && tails != null && edge != null && background != null) {
+        Util.execute(new AsyncTask<Void, Void, Void>() {
+            @Override protected Void doInBackground(Void... params) {
+                Log.d(TAG, "pushCoinsToWearable()");
+                if (heads != null && tails != null && edge != null && background != null) {
 
-            Asset aHeads = createAssetForWearable(heads);
-            Asset aTails = createAssetForWearable(tails);
-            Asset aEdge = createAssetForWearable(edge);
-            Asset aBackground = createAssetForWearable(background);
+                    Asset aHeads = createAssetForWearable(heads);
+                    Asset aTails = createAssetForWearable(tails);
+                    Asset aEdge = createAssetForWearable(edge);
+                    Asset aBackground = createAssetForWearable(background);
 
-            if (googleApiClient != null && googleApiClient.isConnected()) {
-                PutDataMapRequest dataMap = PutDataMapRequest.create("/coins");
-                dataMap.getDataMap().putAsset("heads", aHeads);
-                dataMap.getDataMap().putAsset("tails", aTails);
-                dataMap.getDataMap().putAsset("edge", aEdge);
-                dataMap.getDataMap().putAsset("background", aBackground);
+                    if (googleApiClient != null && googleApiClient.isConnected()) {
+                        PutDataMapRequest dataMap = PutDataMapRequest.create("/coins");
+                        dataMap.getDataMap().putAsset("heads", aHeads);
+                        dataMap.getDataMap().putAsset("tails", aTails);
+                        dataMap.getDataMap().putAsset("edge", aEdge);
+                        dataMap.getDataMap().putAsset("background", aBackground);
 
-                PutDataRequest request = dataMap.asPutDataRequest();
+                        PutDataRequest request = dataMap.asPutDataRequest();
 
-                Log.d(TAG, "Sending assets to wearable");
-                PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi
-                        .putDataItem(googleApiClient, request);
+                        Log.d(TAG, "Sending assets to wearable");
+                        PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi
+                                .putDataItem(googleApiClient, request);
 
-                pendingResult.setResultCallback(new ResultCallback<DataApi.DataItemResult>() {
-                    @Override public void onResult(DataApi.DataItemResult dataItemResult) {
-                        if (dataItemResult.getStatus().isSuccess()) {
-                            Log.d(TAG, "Data item set: " + dataItemResult.getDataItem().getUri());
-                            googleApiClient.disconnect();
-                        }
+                        pendingResult
+                                .setResultCallback(new ResultCallback<DataApi.DataItemResult>() {
+                                    @Override public void onResult(
+                                            DataApi.DataItemResult dataItemResult) {
+                                        if (dataItemResult.getStatus().isSuccess()) {
+                                            Log.d(TAG,
+                                                    "Data item set: " + dataItemResult.getDataItem()
+                                                            .getUri());
+                                            googleApiClient.disconnect();
+                                        }
 
+                                    }
+                                });
                     }
-                });
+                }
+                return null;
             }
-        }
+        });
     }
 
     private Asset createAssetForWearable(Drawable image) {

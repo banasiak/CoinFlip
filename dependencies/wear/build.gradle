@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 dependencies {
-    compile 'com.google.android.support:wearable:+'
-    compile 'com.google.android.gms:play-services-wearable:+'
+    compile 'com.google.android.support:wearable:1.0.0'
+    compile 'com.google.android.gms:play-services-wearable:6.1.11'
     compile project(':dependencies:lib')
 }
 
@@ -14,8 +14,8 @@ android {
         applicationId 'com.banasiak.coinflip'
         minSdkVersion 20
         targetSdkVersion 20
-        versionCode 39
-        versionName '6.2'
+        versionCode 40
+        versionName '6.2.1'
     }
 
     buildTypes {

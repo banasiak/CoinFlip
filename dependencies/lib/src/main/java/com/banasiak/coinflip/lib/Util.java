@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Util.java
- * Jul 12, 2014 4:31 PM | variable
+ * Oct 23, 2014 12:07 PM | variable
  * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -22,10 +22,13 @@
 
 package com.banasiak.coinflip.lib;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
@@ -186,6 +189,15 @@ public class Util {
         int width = display.getWidth();
         Log.d(TAG, "screenWidth=" + width);
         return width;
+    }
+
+    @SuppressLint("NewApi")
+    public static <T> AsyncTask<T, ?, ?> execute(final AsyncTask<T, ?, ?> task, final T... params) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        } else {
+            return task.execute(params);
+        }
     }
 
 }
