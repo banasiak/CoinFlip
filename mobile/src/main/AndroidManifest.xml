@@ -51,12 +51,12 @@
             android:name=".SelfTestActivity"
             android:screenOrientation="portrait"
             android:label="@string/selftest_activity_title"
-            android:theme="@android:style/Theme.Dialog" />
+            android:theme="@style/ThemeSelector.Dialog"/>
         <activity
             android:name=".AboutActivity"
             android:screenOrientation="portrait"
             android:label="@string/about_activity_title"
-            android:theme="@android:style/Theme.Dialog" />
+            android:theme="@style/ThemeSelector.Dialog"/>
 
         <receiver
                 android:name=".InstallReceiver">

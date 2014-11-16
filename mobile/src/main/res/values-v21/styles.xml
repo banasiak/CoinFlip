@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * styles.xml
- * Nov 15, 2014 4:38 PM | variable
+ * Nov 15, 2014 6:51 PM | variable
  * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -27,4 +27,5 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
+    <style name="ThemeSelector.Dialog" parent="android:Theme.Material.Dialog"/>
 </resources>

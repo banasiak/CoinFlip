@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * styles.xml
- * Sep 25, 2013 11:40 AM | variable
- * Copyright (c) 2013 Richard Banasiak
+ * Nov 15, 2014 6:51 PM | variable
+ * Copyright (c) 2014 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -22,4 +22,5 @@
 -->
 <resources>
     <style name="ThemeSelector" parent="android:Theme.NoTitleBar" />
+    <style name="ThemeSelector.Dialog" parent="android:Theme.Dialog"/>
 </resources>
