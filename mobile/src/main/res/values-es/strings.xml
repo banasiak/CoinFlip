@@ -2,7 +2,7 @@
 <!--
 *========================================================================
 * strings.xml
-* Jul 11, 2014 7:44 PM | variable
+* Nov 15, 2014 5:37 PM | variable
 * Copyright (c) 2014 Richard Banasiak
 *========================================================================
 * This file is part of CoinFlip.
@@ -30,7 +30,8 @@
         Presidential $1 moneda imágenes de la United States Mint.
         \n\n\nCopyright © 2014 - Richard Banasiak
         \nContribuciones de código abierto de Alex Baker
-        \nFrench translation by Spanti Nicola (RyDroid)</string>
+        \nTraducción al francés por Spanti Nicola (RyDroid)
+    </string>
     <string name="app_name">Coin Flip</string>
     <string name="coin_animation">Animación de moneda</string>
     <string name="exit">Salir</string>
@@ -40,6 +41,7 @@
     <string name="max">MÁX</string>
     <string name="milliseconds">ms</string>
     <string name="min">APAGADO</string>
+    <string name="new_coins">Nuevas monedas disponibles</string>
     <string name="rate_app_text">Califica la aplicación en Google Play</string>
     <string name="reset">Reiniciar</string>
     <string name="selftest_activity_title">Análisis de diagnóstico de Coin Flip</string>

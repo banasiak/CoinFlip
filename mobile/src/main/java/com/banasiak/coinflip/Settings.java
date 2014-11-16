@@ -48,7 +48,7 @@ public class Settings extends PreferenceActivity implements
     private static final String TAG = Settings.class.getSimpleName();
 
     // add-on package name
-    private static final String EXTPKG = ".coinflipext.";
+    public static final String EXTPKG = ".coinflipext.";
 
     // option keys and default values
     private static final String KEY_ANIMATION = "animation";

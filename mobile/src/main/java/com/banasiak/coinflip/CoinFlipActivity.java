@@ -73,8 +73,8 @@ public class CoinFlipActivity extends Activity {
     // debugging tag
     private static final String TAG = CoinFlipActivity.class.getSimpleName();
 
-    // add-on package name
-    // private static final String EXTPKG = "com.banasiak.coinflipext";
+    // extra flag indicating we should open the settings activity when the app loads
+    public static final String OPEN_SETTINGS_FLAG = "EXTRA_OPEN_SETTINGS";
 
     // version of the settings schema used by this codebase
     private static final int SCHEMA_VERSION = 6;
@@ -215,6 +215,13 @@ public class CoinFlipActivity extends Activity {
         Log.d(TAG, "onCreate()");
 
         super.onCreate(savedInstanceState);
+
+        // open up the Settings activity if we've restarted after an add-on package install
+        if (getIntent().getBooleanExtra(OPEN_SETTINGS_FLAG, false)) {
+            Toast.makeText(this, R.string.new_coins, Toast.LENGTH_LONG).show();
+            final Intent settingsIntent = new Intent(this, Settings.class);
+            startActivity(settingsIntent);
+        }
 
         initializeWearable();
 

@@ -30,7 +30,7 @@
         Images de 1$ présidentiel de United States Mint.
         \n\n\nCopyright © 2014 - Richard Banasiak
         \nContributions open-source contributions de Alex Baker
-        \nFrench translation by Spanti Nicola (RyDroid)
+        \nTraduction française par Spanti Nicola (RyDroid)
     </string>
     <string name="app_name">Coin Flip</string>
     <string name="coin_animation">Animation de la pièce</string>
@@ -41,6 +41,7 @@
     <string name="max">MAX</string>
     <string name="milliseconds">ms</string>
     <string name="min">OFF</string>
+    <string name="new_coins">Nouvelles pièces disponibles</string>
     <string name="rate_app_text">Noter l\'app sur Google Play</string>
     <string name="reset">Reset</string>
     <string name="selftest_activity_title">Test de diagnostic du retournement de la pièce</string>

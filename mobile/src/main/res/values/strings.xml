@@ -42,6 +42,7 @@
     <string name="max">MAX</string>
     <string name="milliseconds">ms</string>
     <string name="min">OFF</string>
+    <string name="new_coins">Sweet! New coins available!</string>
     <string name="rate_app_text">Rate App on Google Play</string>
     <string name="reset">Reset</string>
     <string name="selftest_activity_title">Coin Flip Diagnostic Test</string>
