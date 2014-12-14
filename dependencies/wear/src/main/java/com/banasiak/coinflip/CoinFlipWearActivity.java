@@ -190,12 +190,13 @@ public class CoinFlipWearActivity extends Activity {
         background = loadFromStorage("background");
 
         if (heads == null || tails == null || edge == null || background == null) {
-            Log.w(TAG, "Images unavailable");
-            return false;
-        } else {
-            Animation.generateAnimations(heads, tails, edge, background);
-            return true;
+            Log.w(TAG, "Images unavailable. Loading backup resources.");
+            loadFallbackResources();
         }
+
+        Animation.generateAnimations(heads, tails, edge, background);
+        return true;
+
     }
 
     private Drawable loadFromStorage(String fileName) {
@@ -204,5 +205,15 @@ public class CoinFlipWearActivity extends Activity {
         File dir = cw.getDir("coins", Context.MODE_PRIVATE);
 
         return Drawable.createFromPath(dir + "/" + fileName + ".png");
+    }
+
+    private boolean loadFallbackResources() {
+        heads = getResources().getDrawable(R.drawable.heads);
+        tails = getResources().getDrawable(R.drawable.tails);
+        edge = getResources().getDrawable(R.drawable.edge);
+        background = getResources().getDrawable(R.drawable.background);
+
+        return heads != null && tails != null && edge != null && background != null;
+
     }
 }

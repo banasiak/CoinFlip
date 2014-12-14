@@ -5,10 +5,9 @@ dependencies {
 
 android {
     compileSdkVersion 20
-    buildToolsVersion '20.0.0'
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
-        applicationId 'com.banasiak.coinflip.lib'
         minSdkVersion 8
         targetSdkVersion 20
     }

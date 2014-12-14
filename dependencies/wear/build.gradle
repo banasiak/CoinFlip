@@ -8,14 +8,14 @@ dependencies {
 
 android {
     compileSdkVersion 20
-    buildToolsVersion '20.0.0'
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
         applicationId 'com.banasiak.coinflip'
         minSdkVersion 20
         targetSdkVersion 20
-        versionCode 40
-        versionName '6.2.1'
+        versionCode 42
+        versionName '6.3.1'
     }
 
     buildTypes {
@@ -25,7 +25,7 @@ android {
                     signingConfig signingConfigs.release
                 }
             }
-            runProguard true
+            minifyEnabled true
             proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
         }
     }
