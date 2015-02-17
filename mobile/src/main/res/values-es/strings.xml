@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-*========================================================================
-* strings.xml
-* Nov 15, 2014 5:37 PM | variable
-* Copyright (c) 2014 Richard Banasiak
-*========================================================================
-* This file is part of CoinFlip.
-*
-*    CoinFlip is free software: you can redistribute it and/or modify
-*    it under the terms of the GNU General Public License as published by
-*    the Free Software Foundation, either version 3 of the License, or
-*    (at your option) any later version.
-*
-*    CoinFlip is distributed in the hope that it will be useful,
-*    but WITHOUT ANY WARRANTY; without even the implied warranty of
-*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*    GNU General Public License for more details.
-*
-*    You should have received a copy of the GNU General Public License
-*    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
+ *========================================================================
+ * strings.xml
+ * Feb 17, 2015 1:38 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
+ *========================================================================
+ * This file is part of CoinFlip.
+ *
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
     <string name="about_activity_title">Acerca de Coin Flip</string>
@@ -28,8 +28,9 @@
         para hacer girar la moneda nuevamente.
         \n\n\nQuarter-dollar moneda imágenes de la United States Mint.
         Presidential $1 moneda imágenes de la United States Mint.
-        \n\n\nCopyright © 2014 - Richard Banasiak
-        \nContribuciones de código abierto de Alex Baker, Ciaran Gultnieks &amp; Spanti Nicola
+        \n\n\nCopyright © 2015 - Richard Banasiak
+        \nContribuciones de código abierto de Alex Baker, Ciaran Gultnieks, Spanti Nicola &amp; 
+        Michael Riepen
     </string>
     <string name="app_name">Coin Flip</string>
     <string name="coin_animation">Animación de moneda</string>

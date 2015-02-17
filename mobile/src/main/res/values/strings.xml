@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * strings.xml
- * Jul 11, 2014 7:44 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Feb 17, 2015 1:38 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -29,8 +29,9 @@
         to spin the coin again.
         \n\n\nQuarter-dollar coin images from the United States Mint.
         Presidential $1 Coin images from the United States Mint.
-        \n\n\nCopyright © 2014 - Richard Banasiak
-        \nOpen-source contributions from Alex Baker, Ciaran Gultnieks &amp; Spanti Nicola
+        \n\n\nCopyright © 2015 - Richard Banasiak
+        \nOpen-source contributions from Alex Baker, Ciaran Gultnieks, Spanti Nicola &amp; Michael 
+        Riepen
     </string>
     <string name="app_name">Coin Flip</string>
     <string name="coin_animation">Coin Animation</string>
