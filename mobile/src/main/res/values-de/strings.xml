@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ *========================================================================
+ * strings.xml
+ * Feb 16, 2015 11:21 PM | variable
+ * Copyright (c) 2015 Michael Riepen
+ *========================================================================
+ * This file is part of CoinFlip.
+ *
+ *    CoinFlip is free software: you can redistribute it and/or modify
+ *    it under the terms of the GNU General Public License as published by
+ *    the Free Software Foundation, either version 3 of the License, or
+ *    (at your option) any later version.
+ *
+ *    CoinFlip is distributed in the hope that it will be useful,
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *    GNU General Public License for more details.
+ *
+ *    You should have received a copy of the GNU General Public License
+ *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+    <string name="about_activity_title">Über \"Münze werfen\"</string>
+    <string name="about_text">Die einfache Art eine Münze zu werfen, obwohl gerade keine zur Hand
+        ist. Nur kurz das Fragezeichen antippen oder Mobilgerät schütteln, um die Münze zu werfen.
+        Antippen oder schütteln für erneutes Werfen...
+        \n\n\nViertel-Dollar Münzbilder von \"United States Mint\".
+        Ein-Dollar Präsidenten Münzbilder von \"United States Mint\".
+        \n\n\nCopyright © 2014 - Richard Banasiak
+        \nOpen-source Beiträge von Alex Baker, Ciaran Gultnieks &amp; Spanti Nicola
+    </string>
+    <string name="app_name">Münze werfen</string>
+    <string name="exit">Beenden</string>
+    <string name="instructions_tap_shake_tv">Tippen/Schütteln, um Münze zu werfen</string>
+    <string name="heads">KOPF</string>
+    <string name="max">MAX</string>
+    <string name="milliseconds">ms</string>
+    <string name="min">AUS</string>
+    <string name="new_coins">Genial! Neue Münzen verfügbar!</string>
+    <string name="rate_app_text">App bei Google Play bewerten</string>
+    <string name="selftest_activity_title">Selbsttest</string>
+    <string name="selftest_menu_title">Selbsttest</string>
+    <string name="settings_activity_title">Einstellungen für \"Münze werfen\"</string>
+    <string name="settings_header_basic_title">Grundeinstellungen</string>
+    <string name="settings_header_advanced_title">Erweiterte Einstellungen</string>
+    <string name="settings_item_animation_summary">Animation der drehenden Münze</string>
+    <string name="settings_item_animation_title">Animation</string>
+    <string name="settings_item_coin_summary">Münztyp Auswahl</string>
+    <string name="settings_item_download_summary">Weitere Münzen in Google Play herunterladen</string>
+    <string name="settings_item_download_title">Weitere Münzen finden</string>
+    <string name="settings_item_force_summary">Schüttel Empfindlichkeit</string>
+    <string name="settings_item_force_title">Schütteln</string>
+    <string name="settings_item_selftest_title">Zufallsgenerator Selbsttest</string>
+    <string name="settings_item_selftest_summary">Durchläufe</string>
+    <string name="settings_item_selftest_dialog">Anzahl der Durchläufe</string>
+    <string name="settings_item_sound_summary">Ton abspielen nach Münzwurf</string>
+    <string name="settings_item_sound_title">Ton</string>
+    <string name="settings_item_stats_summary">Statistik Zusammenfassung</string>
+    <string name="settings_item_stats_title">Statistik</string>
+    <string name="settings_item_text_summary">Anzeige KOPF/ZAHL</string>
+    <string name="settings_item_text_title">Text</string>
+    <string name="settings_item_vibrate_summary">Vibrieren bei Münzwurf</string>
+    <string name="settings_item_vibrate_title">Vibrieren</string>
+    <string name="settings_menu_title">Einstellungen</string>
+    <string name="tails">ZAHL</string>
+    <string name="time">ZEIT</string>
+    <string name="toast_coin_error">Münze nicht gefunden - Auswahl wird zurückgesetzt</string>
+    <string name="total">GESAMT</string>
+    <string name="unknown">UNBEKANNT</string>
+    <string name="version">Version</string>
+    <string name="about_menu_title">Über...</string>
+    <string name="coin_animation">Münz Animation</string>
+    <string name="instructions_tap_tv">Tippen, um Münze zu werfen</string>
+    <string name="settings_item_coin_title">Münztyp</string>
+    <string name="reset">Zurücksetzen</string>
+</resources>

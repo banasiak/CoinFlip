@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Münze werfen</string>
+    <string name="no_coins">Zuerst Münze auf Mobilgerät auswählen</string>
+</resources>
