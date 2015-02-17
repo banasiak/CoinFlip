@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * README
- * Dec 14, 2014 1:05 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Feb 17, 2015 2:38 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -31,7 +31,8 @@ DEVELOPERS: Did you know you can create add-in packs with your favorite coins
             for SCF 5.0+?  Find everything you need right here: 
             http://github.com/banasiak/CoinFlipExtExample
 
-OPEN SOURCE CONTRIBUTIONS: Alex Baker, Ciaran Gultnieks, Spanti Nicola, <Your Name Here?>
+OPEN SOURCE CONTRIBUTIONS: Alex Baker, Ciaran Gultnieks, Spanti Nicola, Michael 
+                           Riepen, <Your Name Here?>
 
 ================================================================================
 
