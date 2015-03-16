@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * CoinFlipWearActivity.java
- * Jul 25, 2014 11:26 AM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Mar 16, 2014 2:43 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -29,7 +29,6 @@ import com.banasiak.coinflip.lib.CustomAnimationDrawable;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -62,7 +61,7 @@ public class CoinFlipWearActivity extends Activity {
 
     private Boolean previousResult = true;
 
-    private CustomAnimationDrawable coinAnimationCustom;
+    private CustomAnimationDrawable coinAnimation;
 
     private ImageView coinImage;
 
@@ -148,22 +147,20 @@ public class CoinFlipWearActivity extends Activity {
     private void renderResult(final Animation.ResultState resultState) {
         Log.d(TAG, "renderResult()");
 
-        AnimationDrawable coinAnimation;
-
         coinAnimation = Animation.getAnimation(resultState);
-        coinAnimationCustom = new CustomAnimationDrawable(coinAnimation) {
-            @Override
-            protected void onAnimationFinish() {
+        coinAnimation.setAnimationCallback(new CustomAnimationDrawable.AnimationCallback() {
+            @Override public void onAnimationFinish() {
+                coinAnimation.stop();
                 final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(100);
                 resumeListeners();
             }
-        };
+        });
 
-        //coinImage.setBackgroundDrawable(coinAnimationCustom);
+        //coinImage.setBackgroundDrawable(coinAnimation);
         coinImage.setBackground(null);
-        coinImage.setImageDrawable(coinAnimationCustom);
-        coinAnimationCustom.start();
+        coinImage.setImageDrawable(coinAnimation);
+        coinAnimation.start();
     }
 
     private void pauseListeners() {

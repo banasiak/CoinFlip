@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * CustomAnimationDrawable.java
- * Jul 12, 2014 4:31 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Mar 16, 2014 2:43 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -26,12 +26,13 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.util.Log;
 
-// AnimationDrawable does not provide a callback after the animation is
-// finished.  This abstract class raises an onAnimationFinish() method
-// after the final frame of the animation is rendered.
-// http://stackoverflow.com/questions/2214735/android-animationdrawable-and-knowing-when-animation-ends
+// AnimationDrawable does not provide a callback after the animation is finished.  This class
+// provides an interface for an onAnimationFinish() callback method which is called after the final
+// frame of the animation is rendered.
+//
+// Loosely based on this thread: http://stackoverflow.com/a/6641321
 
-public abstract class CustomAnimationDrawable extends AnimationDrawable {
+public class CustomAnimationDrawable extends AnimationDrawable {
 
     // debugging tag
     private static final String TAG = CustomAnimationDrawable.class.getSimpleName();
@@ -39,11 +40,18 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable {
     Handler mAnimationHandler;
     Runnable mAnimationRunable;
 
-    public CustomAnimationDrawable(AnimationDrawable aniDraw) {
-        // Add each frame to this CustomAnimationDrawable
-        for (int i = 0; i < aniDraw.getNumberOfFrames(); i++) {
-            this.addFrame(aniDraw.getFrame(i), aniDraw.getDuration(i));
-        }
+    public AnimationCallback getAnimationCallback() {
+        return mAnimationCallback;
+    }
+
+    public void setAnimationCallback(AnimationCallback animationCallback) {
+        mAnimationCallback = animationCallback;
+    }
+
+    private AnimationCallback mAnimationCallback;
+
+    public CustomAnimationDrawable() {
+        super();
     }
 
     @Override
@@ -58,7 +66,9 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable {
 
         mAnimationRunable = new Runnable() {
             @Override public void run() {
-                onAnimationFinish();
+                if (mAnimationCallback != null) {
+                    mAnimationCallback.onAnimationFinish();
+                }
             }
         };
 
@@ -86,5 +96,8 @@ public abstract class CustomAnimationDrawable extends AnimationDrawable {
     }
 
     // called when the animation finishes
-    protected abstract void onAnimationFinish();
+    public interface AnimationCallback {
+
+        public void onAnimationFinish();
+    }
 }

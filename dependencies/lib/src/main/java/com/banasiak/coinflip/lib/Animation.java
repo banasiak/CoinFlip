@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * Animation.java
- * Jul 12, 2014 4:31 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Mar 16, 2014 2:43 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -24,7 +24,6 @@ package com.banasiak.coinflip.lib;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -48,21 +47,22 @@ public class Animation {
         UNKNOWN
     }
 
-    private static EnumMap<ResultState, AnimationDrawable> coinAnimationsMap;
+    private static EnumMap<ResultState, CustomAnimationDrawable> coinAnimationsMap;
 
     private Animation() {
         //singleton
     }
 
     public static void init() {
-        coinAnimationsMap = new EnumMap<ResultState, AnimationDrawable>(Animation.ResultState.class);
+        coinAnimationsMap = new EnumMap<ResultState, CustomAnimationDrawable>(
+                Animation.ResultState.class);
     }
 
-    public static EnumMap<ResultState, AnimationDrawable> getAllAnimations() {
+    public static EnumMap<ResultState, CustomAnimationDrawable> getAllAnimations() {
         return coinAnimationsMap;
     }
 
-    public static AnimationDrawable getAnimation(ResultState state) {
+    public static CustomAnimationDrawable getAnimation(ResultState state) {
         return coinAnimationsMap.get(state);
     }
 
@@ -70,12 +70,13 @@ public class Animation {
         coinAnimationsMap.clear();
     }
 
-    public static EnumMap<ResultState, AnimationDrawable> generateAnimations(final Drawable imageA, final Drawable imageB,
+    public static EnumMap<ResultState, CustomAnimationDrawable> generateAnimations(
+            final Drawable imageA, final Drawable imageB,
             final Drawable edge, final Drawable background) {
         Log.d(TAG, "generateAnimations()");
 
         Animation.ResultState resultState;
-        AnimationDrawable coinAnimation;
+        CustomAnimationDrawable coinAnimation;
 
         final int widthA = ((BitmapDrawable) imageA).getBitmap().getWidth();
         final int heightA = ((BitmapDrawable) imageA).getBitmap().getHeight();
@@ -171,7 +172,7 @@ public class Animation {
         return comboImage_bmd;
     }
 
-    private static AnimationDrawable generateAnimatedDrawable(final BitmapDrawable imageA_8,
+    private static CustomAnimationDrawable generateAnimatedDrawable(final BitmapDrawable imageA_8,
             final BitmapDrawable imageA_6,
             final BitmapDrawable imageA_4,
             final BitmapDrawable imageA_2,
@@ -184,7 +185,7 @@ public class Animation {
         Log.d(TAG, "generateAnimatedDrawable()");
 
         final int duration = 20;
-        final AnimationDrawable animation = new AnimationDrawable();
+        final CustomAnimationDrawable animation = new CustomAnimationDrawable();
 
         // create the appropriate animation depending on the result state
         switch (resultState) {

@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * CoinFlipActivity.java
- * Oct 23, 2014 12:07 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Mar 16, 2014 2:43 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -45,7 +45,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.Bitmap;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -103,7 +102,7 @@ public class CoinFlipActivity extends Activity {
 
     private LinearLayout mainLayout;
 
-    private CustomAnimationDrawable coinAnimationCustom;
+    private CustomAnimationDrawable coinAnimation;
 
     private TextView resultText;
 
@@ -193,10 +192,10 @@ public class CoinFlipActivity extends Activity {
 
         pauseListeners();
 
-        if (coinAnimationCustom != null) {
+        if (coinAnimation != null) {
             // shut down the animation thread, otherwise the callback will resume the shake
             // listener in the background even though the app is supposed to be suspended
-            coinAnimationCustom.removeCallbacks();
+            coinAnimation.removeCallbacks();
         }
 
         // persist state
@@ -575,7 +574,6 @@ public class CoinFlipActivity extends Activity {
     private void renderResult(final Animation.ResultState resultState) {
         Log.d(TAG, "renderResult()");
 
-        AnimationDrawable coinAnimation;
         Drawable coinImageDrawable;
 
         // hide the static image and clear the text
@@ -587,20 +585,20 @@ public class CoinFlipActivity extends Activity {
         if (Settings.getAnimationPref(this)) {
             // load the appropriate coin animation based on the state
             coinAnimation = Animation.getAnimation(resultState);
-            coinAnimationCustom = new CustomAnimationDrawable(coinAnimation) {
-                @Override
-                protected void onAnimationFinish() {
+            coinAnimation.setAnimationCallback(new CustomAnimationDrawable.AnimationCallback() {
+                @Override public void onAnimationFinish() {
+                    coinAnimation.stop();
                     playCoinSound();
                     updateResultText(resultState);
                     resumeListeners();
                 }
-            };
+            });
 
             // hide the static image and render the animation
             displayCoinImage(false);
             displayCoinAnimation(true);
-            coinImage.setBackgroundDrawable(coinAnimationCustom);
-            coinAnimationCustom.start();
+            coinImage.setBackgroundDrawable(coinAnimation);
+            coinAnimation.start();
             // handled by animation callback
             // playCoinSound();
             // updateResultText(resultState, resultText);
@@ -706,11 +704,11 @@ public class CoinFlipActivity extends Activity {
         Log.d(TAG, "displayCoinAnimation()");
 
         // safety first!
-        if (coinAnimationCustom != null) {
+        if (coinAnimation != null) {
             if (flag) {
-                coinAnimationCustom.setAlpha(255);
+                coinAnimation.setAlpha(255);
             } else {
-                coinAnimationCustom.setAlpha(0);
+                coinAnimation.setAlpha(0);
             }
         }
     }
