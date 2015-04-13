@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlipWearActivity.java
- * Mar 16, 2014 2:43 PM | variable
+ * Apr 13, 2015 8:55 AM | variable
  * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -150,7 +150,6 @@ public class CoinFlipWearActivity extends Activity {
         coinAnimation = Animation.getAnimation(resultState);
         coinAnimation.setAnimationCallback(new CustomAnimationDrawable.AnimationCallback() {
             @Override public void onAnimationFinish() {
-                coinAnimation.stop();
                 final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(100);
                 resumeListeners();
@@ -160,6 +159,7 @@ public class CoinFlipWearActivity extends Activity {
         //coinImage.setBackgroundDrawable(coinAnimation);
         coinImage.setBackground(null);
         coinImage.setImageDrawable(coinAnimation);
+        coinAnimation.stop();
         coinAnimation.start();
     }
 

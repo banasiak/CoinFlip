@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlipActivity.java
- * Mar 16, 2014 2:43 PM | variable
+ * Apr 13, 2015 8:55 AM | variable
  * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -587,7 +587,6 @@ public class CoinFlipActivity extends Activity {
             coinAnimation = Animation.getAnimation(resultState);
             coinAnimation.setAnimationCallback(new CustomAnimationDrawable.AnimationCallback() {
                 @Override public void onAnimationFinish() {
-                    coinAnimation.stop();
                     playCoinSound();
                     updateResultText(resultState);
                     resumeListeners();
@@ -598,6 +597,7 @@ public class CoinFlipActivity extends Activity {
             displayCoinImage(false);
             displayCoinAnimation(true);
             coinImage.setBackgroundDrawable(coinAnimation);
+            coinAnimation.stop();
             coinAnimation.start();
             // handled by animation callback
             // playCoinSound();

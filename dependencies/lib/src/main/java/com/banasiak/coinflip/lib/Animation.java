@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Animation.java
- * Mar 16, 2014 2:43 PM | variable
+ * Mar 16, 2015 2:43 PM | variable
  * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
