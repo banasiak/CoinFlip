@@ -2,8 +2,8 @@
 <!--
 *========================================================================
 * round_main.xml
-* Oct 23, 2014 12:07 PM | variable
-* Copyright (c) 2014 Richard Banasiak
+ * Sep 26, 2015 6:12 PM | variable
+* Copyright (c) 2015 Richard Banasiak
 *========================================================================
 * This file is part of CoinFlip.
 *
@@ -20,7 +20,7 @@
 *    You should have received a copy of the GNU General Public License
 *    along with CoinFlip.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,13 +29,9 @@
 
     <ImageView
             android:id="@+id/coin_image_view"
-            android:maxWidth="280dp"
-            android:maxHeight="280dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="@drawable/unknown"
             android:scaleType="fitCenter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
-</RelativeLayout>
+            android:layout_gravity="center" />
+</FrameLayout>

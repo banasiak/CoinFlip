@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * Animation.java
- * Mar 16, 2015 2:43 PM | variable
+ * Sep 26, 2015 6:12 PM | variable
  * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -30,9 +30,6 @@ import android.util.Log;
 
 import java.util.EnumMap;
 
-/**
- * Created by variable on 7/12/14.
- */
 public class Animation {
 
     // debugging tag
@@ -50,7 +47,6 @@ public class Animation {
     private static EnumMap<ResultState, CustomAnimationDrawable> coinAnimationsMap;
 
     private Animation() {
-        //singleton
     }
 
     public static void init() {

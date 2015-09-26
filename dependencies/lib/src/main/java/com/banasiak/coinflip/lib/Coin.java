@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * Coin.java
- * Jul 12, 2014 4:31 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Sep 26, 2015 6:12 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -22,6 +22,8 @@
 
 package com.banasiak.coinflip.lib;
 
+import android.util.Log;
+
 import java.util.Random;
 
 public class Coin {
@@ -29,7 +31,21 @@ public class Coin {
     // Debugging tag.
     private static final String TAG = Coin.class.getSimpleName();
 
+    private static Coin instance = null;
+
     final Random generator = new Random();
+
+    private Coin() {
+        // singleton
+    }
+
+    public synchronized static Coin getInstance() {
+        if (instance == null) {
+            Log.d(TAG, "Instantiating new Coin object");
+            instance = new Coin();
+        }
+        return instance;
+    }
 
     public boolean flip() {
         //Log.d(TAG, "flip()");

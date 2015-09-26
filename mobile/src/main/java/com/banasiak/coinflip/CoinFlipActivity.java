@@ -1,7 +1,7 @@
 /*
  *========================================================================
  * CoinFlipActivity.java
- * Apr 13, 2015 8:55 AM | variable
+ * Sep 26, 2015 6:12 PM | variable
  * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -88,7 +88,7 @@ public class CoinFlipActivity extends Activity {
 
     private Drawable background = null;
 
-    private final Coin theCoin = new Coin();
+    private final Coin theCoin = Coin.getInstance();
 
     private ShakeListener shaker;
 

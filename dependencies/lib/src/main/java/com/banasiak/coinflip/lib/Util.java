@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * Util.java
- * Oct 23, 2014 12:07 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Sep 26, 2015 6:12 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -41,8 +41,7 @@ public class Util {
     // debugging tag
     private static final String TAG = Util.class.getSimpleName();
 
-    public Util() {
-        //singleton
+    private Util() {
     }
 
     // concatenate two arrays

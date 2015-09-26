@@ -1,8 +1,8 @@
 /*
  *========================================================================
  * SelfTestAsyncTask.java
- * Jul 12, 2014 4:31 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Sep 26, 2015 6:12 PM | variable
+ * Copyright (c) 2015 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -39,7 +39,7 @@ public class SelfTestTask extends AsyncTask<SelfTestStatus, SelfTestStatus, Self
     public SelfTestTask(final SelfTestActivity iActivity) {
         Log.d(TAG, "SelfTestTask()");
         activity = iActivity;
-        theCoin = new Coin();
+        theCoin = Coin.getInstance();
     }
 
     @Override
