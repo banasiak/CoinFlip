@@ -2,8 +2,8 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * Jul 12, 2014 4:31 PM | variable
- * Copyright (c) 2014 Richard Banasiak
+ * Apr 22, 2016 10:04 PM | variable
+ * Copyright (c) 2016 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
  *
@@ -28,7 +28,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:hardwareAccelerated="true">
         <meta-data android:name="com.google.android.gms.version"

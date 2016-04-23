@@ -2,6 +2,8 @@
 <!--
  *========================================================================
  * strings.xml
+ * Apr 22, 2016 10:04 PM | variable
+ * Copyright (c) 2016 Richard Banasiak
  * Copyright (c) 2014 Spanti Nicola (RyDroid)
  *========================================================================
  * This file is part of CoinFlip.
@@ -28,7 +30,8 @@
         Tapotez ou secouez pour retourner à nouveau la pièce.
         \n\n\nDes images de quart de dollar coin images de United States Mint.
         Images de 1$ présidentiel de United States Mint.
-        \n\n\nCopyright © 2015 - Richard Banasiak
+        \nLauncher icône basée sur l\'illustration par Deividas Grauzinis.
+        \n\n\nCopyright © 2016 - Richard Banasiak
         \nContributions open-source contributions de Alex Baker, Ciaran Gultnieks, Spanti Nicola 
         &amp; Michael Riepen.
     </string>

@@ -2,7 +2,8 @@
 <!--
  *========================================================================
  * strings.xml
- * Feb 16, 2015 11:21 PM | variable
+ * Apr 22, 2016 10:04 PM | variable
+ * Copyright (c) 2016 Richard Banasiak
  * Copyright (c) 2015 Michael Riepen
  *========================================================================
  * This file is part of CoinFlip.
@@ -27,7 +28,8 @@
         Antippen oder schütteln für erneutes Werfen...
         \n\n\nViertel-Dollar Münzbilder von \"United States Mint\".
         Ein-Dollar Präsidenten Münzbilder von \"United States Mint\".
-        \n\n\nCopyright © 2015 - Richard Banasiak
+        \nLauncher-Symbol basiert auf der Grafik von Deividas Graužinis .
+        \n\n\nCopyright © 2016 - Richard Banasiak
         \nOpen-source Beiträge von Alex Baker, Ciaran Gultnieks, Spanti Nicola &amp; Michael Riepen.
     </string>
     <string name="app_name">Münze werfen</string>
