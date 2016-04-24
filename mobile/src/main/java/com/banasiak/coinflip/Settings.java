@@ -50,6 +50,9 @@ public class Settings extends PreferenceActivity implements
     // add-on package name
     public static final String EXTPKG = ".coinflipext.";
 
+    // add-on package query for Google Play
+    public static final String EXTPKG_QUERY = "banasiak%20coinflipext&c=apps";
+
     // option keys and default values
     private static final String KEY_ANIMATION = "animation";
 
@@ -116,7 +119,7 @@ public class Settings extends PreferenceActivity implements
         downloadPref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
             public boolean onPreferenceClick(final Preference preference) {
                 final Intent goToMarket = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("market://search?q=" + EXTPKG + "&c=apps"));
+                        Uri.parse("market://search?q=" + EXTPKG_QUERY));
                 startActivity(goToMarket);
                 return true;
             }
