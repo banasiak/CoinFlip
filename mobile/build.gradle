@@ -1,21 +1,21 @@
 apply plugin: 'com.android.application'
 
 dependencies {
-    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.android.gms:play-services:9.6.1'
     compile project(':dependencies:lib')
     wearApp project(':dependencies:wear')
 }
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 24
+    buildToolsVersion '24.0.2'
 
     defaultConfig {
         applicationId 'com.banasiak.coinflip'
         minSdkVersion 9
-        targetSdkVersion 23
-        versionCode 47
-        versionName '6.4.1'
+        targetSdkVersion 24
+        versionCode 48
+        versionName '6.5'
     }
 
     buildTypes {

@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * Apr 22, 2016 10:04 PM | variable
+ * Sep 27, 2016 8:34 PM | variable
  * Copyright (c) 2016 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -46,7 +46,8 @@
         <activity
             android:name=".Settings"
             android:screenOrientation="portrait"
-            android:label="@string/settings_activity_title" />
+            android:label="@string/settings_activity_title"
+            android:theme="@style/ThemeSelector"/>
         <activity
             android:name=".SelfTestActivity"
             android:screenOrientation="portrait"
