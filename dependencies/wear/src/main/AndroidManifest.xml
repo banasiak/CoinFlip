@@ -2,7 +2,7 @@
 <!--
  *========================================================================
  * AndroidManifest.xml
- * Apr 22, 2016 10:04 PM | variable
+ * Sep 27, 2016 8:34 PM | variable
  * Copyright (c) 2016 Richard Banasiak
  *========================================================================
  * This file is part of CoinFlip.
@@ -46,7 +46,8 @@
 
         <service android:name=".DataLayerListenerService">
             <intent-filter>
-                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+                <action android:name="com.google.android.gms.wearable.DATA_CHANGED" />
+                <data android:scheme="wear" android:host="*" android:pathPrefix="/coins" />
             </intent-filter>
         </service>
     </application>
