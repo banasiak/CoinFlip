@@ -2,8 +2,8 @@
 <!--
 *========================================================================
 * colors.xml
-* Sep 25, 2013 1:14 PM | variable
-* Copyright (c) 2013 Richard Banasiak
+ * Jan 1, 2018 2:40 PM | variable
+ * Copyright (c) 2018 Richard Banasiak
 *========================================================================
 * This file is part of CoinFlip.
 *
@@ -37,4 +37,5 @@
     <color name="blue">#0000FF</color>
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
+    <color name="ic_launcher_background">#333333</color>
 </resources>

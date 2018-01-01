@@ -1,21 +1,28 @@
 apply plugin: 'com.android.application'
 
 dependencies {
-    compile 'com.google.android.gms:play-services:9.6.1'
+    compile 'com.google.android.gms:play-services-wearable:11.8.0'
     compile project(':dependencies:lib')
     wearApp project(':dependencies:wear')
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.2'
 
     defaultConfig {
         applicationId 'com.banasiak.coinflip'
-        minSdkVersion 9
-        targetSdkVersion 24
-        versionCode 48
-        versionName '6.5'
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 49
+        versionName '6.5.1'
+    }
+
+    android {
+        compileOptions {
+            sourceCompatibility 1.6
+            targetCompatibility 1.6
+        }
     }
 
     buildTypes {
@@ -25,7 +32,7 @@ android {
                     signingConfig signingConfigs.release
                 }
             }
-            minifyEnabled true
+            minifyEnabled false
             proguardFile getDefaultProguardFile('proguard-android-optimize.txt')
         }
     }
