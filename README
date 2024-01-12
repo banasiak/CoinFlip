@@ -1,3 +1,9 @@
+# @Deprecated
+This code is very old and no longer being maintained. The APK files associated with it are available via the **[Releases](https://github.com/banasiak/CoinFlip/releases/tag/EOL)** section of this project. 
+
+Future development of [Simple Coin Flip](https://play.google.com/store/apps/details?id=com.banasiak.coinflip) will occur in the [CoinFlip2](https://github.com/banasiak/CoinFlip2) project.
+
+
 /*
  *========================================================================
  * README
